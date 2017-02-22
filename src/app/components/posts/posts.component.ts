@@ -4,8 +4,9 @@ import {
 }                 from '@angular/core';
 // import { Router } from '@angular/router';
 
-import { BlogService } from '../../shared/blog.service';
+import { HttpService, PagerService } from '../../services/index';
 import { Post }        from '../../shared/post.model';
+
 
 @Component({
     selector: 'posts',
@@ -14,12 +15,29 @@ import { Post }        from '../../shared/post.model';
 })
 export class PostsComponent implements OnInit {
     posts: Post[];
+    pager: any = {};
+    pagedItems: any[];
 
-    constructor(private blogService: BlogService) {};
+    constructor(
+        private httpService: HttpService,
+        private pagerService: PagerService
+    ) { };
     ngOnInit() {
         this.getPosts();
     }
     getPosts(): void {
-        this.blogService.getPosts().then(posts => this.posts = posts.reverse());
+        this.httpService.getPosts()
+            .then(posts => {
+                this.posts = posts.reverse();
+                this.setPage(1);
+            });
+    }
+
+    setPage(page: number) {
+        if (!this.posts || page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+        this.pager = this.pagerService.getPager(this.posts.length, page);
+        this.pagedItems = this.posts.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 }

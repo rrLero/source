@@ -6,7 +6,8 @@ import { HttpModule }           from '@angular/http';
 // import { InMemoryDataService }  from './shared/in-memory-data.service';
 
 import { AppRoutingModule }     from './app-routing.module';
-import { BlogService }          from './shared/blog.service';
+import { HttpService, PagerService } from './services/index';
+// import { PagerService }          from './services/index';
 
 import { AppComponent }         from './app.component';
 import { PostsComponent }       from './components/posts/posts.component';
@@ -24,7 +25,7 @@ import { PostComponent }        from './components/post/post.component';
         PostsComponent,
         PostComponent
     ],
-    providers: [BlogService],
+    providers: [HttpService, PagerService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
