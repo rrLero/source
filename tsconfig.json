@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "module": "es2015",
+        "moduleResolution": "node",
+        "target": "es5",
+        "noImplicitAny": false,
+        "sourceMap": true,
+        "mapRoot": "",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "es2015",
+            "dom"
+        ],
+        "outDir": "lib",
+        "skipLibCheck": true,
+        "rootDir": "."
+    },
+    "exclude": [
+        "node_modules",
+        "src/app/main*"
+
+    ],
+    "compileOnSave": false,
+    "angularCompilerOptions": {
+        "genDir": "./src/app/ngfactory"
+    }
+}
