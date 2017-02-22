@@ -1,4 +1,5 @@
 <section *ngIf="post">
     <h2>{{ post.title }}</h2>
     <div [innerHTML]="post.body"></div>
+    <button type="button" (click)="goBack()">Back</button>
 </section>

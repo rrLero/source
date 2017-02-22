@@ -5,6 +5,7 @@ import { Post } from '../shared/post.model';
 
 @Injectable()
 export class HttpService {
+    private postsPreviewUrl = 'https://jsonplaceholder.typicode.com/albums/';
     private postsUrl = 'https://jsonplaceholder.typicode.com/posts/';
     // private postsUrl = 'api/posts';
     // private headers = new Headers({ 'Content-Type': 'application/json' });
@@ -12,7 +13,7 @@ export class HttpService {
     constructor(private http: Http) { }
 
     getPosts(): Promise<Post[]> {
-        return this.http.get(this.postsUrl)
+        return this.http.get(this.postsPreviewUrl)
             .toPromise()
             .then(response => response.json() as Post[])
             .catch(this.handleError);

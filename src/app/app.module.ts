@@ -1,17 +1,17 @@
-import { NgModule }             from '@angular/core';
-import { BrowserModule }        from '@angular/platform-browser';
-import { HttpModule }           from '@angular/http';
+import { NgModule }                  from '@angular/core';
+import { BrowserModule }             from '@angular/platform-browser';
+import { HttpModule }                from '@angular/http';
 
-// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-// import { InMemoryDataService }  from './shared/in-memory-data.service';
+// import { InMemoryWebApiModule }   from 'angular-in-memory-web-api';
+// import { InMemoryDataService }    from './shared/in-memory-data.service';
 
-import { AppRoutingModule }     from './app-routing.module';
+import { AppRoutingModule }          from './app-routing.module';
 import { HttpService, PagerService } from './services/index';
-// import { PagerService }          from './services/index';
 
-import { AppComponent }         from './app.component';
-import { PostsComponent }       from './components/posts/posts.component';
-import { PostComponent }        from './components/post/post.component';
+import { AppComponent }              from './app.component';
+import { PostsComponent }            from './components/posts/posts.component';
+import { PostComponent }             from './components/post/post.component';
+import { PaginationComponent }       from './components/pagination/pagination.component';
 
 @NgModule({
     imports: [
@@ -23,9 +23,13 @@ import { PostComponent }        from './components/post/post.component';
     declarations: [
         AppComponent,
         PostsComponent,
-        PostComponent
+        PostComponent,
+        PaginationComponent
     ],
-    providers: [HttpService, PagerService],
+    providers: [
+        HttpService,
+        PagerService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,4 @@
-import {
-    Component,
-    OnInit
-}                                 from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -23,7 +20,11 @@ export class PostComponent implements OnInit {
     ngOnInit(): void {
         this.route.params
             .switchMap((params: Params) => this.httpService.getPost(+params['id']))
-            .subscribe(post => this.post = post);
+            .subscribe(post => {
+                this.post = post;
+                // let title = this.post.title.replace(/\s/ig, '-');
+                // history.replaceState({}, '', title);
+            });
     }
     goBack(): void {
         this.location.back();
