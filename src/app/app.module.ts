@@ -2,8 +2,8 @@ import { NgModule }             from '@angular/core';
 import { BrowserModule }        from '@angular/platform-browser';
 import { HttpModule }           from '@angular/http';
 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './shared/in-memory-data.service';
+// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { InMemoryDataService }  from './shared/in-memory-data.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 import { BlogService }          from './shared/blog.service';
@@ -17,7 +17,7 @@ import { PostComponent }        from './components/post/post.component';
         BrowserModule,
         HttpModule,
         AppRoutingModule,
-        InMemoryWebApiModule.forRoot(InMemoryDataService)
+        // InMemoryWebApiModule.forRoot(InMemoryDataService)
     ],
     declarations: [
         AppComponent,

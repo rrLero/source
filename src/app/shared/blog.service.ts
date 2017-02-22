@@ -5,7 +5,8 @@ import { Post } from './post.model';
 
 @Injectable()
 export class BlogService {
-    private postsUrl = 'api/posts';
+    private postsUrl = 'https://jsonplaceholder.typicode.com/posts/';
+    // private postsUrl = 'api/posts';
     // private headers = new Headers({ 'Content-Type': 'application/json' });
 
     constructor(private http: Http) { }
@@ -13,14 +14,13 @@ export class BlogService {
     getPosts(): Promise<Post[]> {
         return this.http.get(this.postsUrl)
             .toPromise()
-            .then(response => response.json().data as Post[])
+            .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
     getPost(id: number): Promise<Post> {
-        const url = `${this.postsUrl}/${id}`;
-        return this.http.get(url)
+        return this.http.get(this.postsUrl + id)
             .toPromise()
-            .then(response => response.json().data as Post)
+            .then(response => response.json() as Post)
             .catch(this.handleError);
     }
     private handleError(error: any): Promise<any> {
