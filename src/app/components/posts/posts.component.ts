@@ -8,11 +8,11 @@ import { BlogService } from '../../shared/blog.service';
 import { Post }        from '../../shared/post.model';
 
 @Component({
-    selector: 'index',
-    templateUrl: 'index.component.html',
-    styleUrls: ['index.component.scss']
+    selector: 'posts',
+    templateUrl: 'posts.component.html',
+    styleUrls: ['posts.component.scss']
 })
-export class IndexComponent implements OnInit {
+export class PostsComponent implements OnInit {
     posts: Post[];
 
     constructor(private blogService: BlogService) {};

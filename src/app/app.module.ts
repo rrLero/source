@@ -9,7 +9,7 @@ import { AppRoutingModule }     from './app-routing.module';
 import { BlogService }          from './shared/blog.service';
 
 import { AppComponent }         from './app.component';
-import { IndexComponent }       from './components/index/index.component';
+import { PostsComponent }       from './components/posts/posts.component';
 import { PostComponent }        from './components/post/post.component';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { PostComponent }        from './components/post/post.component';
     ],
     declarations: [
         AppComponent,
-        IndexComponent,
+        PostsComponent,
         PostComponent
     ],
     providers: [BlogService],
