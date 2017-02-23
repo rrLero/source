@@ -1,5 +1,5 @@
 <section *ngFor="let post of page.pagedItems">
-    <h2><a [routerLink]="['/posts', post.id]">{{ post.title }}</a> {{ post.id }}</h2>
+    <h2><a [routerLink]="['/post', post.id]">{{ post.title }}</a> {{ post.id }}</h2>
     <!-- <div [innerHTML]="post.body"></div> -->
 </section>
 

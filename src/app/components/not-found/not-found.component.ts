@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  // selector: 'selector',
   templateUrl: 'not-found.component.html',
 })
 export class NotFoundComponent implements OnInit {

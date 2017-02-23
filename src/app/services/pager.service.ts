@@ -1,5 +1,7 @@
-import * as _ from 'underscore';
+import { Injectable } from '@angular/core';
+import * as _         from 'underscore';
 
+@Injectable()
 export class PagerService {
     getPager(totalItems: number, currentPage = 1, pageSize = 10) {
         // calculate total pages
