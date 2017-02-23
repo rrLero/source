@@ -1,5 +1,6 @@
 <section *ngIf="post">
     <h2>{{ post.title }}</h2>
+    <img src="https://angular.io/resources/images/logos/angular2/angular.svg" alt="" width="500">
     <div [innerHTML]="post.body"></div>
     <button type="button" (click)="goBack()">Back</button>
 </section>

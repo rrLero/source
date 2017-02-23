@@ -12,6 +12,7 @@ import { AppComponent }              from './app.component';
 import { PostsComponent }            from './components/posts/posts.component';
 import { PostComponent }             from './components/post/post.component';
 import { PaginationComponent }       from './components/pagination/pagination.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { PaginationComponent }       from './components/pagination/pagination.co
         AppComponent,
         PostsComponent,
         PostComponent,
-        PaginationComponent
+        PaginationComponent,
+        NotFoundComponent
     ],
     providers: [
         HttpService,
