@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
 import { Location }          from '@angular/common';
 
 import { HttpService, PagerService } from '../../services/index';
@@ -18,15 +17,8 @@ export class PaginationComponent implements OnInit {
     constructor(
         private location: Location,
         private httpService: HttpService,
-        private pagerService: PagerService,
-        private router: Router) {
-        location.subscribe(() => {
-            let path = this.location.path();
-            if (path.indexOf('page')) {
-                let page = parseFloat(path.slice(6));
-                this.setPage(page);
-            }
-        });
+        private pagerService: PagerService) {
+        location.subscribe(() => this.loadPage());
     }
     ngOnInit() {
         this.getPosts();
@@ -40,9 +32,10 @@ export class PaginationComponent implements OnInit {
             });
     }
     loadPage(): void {
-        if (localStorage.getItem('page')) {
-            this.currentPage = JSON.parse(localStorage.getItem('page'));
-            this.router.navigate(['page/', this.currentPage]);
+        let path = this.location.path();
+        if (path.indexOf('page')) {
+            this.currentPage = parseFloat(path.slice(6));
+            this.setPage(this.currentPage);
         }
     }
     setPage(page = 1): void {
@@ -51,8 +44,5 @@ export class PaginationComponent implements OnInit {
         }
         this.pager = this.pagerService.getPager(this.posts.length, page);
         this.pagedItems = this.posts.slice(this.pager.startIndex, this.pager.endIndex + 1);
-        if (!isNaN(this.pager.currentPage)) {
-            localStorage.setItem('page', JSON.stringify(this.pager.currentPage));
-        }
     }
 }
