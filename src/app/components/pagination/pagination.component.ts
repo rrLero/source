@@ -51,6 +51,8 @@ export class PaginationComponent implements OnInit {
         }
         this.pager = this.pagerService.getPager(this.posts.length, page);
         this.pagedItems = this.posts.slice(this.pager.startIndex, this.pager.endIndex + 1);
-        localStorage.setItem('page', JSON.stringify(this.pager.currentPage));
+        if (!isNaN(this.pager.currentPage)) {
+            localStorage.setItem('page', JSON.stringify(this.pager.currentPage));
+        }
     }
 }
