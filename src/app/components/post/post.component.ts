@@ -22,8 +22,6 @@ export class PostComponent implements OnInit {
             .switchMap((params: Params) => this.httpService.getPost(+params['id']))
             .subscribe(post => {
                 this.post = post;
-                // let title = this.post.title.replace(/\s/ig, '-');
-                // history.replaceState({}, '', title);
             });
     }
     goBack(): void {

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PostsComponent }       from './components/posts/posts.component';
 import { PostComponent }        from './components/post/post.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent }    from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/page/1', pathMatch: 'full' },
@@ -13,7 +13,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { useHash: true }) ],
+  imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
