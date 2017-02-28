@@ -1,6 +1,14 @@
-<section *ngFor="let post of page.pagedItems">
-    <h2><a [routerLink]="['/post', post.id]">{{ post.title }}</a> {{ post.id }}</h2>
-    <!-- <div [innerHTML]="post.body"></div> -->
-</section>
+<main>
+    <section *ngFor="let post of page.pagedItems">
+        <!-- <h2><a [routerLink]="['/post', post.id]">{{ post.title }}</a></h2> -->
+        <!-- <b>{{ post.tegs }}</b> -->
+        <!-- <b>{{ post.date | slice:0:10 }}</b> -->
+        <!-- <div [innerHTML]="post.text"></div> -->
+        <h2><a [routerLink]="['/post', post.id]">{{ post.title }}</a> {{ post.id }}</h2>
+        <div [innerHTML]="post.body"></div>
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed accusantium, dolores esse nam adipisci illo.</div>
+    </section>
+</main>
+
 
 <pagination #page></pagination>

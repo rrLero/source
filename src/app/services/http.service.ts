@@ -13,12 +13,14 @@ export class HttpService {
     constructor(private http: Http) { }
 
     getPosts(): Promise<Post[]> {
+        // return this.http.get('../../public/temp.json')
         return this.http.get(this.postsPreviewUrl)
             .toPromise()
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
     getPost(id: number): Promise<Post> {
+        // return this.http.get('../../public/temp.json')
         return this.http.get(this.postsUrl + id)
             .toPromise()
             .then(response => response.json() as Post)

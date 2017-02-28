@@ -26,6 +26,7 @@ export class PaginationComponent implements OnInit {
     getPosts(): void {
         this.httpService.getPosts()
             .then(posts => {
+                // this.posts = posts;
                 this.posts = posts.reverse();
                 this.loadPage();
                 this.setPage(this.currentPage);
@@ -35,8 +36,10 @@ export class PaginationComponent implements OnInit {
         if (localStorage.getItem('page')) {
             this.currentPage = parseFloat(localStorage.getItem('page'));
         }
-        if (window.location.pathname.indexOf('page')) {
-            let userPage = parseFloat(window.location.pathname.slice(6));
+        if (window.location.hash.indexOf('page')) {
+        // if (window.location.pathname.indexOf('page')) {
+            let userPage = parseFloat(window.location.hash.slice(7));
+            // let userPage = parseFloat(window.location.pathname.slice(6));
             this.pager = this.pagerService.getPager(this.posts.length, userPage);
             if (userPage < 1 || userPage > this.pager.totalPages) {
                 this.router.navigate(['not-found']);

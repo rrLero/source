@@ -1,3 +1,7 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
 body {
   background-color: #eee;
   font: 1.25em/1.5 "Open Sans", Arial, sans-serif;
