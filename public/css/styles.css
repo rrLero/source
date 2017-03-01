@@ -7,3 +7,6 @@ body {
   font: 1.25em/1.5 "Open Sans", Arial, sans-serif;
   overflow-x: hidden;
 }
+.cbalink {
+    display: none !important;
+}

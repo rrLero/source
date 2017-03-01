@@ -28,12 +28,13 @@ export class PaginationComponent implements OnInit {
         this.httpService.getPosts()
             .then(posts => {
                 this.posts = posts.reverse();
+                console.log(this.posts);
                 this.setPage();
             });
     }
     setPage(page?): void {
         let path = this.location.path();
-        if (!page && path.indexOf('page') > 0) {
+        if (!page && !path.indexOf('/page/')) {
             page = parseFloat(path.slice(6));
         }
         this.pager = this.pagerService.getPager(this.posts.length, page);
@@ -41,5 +42,6 @@ export class PaginationComponent implements OnInit {
             this.router.navigate(['not-found']);
         }
         this.pagedItems = this.posts.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        window.scrollTo(0, 0);
     }
 }

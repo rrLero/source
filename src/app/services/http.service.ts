@@ -5,22 +5,21 @@ import { Post } from '../shared/post.model';
 
 @Injectable()
 export class HttpService {
-    private postsPreviewUrl = 'https://jsonplaceholder.typicode.com/albums/';
+    private postsPreviewUrl = 'http://gitblog.pythonanywhere.com/rrlero/git-blog/api/get';
     private postsUrl = 'https://jsonplaceholder.typicode.com/posts/';
-    // private postsUrl = 'api/posts';
+    // private postsPreviewUrl = 'https://jsonplaceholder.typicode.com/albums/';
+    // private postsPreviewUrl = 'http://gitblog.pythonanywhere.com/alextriam/git-blog/api/get';
     // private headers = new Headers({ 'Content-Type': 'application/json' });
 
     constructor(private http: Http) { }
 
     getPosts(): Promise<Post[]> {
-        // return this.http.get('../../public/temp.json')
         return this.http.get(this.postsPreviewUrl)
             .toPromise()
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
     getPost(id: number): Promise<Post> {
-        // return this.http.get('../../public/temp.json')
         return this.http.get(this.postsUrl + id)
             .toPromise()
             .then(response => response.json() as Post)
