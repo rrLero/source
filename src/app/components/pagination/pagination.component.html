@@ -8,10 +8,10 @@
     <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
         <a (click)="setPage(page)" [routerLink]="['/page', page]">{{ page }}</a>
     </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+    <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
         <a (click)="setPage(pager.currentPage + 1)" [routerLink]="['/page', pager.currentPage + 1]">Next</a>
     </li>
-    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+    <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
         <a (click)="setPage(pager.totalPages)" [routerLink]="['/page', pager.pages.length]">Last</a>
     </li>
 </ul>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location }          from '@angular/common';
+import { Router }            from '@angular/router';
 
 import { HttpService, PagerService } from '../../services/index';
 import { Post }                      from '../../shared/post.model';
@@ -13,12 +14,12 @@ export class PaginationComponent implements OnInit {
     posts: Post[];
     pager: any = {};
     pagedItems: any[];
-    currentPage: number;
     constructor(
+        private router: Router,
         private location: Location,
         private httpService: HttpService,
         private pagerService: PagerService) {
-        location.subscribe(() => this.loadPage());
+        location.subscribe(() => this.setPage());
     }
     ngOnInit() {
         this.getPosts();
@@ -27,22 +28,18 @@ export class PaginationComponent implements OnInit {
         this.httpService.getPosts()
             .then(posts => {
                 this.posts = posts.reverse();
-                this.loadPage();
-                this.setPage(this.currentPage);
+                this.setPage();
             });
     }
-    loadPage(): void {
+    setPage(page?): void {
         let path = this.location.path();
-        if (path.indexOf('page')) {
-            this.currentPage = parseFloat(path.slice(6));
-            this.setPage(this.currentPage);
-        }
-    }
-    setPage(page = 1): void {
-        if (page < 1 || page > this.pager.totalPages) {
-            return;
+        if (!page && path.indexOf('page') > 0) {
+            page = parseFloat(path.slice(6));
         }
         this.pager = this.pagerService.getPager(this.posts.length, page);
+        if (page < 1 || page > this.pager.totalPages) {
+            this.router.navigate(['not-found']);
+        }
         this.pagedItems = this.posts.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 }

@@ -1,4 +1,11 @@
 ul {
     position: absolute;
     bottom: 1em;
+    left: 50%;
+    transform: translate(-50%);
+
+}
+li.disabled a {
+  opacity: 0;
+  transform: scale(0);
 }
