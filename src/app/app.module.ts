@@ -5,6 +5,7 @@ import { HttpModule }                from '@angular/http';
 import { AppRoutingModule }          from './app-routing.module';
 import { HttpService, PagerService } from './services/index';
 import { SafeHtml }                  from './pipes/safe-html.pipe';
+import { MarkdownPipe }              from './pipes/markdown.pipe';
 
 import { AppComponent }              from './app.component';
 import { PostsComponent }            from './components/posts/posts.component';
@@ -24,7 +25,8 @@ import { NotFoundComponent }         from './components/not-found/not-found.comp
         PostComponent,
         PaginationComponent,
         NotFoundComponent,
-        SafeHtml
+        SafeHtml,
+        MarkdownPipe
     ],
     providers: [
         HttpService,

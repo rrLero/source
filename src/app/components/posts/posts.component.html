@@ -3,7 +3,7 @@
         <h2><a [routerLink]="['/post', post.id]">{{ title }}</a></h2>
         <b>{{ post.tags }}</b>
         <b>{{ post.date | slice:0:10 }}</b>
-        <div [innerHTML]="post.text"></div>
+        <div [innerHTML]="post.text | markdown"></div>
         <!-- <h2><a [routerLink]="['/post', post.id]">{{ post.title }}</a> {{ post.id }}</h2>
         <div [innerHTML]="post.body"></div>
         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed accusantium, dolores esse nam adipisci illo.</div> -->
