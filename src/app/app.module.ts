@@ -12,6 +12,7 @@ import { PostsComponent }            from './components/posts/posts.component';
 import { PostComponent }             from './components/post/post.component';
 import { PaginationComponent }       from './components/pagination/pagination.component';
 import { NotFoundComponent }         from './components/not-found/not-found.component';
+import { SearchComponent }           from './components/search/search.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { NotFoundComponent }         from './components/not-found/not-found.comp
         PaginationComponent,
         NotFoundComponent,
         SafeHtml,
-        MarkdownPipe
+        MarkdownPipe,
+        SearchComponent
     ],
     providers: [
         HttpService,

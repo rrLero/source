@@ -2,9 +2,10 @@
     <h2>{{ post.title }}</h2>
     <img src="https://angular.io/resources/images/logos/angular2/angular.svg" alt="" width="200">
 
-    <div [innerHTML]="post.body"></div>
-    <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut sint hic maiores sed totam quod temporibus rem inventore cumque. Eos fuga praesentium inventore beatae temporibus id, asperiores facilis sit dolor, ipsam, nesciunt animi. Beatae in sed consequatur, mollitia, et fugit, eos veritatis facilis ipsam reiciendis non numquam praesentium odio provident.
-    </div>
+    <div [innerHTML]="post.text"></div>
     <button type="button" (click)="goBack()">Back</button>
+    <!-- <button type="button" (click)="edit(post.body)">{{ hidden ? 'Edit' : 'Cancel' }}</button> -->
+    <!-- <input #title [class.hidden]="hidden" type="text" [value]="post.title"> -->
+    <!-- <textarea #text [class.hidden]="hidden" cols="100" rows="10" [value]="post.text"></textarea> -->
+    <button [class.hidden]="hidden" type="button" (click)="save(text.value, title.value)">Save</button>
 </section>

@@ -27,11 +27,14 @@ export class PaginationComponent implements OnInit {
     getPosts(): void {
         this.httpService.getPosts()
             .then(posts => {
-                this.posts = posts.reverse();
+                this.posts = posts;
                 console.log(this.posts);
                 this.setPage();
             });
     }
+    // updatePost(post) {
+    //     this.httpService.update(post);
+    // }
     setPage(page?): void {
         let path = this.location.path();
         if (!page && !path.indexOf('/page/')) {

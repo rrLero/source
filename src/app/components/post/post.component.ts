@@ -12,6 +12,7 @@ import { Post }        from '../../shared/post.model';
 })
 export class PostComponent implements OnInit {
     post: Post;
+    hidden = true;
     constructor(
         private httpService: HttpService,
         private route: ActivatedRoute,
@@ -19,11 +20,20 @@ export class PostComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params
-            .switchMap((params: Params) => this.httpService.getPost(+params['id']))
+        .switchMap((params: Params) => this.httpService.getPost(+params['id']))
             .subscribe(post => {
                 this.post = post;
             });
     }
+    // edit() {
+    //     this.hidden = false;
+    // }
+    // save(text, title) {
+    //     this.hidden = !this.hidden;
+    //     this.post.body = text;
+    //     this.post.title = title;
+    //     // this.httpService.update(this.post);
+    // }
     goBack(): void {
         this.location.back();
     }

@@ -1,14 +1,19 @@
+<search></search>
 <main>
     <section *ngFor="let post of page.pagedItems">
-        <h2><a [routerLink]="['/post', post.id]">{{ title }}</a></h2>
-        <b>{{ post.tags }}</b>
-        <b>{{ post.date | slice:0:10 }}</b>
-        <div [innerHTML]="post.text | markdown"></div>
-        <!-- <h2><a [routerLink]="['/post', post.id]">{{ post.title }}</a> {{ post.id }}</h2>
-        <div [innerHTML]="post.body"></div>
-        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed accusantium, dolores esse nam adipisci illo.</div> -->
+        <h3>
+            <a [routerLink]="['/post', post.id]">{{ post.title }}</a>
+        </h3>
+        <div>{{ post.date | slice:0:10 }}</div>
+        <div>{{ post.tags }}</div>
+        <div>author: {{ post.author || 'user' }}</div>
+        <!-- <h3>
+            <a><b>{{ post.tags[0] + ' &rarr;' }}</b></a>
+            <a [routerLink]="['/post', post.id]">{{ post.title }}</a>
+        </h3> -->
+        <!-- <div [innerHTML]="post.text[0]"></div> -->
+        ...<a [routerLink]="['/post', post.id]">read more</a>
     </section>
 </main>
-
 
 <pagination #page></pagination>

@@ -11,7 +11,7 @@ commonConfig.entry.app = './src/app/main';
 commonConfig.module.rules.push({
     test: /\.ts$/,
     use: [
-        '@angularclass/hmr-loader',
+        // '@angularclass/hmr-loader',
         'awesome-typescript-loader',
         'angular2-router-loader',
         'angular2-template-loader'
@@ -19,7 +19,7 @@ commonConfig.module.rules.push({
 });
 
 module.exports = webpackMerge(commonConfig, {
-    devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
 
     output: {
         path: helpers.root('dist'),
@@ -37,6 +37,7 @@ module.exports = webpackMerge(commonConfig, {
         }),
         new BrowserSyncPlugin({
             open: false,
+            notify: false,
             port: 9000,
             proxy: 'http://localhost:8080/'
         },

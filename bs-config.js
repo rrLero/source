@@ -7,6 +7,6 @@ module.exports = {
         logPrefix: 'server',
         port: 9000,
         notify: false,
-        tunnel: false,
+        tunnel: true,
         open: false
 };
