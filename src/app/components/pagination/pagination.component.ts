@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Location }          from '@angular/common';
-import { Router }            from '@angular/router';
+import { Component, OnInit }         from '@angular/core';
+import { Location }                  from '@angular/common';
+import { Router }                    from '@angular/router';
 
 import { HttpService, PagerService } from '../../services/index';
 import { Post }                      from '../../shared/post.model';
@@ -32,27 +32,13 @@ export class PaginationComponent implements OnInit {
         this.httpService.getPosts()
             .then(posts => {
                 this.posts = posts;
-                console.log(this.posts);
                 this.setPage();
+                console.log(this.posts);
             });
     }
-    // getCategory(category) {
-    //     console.log(category);
-    //     this.httpService.getCategory(category)
-    //         .then(posts => {
-    //             this.posts = posts;
-    //             console.log(this.posts);
-    //             this.setPage();
-    //         });
-    // }
-    // updatePost(post) {
-    //     this.httpService.update(post);
-    // }
     setPage(page?): void {
-        let path = this.location.path();
-        if (!page && path.indexOf('/page/') > 0) {
-            let num = path.split('/')[4];
-            page = parseFloat(num);
+        if (!page && this.path[3] === 'page') {
+            page = parseFloat(this.path[4]);
         }
         this.pager = this.pagerService.getPager(this.posts.length, page);
         if (page < 1 || page > this.pager.totalPages) {

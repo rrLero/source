@@ -12,8 +12,5 @@ export class PostsComponent implements OnInit {
     repo = this.path[2];
     url = `/${this.name}/${this.repo}/post/`;
     constructor(private location: Location) { };
-    ngOnInit() {
-        console.log(this.path);
-     }
-
+    ngOnInit() { }
 }

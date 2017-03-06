@@ -1,16 +1,7 @@
-// export interface Post {
-//     id: number;
-//     user: string;
-//     date: string;
-//     category: string;
-//     tags: string[];
-//     title: string;
-//     content: string;
-// }
-
 export interface Post {
-    userId: number;
-    id: number;
+    author: string;
+    date: string;
+    tags: string[];
     title: string;
-    body?: string;
+    text: string;
 }

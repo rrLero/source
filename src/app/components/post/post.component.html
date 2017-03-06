@@ -1,6 +1,4 @@
 <section *ngIf="post">
-    <h2>{{ post.title }}</h2>
-    <div [innerHTML]="post.text | markdown |safeHtml"></div>
-    <!-- <div [innerHTML]="post.text"></div> -->
+    <div [innerHTML]="post.text_full_strings | markdown |safeHtml"></div>
     <button type="button" (click)="goBack()">Back</button>
 </section>

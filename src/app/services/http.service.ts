@@ -2,46 +2,36 @@ import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Location }      from '@angular/common';
 
-import { Post } from '../shared/post.model';
+import { Post }          from '../shared/post.model';
 
 @Injectable()
 export class HttpService {
-    // private headers = new Headers({ 'Content-Type': 'application/json' });
-    private path;
-    private postsUrl;
+    private headers = new Headers({ 'Content-Type': 'application/json' });
+    private host = 'http://gitblog.pythonanywhere.com/';
+    private path: string[];
+    private url: string;
     constructor(
-        private location: Location,
-        private http: Http) { }
+        private http: Http,
+        private location: Location ) { }
 
-    getPosts(): Promise<Post[]> {
+    getUrl() {
         this.path = this.location.path().split('/');
-        this.postsUrl = `http://localhost:5000/${this.path[1]}/${this.path[2]}/api/get`;
-        // this.postsUrl = `http://gitblog.pythonanywhere.com/${this.path[1]}/${this.path[2]}/api/get`;
-        return this.http.get(this.postsUrl)
+        this.url = `${this.host}${this.path[1]}/${this.path[2]}/api/get`;
+    }
+    getPosts(): Promise<Post[]> {
+        this.getUrl();
+        return this.http.get(this.url)
             .toPromise()
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
-    getPost(id: number): Promise<Post> {
-        this.path = this.location.path().split('/');
-        this.postsUrl = `http://localhost:5000/${this.path[1]}/${this.path[2]}/api/get`;
-        return this.http.get(`${this.postsUrl}/post/${id}`)
+    getPost(title: string): Promise<Post> {
+        this.getUrl();
+        return this.http.get(`${this.url}/${title}`)
             .toPromise()
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
-    // getCategory(category: string): Promise<Post[]> {
-    //     return this.http.get(`${this.categoryUrl}${category}`)
-    //         .toPromise()
-    //         .then(response => response.json() as Post[])
-    //         .catch(this.handleError);
-    // }
-    // getPostByTitle(title: string): Promise<Post[]> {
-    //     return this.http.get(`${this.postUrl}${title}`)
-    //         .toPromise()
-    //         .then(response => response.json() as Post[])
-    //         .catch(this.handleError);
-    // }
     // create(post: Post): Promise<Post> {
     //     return this.http
     //         .post(this.postsUrl, JSON.stringify(post), { headers: this.headers })
