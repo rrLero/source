@@ -1,30 +1,41 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { Location }      from '@angular/common';
 
 import { Post } from '../shared/post.model';
 
 @Injectable()
 export class HttpService {
     // private headers = new Headers({ 'Content-Type': 'application/json' });
-    private postsUrl = 'http://localhost:5000/alextriam/git-blog/api/get';
-    private postUrl = `${this.postsUrl}/post`;
-    // private postsUrl = 'http://gitblog.pythonanywhere.com/alextriam/git-blog/api/get';
-    // private postUrl = `${this.postsUrl}/post`;
-
-    constructor(private http: Http) { }
+    private path;
+    private postsUrl;
+    constructor(
+        private location: Location,
+        private http: Http) { }
 
     getPosts(): Promise<Post[]> {
+        this.path = this.location.path().split('/');
+        this.postsUrl = `http://localhost:5000/${this.path[1]}/${this.path[2]}/api/get`;
+        // this.postsUrl = `http://gitblog.pythonanywhere.com/${this.path[1]}/${this.path[2]}/api/get`;
         return this.http.get(this.postsUrl)
             .toPromise()
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
     getPost(id: number): Promise<Post> {
-        return this.http.get(`${this.postUrl}/${id}`)
+        this.path = this.location.path().split('/');
+        this.postsUrl = `http://localhost:5000/${this.path[1]}/${this.path[2]}/api/get`;
+        return this.http.get(`${this.postsUrl}/post/${id}`)
             .toPromise()
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
+    // getCategory(category: string): Promise<Post[]> {
+    //     return this.http.get(`${this.categoryUrl}${category}`)
+    //         .toPromise()
+    //         .then(response => response.json() as Post[])
+    //         .catch(this.handleError);
+    // }
     // getPostByTitle(title: string): Promise<Post[]> {
     //     return this.http.get(`${this.postUrl}${title}`)
     //         .toPromise()

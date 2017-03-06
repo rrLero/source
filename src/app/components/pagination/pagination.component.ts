@@ -14,6 +14,10 @@ export class PaginationComponent implements OnInit {
     posts: Post[];
     pager: any = {};
     pagedItems: any[];
+    path = this.location.path().split('/');
+    name = this.path[1];
+    repo = this.path[2];
+    url = `/${this.name}/${this.repo}/page/`;
     constructor(
         private router: Router,
         private location: Location,
@@ -32,13 +36,23 @@ export class PaginationComponent implements OnInit {
                 this.setPage();
             });
     }
+    // getCategory(category) {
+    //     console.log(category);
+    //     this.httpService.getCategory(category)
+    //         .then(posts => {
+    //             this.posts = posts;
+    //             console.log(this.posts);
+    //             this.setPage();
+    //         });
+    // }
     // updatePost(post) {
     //     this.httpService.update(post);
     // }
     setPage(page?): void {
         let path = this.location.path();
-        if (!page && !path.indexOf('/page/')) {
-            page = parseFloat(path.slice(6));
+        if (!page && path.indexOf('/page/') > 0) {
+            let num = path.split('/')[4];
+            page = parseFloat(num);
         }
         this.pager = this.pagerService.getPager(this.posts.length, page);
         if (page < 1 || page > this.pager.totalPages) {

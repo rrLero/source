@@ -1,17 +1,17 @@
 <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
     <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(1)" [routerLink]="['/page', 1]">First</a>
+        <a (click)="setPage(1)" [routerLink]="[url, 1]">First</a>
     </li>
     <li [ngClass]="{disabled:pager.currentPage === 1}">
-        <a (click)="setPage(pager.currentPage - 1)" [routerLink]="['/page', pager.currentPage - 1]">Previous</a>
+        <a (click)="setPage(pager.currentPage - 1)" [routerLink]="[url, pager.currentPage - 1]">Previous</a>
     </li>
     <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-        <a (click)="setPage(page)" [routerLink]="['/page', page]">{{ page }}</a>
+        <a (click)="setPage(page)" [routerLink]="[url, page]">{{ page }}</a>
     </li>
     <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(pager.currentPage + 1)" [routerLink]="['/page', pager.currentPage + 1]">Next</a>
+        <a (click)="setPage(pager.currentPage + 1)" [routerLink]="[url, pager.currentPage + 1]">Next</a>
     </li>
     <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-        <a (click)="setPage(pager.totalPages)" [routerLink]="['/page', pager.pages.length]">Last</a>
+        <a (click)="setPage(pager.totalPages)" [routerLink]="[url, pager.pages.length]">Last</a>
     </li>
 </ul>
