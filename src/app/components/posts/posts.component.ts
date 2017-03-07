@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }    from '@angular/router';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'posts',
@@ -10,6 +10,10 @@ export class PostsComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}/post/`;
-    constructor(private route: ActivatedRoute) { };
-    ngOnInit() { }
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute) { };
+    ngOnInit() {
+        this.router.navigate([`${this.name}/${this.repo}/page/1`]);
+    }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Location }   from '@angular/common';
 import { Http }       from '@angular/http';
+import { Location }   from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 
 import { Post }       from '../shared/post.model';
 

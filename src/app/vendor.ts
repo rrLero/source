@@ -15,11 +15,10 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/toPromise';
 
-// import 'angular-in-memory-web-api';
-
 if (process.env.ENV !== 'production') {
     require('@angular/platform-browser-dynamic');
     require('@angular/compiler');
 }
 
 import 'underscore';
+import 'marked';

@@ -9,8 +9,9 @@ import { NotFoundComponent }    from './components/not-found/not-found.component
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: ':name/:repo/post/:title', component: PostComponent },
+  { path: ':name/:repo', component: PostsComponent },
   { path: ':name/:repo/page/:id', component: PostsComponent },
+  { path: ':name/:repo/post/:title', component: PostComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
