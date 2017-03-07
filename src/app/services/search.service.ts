@@ -7,7 +7,7 @@ import { Post }       from '../shared/post.model';
 
 @Injectable()
 export class SearchService {
-    private host = 'http://gitblog.pythonanywhere.com/';
+    private host = 'http://gitblog.pythonanywhere.com';
     private path: string[];
     private url: string;
     constructor(
@@ -16,7 +16,7 @@ export class SearchService {
 
     getUrl() {
         this.path = this.location.path().split('/');
-        this.url = `${this.host}${this.path[1]}/${this.path[2]}/api/get?title=`;
+        this.url = `${this.host}/${this.path[1]}/${this.path[2]}/api/get?title=`;
     }
     search(term: string): Observable<Post[]> {
         this.getUrl();

@@ -7,7 +7,7 @@ import { Post }          from '../shared/post.model';
 @Injectable()
 export class HttpService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private host = 'http://gitblog.pythonanywhere.com/';
+    private host = 'http://gitblog.pythonanywhere.com';
     private path: string[];
     private url: string;
     constructor(
@@ -16,7 +16,7 @@ export class HttpService {
 
     getUrl(name: string, repo: string) {
         this.path = this.location.path().split('/');
-        this.url = `${this.host}${name}/${repo}/api/get`;
+        this.url = `${this.host}/${name}/${repo}/api/get`;
     }
     getPosts(name: string, repo: string): Promise<Post[]> {
         this.getUrl(name, repo);
