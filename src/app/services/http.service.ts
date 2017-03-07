@@ -14,19 +14,19 @@ export class HttpService {
         private http: Http,
         private location: Location ) { }
 
-    getUrl() {
+    getUrl(name: string, repo: string) {
         this.path = this.location.path().split('/');
-        this.url = `${this.host}${this.path[1]}/${this.path[2]}/api/get`;
+        this.url = `${this.host}${name}/${repo}/api/get`;
     }
-    getPosts(): Promise<Post[]> {
-        this.getUrl();
+    getPosts(name: string, repo: string): Promise<Post[]> {
+        this.getUrl(name, repo);
         return this.http.get(this.url)
             .toPromise()
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
-    getPost(title: string): Promise<Post> {
-        this.getUrl();
+    getPost(name: string, repo: string, title: string): Promise<Post> {
+        this.getUrl(name, repo);
         return this.http.get(`${this.url}/${title}`)
             .toPromise()
             .then(response => response.json() as Post)

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location }            from '@angular/common';
+import { ActivatedRoute }    from '@angular/router';
 
 @Component({
     selector: 'posts',
@@ -7,10 +7,9 @@ import { Location }            from '@angular/common';
     styleUrls: ['posts.component.scss']
 })
 export class PostsComponent implements OnInit {
-    path = this.location.path().split('/');
-    name = this.path[1];
-    repo = this.path[2];
+    name = this.route.snapshot.params['name'];
+    repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}/post/`;
-    constructor(private location: Location) { };
+    constructor(private route: ActivatedRoute) { };
     ngOnInit() { }
 }
