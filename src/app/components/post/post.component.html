@@ -1,8 +1,8 @@
 <section *ngIf="post">
-    <button class="edit" type="button" (click)="edit()">{{ hidden ? 'edit' : 'close' }}</button>
+    <button class="edit" type="button" (click)="edit(text)">{{ hidden ? 'edit' : 'close' }}</button>
     <button class="edit" type="button" (click)="delete()">delete</button>
-    <div [innerHTML]="post.text_full_strings | markdown | safeHtml"></div>
-    <textarea #text [class.hidden]="hidden" [value]="template"></textarea><br>
+    <div [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
+    <textarea #text [class.hidden]="hidden" [value]="post.text_full_strings"></textarea><br>
     <button [class.hidden]="!hidden" type="button" (click)="goBack()">Back</button>
     <button [class.hidden]="hidden" class="save" type="button" (click)="save(text)">save</button>
     <button [class.hidden]="hidden" class="cancel" type="button" (click)="cancel(text)">cancel</button>

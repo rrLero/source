@@ -11,19 +11,16 @@ export let template: string;
 
 export class Template {
     constructor(
-        title: string,
-        tags: string[],
         author: string,
-        date: string,
-        text_full_strings?: string) {
+        date: string) {
         template = `
----
-layout:
-title: ${title}
-tags: ${tags}
-author: ${author}
-date: ${date}
----
-${text_full_strings || ''}`;
+        ---
+        layout:
+        title:
+        tags:
+        author: ${author}
+        date: ${date}
+        ---
+        `;
     }
 };
