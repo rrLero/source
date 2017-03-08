@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
-import { Location }          from '@angular/common';
-import { Observable }        from 'rxjs/Observable';
-import { Subject }           from 'rxjs/Subject';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable }             from 'rxjs/Observable';
+import { Subject }                from 'rxjs/Subject';
 
-import { HttpService }       from '../../services/index';
-import { SearchService }     from '../../services/index';
-import { Post }              from '../../shared/post.model';
+import { SearchService }          from '../../services/index';
+import { Post }                   from '../../shared/post.model';
 
 @Component({
     selector: 'search',
@@ -16,16 +14,14 @@ import { Post }              from '../../shared/post.model';
 })
 export class SearchComponent implements OnInit {
     posts: Observable<Post[]>;
-    private path = this.location.path().split('/');
-    private name = this.path[1];
-    private repo = this.path[2];
-    private url = `/${this.name}/${this.repo}/post/`;
     private searchTerms = new Subject<string>();
+    private name = this.route.snapshot.params['name'];
+    private repo = this.route.snapshot.params['repo'];
+    private url = `/${this.name}/${this.repo}/post/`;
     constructor(
-        private location: Location,
-        private httpService: HttpService,
-        private searchService: SearchService,
-        private router: Router) { }
+        private router: Router,
+        private route: ActivatedRoute,
+        private searchService: SearchService) { }
 
     search(term: string): void {
         this.searchTerms.next(term);
@@ -35,7 +31,7 @@ export class SearchComponent implements OnInit {
             .debounceTime(300)
             .distinctUntilChanged()
             .switchMap(term => term
-                ? this.searchService.search(term)
+                ? this.searchService.search(this.name, this.repo, term)
                 : Observable.of<Post[]>([]))
             .catch(error => {
                 // TODO: add real error handling

@@ -9,6 +9,6 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router) { }
     ngOnInit() { }
     go(name, repo) {
-        this.router.navigate([`${name.value}/${repo.value}/page/1`]);
+        this.router.navigate([`${name.value}/${repo.value}`]);
     }
 }

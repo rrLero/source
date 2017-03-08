@@ -1,15 +1,16 @@
 <search></search>
-<main>
-    <section *ngFor="let post of page.pagedItems">
+
+<section>
+    <div *ngFor="let post of page.pagedItems">
         <h3>
             <a [routerLink]="[url, post.title]">{{ post.title }}</a>
         </h3>
         <div>{{ post.date | slice:0:10 }}</div>
         <div>tags: {{ post.tags }}</div>
         <div>author: {{ post.author || 'user' }}</div>
-        ...<a [routerLink]="[url, post.title]">read more</a>
-        <!-- <div [innerHTML]="post.text_full_strings | markdown |safeHtml"></div> -->
-    </section>
-</main>
+        <a [routerLink]="[url, post.title]">...read more</a>
+        <!-- <div [innerHTML]="post.text_full_strings | markdown | safeHtml"></div> -->
+    </div>
+</section>
 
 <pagination #page></pagination>

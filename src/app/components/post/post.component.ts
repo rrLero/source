@@ -1,9 +1,9 @@
-import { Component, OnInit }      from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute }    from '@angular/router';
+import { Location }          from '@angular/common';
 
-import { HttpService }            from '../../services/index';
-import { Post }                   from '../../shared/post.model';
+import { HttpService }       from '../../services/index';
+import { Post }              from '../../shared/post.model';
 
 @Component({
     selector: 'post',
@@ -12,18 +12,16 @@ import { Post }                   from '../../shared/post.model';
 })
 export class PostComponent implements OnInit {
     post: Post;
-    hidden = true;
     constructor(
-        private httpService: HttpService,
+        private location: Location,
         private route: ActivatedRoute,
-        private location: Location) { }
+        private httpService: HttpService) { }
 
     ngOnInit(): void {
         this.route.params
-        .switchMap(({ name, repo, title }) => this.httpService.getPost(name, repo, title))
-            .subscribe(post => {
-                this.post = post;
-            });
+        .switchMap(({ name, repo, title }) =>
+            this.httpService.getPost(name, repo, title))
+            .subscribe(post => this.post = post);
     }
     goBack(): void {
         this.location.back();

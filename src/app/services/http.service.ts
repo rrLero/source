@@ -1,6 +1,5 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Location }      from '@angular/common';
 
 import { Post }          from '../shared/post.model';
 
@@ -8,14 +7,10 @@ import { Post }          from '../shared/post.model';
 export class HttpService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private host = 'http://gitblog.pythonanywhere.com';
-    private path: string[];
     private url: string;
-    constructor(
-        private http: Http,
-        private location: Location ) { }
+    constructor(private http: Http) { }
 
     getUrl(name: string, repo: string) {
-        this.path = this.location.path().split('/');
         this.url = `${this.host}/${name}/${repo}/api/get`;
     }
     getPosts(name: string, repo: string): Promise<Post[]> {

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http }       from '@angular/http';
-import { Location }   from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 
 import { Post }       from '../shared/post.model';
@@ -8,18 +7,14 @@ import { Post }       from '../shared/post.model';
 @Injectable()
 export class SearchService {
     private host = 'http://gitblog.pythonanywhere.com';
-    private path: string[];
     private url: string;
-    constructor(
-        private location: Location,
-        private http: Http) { }
+    constructor(private http: Http) { }
 
-    getUrl() {
-        this.path = this.location.path().split('/');
-        this.url = `${this.host}/${this.path[1]}/${this.path[2]}/api/get?title=`;
+    getUrl(name: string, repo: string) {
+        this.url = `${this.host}/${name}/${repo}/api/get?title=`;
     }
-    search(term: string): Observable<Post[]> {
-        this.getUrl();
+    search(name: string, repo: string, term: string): Observable<Post[]> {
+        this.getUrl(name, repo);
         return this.http
             .get(`${this.url}${term}`)
             .map(response => response.json() as Post[]);

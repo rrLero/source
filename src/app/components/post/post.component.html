@@ -1,4 +1,4 @@
 <section *ngIf="post">
-    <div [innerHTML]="post.text_full_strings | markdown |safeHtml"></div>
+    <div [innerHTML]="post.text_full_strings | markdown | safeHtml"></div>
     <button type="button" (click)="goBack()">Back</button>
 </section>

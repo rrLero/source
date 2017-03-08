@@ -1,6 +1,6 @@
 import { Component, OnInit }         from '@angular/core';
-import { Location }                  from '@angular/common';
 import { Router, ActivatedRoute }    from '@angular/router';
+import { Location }                  from '@angular/common';
 
 import { HttpService, PagerService } from '../../services/index';
 import { Post }                      from '../../shared/post.model';
@@ -20,8 +20,8 @@ export class PaginationComponent implements OnInit {
     url = `/${this.name}/${this.repo}/page/`;
     constructor(
         private router: Router,
-        private route: ActivatedRoute,
         private location: Location,
+        private route: ActivatedRoute,
         private httpService: HttpService,
         private pagerService: PagerService) {
         location.subscribe(() => this.setPage());
@@ -34,7 +34,6 @@ export class PaginationComponent implements OnInit {
             .then(posts => {
                 this.posts = posts;
                 this.setPage();
-                // console.log(this.posts);
             });
     }
     setPage(page?): void {
