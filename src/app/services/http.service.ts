@@ -32,7 +32,7 @@ export class HttpService {
         this.getUrl(name, repo);
         const url = `${this.url}/${post.title}`;
         console.log(url);
-        console.log(post);
+        // console.log(post);
         // return this.http
         //     .put(url, JSON.stringify(post), { headers: this.headers })
         //     .toPromise()

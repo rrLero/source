@@ -34,12 +34,6 @@ export class PostComponent implements OnInit {
         this.location.back();
     }
     edit(): void {
-        if (this.hidden) {
-            let text = this.post.text_full_strings;
-            localStorage.setItem('backup', text);
-        } else {
-            localStorage.removeItem('backup');
-        }
         new Template(
             this.post.title,
             this.post.tags,
@@ -48,22 +42,25 @@ export class PostComponent implements OnInit {
             this.post.text_full_strings
         );
         this.template = template;
+        if (this.hidden) {
+            localStorage.setItem('backup', template);
+        } else {
+            localStorage.removeItem('backup');
+        }
         this.hidden = !this.hidden;
     }
     save(text): void {
         this.post.text_full_strings = text.value;
         this.httpService.update(this.name, this.repo, this.post);
+        this.post.text_full_strings = text.value.split('---')[2];
         this.popup = true;
     }
     cancel(text): void {
         let backup = localStorage.getItem('backup');
-        this.post.text_full_strings = backup;
+        this.post.text_full_strings = text.value.split('---')[2];
         text.value = backup;
     }
     delete(): void {
         this.httpService.delete(this.name, this.repo, this.post.title);
-    }
-    setTemplate() {
-
     }
 }

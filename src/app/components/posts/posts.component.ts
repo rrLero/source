@@ -41,6 +41,7 @@ export class PostsComponent implements OnInit {
     }
     push(text) {
         console.log(text.value);
+        console.log(text.value.split('---')[2]);
         // name = name.trim();
         // if (!name) { return; }
         // this.httpService.create(name)
