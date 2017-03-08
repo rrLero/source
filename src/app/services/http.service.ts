@@ -29,6 +29,9 @@ export class HttpService {
     }
     // update(name: string, repo: string, post: Post): Promise<Post> {
     update(name: string, repo: string, post: Post) {
+        let token = localStorage.getItem('auth_token');
+        this.headers.append('Autorization', `Bearer ${token}`);
+        console.log(this.headers);
         this.getUrl(name, repo);
         const url = `${this.url}/${post.title}`;
         console.log(url);

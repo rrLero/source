@@ -5,6 +5,7 @@ import { LoginComponent }       from './components/index';
 import { PostsComponent }       from './components/index';
 import { PostComponent }        from './components/index';
 import { NotFoundComponent }    from './components/index';
+import { AuthComponent }        from './components/index';
 
 const routes: Routes = [
     {
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
         path: ':name/:repo/post/:title',
         component: PostComponent
+    },
+    {
+        path: ':name/:repo/auth',
+        component: AuthComponent
     },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }

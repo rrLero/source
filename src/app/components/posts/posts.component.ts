@@ -2,6 +2,7 @@ import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService }            from '../../services/index';
+import { AuthService }            from '../../services/index';
 import { Template, template }     from '../../shared/post.model';
 
 @Component({
@@ -14,12 +15,13 @@ export class PostsComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = this.route.snapshot.params['id'];
-    url = `/${this.name}/${this.repo}/post/`;
+    url = `/${this.name}/${this.repo}/`;
     hidden = true;
     template: string;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+        private authService: AuthService,
         private httpService: HttpService) { };
     ngOnInit() {
         this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
@@ -41,5 +43,20 @@ export class PostsComponent implements OnInit {
         //         this.heroes.push(hero);
         //         this.selectedHero = null;
         //     });
+    }
+
+    /**
+     * Is the user logged in?
+     */
+    get isLoggedIn() {
+        return this.authService.isLoggedIn();
+    }
+
+    /**
+     * Log the user out
+     */
+    logout() {
+        this.authService.logout();
+        this.router.navigate([this.url,'auth']);
     }
 }
