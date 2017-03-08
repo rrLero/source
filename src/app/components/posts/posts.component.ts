@@ -29,7 +29,7 @@ export class PostsComponent implements OnInit {
         let time = `${this.date.toString()}`.slice(15).slice(0, 6);
         let datetime = date + time;
         new Template(this.name, datetime);
-        this.template = template;
+        this.template = template.trim();
         this.hidden = !this.hidden;
     }
     push(text) {

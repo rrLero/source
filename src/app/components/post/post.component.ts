@@ -33,15 +33,16 @@ export class PostComponent implements OnInit {
     }
     edit(): void {
         if (this.hidden) {
-            localStorage.setItem('backup', this.post.text_full_strings);
+            localStorage.setItem('backup', this.post.text_full_md);
         } else {
             localStorage.removeItem('backup');
         }
         this.hidden = !this.hidden;
     }
     save(text): void {
-        this.post.text_full_strings = text.value;
+        this.post.text_full_md = text.value;
         this.httpService.update(this.name, this.repo, this.post);
+        this.hidden = !this.hidden;
         this.popup = true;
     }
     cancel(text): void {

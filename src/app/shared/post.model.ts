@@ -5,6 +5,7 @@ export interface Post {
     tags: string[];
     title: string;
     text_full_strings: string;
+    text_full_md: string;
 }
 
 export let template: string;
@@ -14,13 +15,13 @@ export class Template {
         author: string,
         date: string) {
         template = `
-        ---
-        layout:
-        title:
-        tags:
-        author: ${author}
-        date: ${date}
-        ---
-        `;
+---
+layout:
+title:
+tags:
+author: ${author}
+date: ${date}
+---
+`;
     }
 };
