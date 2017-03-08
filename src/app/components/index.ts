@@ -4,6 +4,7 @@ import { PostComponent }       from './post/post.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SearchComponent }     from './search/search.component';
 import { NotFoundComponent }   from './not-found/not-found.component';
+import { MdEditorComponent }   from './md-editor/md-editor.component';
 
 export { LoginComponent };
 export { PostsComponent };
@@ -16,5 +17,6 @@ export const components = [
     PostComponent,
     PaginationComponent,
     SearchComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    MdEditorComponent
 ];

@@ -1,4 +1,4 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 import SimpleMDE from 'simplemde';
 
 @Directive({
@@ -6,12 +6,13 @@ import SimpleMDE from 'simplemde';
 })
 export class MdEditorDirective {
     editor;
+    @Input('mdEditor') editorValue: string;
 
     constructor(private el: ElementRef) {
-        console.log(el);
         this.editor = new SimpleMDE({
             element: this.el.nativeElement,
             status: false
         });
+        this.editor.value(this.editorValue);
     }
 }
