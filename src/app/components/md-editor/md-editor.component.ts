@@ -13,7 +13,9 @@ export class MdEditorComponent implements OnInit {
     ngOnInit() {
         this.editor = new SimpleMDE({
             element: this.el.nativeElement,
-            status: false
+            status: false,
+            showIcons: ["code", "table"],
+            spellChecker: false
         });
         this.setValue(this.value);
 
