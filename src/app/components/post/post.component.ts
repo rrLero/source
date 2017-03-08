@@ -3,7 +3,7 @@ import { ActivatedRoute }    from '@angular/router';
 import { Location }          from '@angular/common';
 
 import { HttpService }       from '../../services/index';
-import { Post }              from '../../shared/post.model';
+import { Post, Template, template }              from '../../shared/post.model';
 
 @Component({
     selector: 'post',
@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     id = this.route.snapshot.params['id'];
     url = `/${this.name}/${this.repo}/post/`;
+    template: string;
     constructor(
         private location: Location,
         private route: ActivatedRoute,
@@ -39,6 +40,14 @@ export class PostComponent implements OnInit {
         } else {
             localStorage.removeItem('backup');
         }
+        new Template(
+            this.post.title,
+            this.post.tags,
+            this.post.author,
+            this.post.date,
+            this.post.text_full_strings
+        );
+        this.template = template;
         this.hidden = !this.hidden;
     }
     save(text): void {
@@ -53,5 +62,8 @@ export class PostComponent implements OnInit {
     }
     delete(): void {
         this.httpService.delete(this.name, this.repo, this.post.title);
+    }
+    setTemplate() {
+
     }
 }

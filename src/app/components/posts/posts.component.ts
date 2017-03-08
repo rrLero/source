@@ -2,6 +2,7 @@ import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService }            from '../../services/index';
+import { Template, template }              from '../../shared/post.model';
 
 @Component({
     selector: 'posts',
@@ -26,15 +27,16 @@ export class PostsComponent implements OnInit {
     create() {
         let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
         let time = `${this.date.toString()}`.slice(15).slice(0, 6);
-        this.template = `
-            ---
-            layout:
-            title:
-            tags:
-            author: ${this.name}
-            date: ${date} ${time}
-            ---
-        `;
+        let setDate = date + time;
+        let empty = '';
+        let emptyArr = [];
+        new Template(
+            empty,
+            emptyArr,
+            this.name,
+            setDate,
+        );
+        this.template = template;
         this.hidden = !this.hidden;
     }
     push(text) {
