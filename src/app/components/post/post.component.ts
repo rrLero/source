@@ -40,7 +40,7 @@ export class PostComponent implements OnInit {
         this.hidden = !this.hidden;
     }
     save(text): void {
-        this.post.text_full_strings = text.updatedValue;
+        this.post.text_full_strings = text.value;
         this.httpService.update(this.name, this.repo, this.post);
         this.popup = true;
     }

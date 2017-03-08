@@ -8,7 +8,6 @@ import SimpleMDE from 'simplemde';
 export class MdEditorComponent implements OnInit {
     @Input() value: string;
     @ViewChild('editor') el: ElementRef;
-    updatedValue: string;
     editor;
 
     ngOnInit() {
@@ -19,7 +18,7 @@ export class MdEditorComponent implements OnInit {
         this.setValue(this.value);
 
         this.editor.codemirror.on("change", () => {
-            this.updatedValue = this.editor.value();
+            this.value = this.editor.value();
         });
     }
 
