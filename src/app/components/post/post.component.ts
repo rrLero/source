@@ -12,6 +12,12 @@ import { Post }              from '../../shared/post.model';
 })
 export class PostComponent implements OnInit {
     post: Post;
+    hidden = true;
+    popup = false;
+    name = this.route.snapshot.params['name'];
+    repo = this.route.snapshot.params['repo'];
+    id = this.route.snapshot.params['id'];
+    url = `/${this.name}/${this.repo}/post/`;
     constructor(
         private location: Location,
         private route: ActivatedRoute,
@@ -25,5 +31,24 @@ export class PostComponent implements OnInit {
     }
     goBack(): void {
         this.location.back();
+    }
+    edit(): void {
+        if (this.hidden) {
+            let text = this.post.text_full_strings;
+            localStorage.setItem('backup', text);
+        } else {
+            localStorage.removeItem('backup');
+        }
+        this.hidden = !this.hidden;
+    }
+    save(text): void {
+        this.post.text_full_strings = text.value;
+        this.httpService.update(this.name, this.repo, this.post);
+        this.popup = true;
+    }
+    cancel(text): void {
+        let backup = localStorage.getItem('backup');
+        this.post.text_full_strings = backup;
+        text.value = backup;
     }
 }

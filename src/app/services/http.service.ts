@@ -27,6 +27,17 @@ export class HttpService {
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
+    update(name: string, repo: string, post: Post) {
+        this.getUrl(name, repo);
+        const url = `${this.url}/${post.title}`;
+        console.log(url);
+        console.log(post);
+        // return this.http
+        //     .put(url, JSON.stringify(post), { headers: this.headers })
+        //     .toPromise()
+        //     .then(() => post)
+        //     .catch(this.handleError);
+    }
     // create(post: Post): Promise<Post> {
     //     return this.http
     //         .post(this.postsUrl, JSON.stringify(post), { headers: this.headers })
@@ -39,15 +50,6 @@ export class HttpService {
     //     return this.http.delete(url, { headers: this.headers })
     //         .toPromise()
     //         .then(() => null)
-    //         .catch(this.handleError);
-    // }
-    // update(post: Post): Promise<Post> {
-    //     console.log(post);
-    //     const url = `${this.postsUrl}/${post.id}`;
-    //     return this.http
-    //         .put(url, JSON.stringify(post), { headers: this.headers })
-    //         .toPromise()
-    //         .then(() => post)
     //         .catch(this.handleError);
     // }
     private handleError(error: any): Promise<any> {

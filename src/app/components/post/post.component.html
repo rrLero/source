@@ -1,4 +1,14 @@
 <section *ngIf="post">
+    <button class="edit" type="button" (click)="edit()">{{ hidden ? 'edit' : 'close' }}</button>
     <div [innerHTML]="post.text_full_strings | markdown | safeHtml"></div>
-    <button type="button" (click)="goBack()">Back</button>
+    <textarea #text [class.hidden]="hidden" [value]="post.text_full_strings"></textarea><br>
+    <button [class.hidden]="!hidden" type="button" (click)="goBack()">Back</button>
+    <button [class.hidden]="hidden" class="save" type="button" (click)="save(text)">save</button>
+    <button [class.hidden]="hidden" class="cancel" type="button" (click)="cancel(text)">cancel</button>
+    <div  [class.hidden]="!popup" (click)="popup = !popup" class="popup">
+        saved!
+        <small>
+            You can undo the changes
+        </small>
+    </div>
 </section>
