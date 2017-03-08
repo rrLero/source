@@ -44,7 +44,8 @@ module.exports = webpackMerge(commonConfig, {
             },
             output: {
                 comments: false
-            }
+            },
+            sourceMap: false
         }),
         new CompressionPlugin({
             asset: '[path].gz[query]',
