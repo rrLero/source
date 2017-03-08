@@ -12,9 +12,11 @@ import { AppComponent }              from './app.component';
 import { LoginComponent }            from './components/login/login.component';
 import { PostsComponent }            from './components/posts/posts.component';
 import { PostComponent }             from './components/post/post.component';
+import { PostEditComponent }         from './components/post-edit/post-edit.component';
 import { PaginationComponent }       from './components/pagination/pagination.component';
 import { SearchComponent }           from './components/search/search.component';
 import { NotFoundComponent }         from './components/not-found/not-found.component';
+import { MdEditorDirective }         from './directives/md-editor.directive';
 
 @NgModule({
     imports: [
@@ -28,11 +30,13 @@ import { NotFoundComponent }         from './components/not-found/not-found.comp
         LoginComponent,
         PostsComponent,
         PostComponent,
+        PostEditComponent,
         PaginationComponent,
         NotFoundComponent,
         SafeHtmlPipe,
         MarkdownPipe,
-        SearchComponent
+        SearchComponent,
+        MdEditorDirective
     ],
     providers: [
         HttpService,

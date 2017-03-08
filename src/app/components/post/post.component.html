@@ -1,4 +1,7 @@
 <section *ngIf="post">
     <div [innerHTML]="post.text_full_strings | markdown |safeHtml"></div>
-    <button type="button" (click)="goBack()">Back</button>
+    <button type="button" class="btn btn-info" (click)="goBack()">Back</button>
+    <button type="button" class="btn btn-warning" [routerLink]="'edit'">Edit</button>
 </section>
+
+
