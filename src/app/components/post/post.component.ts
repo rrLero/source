@@ -25,8 +25,8 @@ export class PostComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.params
-        .switchMap(({ name, repo, title }) =>
-            this.httpService.getPost(name, repo, title))
+            .switchMap(({ name, repo, title }) =>
+                this.httpService.getPost(name, repo, title))
             .subscribe(post => this.post = post);
     }
     goBack(): void {
@@ -50,5 +50,8 @@ export class PostComponent implements OnInit {
         let backup = localStorage.getItem('backup');
         this.post.text_full_strings = backup;
         text.value = backup;
+    }
+    delete(): void {
+        this.httpService.delete(this.name, this.repo, this.post.title);
     }
 }

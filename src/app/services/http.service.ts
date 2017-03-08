@@ -27,6 +27,7 @@ export class HttpService {
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
+    // update(name: string, repo: string, post: Post): Promise<Post> {
     update(name: string, repo: string, post: Post) {
         this.getUrl(name, repo);
         const url = `${this.url}/${post.title}`;
@@ -38,20 +39,24 @@ export class HttpService {
         //     .then(() => post)
         //     .catch(this.handleError);
     }
+    // delete(name: string, repo: string, title: string): Promise<void> {
+    delete(name: string, repo: string, title: string) {
+        this.getUrl(name, repo);
+        const url = `${this.url}/${title}`;
+        console.log(url);
+        // return this.http.delete(url, { headers: this.headers })
+        //     .toPromise()
+        //     .then(() => null)
+        //     .catch(this.handleError);
+    }
     // create(post: Post): Promise<Post> {
-    //     return this.http
-    //         .post(this.postsUrl, JSON.stringify(post), { headers: this.headers })
-    //         .toPromise()
-    //         .then(res => res.json())
-    //         .catch(this.handleError);
-    // }
-    // delete(id: number): Promise<void> {
-    //     const url = `${this.postUrl}/${id}`;
-    //     return this.http.delete(url, { headers: this.headers })
-    //         .toPromise()
-    //         .then(() => null)
-    //         .catch(this.handleError);
-    // }
+    create(post: Post) {
+        // return this.http
+        //     .post(this.postsUrl, JSON.stringify(post), { headers: this.headers })
+        //     .toPromise()
+        //     .then(res => res.json())
+        //     .catch(this.handleError);
+    }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

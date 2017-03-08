@@ -1,5 +1,7 @@
 <search></search>
-
+<button type="button" (click)="create()">{{ hidden ? 'create' : 'cancel'}}</button>
+<textarea #newPost [class.hidden]="hidden" [value]="template"></textarea>
+<button [class.hidden]="hidden" type="button" (click)="push(newPost)">push</button>
 <section>
     <div *ngFor="let post of page.pagedItems">
         <h3>
