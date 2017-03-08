@@ -3,7 +3,7 @@ import { ActivatedRoute }    from '@angular/router';
 import { Location }          from '@angular/common';
 
 import { HttpService }       from '../../services/index';
-import { Post, Template, template }              from '../../shared/post.model';
+import { Post }              from '../../shared/post.model';
 
 @Component({
     selector: 'post',
@@ -16,9 +16,7 @@ export class PostComponent implements OnInit {
     popup = false;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
-    id = this.route.snapshot.params['id'];
     url = `/${this.name}/${this.repo}/post/`;
-    template: string;
     constructor(
         private location: Location,
         private route: ActivatedRoute,
@@ -34,16 +32,8 @@ export class PostComponent implements OnInit {
         this.location.back();
     }
     edit(): void {
-        new Template(
-            this.post.title,
-            this.post.tags,
-            this.post.author,
-            this.post.date,
-            this.post.text_full_strings
-        );
-        this.template = template;
         if (this.hidden) {
-            localStorage.setItem('backup', template);
+            localStorage.setItem('backup', this.post.text_full_strings);
         } else {
             localStorage.removeItem('backup');
         }
@@ -52,12 +42,10 @@ export class PostComponent implements OnInit {
     save(text): void {
         this.post.text_full_strings = text.value;
         this.httpService.update(this.name, this.repo, this.post);
-        this.post.text_full_strings = text.value.split('---')[2];
         this.popup = true;
     }
     cancel(text): void {
         let backup = localStorage.getItem('backup');
-        this.post.text_full_strings = text.value.split('---')[2];
         text.value = backup;
     }
     delete(): void {
