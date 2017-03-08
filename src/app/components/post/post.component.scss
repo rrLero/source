@@ -33,6 +33,7 @@ textarea {
   border: 1px solid #999;
   background-color: #fff;
   color: green;
+  z-index: 10;
   &::before {
     position: absolute;
     content: "X";

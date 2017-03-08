@@ -7,7 +7,6 @@ import { AppComponent }     from './app.component';
 import { components }       from './components/index';
 import { services }         from './services/index';
 import { pipes }            from './pipes/index';
-import { directives }       from './directives/index';
 
 @NgModule({
     imports: [
@@ -19,7 +18,6 @@ import { directives }       from './directives/index';
         AppComponent,
         ...components,
         ...pipes,
-        ...directives
     ],
     providers: [ ...services ],
     bootstrap: [ AppComponent ]

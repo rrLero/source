@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import SimpleMDE from 'simplemde';
 
 @Component({
@@ -7,8 +7,8 @@ import SimpleMDE from 'simplemde';
 })
 export class MdEditorComponent implements OnInit {
     @Input() value: string;
-    @Output() updatedValue = new EventEmitter();
     @ViewChild('editor') el: ElementRef;
+    updatedValue: string;
     editor;
 
     ngOnInit() {
@@ -16,7 +16,14 @@ export class MdEditorComponent implements OnInit {
             element: this.el.nativeElement,
             status: false
         });
-        this.editor.value(this.value);
+        this.setValue(this.value);
+
+        this.editor.codemirror.on("change", () => {
+            this.updatedValue = this.editor.value();
+        });
     }
 
+    setValue(value) {
+        this.editor.value(value);
+    }
 }

@@ -40,13 +40,13 @@ export class PostComponent implements OnInit {
         this.hidden = !this.hidden;
     }
     save(text): void {
-        this.post.text_full_strings = text.value;
+        this.post.text_full_strings = text.updatedValue;
         this.httpService.update(this.name, this.repo, this.post);
         this.popup = true;
     }
     cancel(text): void {
         let backup = localStorage.getItem('backup');
-        text.value = backup;
+        text.setValue(backup);
     }
     delete(): void {
         this.httpService.delete(this.name, this.repo, this.post.title);
