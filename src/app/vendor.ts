@@ -22,3 +22,4 @@ if (process.env.ENV !== 'production') {
 
 import 'underscore';
 import 'marked';
+import 'simplemde';

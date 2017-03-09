@@ -11,52 +11,56 @@ export class HttpService {
     constructor(private http: Http) { }
 
     getUrl(name: string, repo: string) {
-        this.url = `${this.host}/${name}/${repo}/api/get`;
+        this.url = `${this.host}/${name}/${repo}/api`;
     }
     getPosts(name: string, repo: string): Promise<Post[]> {
         this.getUrl(name, repo);
-        return this.http.get(this.url)
+        return this.http.get(`${this.url}/get`)
             .toPromise()
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
     getPost(name: string, repo: string, title: string): Promise<Post> {
         this.getUrl(name, repo);
-        return this.http.get(`${this.url}/${title}`)
+        return this.http.get(`${this.url}/get/${title}`)
             .toPromise()
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
-    // update(name: string, repo: string, post: Post): Promise<Post> {
-    update(name: string, repo: string, post: Post) {
+    // update(name: string, repo: string, title: string, post: Post): Promise<Post> {
+    //     this.getUrl(name, repo);
+    //     const url = `${this.url}/put/${title}`;
+    //     console.log(url);
+    //     return this.http
+    //         .post(url, JSON.stringify(post), { headers: this.headers })
+    //         .toPromise()
+    //         // .then(res => res.json())
+    //         .then(() => post)
+    //         .catch(this.handleError);
+    // }
+    update(name: string, repo: string, title: string, post: Post)  {
         this.getUrl(name, repo);
-        const url = `${this.url}/${post.title}`;
+        const url = `${this.url}/put/${title}`;
         console.log(url);
-        // console.log(post);
-        // return this.http
-        //     .put(url, JSON.stringify(post), { headers: this.headers })
-        //     .toPromise()
-        //     .then(() => post)
-        //     .catch(this.handleError);
+        console.log(post);
     }
+    // create(name: string, repo: string, post: Post): Promise<Post> {
+        // this.getUrl(name, repo);
+        // const url = `${this.host}/${name}/${repo}`;
+        // return this.http
+        //     .post(url, JSON.stringify(post), { headers: this.headers })
+        //     .toPromise()
+        //     .then(res => res.json())
+        //     .catch(this.handleError);
+    // }
     // delete(name: string, repo: string, title: string): Promise<void> {
-    delete(name: string, repo: string, title: string) {
-        this.getUrl(name, repo);
-        const url = `${this.url}/${title}`;
-        console.log(url);
+        // this.getUrl(name, repo);
+        // const url = `${this.host}/${name}/${repo}`;
         // return this.http.delete(url, { headers: this.headers })
         //     .toPromise()
         //     .then(() => null)
         //     .catch(this.handleError);
-    }
-    // create(post: Post): Promise<Post> {
-    create(post: Post) {
-        // return this.http
-        //     .post(this.postsUrl, JSON.stringify(post), { headers: this.headers })
-        //     .toPromise()
-        //     .then(res => res.json())
-        //     .catch(this.handleError);
-    }
+    // }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
