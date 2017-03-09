@@ -1,12 +1,21 @@
 <section *ngIf="post">
     <button class="edit" type="button" (click)="edit(text)">{{ hidden ? 'edit' : 'close' }}</button>
     <!-- <button class="edit" type="button" (click)="delete()">delete</button> -->
+    <h2>{{ post.title }}</h2>
+    <div [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
 
-    <div [innerHTML]="post.text_full_md | splitMd | markdown | safeHtml "></div>
-    <md-editor #text [class.hidden]="hidden" [value]="post.text_full_md"></md-editor>
+    <label for="" [class.hidden]="hidden">Title
+        <input  #title type="text" [value]="post.title">
+    </label><br>
+    <label for="" [class.hidden]="hidden">Tags
+        <input  #tags type="text" [value]="post.tags">
+    </label>
+
+
+    <md-editor #text [class.hidden]="hidden" [value]="post.text_full_strings "></md-editor>
 
     <button [class.hidden]="!hidden" type="button" (click)="goBack()">Back</button>
-    <button [class.hidden]="hidden" class="save" type="button" (click)="save(text)">save</button>
+    <button [class.hidden]="hidden" class="save" type="button" (click)="save(title, tags, text)">save</button>
 
     <!-- <button [class.hidden]="hidden" class="cancel" type="button" (click)="cancel(text)">cancel</button> -->
 
