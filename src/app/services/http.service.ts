@@ -27,6 +27,13 @@ export class HttpService {
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
+    getPostByTitle(name: string, repo: string, title: string): Promise<Post> {
+        this.getUrl(name, repo);
+        return this.http.get(`${this.url}/get/${title}`)
+            .toPromise()
+            .then(response => response.json() as Post)
+            .catch(this.handleError);
+    }
     update(name: string, repo: string, id: string, sha: string, post: Post): Promise<Post> {
         this.getUrl(name, repo);
         const url = `${this.url}/put/${id}/${sha}`;

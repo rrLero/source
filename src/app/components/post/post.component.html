@@ -16,7 +16,7 @@
     <button [class.hidden]="!hidden" type="button" (click)="goBack()">Back</button>
     <button [class.hidden]="hidden" class="save" type="button" (click)="save(title, tags, text, popup)">save</button>
 
-    <!-- <button [class.hidden]="hidden" class="cancel" type="button" (click)="cancel(text)">cancel</button> -->
+    <button [class.hidden]="hidden" class="cancel" type="button" (click)="cancel(text)">cancel</button>
 
     <div [class.hidden]="!popup" (click)="popup = !popup" class="popup" [innerHTML]="popupText">
     </div>

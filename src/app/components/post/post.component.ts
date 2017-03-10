@@ -24,19 +24,29 @@ export class PostComponent implements OnInit {
         private httpService: HttpService) { }
 
     ngOnInit(): void {
-        this.route.params
+        let test = parseFloat(this.location.path().split('/')[4].slice(0, 4));
+        if (test) {
+            this.route.params
             .switchMap(({ name, repo, title }) =>
                 this.httpService.getPost(name, repo, title))
-            .subscribe(post => this.post = post);
+                .subscribe(post => this.post = post);
+        } else {
+            this.route.params
+            .switchMap(({ name, repo, title }) =>
+                this.httpService.getPostByTitle(name, repo, title))
+                .subscribe(post => this.post = post);
+        }
     }
     goBack(): void {
         this.location.back();
     }
     edit(): void {
         if (this.hidden) {
-            localStorage.setItem('backup', this.post.text_full_strings);
+            localStorage.setItem('title', this.post.title);
+            localStorage.setItem('tags', JSON.stringify(this.post.tags));
+            localStorage.setItem('text', this.post.text_full_strings);
         } else {
-            localStorage.removeItem('backup');
+            this.clearLocalStorage();
         }
         this.hidden = !this.hidden;
     }
@@ -44,6 +54,13 @@ export class PostComponent implements OnInit {
         this.post.title = title.value;
         this.post.tags = tags.value.split(',');
         this.post.text_full_strings = text.value;
+        this.hidden = !this.hidden;
+        this.popup = true;
+        this.buildFullMd();
+        this.update();
+        this.clearLocalStorage();
+    }
+    buildFullMd(): void {
         new UpdatedPost(
             this.post.title,
             this.post.tags,
@@ -52,7 +69,8 @@ export class PostComponent implements OnInit {
             this.post.text_full_strings
         );
         this.post.text_full_md = updatedPost.trim();
-        this.popup = true;
+    }
+    update(): void {
         this.httpService.update(
             this.name,
             this.repo,
@@ -63,12 +81,19 @@ export class PostComponent implements OnInit {
                 this.popupText = 'done!';
                 setTimeout(() => this.popup = false, 1500);
             });
-        this.hidden = !this.hidden;
-        localStorage.removeItem('backup');
     }
-    cancel(text): void {
-        let backup = localStorage.getItem('backup');
-        text.setValue(backup);
+    cancel(textEl): void {
+        let title = localStorage.getItem('title');
+        let tags = JSON.parse(localStorage.getItem('tags'));
+        let text = localStorage.getItem('text');
+        this.post.title = title;
+        this.post.tags = tags;
+        textEl.setValue(text.trim());
+    }
+    clearLocalStorage() {
+        localStorage.removeItem('title');
+        localStorage.removeItem('tags');
+        localStorage.removeItem('text');
     }
     // delete(): void {
     //     this.httpService.delete(this.name, this.repo, this.post.title);
