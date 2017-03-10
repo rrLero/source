@@ -19,14 +19,10 @@ export class AuthGithubComponent implements OnInit {
     accessToken: any;
 
     public getToken(code) {
-        this.accessToken = this.http.post('https://github.com/login/oauth/access_token', {
-            client_id: DEV.client_id,
-            client_secret: DEV.client_secret,
-            code,
-        })
+        const url = 'http://gitblog.pythonanywhere.com/api/auth';
+        this.accessToken = this.http.post(url, { code })
             .map((res: Response) => {
                 let json = res.json();
-                console.log(res);
                 if (json && json.token) {
                     this.accessToken = json;
                     localStorage.setItem("access_token", this.accessToken.token);
@@ -37,7 +33,6 @@ export class AuthGithubComponent implements OnInit {
                 }
             })
             .catch(this.handleError);
-        console.log(this.accessToken);
         return this.accessToken;
     }
 
