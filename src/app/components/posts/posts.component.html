@@ -1,5 +1,5 @@
-<a *ngIf="!isLoggedIn" [routerLink]="[url, 'auth']">Login</a>
-<a *ngIf="isLoggedIn" (click)="logout()">Logout</a>
+<!-- <a *ngIf="!isLoggedIn" [routerLink]="[url, 'auth']">Login</a>
+<a *ngIf="isLoggedIn" (click)="logout()">Logout</a> -->
 
 <search></search>
 
@@ -10,12 +10,12 @@
 <section>
     <div *ngFor="let post of page.pagedItems">
         <h3>
-            <a [routerLink]="[url, 'post', post.title]">{{ post.title }}</a>
+            <a [routerLink]="[url, 'post', post.id]">{{ post.title }}</a>
         </h3>
         <div>{{ post.date | slice:0:10 }}</div>
         <div>tags: {{ post.tags }}</div>
         <div>author: {{ post.author || 'user' }}</div>
-        <a [routerLink]="[url, 'post', post.title]">...read more</a>
+        <a [routerLink]="[url, 'post', post.id]">...read more</a>
 
     </div>
 </section>

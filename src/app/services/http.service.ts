@@ -20,30 +20,28 @@ export class HttpService {
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
-    getPost(name: string, repo: string, title: string): Promise<Post> {
+    getPost(name: string, repo: string, id: string): Promise<Post> {
         this.getUrl(name, repo);
-        return this.http.get(`${this.url}/get/${title}`)
+        return this.http.get(`${this.url}/get/id/${id}`)
             .toPromise()
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
-    // update(name: string, repo: string, title: string, post: Post): Promise<Post> {
-    //     this.getUrl(name, repo);
-    //     const url = `${this.url}/put/${title}`;
-    //     console.log(url);
-    //     return this.http
-    //         .post(url, JSON.stringify(post), { headers: this.headers })
-    //         .toPromise()
-    //         // .then(res => res.json())
-    //         .then(() => post)
-    //         .catch(this.handleError);
-    // }
-    update(name: string, repo: string, title: string, post: Post)  {
+    update(name: string, repo: string, id: string, sha: string, post: Post): Promise<Post> {
         this.getUrl(name, repo);
-        const url = `${this.url}/put/${title}`;
-        console.log(url);
-        console.log(post);
+        const url = `${this.url}/put/${id}/${sha}`;
+        return this.http
+            .post(url, JSON.stringify(post), { headers: this.headers })
+            .toPromise()
+            .then(() => post)
+            .catch(this.handleError);
     }
+    // update(name: string, repo: string, title: string, sha: string, post: Post)  {
+    //     this.getUrl(name, repo);
+    //     const url = `${this.url}/put/${title}/${sha}`;
+    //     console.log(url);
+    //     console.log(post);
+    // }
     // create(name: string, repo: string, post: Post): Promise<Post> {
         // this.getUrl(name, repo);
         // const url = `${this.host}/${name}/${repo}`;

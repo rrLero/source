@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService }            from '../../services/index';
 import { AuthService }            from '../../services/index';
-import { Template, template }     from '../../shared/post.model';
 
 @Component({
     selector: 'posts',
@@ -30,8 +29,6 @@ export class PostsComponent implements OnInit {
         let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
         let time = `${this.date.toString()}`.slice(15).slice(0, 6);
         let datetime = date + time;
-        new Template(this.name, datetime);
-        this.template = template.trim();
         this.hidden = !this.hidden;
     }
     push(text) {
