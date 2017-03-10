@@ -6,12 +6,14 @@ import { SearchComponent }     from './search/search.component';
 import { NotFoundComponent }   from './not-found/not-found.component';
 import { MdEditorComponent }   from './md-editor/md-editor.component';
 import { AuthComponent }       from './auth/auth.component';
+import { AuthGithubComponent } from './auth-github/auth-github.component';
 
 export { LoginComponent };
 export { PostsComponent };
 export { PostComponent };
 export { NotFoundComponent };
 export { AuthComponent };
+export { AuthGithubComponent };
 
 export const components = [
     LoginComponent,
@@ -21,5 +23,6 @@ export const components = [
     SearchComponent,
     NotFoundComponent,
     MdEditorComponent,
-    AuthComponent
+    AuthComponent,
+    AuthGithubComponent
 ];
