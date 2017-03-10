@@ -6,22 +6,27 @@ export interface Post {
     title: string;
     text_full_strings: string;
     text_full_md: string;
+    sha: string;
 }
 
-export let template: string;
+export let updatedPost: string;
 
-export class Template {
+export class UpdatedPost {
     constructor(
+        title:  string,
+        tags: string[],
         author: string,
-        date: string) {
-        template = `
+        date: string,
+        text: string) {
+        updatedPost = `
 ---
 layout:
-title:
-tags:
+title: ${title}
+tags: ${tags}
 author: ${author}
 date: ${date}
 ---
+${text}
 `;
     }
-};
+}

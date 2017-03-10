@@ -3,7 +3,7 @@ import { ActivatedRoute }    from '@angular/router';
 import { Location }          from '@angular/common';
 
 import { HttpService }       from '../../services/index';
-import { Post }              from '../../shared/post.model';
+import { Post, UpdatedPost, updatedPost }              from '../../shared/post.model';
 
 @Component({
     selector: 'post',
@@ -14,6 +14,7 @@ export class PostComponent implements OnInit {
     post: Post;
     hidden = true;
     popup = false;
+    popupText = 'upload...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}/post/`;
@@ -39,14 +40,31 @@ export class PostComponent implements OnInit {
         }
         this.hidden = !this.hidden;
     }
-    save(title, tags, text): void {
+    save(title, tags, text, popup): void {
         this.post.title = title.value;
         this.post.tags = tags.value.split(',');
         this.post.text_full_strings = text.value;
-        this.httpService.update(this.name, this.repo, this.post.id, this.post);
+        new UpdatedPost(
+            this.post.title,
+            this.post.tags,
+            this.post.author,
+            this.post.date,
+            this.post.text_full_strings
+        );
+        this.post.text_full_md = updatedPost.trim();
+        this.popup = true;
+        this.httpService.update(
+            this.name,
+            this.repo,
+            this.post.id,
+            this.post.sha,
+            this.post)
+            .then(() => {
+                this.popupText = 'done!';
+                setTimeout(() => this.popup = false, 1500);
+            });
         this.hidden = !this.hidden;
         localStorage.removeItem('backup');
-        // this.popup = true;
     }
     cancel(text): void {
         let backup = localStorage.getItem('backup');
