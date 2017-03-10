@@ -11,6 +11,11 @@ export class AuthComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
 
+    client_id = '9ef82b07caf06c5561f5';
+    client_secret = 'd96675528726a49606a950e5a022fd483a4207b7';
+
+    githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=' + this.client_id + '&scope=user&redirect_uri=' + 'http://localhost:8080/';
+
     constructor(private service: AuthService,
                 private router: Router,
                 private route: ActivatedRoute) {

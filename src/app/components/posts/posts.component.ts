@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpService }            from '../../services/index';
 import { AuthService }            from '../../services/index';
 import { Template, template }     from '../../shared/post.model';
+import { DEV }     from '../../github.config';
 
 @Component({
     selector: 'posts',
@@ -18,6 +19,7 @@ export class PostsComponent implements OnInit {
     url = `/${this.name}/${this.repo}/`;
     hidden = true;
     template: string;
+    githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=' + DEV.client_id + '&scope=user&redirect_uri=' + DEV.redirect_uri;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
