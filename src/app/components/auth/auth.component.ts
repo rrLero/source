@@ -8,29 +8,25 @@ import { Observable }             from "rxjs";
 })
 
 export class AuthComponent implements OnInit {
+    accessToken: any;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private http: Http) {
     }
 
-    accessToken: any;
-
     public getToken(code) {
-        const url = 'http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth';
-        // const url = `http://localhost:9999/authenticate/${code}`;
-        this.accessToken = this.http.post(url, { code })
-        // this.accessToken = this.http.get(url)
+        const url = `http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth?code=${code}`;
+        this.accessToken = this.http.get(url)
             .map((res: Response) => {
                 let json = res.json();
-                console.log(json);
-                if (json && json.token) {
+                if (json && json.access_token) {
                     this.accessToken = json;
-                    localStorage.setItem("access_token", this.accessToken.token);
-                    return {"authenticated": true};
+                    localStorage.setItem("access_token", this.accessToken.access_token);
+                    // return { "authenticated": true };
                 } else {
                     localStorage.removeItem("access_token");
-                    return {"authenticated": false};
+                    // return { "authenticated": false };
                 }
             })
             .catch(this.handleError);
@@ -48,8 +44,8 @@ export class AuthComponent implements OnInit {
                 let code = param['code'];
                 this.getToken(code)
                     .subscribe(() => {
-                    return this.router.navigate(['/']);
-                });
+                        return this.router.navigate(['/']);
+                    });
             });
     }
 
