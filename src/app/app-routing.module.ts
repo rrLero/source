@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent }       from './components/index';
 import { PostsComponent }       from './components/index';
 import { PostComponent }        from './components/index';
+import { CreatePostComponent }  from './components/index';
 import { NotFoundComponent }    from './components/index';
 import { AuthComponent }        from './components/index';
 
@@ -23,6 +24,10 @@ const routes: Routes = [
     {
         path: ':name/:repo/post/:title',
         component: PostComponent
+    },
+    {
+        path: ':name/:repo/create',
+        component: CreatePostComponent
     },
     {
         path: ':name/:repo/auth',
