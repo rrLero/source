@@ -26,7 +26,8 @@ export class PostsComponent implements OnInit {
         private httpService: HttpService) { };
     ngOnInit() {
         this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
-        if (this.authService.isLogged) {
+        const token = localStorage.getItem("access_token");
+        if (token) {
             this.authService.getProfile().subscribe();
         }
     }
