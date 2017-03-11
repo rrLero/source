@@ -1,23 +1,8 @@
 <section *ngIf="post">
-    <button class="edit" type="button" (click)="edit(text)">{{ hidden ? 'edit' : 'close' }}</button>
-    <!-- <button class="edit" type="button" (click)="delete()">delete</button> -->
+    <button type="button">
+        <a [routerLink]="[url, 'edit']">Edit post</a>
+    </button>
     <h2>{{ post.title }}</h2>
     <div [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
-
-    <label for="title" [class.hidden]="hidden">Title
-        <input #title type="text" [value]="post.title" id="title">
-    </label><br>
-    <label for="tags" [class.hidden]="hidden">Tags
-        <input  #tags type="text" [value]="post.tags" id="tags">
-    </label>
-
-    <md-editor #text [class.hidden]="hidden" [value]="post.text_full_strings.trim()"></md-editor>
-
-    <button [class.hidden]="!hidden" type="button" (click)="goBack()">Back</button>
-    <button [class.hidden]="hidden" class="save" type="button" (click)="save(title, tags, text, popup)">save</button>
-
-    <button [class.hidden]="hidden" class="cancel" type="button" (click)="cancel(text)">cancel</button>
-
-    <div [class.hidden]="!popup" (click)="popup = !popup" class="popup" [innerHTML]="popupText">
-    </div>
+    <button type="button" (click)="goBack()">Back</button>
 </section>

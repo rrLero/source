@@ -43,12 +43,16 @@ export class HttpService {
             .then(() => post)
             .catch(this.handleError);
     }
-    // update(name: string, repo: string, title: string, sha: string, post: Post)  {
-    //     this.getUrl(name, repo);
-    //     const url = `${this.url}/put/${title}/${sha}`;
-    //     console.log(url);
-    //     console.log(post);
-    // }
+    create(name: string, repo: string, post: Post) {
+        this.getUrl(name, repo);
+        const url = `${this.host}/${name}/${repo}`;
+        console.log(post);
+        // return this.http
+        //     .post(url, JSON.stringify(post), { headers: this.headers })
+        //     .toPromise()
+        //     .then(res => res.json())
+        //     .catch(this.handleError);
+    }
     // create(name: string, repo: string, post: Post): Promise<Post> {
         // this.getUrl(name, repo);
         // const url = `${this.host}/${name}/${repo}`;

@@ -1,5 +1,6 @@
 import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location }               from '@angular/common';
 
 import { HttpService }            from '../../services/index';
 import { AuthService }            from '../../services/index';
@@ -16,12 +17,12 @@ export class PostsComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     id = this.route.snapshot.params['id'];
     url = `/${this.name}/${this.repo}/`;
-    hidden = true;
     template: string;
     githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=' + DEV.client_id + '&scope=user&redirect_uri=' + DEV.redirect_uri;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+        private location: Location,
         private authService: AuthService,
         private httpService: HttpService) { };
     ngOnInit() {
@@ -32,20 +33,8 @@ export class PostsComponent implements OnInit {
     logout() {
         this.authService.logout();
     }
-    // create() {
-    //     let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
-    //     let time = `${this.date.toString()}`.slice(15).slice(0, 6);
-    //     let datetime = date + time;
-    //     this.hidden = !this.hidden;
-    // }
-    // push(text) {
-    //     console.log(text.value);
-        // name = name.trim();
-        // if (!name) { return; }
-        // this.httpService.create(name)
-        //     .then(hero => {
-        //         this.heroes.push(hero);
-        //         this.selectedHero = null;
-        //     });
-    // }
+    savePage() {
+        let page = this.location.path().split('/')[4];
+        localStorage.setItem('page', page);
+    }
 }
