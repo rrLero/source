@@ -18,7 +18,9 @@ export class AuthComponent implements OnInit {
 
     public getToken(code) {
         const url = 'http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth';
+        // const url = `http://localhost:9999/authenticate/${code}`;
         this.accessToken = this.http.post(url, { code })
+        // this.accessToken = this.http.get(url)
             .map((res: Response) => {
                 let json = res.json();
                 console.log(json);

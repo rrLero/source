@@ -1,10 +1,10 @@
-<a [hidden]="authService.isLogged" [href]="githubUrl">Github login</a>
+<a [hidden]="service.isLogged" [href]="githubUrl">Github login</a>
 
-<div [hidden]="!authService.isLogged">
+<div [hidden]="!service.isLogged">
     <div class="profile">
-        <img class="profile-avatar" src="{{authService.loggedUser?.avatar_url }}" alt="">
+        <img class="profile-avatar" src="{{ service.loggedUser?.avatar_url }}" alt="">
         <div class="profile-name">
-            <p>{{ authService.loggedUser?.name }} <span class="glyphicon glyphicon-log-out profile-logout" (click)="logout()"></span></p>
+            <p>{{ service.loggedUser?.name }} <span class="glyphicon glyphicon-log-out profile-logout" (click)="logout()"></span></p>
         </div>
     </div>
 </div>
