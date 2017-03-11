@@ -1,44 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute }            from '@angular/router';
-import { AuthService }       from '../../services/index';
+import { Component, OnInit }      from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { Http, Response }         from "@angular/http";
+import { Observable }             from "rxjs";
 
 @Component({
-    templateUrl: 'auth.component.html'
+    template: `<p>Authenticate</p>`,
 })
+
 export class AuthComponent implements OnInit {
-    credentials = { username: '', password: '' };
-    errorMessage: string = '';
-    name = this.route.snapshot.params['name'];
-    repo = this.route.snapshot.params['repo'];
 
-    client_id = '9ef82b07caf06c5561f5';
-    client_secret = 'd96675528726a49606a950e5a022fd483a4207b7';
-
-    githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=' + this.client_id + '&scope=user&redirect_uri=' + 'http://localhost:8080/';
-
-    constructor(private service: AuthService,
+    constructor(private route: ActivatedRoute,
                 private router: Router,
-                private route: ActivatedRoute) {
+                private http: Http) {
+    }
+
+    accessToken: any;
+
+    public getToken(code) {
+        const url = 'http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth';
+        this.accessToken = this.http.post(url, { code })
+            .map((res: Response) => {
+                let json = res.json();
+                console.log(json);
+                if (json && json.token) {
+                    this.accessToken = json;
+                    localStorage.setItem("access_token", this.accessToken.token);
+                    return {"authenticated": true};
+                } else {
+                    localStorage.removeItem("access_token");
+                    return {"authenticated": false};
+                }
+            })
+            .catch(this.handleError);
+        return this.accessToken;
+    }
+
+    private handleError(error: Response) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
     }
 
     ngOnInit() {
-    }
-
-    /**
-     * Login a user
-     */
-    login() {
-        this.errorMessage = '';
-
-        this.service.login(this.credentials.username, this.credentials.password)
-            .subscribe(
-                () => {
-                    this.router.navigate([this.name, this.repo]);
-                },
-                err => {
-                    this.errorMessage = err;
-                }
-            );
+        this.route.queryParams.subscribe(
+            (param: any) => {
+                let code = param['code'];
+                this.getToken(code);
+                //     .subscribe(() => {
+                //     return this.router.navigate(['/']);
+                // });
+            })
     }
 
 }
