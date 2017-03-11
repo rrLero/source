@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent }       from './components/index';
 import { PostsComponent }       from './components/index';
 import { PostComponent }        from './components/index';
+import { CreatePostComponent }  from './components/index';
 import { NotFoundComponent }    from './components/index';
 import { AuthComponent }        from './components/index';
 
@@ -25,7 +26,11 @@ const routes: Routes = [
         component: PostComponent
     },
     {
-        path: 'auth',
+        path: ':name/:repo/create',
+        component: CreatePostComponent
+    },
+    {
+        path: ':name/:repo/auth',
         component: AuthComponent
     },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
