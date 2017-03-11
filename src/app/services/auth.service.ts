@@ -1,67 +1,47 @@
-import { Injectable }     from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/observable/throw';
+import { Injectable }                              from "@angular/core";
+import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { Router }                                  from "@angular/router";
+import { Observable }                              from "rxjs";
 
 @Injectable()
 export class AuthService {
-    private authUrl: string = 'https://reqres.in/api';
-    private loggedIn: boolean = false;
+    private _loggedUser: any;
+    private _isLogged: boolean;
 
-    constructor(private http: Http) {
-        // look at localStorage to check if the user is logged in
-        this.loggedIn = !!localStorage.getItem('auth_token');
+    constructor(private http: Http,
+                private router: Router) {
     }
 
-    /**
-     * Check if the user is logged in
-     */
-    isLoggedIn() {
-        return this.loggedIn;
-    }
+    public getProfile() {
+        let headers = new Headers({'Authorization': 'token ' + localStorage.getItem("access_token")});
+        let options = new RequestOptions({headers: headers});
 
-    /**
-     * Log the user in
-     */
-    login(username: string, password: string): Observable<string> {
-        return this.http.post(`${this.authUrl}/login`, { username, password })
-            .map(res => res.json())
-            .do(res => {
-                if (res.token) {
-                    localStorage.setItem('auth_token', res.token);
-                    this.loggedIn = true;
-                }
+        return this.http.get("https://api.github.com/user", options)
+            .map((res: Response) => {
+                this._loggedUser = res.json();
+                this._isLogged = true;
+                return this._loggedUser;
             })
             .catch(this.handleError);
     }
 
-    /**
-     * Log the user out
-     */
-    logout() {
-        localStorage.removeItem('auth_token');
-        this.loggedIn = false;
+    public logout() {
+        this._isLogged = false;
+        localStorage.removeItem('access_token');
+        return this.router.navigate(['/login']);
     }
 
-    /**
-     * Handle any errors from the API
-     */
-    private handleError(err) {
-        let errMessage: string;
+    private handleError(error: Response) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
 
-        if (err instanceof Response) {
-            let body   = err.json() || '';
-            let error  = body.error || JSON.stringify(body);
-            errMessage = `${err.status} - ${err.statusText || ''} ${error}`;
-        } else {
-            errMessage = err.message ? err.message : err.toString();
-        }
+    get loggedUser(): any {
+        return this._loggedUser;
+    }
 
-        return Observable.throw(errMessage);
+    get isLogged() {
+        return this._isLogged;
     }
 
 }

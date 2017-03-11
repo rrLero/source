@@ -44,11 +44,11 @@ export class AuthComponent implements OnInit {
         this.route.queryParams.subscribe(
             (param: any) => {
                 let code = param['code'];
-                this.getToken(code);
-                //     .subscribe(() => {
-                //     return this.router.navigate(['/']);
-                // });
-            })
+                this.getToken(code)
+                    .subscribe(() => {
+                    return this.router.navigate(['/']);
+                });
+            });
     }
 
 }
