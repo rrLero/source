@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService }            from '../../services/index';
 import { AuthService }            from '../../services/index';
-import { DEV }     from '../../github.config';
+import { DEV }                    from '../../github.config';
 
 @Component({
     selector: 'posts',
@@ -26,15 +26,20 @@ export class PostsComponent implements OnInit {
         private httpService: HttpService) { };
     ngOnInit() {
         this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
+        this.authService.getProfile().subscribe();
     }
-    create() {
-        let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
-        let time = `${this.date.toString()}`.slice(15).slice(0, 6);
-        let datetime = date + time;
-        this.hidden = !this.hidden;
+
+    logout() {
+        this.authService.logout();
     }
-    push(text) {
-        console.log(text.value);
+    // create() {
+    //     let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
+    //     let time = `${this.date.toString()}`.slice(15).slice(0, 6);
+    //     let datetime = date + time;
+    //     this.hidden = !this.hidden;
+    // }
+    // push(text) {
+    //     console.log(text.value);
         // name = name.trim();
         // if (!name) { return; }
         // this.httpService.create(name)
@@ -42,5 +47,5 @@ export class PostsComponent implements OnInit {
         //         this.heroes.push(hero);
         //         this.selectedHero = null;
         //     });
-    }
+    // }
 }
