@@ -6,16 +6,11 @@ import { PostsComponent }       from './components/index';
 import { PostComponent }        from './components/index';
 import { NotFoundComponent }    from './components/index';
 import { AuthComponent }        from './components/index';
-import { AuthGithubComponent }  from './components/index';
 
 const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
-    },
-    {
-        path: 'auth_github',
-        component: AuthGithubComponent
     },
     {
         path: ':name/:repo',
@@ -30,7 +25,7 @@ const routes: Routes = [
         component: PostComponent
     },
     {
-        path: ':name/:repo/auth',
+        path: 'auth',
         component: AuthComponent
     },
     { path: '', redirectTo: '/login', pathMatch: 'full' },

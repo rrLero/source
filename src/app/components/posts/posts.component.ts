@@ -43,19 +43,4 @@ export class PostsComponent implements OnInit {
         //         this.selectedHero = null;
         //     });
     }
-
-    /**
-     * Is the user logged in?
-     */
-    get isLoggedIn() {
-        return this.authService.isLoggedIn();
-    }
-
-    /**
-     * Log the user out
-     */
-    logout() {
-        this.authService.logout();
-        this.router.navigate([this.url,'auth']);
-    }
 }
