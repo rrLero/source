@@ -7,3 +7,10 @@
     </label>
 </form>
 <button type="button" (click)="go(nameEl, repoEl); saveUser(nameEl, repoEl)">go</button>
+<hr>
+<h3>List of blogs</h3>
+<section *ngFor="let blog of blogs">
+    <h4>
+        <a [routerLink]="['/' + blog.name + '/' + blog.repo]">{{ blog.name }} - {{  blog.repo }}</a>
+    </h4>
+</section>

@@ -13,23 +13,28 @@ export class HttpService {
     getUrl(name: string, repo: string) {
         this.url = `${this.host}/${name}/${repo}/api`;
     }
+    getBlogs(): Promise<any> {
+        const url = `${this.host}/api/blog_list`;
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
     getPosts(name: string, repo: string): Promise<Post[]> {
         this.getUrl(name, repo);
-        return this.http.get(`${this.url}/get`)
+        const url = `${this.url}/get`;
+        return this.http
+            .get(url)
             .toPromise()
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
     getPost(name: string, repo: string, id: string): Promise<Post> {
         this.getUrl(name, repo);
-        return this.http.get(`${this.url}/get/id/${id}`)
-            .toPromise()
-            .then(response => response.json() as Post)
-            .catch(this.handleError);
-    }
-    getPostByTitle(name: string, repo: string, title: string): Promise<Post> {
-        this.getUrl(name, repo);
-        return this.http.get(`${this.url}/get/${title}`)
+        const url = `${this.url}/get/id/${id}`;
+        return this.http
+            .get(url)
             .toPromise()
             .then(response => response.json() as Post)
             .catch(this.handleError);
