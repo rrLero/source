@@ -36,7 +36,8 @@ export class HttpService {
     }
     update(name: string, repo: string, id: string, sha: string, post: Post): Promise<Post> {
         this.getUrl(name, repo);
-        const url = `${this.url}/put/${id}/${sha}`;
+        const token = localStorage.getItem("access_token");
+        const url = `${this.url}/put/${id}/${sha}?access_token=${token}`;
         return this.http
             .post(url, JSON.stringify(post), { headers: this.headers })
             .toPromise()

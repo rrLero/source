@@ -16,29 +16,29 @@ textarea {
 
 .profile {
   overflow: hidden;
+}
 
-  &-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    float: left;
-  }
+.profile-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  float: left;
+}
 
-  &-name {
-    float: left;
-    padding-left: 10px;
+.profile-name {
+  float: left;
+  padding-left: 10px;
+}
 
-    p {
-      font-size: 18px;
-      margin: 0;
-      line-height: 50px;
-    }
-  }
+.profile-name p {
+  font-size: 18px;
+  margin: 0;
+  line-height: 50px;
+}
 
-  &-logout {
-    margin-left: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    color: #aaaaaa;
-  }
+.profile-logout {
+  margin-left: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #aaaaaa;
 }

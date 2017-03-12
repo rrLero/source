@@ -18,7 +18,7 @@ export class PostsComponent implements OnInit {
     id = this.route.snapshot.params['id'];
     url = `/${this.name}/${this.repo}/`;
     template: string;
-    githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=' + DEV.client_id + '&scope=user&redirect_uri=' + DEV.redirect_uri;
+    githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=' + DEV.client_id + '&scope=repo&redirect_uri=' + DEV.redirect_uri;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -27,7 +27,14 @@ export class PostsComponent implements OnInit {
         private httpService: HttpService) { };
     ngOnInit() {
         this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
-        this.authService.getProfile().subscribe();
+        const token = localStorage.getItem("access_token");
+        if (token) {
+            this.authService.getProfile().subscribe();
+        }
+    }
+
+    get service() {
+        return this.authService;
     }
 
     logout() {
