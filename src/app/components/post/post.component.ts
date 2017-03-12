@@ -26,8 +26,12 @@ export class PostComponent implements OnInit {
     ngOnInit(): void {
         this.route.params
         .switchMap(({ name, repo, title }) =>
-            this.httpService.getPostByTitle(name, repo, title))
+            this.httpService.getPost(name, repo, title))
             .subscribe(post => this.post = post);
+        // this.route.params
+        // .switchMap(({ name, repo, title }) =>
+        //     this.httpService.getPostByTitle(name, repo, title))
+        //     .subscribe(post => this.post = post);
     }
     goBack(): void {
         // this.location.back();

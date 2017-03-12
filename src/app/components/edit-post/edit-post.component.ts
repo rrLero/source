@@ -6,7 +6,8 @@ import { HttpService }            from '../../services/index';
 import { Post, FullMd, fullMd }   from '../../shared/post.model';
 
 @Component({
-    templateUrl: 'edit-post.component.html'
+    templateUrl: 'edit-post.component.html',
+    styleUrls: ['edit-post.component.scss']
 })
 export class EditPostComponent implements OnInit {
     post: Post;
@@ -25,7 +26,7 @@ export class EditPostComponent implements OnInit {
     ngOnInit(): void {
         this.route.params
             .switchMap(({ name, repo, title }) =>
-                this.httpService.getPostByTitle(name, repo, title))
+                this.httpService.getPost(name, repo, title))
                 .subscribe(post => {
                     this.post = post;
                     localStorage.setItem('title', this.post.title);
@@ -45,8 +46,7 @@ export class EditPostComponent implements OnInit {
         this.post.text_full_strings = text.value;
         this.hidden = !this.hidden;
         this.buildFullMd();
-        this.goBack();
-        // this.update();
+        this.update();
     }
     buildFullMd(): void {
         new FullMd(
@@ -68,7 +68,7 @@ export class EditPostComponent implements OnInit {
             .then(() => {
                 this.popupText = 'done!';
                 setTimeout(() => this.hidden = true, 1500);
-                this.goBack();
+                setTimeout(() => this.goBack(), 1800);
             });
     }
     cancel(textEl): void {

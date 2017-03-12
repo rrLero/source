@@ -17,32 +17,32 @@ textarea {
 .cancel {
   float: left;
 }
-.popup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  max-width: 20em;
-  height: 15em;
-  border: 1px solid #999;
-  background-color: #fff;
-  color: green;
-  z-index: 10;
-  &::before {
-    position: absolute;
-    content: "X";
-    top: 1em;
-    right: 1em;
-    color: red;
-    cursor: pointer;
-
-  }
-}
+// .popup {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   margin: auto;
+//   max-width: 20em;
+//   height: 15em;
+//   border: 1px solid #999;
+//   background-color: #fff;
+//   color: green;
+//   z-index: 10;
+//   &::before {
+//     position: absolute;
+//     content: "X";
+//     top: 1em;
+//     right: 1em;
+//     color: red;
+//     cursor: pointer;
+//
+//   }
+// }
 small {
   font-size: 60%;
   color: #000;

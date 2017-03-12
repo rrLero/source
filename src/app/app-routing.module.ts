@@ -35,7 +35,7 @@ const routes: Routes = [
         component: CreatePostComponent
     },
     {
-        path: ':name/:repo/auth',
+        path: 'auth',
         component: AuthComponent
     },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
