@@ -27,8 +27,7 @@ export class PostsComponent implements OnInit {
         private httpService: HttpService) { };
     ngOnInit() {
         this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
-        const token = localStorage.getItem("access_token");
-        if (token) {
+        if (this.authService.isLogged) {
             this.authService.getProfile().subscribe();
         }
     }
@@ -39,6 +38,7 @@ export class PostsComponent implements OnInit {
 
     logout() {
         this.authService.logout();
+        this.router.navigate(['/login']);
     }
     savePage() {
         let page = this.location.path().split('/')[4];
