@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
 
 @Component({
-    selector: 'login',
-    templateUrl: 'login.component.html',
+    selector: 'welcome',
+    templateUrl: 'welcome.component.html',
 })
-export class LoginComponent implements OnInit {
+export class WelcomeComponent implements OnInit {
     constructor(private router: Router) { }
     ngOnInit() { }
     go(name, repo) {

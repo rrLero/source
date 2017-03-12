@@ -1,7 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent }       from './components/index';
+import { WelcomeComponent }     from './components/index';
 import { PostsComponent }       from './components/index';
 import { PostComponent }        from './components/index';
 import { CreatePostComponent }  from './components/index';
@@ -11,8 +11,8 @@ import { AuthComponent }        from './components/index';
 
 const routes: Routes = [
     {
-        path: 'login',
-        component: LoginComponent
+        path: 'welcome',
+        component: WelcomeComponent
     },
     {
         path: ':name/:repo',
@@ -38,7 +38,7 @@ const routes: Routes = [
         path: 'auth',
         component: AuthComponent
     },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/welcome', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }
 ];
 
