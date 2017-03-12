@@ -6,12 +6,15 @@ import { HttpService }       from '../../services/index';
 import { Post, post, FullMd, fullMd } from '../../shared/post.model';
 
 @Component({
-    templateUrl: 'create-post.component.html'
+    templateUrl: 'create-post.component.html',
+    styleUrls: ['create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
     date = new Date();
     today: string;
     datetime: string;
+    hidden = true;
+    popupText = 'upload...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
@@ -30,7 +33,9 @@ export class CreatePostComponent implements OnInit {
         this.location.back();
     }
     repalceSpace(filenameEl) {
-        filenameEl.value = filenameEl.value.replace(/\s+/g, '-');
+        if (filenameEl.value) {
+            filenameEl.value = `${this.today}-${filenameEl.value}`.replace(/\s+/g, '-');
+        }
     }
     create(filenameEl, titleEl, tagsEl, textEl) {
         new FullMd(
@@ -40,21 +45,19 @@ export class CreatePostComponent implements OnInit {
             this.datetime,
             textEl.value
         );
-        console.log(fullMd);
         new Post(
             filenameEl.value,
-            // this.name,
-            // this.datetime,
-            // tagsEl.value.split(','),
-            // titleEl.value,
             fullMd.trim()
         );
     }
     push(filenameEl, titleEl, tagsEl, textEl) {
         this.create(filenameEl, titleEl, tagsEl, textEl);
-        this.httpService.create(this.name, this.repo, post);
-        this.router.navigate([this.url]);
-            // .then(post => {
-            // });
+        this.hidden = false;
+        this.httpService.create(this.name, this.repo, post)
+        .then(() => {
+            this.popupText = 'done!';
+            setTimeout(() => this.hidden = true, 1500);
+            setTimeout(() => this.goBack(), 1800);
+        });
     }
 }

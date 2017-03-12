@@ -32,8 +32,10 @@ export class PaginationComponent implements OnInit {
     getPosts(): void {
         this.httpService.getPosts(this.name, this.repo)
             .then(posts => {
-                this.posts = posts;
-                this.setPage();
+                if (posts) {
+                    this.posts = posts;
+                    this.setPage();
+                }
                 // console.log(this.posts);
             });
     }
@@ -42,11 +44,13 @@ export class PaginationComponent implements OnInit {
             let path = this.location.path().split('/');
             page = parseFloat(path[4]);
         }
-        this.pager = this.pagerService.getPager(this.posts.length, page);
-        if (page < 1 || page > this.pager.totalPages) {
-            this.router.navigate(['not-found']);
+        if (this.posts) {
+            this.pager = this.pagerService.getPager(this.posts.length, page);
+            if (page < 1 || page > this.pager.totalPages) {
+                // this.router.navigate(['not-found']);
+            }
+            this.pagedItems = this.posts.slice(this.pager.startIndex, this.pager.endIndex + 1);
+            window.scrollTo(0, 0);
         }
-        this.pagedItems = this.posts.slice(this.pager.startIndex, this.pager.endIndex + 1);
-        window.scrollTo(0, 0);
     }
 }

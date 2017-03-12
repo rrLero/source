@@ -1,9 +1,9 @@
 <form action="">
     <label for="">name
-        <input #name type="text" value="rrlero">
+        <input #nameEl type="text" [value]="name">
     </label>
     <label for="">repo
-        <input #repo type="text" value="git-blog">
+        <input #repoEl type="text" [value]="repo">
     </label>
 </form>
-<button type="button" (click)="go(name, repo)">go</button>
+<button type="button" (click)="go(nameEl, repoEl); saveUser(nameEl, repoEl)">go</button>

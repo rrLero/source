@@ -2,9 +2,9 @@
 
 <div class="row" *ngIf="post">
     <div class="col-md-10 col-md-offset-1">
-        <div><b>Author:</b> {{ name }}</div>
+        <div><b>Author:</b> {{ post.author }}</div>
         <div><b>Date:</b> {{ post.date }}</div>
-        <form>
+        <form (submit)="save(title, tags, text)">
             <div class="form-group">
                 <label>Title:</label>
                 <input #title [value]="post.title" class="form-control" type="text" name="title" placeholder="Title" required>
@@ -18,7 +18,7 @@
                 <md-editor #text [value]="post.text_full_strings.trim()"></md-editor>
             </div>
             <div class="form-group">
-                <button type="submit" (click)="save(title, tags, text)" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Update</button>
                 <button type="button" (click)="cancel(text)" class="btn">Cancel</button>
                 <button type="button" (click)="goBack()" class="btn">Back</button>
             </div>

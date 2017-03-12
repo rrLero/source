@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit {
             });
     }
     gotoDetail(post: Post): void {
-        let link = [this.url, post.title];
+        let link = [this.url, post.id];
         this.router.navigate(link);
     }
 }
