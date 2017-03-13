@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute }    from '@angular/router';
-import { Location }               from '@angular/common';
+import { Component, OnInit }          from '@angular/core';
+import { Router, ActivatedRoute }     from '@angular/router';
+import { Location }                   from '@angular/common';
 
-import { HttpService }       from '../../services/index';
+import { HttpService, AuthService }   from '../../services/index';
 import { Post, post, FullMd, fullMd } from '../../shared/post.model';
 
 @Component({
@@ -12,6 +12,7 @@ import { Post, post, FullMd, fullMd } from '../../shared/post.model';
 export class CreatePostComponent implements OnInit {
     date = new Date();
     today: string;
+    author: string;
     datetime: string;
     hidden = true;
     popupText = 'upload...';
@@ -22,12 +23,17 @@ export class CreatePostComponent implements OnInit {
         private router: Router,
         private location: Location,
         private route: ActivatedRoute,
+        private authService: AuthService,
         private httpService: HttpService) { }
 
     ngOnInit() {
         this.today = `${this.date.toISOString()}`.slice(2).slice(0, 8);
         let time = `${this.date.toString()}`.slice(15).slice(0, 6);
         this.datetime = this.today + time;
+        if (this.authService.isLogged) {
+            this.authService.getProfile().subscribe();
+            this.author = this.authService.loggedUser.name;
+        }
     }
     goBack() {
         this.location.back();
