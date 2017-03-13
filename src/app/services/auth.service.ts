@@ -1,14 +1,12 @@
 import { Injectable }                              from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }                              from 'rxjs/Observable';
-import { error } from "util";
-import { toPromise } from "rxjs/operator/toPromise";
 
 @Injectable()
 export class AuthService {
     private _loggedUser: any;
     private _isLogged: boolean;
-    private _access: any;
+    // private _access: any;
 
     constructor(private http: Http) {
         this._isLogged = !!localStorage.getItem('access_token');
@@ -22,8 +20,8 @@ export class AuthService {
             .do(response => {
                 if (response && response.access_token) {
                 // if (response && response.token) {
-                    localStorage.setItem("access_token", response.access_token);
-                    // localStorage.setItem("access_token", response.token);
+                    localStorage.setItem('access_token', response.access_token);
+                    // localStorage.setItem('access_token', response.token);
                     this._isLogged = true;
                 }
             })
@@ -31,10 +29,10 @@ export class AuthService {
     }
 
     getProfile() {
-        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem("access_token") });
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.get("https://api.github.com/user", options)
+        return this.http.get('https://api.github.com/user', options)
             .map(response => response.json())
             .do(response => {
                 this._loggedUser = response;
@@ -86,8 +84,8 @@ export class AuthService {
         return this._isLogged;
     }
 
-    get hasAccess() {
-        return this._access;
-    }
+    // get hasAccess() {
+    //     return this._access;
+    // }
 
 }

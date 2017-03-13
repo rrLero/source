@@ -4,7 +4,6 @@ import { Location }               from '@angular/common';
 
 import { HttpService }            from '../../services/index';
 import { AuthService }            from '../../services/index';
-import { DEV }                    from '../../github.config';
 
 @Component({
     selector: 'posts',
@@ -18,7 +17,8 @@ export class PostsComponent implements OnInit {
     id = this.route.snapshot.params['id'];
     url = `/${this.name}/${this.repo}/`;
     template: string;
-    githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=' + DEV.client_id + '&scope=repo&redirect_uri=' + DEV.redirect_uri;
+    // githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=caf9e03a36ecdaadcfb1&scope=repo&redirect_uri=http://localhost:8080/auth';
+    githubUrl: string = 'https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=http://acid.zzz.com.ua/auth';
     constructor(
         private router: Router,
         private route: ActivatedRoute,
