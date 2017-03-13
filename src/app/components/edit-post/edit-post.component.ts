@@ -24,26 +24,23 @@ export class EditPostComponent implements OnInit {
         private httpService: HttpService) { }
 
     ngOnInit(): void {
+        this.getPost();
+    }
+    getPost() {
         this.route.params
-            .switchMap(({ name, repo, title }) =>
-                this.httpService.getPost(name, repo, title))
-                .subscribe(post => {
-                    this.post = post;
-                    localStorage.setItem('title', this.post.title);
-                    localStorage.setItem('tags', JSON.stringify(this.post.tags));
-                    localStorage.setItem('text', this.post.text_full_strings);
-                });
+        .switchMap(({ name, repo, title }) =>
+            this.httpService.getPost(name, repo, title))
+            .subscribe(post => {
+                this.post = post;
+                localStorage.setItem('title', this.post.title);
+                localStorage.setItem('tags', JSON.stringify(this.post.tags));
+                localStorage.setItem('text', this.post.text_full_strings);
+            });
     }
-    goBack(): void {
-        this.clearLocalStorage();
-        this.router.navigate([this.url]);
-        // this.location.back();
-    }
-    save(title, tags, text, popup): void {
-        event.preventDefault();
-        this.post.title = title.value;
-        this.post.tags = tags.value.split(',');
-        this.post.text_full_strings = text.value;
+    save(titleEl, tagsEl, textEl): void {
+        this.post.title = titleEl.value;
+        this.post.tags = tagsEl.value.split(',');
+        this.post.text_full_strings = textEl.value;
         this.hidden = !this.hidden;
         this.buildFullMd();
         this.update();
@@ -83,5 +80,10 @@ export class EditPostComponent implements OnInit {
         localStorage.removeItem('title');
         localStorage.removeItem('tags');
         localStorage.removeItem('text');
+    }
+    goBack(): void {
+        this.clearLocalStorage();
+        this.router.navigate([this.url]);
+        // this.location.back();
     }
 }
