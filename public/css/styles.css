@@ -19,3 +19,8 @@ a:active {
 a:focus {
     text-decoration: none;
 }
+
+.add-comment .CodeMirror {
+  min-height: 150px;
+  height: 150px;
+}

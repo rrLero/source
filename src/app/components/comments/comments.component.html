@@ -1,0 +1,25 @@
+<div class="row" *ngIf="comments">
+    <div class="col-sm-12">
+        <h3>Users Comments</h3>
+    </div>
+    <div *ngFor="let comment of comments" class="col-sm-12">
+        <div class="row">
+            <div class="col-xs-2 col-sm-2 col-md-1">
+                <div class="thumbnail">
+                    <img class="img-responsive user-photo" [src]="comment.avatar_url">
+                </div>
+            </div>
+
+            <div class="col-xs-10 col-sm-10 col-md-11">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>{{ comment.user }}</strong> <span class="text-muted">commented {{ comment.created_at | date:'y-mm-dd HH:mm' }}</span>
+                    </div>
+                    <div class="panel-body" [innerHTML]="comment.body | markdown | safeHtml"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<comment-from></comment-from>

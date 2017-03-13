@@ -1,4 +1,4 @@
-import { WelcomeComponent }      from './welcome/welcome.component';
+import { WelcomeComponent }    from './welcome/welcome.component';
 import { PostsComponent }      from './posts/posts.component';
 import { PostComponent }       from './post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
@@ -8,6 +8,8 @@ import { SearchComponent }     from './search/search.component';
 import { NotFoundComponent }   from './not-found/not-found.component';
 import { MdEditorComponent }   from './md-editor/md-editor.component';
 import { AuthComponent }       from './auth/auth.component';
+import { CommentsComponent }   from './comments/comments.component';
+import { CommentFormComponent }   from './comments/comment-form.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -27,5 +29,7 @@ export const components = [
     SearchComponent,
     NotFoundComponent,
     MdEditorComponent,
-    AuthComponent
+    AuthComponent,
+    CommentsComponent,
+    CommentFormComponent
 ];
