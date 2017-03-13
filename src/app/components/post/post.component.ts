@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService }            from '../../services/index';
 import { Post }                   from '../../shared/post.model';
-import { AuthService }            from "../../services/index";
+import { AuthService }            from '../../services/index';
 
 
 @Component({
