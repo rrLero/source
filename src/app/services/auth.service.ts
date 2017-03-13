@@ -6,6 +6,7 @@ import { Observable }                              from 'rxjs/Observable';
 export class AuthService {
     private _loggedUser: any;
     private _isLogged: boolean;
+    private _access: any;
 
     constructor(private http: Http) {
         this._isLogged = !!localStorage.getItem('access_token');
@@ -28,7 +29,7 @@ export class AuthService {
     }
 
     getProfile() {
-        let headers = new Headers({ 'Authorization': 'token ' + localStorage.getItem("access_token") });
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem("access_token") });
         let options = new RequestOptions({ headers: headers });
 
         return this.http.get("https://api.github.com/user", options)
@@ -36,6 +37,19 @@ export class AuthService {
             .do(response => {
                 this._loggedUser = response;
                 this._isLogged = true;
+            })
+            .catch(this.handleError);
+    }
+
+    getPermission(name: string, repo: string, login: string) {
+        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem("access_token") });
+        headers.append('Accept', 'application/vnd.github.korra-preview');
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.get(`https://api.github.com/repos/${name}/${repo}/collaborators/${login}/permission`, options)
+            .map(response => response.json())
+            .do(response => {
+                this._access = response.permission !== 'none' && response.permission !== 'read';
             })
             .catch(this.handleError);
     }
@@ -49,8 +63,8 @@ export class AuthService {
         let errMessage: string;
 
         if (err instanceof Response) {
-            let body   = err.json() || '';
-            let error  = body.error || JSON.stringify(body);
+            let body = err.json() || '';
+            let error = body.error || JSON.stringify(body);
             errMessage = `${err.status} - ${err.statusText || ''} ${error}`;
         } else {
             errMessage = err.message ? err.message : err.toString();
@@ -65,6 +79,10 @@ export class AuthService {
 
     get isLogged() {
         return this._isLogged;
+    }
+
+    get hasAccess() {
+        return this._access;
     }
 
 }

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService }            from '../../services/index';
 import { Post }                   from '../../shared/post.model';
+import { AuthService }            from "../../services/index";
 
 
 @Component({
@@ -21,11 +22,21 @@ export class PostComponent implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private httpService: HttpService) {
+        private httpService: HttpService,
+        public authService: AuthService) {
     }
 
     ngOnInit(): void {
         this.getPost();
+
+        if (this.authService.isLogged) {
+            this.authService.getProfile().subscribe(
+                () => {
+                    let login = this.authService.loggedUser.login;
+                    this.authService.getPermission(this.name, this.repo, login).subscribe()
+                }
+            );
+        }
     }
     getPost() {
         this.route.params
