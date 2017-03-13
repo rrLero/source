@@ -46,13 +46,17 @@ export class PostComponent implements OnInit {
     }
     delete() {
         this.hidden = false;
-        this.httpService
+        if (confirm('delete post?')) {
+            this.httpService
             .delete(this.name, this.repo, this.post.id, this.post.sha)
             .then(() => {
                 this.popupText = 'done!';
                 setTimeout(() => this.hidden = true, 1500);
                 setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
             });
+        } else {
+            this.hidden = true;
+        }
     }
     goBack(): void {
         let loadPage = localStorage.getItem('page') ? localStorage.getItem('page') : '1';
