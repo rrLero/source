@@ -2,7 +2,7 @@ import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location }               from '@angular/common';
 
-import { AuthService }            from '../../services/index';
+import { AuthService, HttpService }            from '../../services/index';
 
 @Component({
     selector: 'posts',
@@ -22,6 +22,7 @@ export class PostsComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
+        private httpService: HttpService,
         private authService: AuthService) { };
     ngOnInit() {
         this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
@@ -30,7 +31,7 @@ export class PostsComponent implements OnInit {
                 let login = this.authService.loggedUser.login;
                 this.authService
                     .getPermission(this.name, this.repo, login)
-                    .then(({ access }) => this.canEdit = access)
+                    .then(({ access }) => this.canEdit = access);
             });
         }
     }
@@ -38,7 +39,13 @@ export class PostsComponent implements OnInit {
     get service() {
         return this.authService;
     }
-
+    updateBlogs() {
+        this.httpService.updateBlogs(this.name, this.repo)
+        .subscribe(() => {
+            alert('updated');
+            this.router.navigate([this.url]);
+        });
+    }
     logout() {
         this.authService.logout();
         this.router.navigate(['/welcome']);

@@ -10,11 +10,11 @@
 </div>
 
 <search></search>
-<!-- <button type="button"> -->
-    <div>
-        <a [hidden]="!canEdit" [routerLink]="[url, 'create']">Add post</a>
-    </div>
-<!-- </button> -->
+
+<div class="controls">
+    <button [hidden]="!canEdit" (click)="updateBlogs()" class="control">Update Posts</button>
+    <a [hidden]="!canEdit" [routerLink]="[url, 'create']" class="control">Add post</a>
+</div>
 
 <section>
     <div *ngFor="let post of page.pagedItems">

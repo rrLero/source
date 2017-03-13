@@ -1,8 +1,8 @@
 <section *ngIf="post">
-    <!-- <button type="button"> -->
+    <div class="controls">
         <a [hidden]="!canEdit" [routerLink]="[url, 'edit']">Edit post</a>
-    <!-- </button> -->
-    <button [hidden]="!canEdit" class="edit" (click)="delete()">del</button>
+        <button [hidden]="!canEdit" class="edit" (click)="delete()">del</button>
+    </div>
     <h2>{{ post.title }}</h2>
     <div [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
     <button type="button" (click)="goBack()">Back</button>

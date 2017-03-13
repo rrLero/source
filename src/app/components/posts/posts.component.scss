@@ -42,3 +42,15 @@ textarea {
   cursor: pointer;
   color: #aaaaaa;
 }
+.controls {
+  height: 2em;
+  .control {
+    float: right;
+    margin-right: 1em;
+    padding: .5em;
+
+  }
+  a {
+    border: 1px solid;
+  }
+}
