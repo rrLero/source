@@ -6,22 +6,22 @@ import { Observable }                              from 'rxjs/Observable';
 export class AuthService {
     private _loggedUser: any;
     private _isLogged: boolean;
-    // private _access: any;
+    private _access: any;
 
     constructor(private http: Http) {
         this._isLogged = !!localStorage.getItem('access_token');
     }
 
     getToken(code): Observable<string> {
-        // const url = `http://localhost:9999/authenticate/${code}`;
-        const url = `http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth?code=${code}`;
+        const url = `http://localhost:9999/authenticate/${code}`;
+        // const url = `http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth?code=${code}`;
         return this.http.get(url)
             .map(response => response.json())
             .do(response => {
-                if (response && response.access_token) {
-                // if (response && response.token) {
-                    localStorage.setItem('access_token', response.access_token);
-                    // localStorage.setItem('access_token', response.token);
+                // if (response && response.access_token) {
+                if (response && response.token) {
+                    // localStorage.setItem('access_token', response.access_token);
+                    localStorage.setItem('access_token', response.token);
                     this._isLogged = true;
                 }
             })
@@ -57,6 +57,15 @@ export class AuthService {
     //         });
     // }
 
+    getPermission(name: string, repo: string, login: string) {
+        const token = localStorage.getItem("access_token");
+
+        return this.http.get(`http://gitblog.pythonanywhere.com/api/repo_master/${name}/${repo}/${login}?access_token=${token}`)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
     logout() {
         this._isLogged = false;
         localStorage.removeItem('access_token');
@@ -84,8 +93,8 @@ export class AuthService {
         return this._isLogged;
     }
 
-    // get hasAccess() {
-    //     return this._access;
-    // }
+    get hasAccess() {
+        return this._access;
+    }
 
 }

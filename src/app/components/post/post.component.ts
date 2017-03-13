@@ -18,6 +18,7 @@ export class PostComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
+    canEdit = false;
     url = `/${this.name}/${this.repo}/post/${this.title}`;
     constructor(
         private router: Router,
@@ -28,14 +29,14 @@ export class PostComponent implements OnInit {
 
     ngOnInit(): void {
         this.getPost();
-        // if (this.authService.isLogged) {
-        //     this.authService.getProfile().subscribe(
-        //         () => {
-        //             let login = this.authService.loggedUser.login;
-        //             this.authService.getPermission(this.name, this.repo, login)
-        //         }
-        //     );
-        // }
+        if (this.authService.isLogged) {
+            this.authService.getProfile().subscribe(() => {
+                let login = this.authService.loggedUser.login;
+                this.authService
+                    .getPermission(this.name, this.repo, login)
+                    .then(({ access }) => this.canEdit = access)
+            });
+        }
     }
     getPost() {
         this.route.params

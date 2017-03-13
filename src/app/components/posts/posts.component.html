@@ -11,7 +11,7 @@
 
 <search></search>
 <!-- <button type="button"> -->
-    <a [routerLink]="[url, 'create']">Add post</a>
+    <a [hidden]="!canEdit" [routerLink]="[url, 'create']">Add post</a>
 <!-- </button> -->
 
 <section>
