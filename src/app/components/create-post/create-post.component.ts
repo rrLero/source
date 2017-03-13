@@ -11,7 +11,6 @@ import { Post, post, FullMd, fullMd } from '../../shared/post.model';
 })
 export class CreatePostComponent implements OnInit {
     date = new Date();
-    today: string;
     author: string;
     datetime: string;
     hidden = true;
@@ -27,9 +26,9 @@ export class CreatePostComponent implements OnInit {
         private httpService: HttpService) { }
 
     ngOnInit() {
-        this.today = `${this.date.toISOString()}`.slice(2).slice(0, 8);
+        let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
         let time = `${this.date.toString()}`.slice(15).slice(0, 6);
-        this.datetime = this.today + time;
+        this.datetime = date + time;
         if (this.authService.isLogged) {
             this.authService.getProfile().subscribe();
             this.author = this.authService.loggedUser.name;
@@ -40,14 +39,14 @@ export class CreatePostComponent implements OnInit {
     }
     repalceSpace(filenameEl) {
         if (filenameEl.value) {
-            filenameEl.value = `${this.today}-${filenameEl.value}`.replace(/\s+/g, '-');
+            filenameEl.value = filenameEl.value.replace(/\s+/g, '-');
         }
     }
     create(filenameEl, titleEl, tagsEl, textEl) {
         new FullMd(
             titleEl.value,
             tagsEl.value,
-            this.name,
+            this.author,
             this.datetime,
             textEl.value
         );
