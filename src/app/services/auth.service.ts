@@ -1,6 +1,8 @@
 import { Injectable }                              from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable }                              from 'rxjs/Observable';
+import { error } from "util";
+import { toPromise } from "rxjs/operator/toPromise";
 
 @Injectable()
 export class AuthService {
@@ -41,18 +43,21 @@ export class AuthService {
             .catch(this.handleError);
     }
 
-    getPermission(name: string, repo: string, login: string) {
-        let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem("access_token") });
-        headers.append('Accept', 'application/vnd.github.korra-preview');
-        let options = new RequestOptions({ headers: headers });
-
-        return this.http.get(`https://api.github.com/repos/${name}/${repo}/collaborators/${login}/permission`, options)
-            .map(response => response.json())
-            .do(response => {
-                this._access = response.permission !== 'none' && response.permission !== 'read';
-            })
-            .catch(this.handleError);
-    }
+    // getPermission(name: string, repo: string, login: string) {
+    //     let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem("access_token") });
+    //     headers.append('Accept', 'application/vnd.github.korra-preview');
+    //     let options = new RequestOptions({ headers: headers });
+    //
+    //     return this.http.get(`https://api.github.com/repos/${name}/${repo}/collaborators/${login}/permission`, options)
+    //         .toPromise()
+    //         .then(response => response.json())
+    //         .then(response => {
+    //             this._access = response.permission !== 'none' && response.permission !== 'read';
+    //         })
+    //         .catch(() => {
+    //             this._access = false;
+    //         });
+    // }
 
     logout() {
         this._isLogged = false;

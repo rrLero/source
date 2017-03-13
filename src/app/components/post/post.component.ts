@@ -28,15 +28,14 @@ export class PostComponent implements OnInit {
 
     ngOnInit(): void {
         this.getPost();
-
-        if (this.authService.isLogged) {
-            this.authService.getProfile().subscribe(
-                () => {
-                    let login = this.authService.loggedUser.login;
-                    this.authService.getPermission(this.name, this.repo, login).subscribe()
-                }
-            );
-        }
+        // if (this.authService.isLogged) {
+        //     this.authService.getProfile().subscribe(
+        //         () => {
+        //             let login = this.authService.loggedUser.login;
+        //             this.authService.getPermission(this.name, this.repo, login)
+        //         }
+        //     );
+        // }
     }
     getPost() {
         this.route.params
