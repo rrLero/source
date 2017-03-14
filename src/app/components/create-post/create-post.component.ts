@@ -59,10 +59,13 @@ export class CreatePostComponent implements OnInit {
         this.create(filenameEl, titleEl, tagsEl, textEl);
         this.hidden = false;
         this.httpService.create(this.name, this.repo, post)
-        .then(() => {
-            this.popupText = 'done!';
-            setTimeout(() => this.hidden = true, 1500);
-            setTimeout(() => this.goBack(), 1800);
-        });
+        .then(() =>
+            this.httpService.updateBlog(this.name, this.repo)
+            .subscribe(() => {
+                this.popupText = 'done!';
+                setTimeout(() => this.hidden = true, 1500);
+                setTimeout(() => this.goBack(), 1800);
+            })
+        );
     }
 }

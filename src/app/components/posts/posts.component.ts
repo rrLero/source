@@ -39,13 +39,6 @@ export class PostsComponent implements OnInit {
     get service() {
         return this.authService;
     }
-    updateBlogs() {
-        this.httpService.updateBlogs(this.name, this.repo)
-        .subscribe(() => {
-            alert('updated');
-            this.router.navigate([this.url]);
-        });
-    }
     logout() {
         this.authService.logout();
         this.router.navigate(['/welcome']);

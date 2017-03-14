@@ -13,7 +13,7 @@ export class HttpService {
     getUrl(name: string, repo: string) {
         this.url = `${this.host}/${name}/${repo}/api`;
     }
-    updateBlogs(name: string, repo: string) {
+    updateBlog(name: string, repo: string) {
         this.getUrl(name, repo);
         const url = `${this.url}/update`;
         return this.http.get(url).catch(this.handleError);

@@ -12,7 +12,6 @@
 <search></search>
 
 <div class="controls">
-    <button [hidden]="!canEdit" (click)="updateBlogs()" class="control">Update Posts</button>
     <a [hidden]="!canEdit" [routerLink]="[url, 'create']" class="control">Add post</a>
 </div>
 

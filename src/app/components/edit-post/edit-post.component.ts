@@ -62,11 +62,14 @@ export class EditPostComponent implements OnInit {
             this.post.id,
             this.post.sha,
             this.post)
-            .then(() => {
-                this.popupText = 'done!';
-                setTimeout(() => this.hidden = true, 1500);
-                setTimeout(() => this.goBack(), 1800);
-            });
+            .then(() =>
+                this.httpService.updateBlog(this.name, this.repo)
+                .subscribe(() => {
+                    this.popupText = 'done!';
+                    setTimeout(() => this.hidden = true, 1500);
+                    setTimeout(() => this.goBack(), 1800);
+                })
+            );
     }
     cancel(textEl): void {
         let title = localStorage.getItem('title');

@@ -34,7 +34,7 @@ export class PostComponent implements OnInit {
                 let login = this.authService.loggedUser.login;
                 this.authService
                     .getPermission(this.name, this.repo, login)
-                    .then(({ access }) => this.canEdit = access)
+                    .then(({ access }) => this.canEdit = access);
             });
         }
     }
@@ -49,11 +49,14 @@ export class PostComponent implements OnInit {
         if (confirm('delete post?')) {
             this.httpService
             .delete(this.name, this.repo, this.post.id, this.post.sha)
-            .then(() => {
-                this.popupText = 'done!';
-                setTimeout(() => this.hidden = true, 1500);
-                setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
-            });
+            .then(() =>
+                this.httpService.updateBlog(this.name, this.repo)
+                .subscribe(() => {
+                    this.popupText = 'done!';
+                    setTimeout(() => this.hidden = true, 1500);
+                    setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
+                })
+            );
         } else {
             this.hidden = true;
         }
