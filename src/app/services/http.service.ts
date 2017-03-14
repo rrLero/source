@@ -77,6 +77,18 @@ export class HttpService {
             .then(() => null)
             .catch(this.handleError);
     }
+    deleteBlog(name: string, repo: string): Promise<void> {
+        this.getUrl(name, repo);
+        const token = localStorage.getItem('access_token');
+        const headers = new Headers({ 'Authorization': 'token ' + token });
+        const options = new RequestOptions({ headers: headers });
+        const url = `${this.url}/del_repo?access_token=${token}`;
+        return this.http
+            .delete(url, options)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

@@ -40,4 +40,18 @@ export class ControlsComponent {
             this.hidden = true;
         }
     }
+    deleteBlog() {
+        this.hidden = false;
+        if (confirm('Remove blog?')) {
+            this.httpService
+            .deleteBlog(this.name, this.repo)
+            .then(() => {
+                    this.popupText = 'done!';
+                    setTimeout(() => this.hidden = true, 1500);
+                    setTimeout(() => this.router.navigate(['/']));
+                });
+        } else {
+            this.hidden = true;
+        }
+    }
 }

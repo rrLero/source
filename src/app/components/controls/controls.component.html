@@ -1,6 +1,7 @@
 <div class="controls">
     <a class="btn btn-primary" [routerLink]="[create]">Add post</a>
     <a  class="btn btn-primary" [class.hidden]="!post" [routerLink]="[edit]">Edit post</a>
-    <button  class="btn btn-danger" [class.hidden]="!post" (click)="delete()">Remove</button>
+    <button  class="btn btn-danger" [class.hidden]="!post" (click)="delete()">Remove post</button>
+    <button  class="btn btn-danger" [class.hidden]="post" (click)="deleteBlog()">Remove blog</button>
 </div>
 <popup [hidden]="hidden" [popupText]="popupText"></popup>
