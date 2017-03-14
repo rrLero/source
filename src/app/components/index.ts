@@ -11,9 +11,9 @@ import { MdEditorComponent }   from './md-editor/md-editor.component';
 import { AuthComponent }       from './auth/auth.component';
 import { CommentsComponent }   from './comments/comments.component';
 import { CommentFormComponent }   from './comments/comment-form.component';
+import { PopupComponent }       from './popup/popup.component';
 
 export { WelcomeComponent };
-export { AuthProfileComponent };
 export { PostsComponent };
 export { PostComponent };
 export { CreatePostComponent };
@@ -34,5 +34,6 @@ export const components = [
     MdEditorComponent,
     AuthComponent,
     CommentsComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    PopupComponent
 ];

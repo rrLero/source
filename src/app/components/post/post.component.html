@@ -12,4 +12,4 @@
     <comments [id]="post.id"></comments>
 </section>
 
-<div [class.hidden]="hidden" (click)="hidden = !hidden" class="post" [innerHTML]="popupText"></div>
+<popup [hidden]="hidden" [popupText]="popupText"></popup>

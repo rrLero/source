@@ -25,4 +25,5 @@
         </form>
     </div>
 </div>
-<div [class.hidden]="hidden" (click)="hidden = !hidden" class="post" [innerHTML]="popupText"></div>
+
+<popup [hidden]="hidden" [popupText]="popupText"></popup>
