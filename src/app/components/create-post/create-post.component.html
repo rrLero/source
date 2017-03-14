@@ -22,7 +22,7 @@
                 <md-editor #text></md-editor>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button [disabled]="!text.value" type="submit" class="btn btn-primary">Create</button>
                 <button type="button" class="btn" (click)="goBack()">Back</button>
             </div>
         </form>

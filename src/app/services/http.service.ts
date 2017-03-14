@@ -15,7 +15,8 @@ export class HttpService {
     }
     updateBlog(name: string, repo: string) {
         this.getUrl(name, repo);
-        const url = `${this.url}/update`;
+        const token = localStorage.getItem('access_token');
+        const url = `${this.url}/update?access_token=${token}`;
         return this.http.get(url).catch(this.handleError);
     }
     getBlogs(): Promise<any> {
