@@ -13,6 +13,7 @@ export class AuthProfileComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}/`;
+    login: string;
     canEdit = false;
     logged = false;
     // githubUrl = 'https://github.com/login/oauth/authorize?client_id=caf9e03a36ecdaadcfb1&scope=repo&redirect_uri=http://localhost:8080/auth';
@@ -26,9 +27,10 @@ export class AuthProfileComponent implements OnInit {
         if (this.authService.isLogged) {
             this.authService.getProfile().subscribe(() => {
                 this.logged = true;
-                let login = this.authService.loggedUser.login;
+                this.login = this.authService.loggedUser.login;
+                // let login = this.authService.loggedUser.login;
                 this.authService
-                    .getPermission(this.name, this.repo, login)
+                    .getPermission(this.name, this.repo, this.login)
                     .then(({ access }) => this.canEdit = access);
             });
         }

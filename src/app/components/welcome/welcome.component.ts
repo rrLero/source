@@ -27,7 +27,7 @@ export class WelcomeComponent implements OnInit {
             });
     }
     go(name, repo) {
-        this.router.navigate([`${name.value}/${repo.value}`]);
+        this.router.navigate([`${name}/${repo.value}`]);
     }
     // loadUser() {
     //     if (localStorage.getItem('name')) {

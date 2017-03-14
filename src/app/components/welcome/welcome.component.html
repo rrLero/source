@@ -1,13 +1,13 @@
 <auth-profile #profile></auth-profile>
 
-<form action="" [hidden]="!profile.logged">
-    <label for="">name
+<form (submit)="go(profile.login, repoEl)" [hidden]="!profile.logged">
+    <!-- <label for="">name
         <input #nameEl type="text">
-    </label>
+    </label> -->
     <label for="">repo
-        <input #repoEl type="text">
+        <input #repoEl type="text" required>
     </label>
-    <button type="button" (click)="go(nameEl, repoEl)" >go</button>
+    <button type="submit">Create Blog</button>
 </form>
 
 <hr>
