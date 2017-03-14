@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute }   from "@angular/router";
+import { ActivatedRoute }           from '@angular/router';
 
 import { Comment }         from '../../shared/comment.model'
-import { CommentsService } from "../../services/index";
+import { CommentsService } from '../../services/index';
 
 @Component({
     selector: 'comments',
@@ -10,24 +10,39 @@ import { CommentsService } from "../../services/index";
     styleUrls: ['comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-    @Input() id: string;
+    @Input() postId: string;
     comments: Comment[];
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
+    // access;
 
-    constructor(private router: Router,
-                private route: ActivatedRoute,
+    constructor(private route: ActivatedRoute,
                 private commentsService: CommentsService) { }
 
     ngOnInit() {
-        // get comments for API
-        console.log(this.id);
-        this.commentsService.getComments(this.name, this.repo, this.id)
-            .then((data) => {
-                if (data instanceof Array) {
+        this.commentsService.get(this.name, this.repo, this.postId)
+            .then(data => {
+                if (data.length > 0) {
                     this.comments = data;
                 }
-            })
+            });
+        // if (this.authService.isLogged) {
+        //     this.authService.getProfile().subscribe(() => {
+        //         const login = this.authService.loggedUser.login;
+        //         this.authService
+        //             .getPermission(this.name, this.repo, login)
+        //             .then(({ access }) => this.access = access);
+        //     });
+        // }
+    }
+
+    remove(comment) {
+        const id = comment.id;
+        this.commentsService.remove(this.name, this.repo, id)
+            .then(() => {
+                const index = this.comments.indexOf(comment);
+                this.comments.splice(index, 1);
+            });
     }
 
 }

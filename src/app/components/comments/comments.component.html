@@ -14,7 +14,9 @@
                 <div class="col-xs-10 col-sm-10 col-md-11">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <strong>{{ comment.user }}</strong> <span class="text-muted">commented {{ comment.created_at | date:'y-mm-dd HH:mm' }}</span>
+                            <strong>{{ comment.user }}</strong>
+                            <span class="text-muted">commented {{ comment.created_at | date:'y-mm-dd HH:mm' }}</span>
+                            <span (click)="remove(comment)" class="glyphicon glyphicon-remove pull-right delete"></span>
                         </div>
                         <div class="panel-body" [innerHTML]="comment.body | markdown | safeHtml"></div>
                     </div>

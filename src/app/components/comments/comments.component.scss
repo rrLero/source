@@ -34,3 +34,14 @@
   border-right-color: #ddd;
   border-width: 8px;
 }
+
+.delete {
+  color: #777;
+  cursor: pointer;
+  line-height: 18px;
+  opacity: 0.5;
+}
+
+.delete:hover {
+  opacity: 1;
+}

@@ -6,13 +6,20 @@ import { Observable }     from 'rxjs/Observable';
 export class CommentsService {
     private host = 'http://gitblog.pythonanywhere.com';
 
-    constructor(private http: Http) {
-    }
+    constructor(private http: Http) { }
 
-    getComments(name: string, repo: string, id: string) {
-        return this.http.get(`${this.host}/${name}/${repo}/api/get_comments/${id}`)
+    get(name: string, repo: string, postId: string) {
+        return this.http.get(`${this.host}/${name}/${repo}/api/get_comments/${postId}`)
             .toPromise()
             .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    remove(name: string, repo: string, id: number) {
+        let token = localStorage.getItem('access_token');
+        return this.http.delete(`${this.host}/${name}/${repo}/api/get_comments/${id}?access_token=${token}`,)
+            .toPromise()
+            .then(response => response.status)
             .catch(this.handleError);
     }
 
