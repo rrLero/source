@@ -1,4 +1,4 @@
-<a [hidden]="service.isLogged" [href]="githubUrl">Github login</a>
+<a [hidden]="service.isLogged" [href]="githubUrl" (click)="savePath()">Github login</a>
 
 <div [hidden]="!service.isLogged">
     <div class="profile">

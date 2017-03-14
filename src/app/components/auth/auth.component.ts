@@ -18,7 +18,16 @@ export class AuthComponent implements OnInit {
             (param: any) => {
                 let code = param['code'];
                 this.authService.getToken(code)
-                    .subscribe(() => this.router.navigate(['/']));
+                    .subscribe(() => {
+                        let path = localStorage.getItem('path');
+                        if (path) {
+                            this.router.navigate([path]);
+                            localStorage.removeItem('path');
+                        } else {
+                            this.router.navigate(['/']);
+                        }
+                    });
+                    // .subscribe(() => this.router.navigate(['/']));
             });
     }
 

@@ -1,6 +1,6 @@
 <auth-profile #profile></auth-profile>
 
-<form action="" >
+<form action="" [hidden]="!profile.logged">
     <label for="">name
         <input #nameEl type="text">
     </label>
