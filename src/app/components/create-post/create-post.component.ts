@@ -14,7 +14,7 @@ export class CreatePostComponent implements OnInit {
     author: string;
     datetime: string;
     hidden = true;
-    popupText = 'upload...';
+    popupText = 'creating...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;

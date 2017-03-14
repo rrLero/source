@@ -1,29 +1,9 @@
-.popup {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.absolute {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  max-width: 8em;
-  height: 6em;
-  // border: 1px solid #999;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #000;
-  font-size: 4em;
-  background-color: #fff;
-  color: forestgreen;
-  z-index: 10;
-  &::before {
-    position: absolute;
-    content: "X";
-    top: 1em;
-    right: 1em;
-    color: red;
-    cursor: pointer;
-
-  }
+  top: 20%;
+    left: 50%;
+    transform: translate(-50%);
+  //   right: 0;
+  //   bottom: 0;
+  //   margin: auto;
 }
