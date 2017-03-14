@@ -24,7 +24,7 @@ import { HttpService }       from '../../services/index';
                 animate(200)
             ]),
             transition('* => void', [
-                animate(300, style({ opacity: '0' }))
+                animate(100, style({ opacity: '0' }))
             ])
         ])
     ]
