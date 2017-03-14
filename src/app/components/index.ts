@@ -1,4 +1,5 @@
 import { WelcomeComponent }    from './welcome/welcome.component';
+import { AuthProfileComponent }    from './auth/auth-profile.component';
 import { PostsComponent }      from './posts/posts.component';
 import { PostComponent }       from './post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
@@ -12,6 +13,7 @@ import { CommentsComponent }   from './comments/comments.component';
 import { CommentFormComponent }   from './comments/comment-form.component';
 
 export { WelcomeComponent };
+export { AuthProfileComponent };
 export { PostsComponent };
 export { PostComponent };
 export { CreatePostComponent };
@@ -21,6 +23,7 @@ export { AuthComponent };
 
 export const components = [
     WelcomeComponent,
+    AuthProfileComponent,
     PostsComponent,
     PostComponent,
     CreatePostComponent,

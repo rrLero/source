@@ -1,0 +1,10 @@
+<a [hidden]="service.isLogged" [href]="githubUrl">Github login</a>
+
+<div [hidden]="!service.isLogged">
+    <div class="profile">
+        <img class="profile-avatar" src="{{ service.loggedUser?.avatar_url }}" alt="">
+        <div class="profile-name">
+            <p>{{ service.loggedUser?.name }} <span class="glyphicon glyphicon-log-out profile-logout" (click)="logout()"></span></p>
+        </div>
+    </div>
+</div>

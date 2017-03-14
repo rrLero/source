@@ -1,12 +1,15 @@
-<form action="">
+<auth-profile #profile></auth-profile>
+
+<form action="" >
     <label for="">name
-        <input #nameEl type="text" [value]="name">
+        <input #nameEl type="text">
     </label>
     <label for="">repo
-        <input #repoEl type="text" [value]="repo">
+        <input #repoEl type="text">
     </label>
+    <button type="button" (click)="go(nameEl, repoEl)" >go</button>
 </form>
-<button type="button" (click)="go(nameEl, repoEl); saveUser(nameEl, repoEl)">go</button>
+
 <hr>
 <h3>List of blogs</h3>
 <section *ngFor="let blog of blogs">
