@@ -1,13 +1,13 @@
-<auth-profile #profile></auth-profile>
-
-<form *ngIf="profile.logged" (submit)="go(profile.login, repoEl)" class="form-inline">
+<form [@welcome]="form.state" #form *ngIf="profile.logged" (submit)="go(profile.login, repoEl)" class="form-inline">
         <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
     <button class="btn btn-primary" type="submit">Create Blog</button>
 </form>
 
+<auth-profile #profile></auth-profile>
+
 <hr>
 <h3>List of blogs</h3>
-<section *ngFor="let blog of blogs">
+<section [@welcome]="blog.state" *ngFor="let blog of blogs">
     <h4>
         <a [routerLink]="['/' + blog.name + '/' + blog.repo]">{{ blog.name }} - {{  blog.repo }}</a>
     </h4>

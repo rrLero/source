@@ -1,4 +1,13 @@
-import { Component, OnInit }      from '@angular/core';
+// import { Component, OnInit }      from '@angular/core';
+import {
+    Component,
+    OnInit,
+    trigger,
+    state,
+    style,
+    transition,
+    animate
+}                                 from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { HttpService }            from '../../services/index';
@@ -7,7 +16,19 @@ import { Post }                   from '../../shared/post.model';
 @Component({
     selector: 'post',
     templateUrl: 'post.component.html',
-    styleUrls: ['post.component.scss']
+    styleUrls: ['post.component.scss'],
+    animations: [
+        trigger('post', [
+            state('in', style({ opacity: '1' })),
+            transition('void => *', [
+                style({ opacity: '0' }),
+                animate(200)
+            ]),
+            transition('* => void', [
+                animate(300, style({ opacity: '0' }))
+            ])
+        ])
+    ]
 })
 export class PostComponent implements OnInit {
     post: Post;
