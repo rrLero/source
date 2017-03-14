@@ -3,7 +3,8 @@
 <controls *ngIf="profile.canEdit"></controls>
 
 <section>
-    <div *ngFor="let post of page.pagedItems">
+    <h2 *ngIf="profile.login === name && !profile.canEdit">No repo</h2>
+    <div [@posts]="post.state" *ngFor="let post of page.pagedItems">
         <h3>
             <a [routerLink]="[url, 'post', post.id]" (click)="savePage()">{{ post.title }}</a>
         </h3>

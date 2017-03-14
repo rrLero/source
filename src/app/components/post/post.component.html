@@ -1,9 +1,9 @@
 <auth-profile #profile></auth-profile>
 <controls *ngIf="profile.canEdit" [post]="post"></controls>
 
-<section *ngIf="post">
+<section *ngIf="post" [@post]="post.state">
     <h2>{{ post.title }}</h2>
-    <div [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
+    <div class="text" [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
     <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
     <comments [id]="post.id"></comments>
 </section>

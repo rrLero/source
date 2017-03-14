@@ -1,4 +1,13 @@
-import { Component, OnInit }      from '@angular/core';
+// import { Component, OnInit }      from '@angular/core';
+import {
+    Component,
+    OnInit,
+    trigger,
+    state,
+    style,
+    transition,
+    animate
+}                                 from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -7,7 +16,19 @@ import { HttpService }            from '../../services/index';
 @Component({
     selector: 'posts',
     templateUrl: 'posts.component.html',
-    styleUrls: ['posts.component.scss']
+    styleUrls: ['posts.component.scss'],
+    animations: [
+        trigger('posts', [
+            state('in', style({ opacity: '1' })),
+            transition('void => *', [
+                style({ opacity: '0' }),
+                animate(200)
+            ]),
+            transition('* => void', [
+                animate(300, style({ opacity: '0' }))
+            ])
+        ])
+    ]
 })
 export class PostsComponent implements OnInit {
     name = this.route.snapshot.params['name'];

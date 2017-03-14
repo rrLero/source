@@ -8,13 +8,15 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  max-width: 20em;
-  height: 15em;
-  border: 1px solid #999;
+  max-width: 8em;
+  height: 6em;
+  // border: 1px solid #999;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+  font-size: 4em;
   background-color: #fff;
-  color: green;
+  color: forestgreen;
   z-index: 10;
-  transform: scale(0);
   &::before {
     position: absolute;
     content: "X";
@@ -24,7 +26,4 @@
     cursor: pointer;
 
   }
-}
-.visible {
-  transform: scale(1);
 }
