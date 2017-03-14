@@ -12,15 +12,15 @@ export class AuthService {
     }
 
     getToken(code): Observable<string> {
-        // const url = `http://localhost:9999/authenticate/${code}`;
-        const url = `http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth?code=${code}`;
+        const url = `http://localhost:9999/authenticate/${code}`;
+        // const url = `http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth?code=${code}`;
         return this.http.get(url)
             .map(response => response.json())
             .do(response => {
-                if (response && response.access_token) {
-                // if (response && response.token) {
-                    localStorage.setItem('access_token', response.access_token);
-                    // localStorage.setItem('access_token', response.token);
+                // if (response && response.access_token) {
+                if (response && response.token) {
+                    // localStorage.setItem('access_token', response.access_token);
+                    localStorage.setItem('access_token', response.token);
                     this._isLogged = true;
                 }
             })

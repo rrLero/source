@@ -1,1 +1,1 @@
-<div [class.hidden]="hidden" (click)="hidden = !hidden" class="popup" [innerHTML]="popupText"></div>
+<div [ngClass]="{'hidden': hidden, 'visible': !hidden}" class="popup" [innerHTML]="popupText"></div>

@@ -12,6 +12,7 @@ import { AuthComponent }       from './auth/auth.component';
 import { CommentsComponent }   from './comments/comments.component';
 import { CommentFormComponent }   from './comments/comment-form.component';
 import { PopupComponent }       from './popup/popup.component';
+import { ControlsComponent }       from './controls/controls.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -35,5 +36,6 @@ export const components = [
     AuthComponent,
     CommentsComponent,
     CommentFormComponent,
-    PopupComponent
+    PopupComponent,
+    ControlsComponent
 ];

@@ -1,15 +1,9 @@
 <auth-profile #profile></auth-profile>
+<controls *ngIf="profile.canEdit" [post]="post"></controls>
 
 <section *ngIf="post">
-    <div class="controls">
-        <a [hidden]="!profile.canEdit" [routerLink]="[url, 'edit']">Edit post</a>
-        <button [hidden]="!profile.canEdit" class="edit" (click)="delete()">del</button>
-    </div>
     <h2>{{ post.title }}</h2>
     <div [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
-    <button type="button" (click)="goBack()">Back</button>
-
+    <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
     <comments [id]="post.id"></comments>
 </section>
-
-<popup [hidden]="hidden" [popupText]="popupText"></popup>

@@ -1,13 +1,8 @@
 <auth-profile #profile></auth-profile>
 
-<form (submit)="go(profile.login, repoEl)" [hidden]="!profile.logged">
-    <!-- <label for="">name
-        <input #nameEl type="text">
-    </label> -->
-    <label for="">repo
-        <input #repoEl type="text" required>
-    </label>
-    <button type="submit">Create Blog</button>
+<form *ngIf="profile.logged" (submit)="go(profile.login, repoEl)" class="form-inline">
+        <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
+    <button class="btn btn-primary" type="submit">Create Blog</button>
 </form>
 
 <hr>

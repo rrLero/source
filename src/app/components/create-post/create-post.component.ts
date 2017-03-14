@@ -64,7 +64,7 @@ export class CreatePostComponent implements OnInit {
             .subscribe(() => {
                 this.popupText = 'done!';
                 setTimeout(() => this.hidden = true, 1500);
-                setTimeout(() => this.goBack(), 1800);
+                setTimeout(() => this.router.navigate([this.url]), 1800);
             })
         );
     }
