@@ -24,6 +24,6 @@ a:focus {
 }
 
 .add-comment .CodeMirror {
-  min-height: 150px;
-  height: 150px;
+  min-height: 100px;
+  height: 100px;
 }

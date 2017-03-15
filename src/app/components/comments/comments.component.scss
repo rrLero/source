@@ -1,44 +1,66 @@
-.wrap {
-  min-height: 5em;
+.post-footer {
+  margin: 30px 0;
+  border-top: 1px solid #ddd;
+  padding: 15px;
 }
-.thumbnail {
+
+.post-footer h3 {
+  margin-top: 10px;
+}
+
+.post-footer p {
+  margin-bottom: 20px;
+}
+
+.comments-list {
   padding: 0;
+  margin-top: 20px;
+  list-style-type: none;
 }
 
-.panel {
-  position: relative;
-}
-
-.panel > .panel-heading:after, .panel > .panel-heading:before {
-  position: absolute;
-  top: 11px;
-  left: -16px;
-  right: 100%;
-  width: 0;
-  height: 0;
+.comment {
   display: block;
-  content: " ";
-  border-color: transparent;
-  border-style: solid solid outset;
-  pointer-events: none;
+  width: 100%;
+  margin: 20px 0;
 }
 
-.panel > .panel-heading:after {
-  border-width: 7px;
-  border-right-color: #f5f5f5;
-  margin-top: 1px;
-  margin-left: 2px;
+.avatar {
+  width: 35px;
+  height: 35px;
 }
 
-.panel > .panel-heading:before {
-  border-right-color: #ddd;
-  border-width: 8px;
+.comment-heading {
+  display: block;
+  width: 100%;
+}
+
+.user {
+  font-size: 14px;
+  font-weight: bold;
+  display: inline;
+  margin-top: 0;
+  margin-right: 10px;
+}
+
+.time {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 0;
+  display: inline;
+}
+
+.comment-body {
+  margin-left: 50px;
+}
+
+.comment > .comments-list {
+  margin-left: 50px;
 }
 
 .delete {
-  color: #777;
+  margin-left: 5px;
   cursor: pointer;
-  line-height: 18px;
+  color: #777;
   opacity: 0.5;
 }
 
