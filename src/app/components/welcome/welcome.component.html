@@ -9,10 +9,12 @@
     </div>
 </div>
 
-<form [@welcome]="form.state" #form *ngIf="profile.logged" (submit)="go(profile.login, repoEl)" class="form-inline">
-        <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
-    <button class="btn btn-primary" type="submit">Create Blog</button>
-</form>
+<div class="wrap">
+    <form [@welcome]="form.state" #form *ngIf="profile.logged" (submit)="go(profile.login, repoEl)" class="form-inline">
+            <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
+        <button class="btn btn-primary" type="submit">Create Blog</button>
+    </form>
+</div>
 
 <hr>
 

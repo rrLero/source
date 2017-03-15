@@ -1,5 +1,5 @@
 <auth-profile #profile></auth-profile>
-<controls *ngIf="profile.canEdit"></controls>
+<controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>
 <search></search>
 
 <section>
