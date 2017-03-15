@@ -42,7 +42,6 @@ export class WelcomeComponent implements OnInit {
         this.httpService.getBlogs()
             .then(blogs => {
                 this.blogs = blogs;
-                // console.log(this.blogs);
             });
     }
     go(name, repo) {

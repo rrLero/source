@@ -2,6 +2,6 @@
     <a #control class="btn btn-primary" [routerLink]="[create]">Add post</a>
     <a  #control class="btn btn-primary" [class.hidden]="!post" [routerLink]="[edit]">Edit post</a>
     <button #control  class="btn btn-danger" [class.hidden]="!post" (click)="delete()">Remove post</button>
-    <button #control  class="btn btn-danger" [class.hidden]="post" (click)="deleteBlog()">Remove blog</button>
+    <button #control *ngIf="owner.toLowerCase() === name"  class="btn btn-danger" [class.hidden]="post" (click)="deleteBlog()">Remove blog</button>
 </div>
 <popup [hidden]="hidden" [popupText]="popupText"></popup>

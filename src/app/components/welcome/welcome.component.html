@@ -1,12 +1,24 @@
-<form [@welcome]="form.state" #form *ngIf="profile.logged" (submit)="go(profile.login, repoEl)" class="form-inline">
-        <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
-    <button class="btn btn-primary" type="submit">Create Blog</button>
-</form>
-
 <auth-profile #profile></auth-profile>
 
+<div *ngIf="profile.logged" class="own-blogs">
+    <h3>Your blogs:</h3>
+    <div *ngFor="let blog of blogs">
+        <h4 *ngIf="blog.name === profile.login.toLowerCase()" [@welcome]="blog.state">
+            <a [routerLink]="['/' + blog.name + '/' + blog.repo]">{{ blog.repo }}</a>
+        </h4>
+    </div>
+</div>
+
+<div class="wrap">
+    <form [@welcome]="form.state" #form *ngIf="profile.logged" (submit)="go(profile.login, repoEl)" class="form-inline">
+            <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
+        <button class="btn btn-primary" type="submit">Create Blog</button>
+    </form>
+</div>
+
 <hr>
-<h3>List of blogs</h3>
+
+<h3>List of blogs:</h3>
 <section [@welcome]="blog.state" *ngFor="let blog of blogs">
     <h4>
         <a [routerLink]="['/' + blog.name + '/' + blog.repo]">{{ blog.name }} - {{  blog.repo }}</a>

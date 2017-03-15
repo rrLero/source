@@ -1,6 +1,6 @@
 <auth-profile #profile></auth-profile>
+<controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>
 <search></search>
-<controls *ngIf="profile.canEdit"></controls>
 
 <section>
     <h2 *ngIf="profile.login === name && !profile.canEdit">No repo</h2>

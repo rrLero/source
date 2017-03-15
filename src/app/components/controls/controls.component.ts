@@ -32,8 +32,9 @@ import { Post }                   from '../../shared/post.model';
 })
 export class ControlsComponent {
     @Input() post: Post;
+    @Input() owner: string;
     hidden = true;
-    popupText = 'deleted...';
+    popupText = 'deleting...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];

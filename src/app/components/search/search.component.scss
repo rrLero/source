@@ -1,6 +1,6 @@
 .search-result {
   position: relative;
-  left: 7.3em;
+  // left: 7.3em;
   width: 17em;
   height: 2.5em;
   padding: 5px;
@@ -19,9 +19,8 @@
 }
 
 .search-component {
-  position: relative;
-  z-index: 100;
   height: 5em;
+    margin-top: .5em;
   padding: 0.5em;
   border-radius: 5px;
   background-color: #eee;
@@ -32,6 +31,7 @@ input {
   display: inline-block;
   width: 18.4em;
   height: 2.2em;
+
   padding-left: 0.5em;
   border-radius: 3px;
   border: none;
@@ -39,7 +39,7 @@ input {
 }
 
 h4 {
-  display: inline-block;
+  // display: inline-block;
   margin-bottom: .5em;
   margin-right: .5em;
 }

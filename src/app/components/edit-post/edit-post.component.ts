@@ -12,7 +12,7 @@ import { Post, FullMd, fullMd }   from '../../shared/post.model';
 export class EditPostComponent implements OnInit {
     post: Post;
     hidden = true;
-    popupText = 'upload...';
+    popupText = 'updating...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
