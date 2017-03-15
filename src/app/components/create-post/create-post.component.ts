@@ -4,6 +4,7 @@ import { Location }                   from '@angular/common';
 
 import { HttpService, AuthService }   from '../../services/index';
 import { Post, post, FullMd, fullMd } from '../../shared/post.model';
+import { UserService } from "../../services/user.service";
 
 @Component({
     templateUrl: 'create-post.component.html',
@@ -23,6 +24,7 @@ export class CreatePostComponent implements OnInit {
         private location: Location,
         private route: ActivatedRoute,
         private authService: AuthService,
+        private userService: UserService,
         private httpService: HttpService) { }
 
     ngOnInit() {
@@ -30,10 +32,8 @@ export class CreatePostComponent implements OnInit {
         let time = `${this.date.toString()}`.slice(15).slice(0, 6);
         this.datetime = date + time;
         if (this.authService.isLogged) {
-            this.authService.getProfile().subscribe();
-            this.author = this.authService.loggedUser.name
-                ? this.authService.loggedUser.name
-                : this.authService.loggedUser.login;
+            const profile = this.userService.getUser();
+            this.author = profile.name || profile.login;
         }
     }
     goBack() {

@@ -1,10 +1,10 @@
-<a [hidden]="service.isLogged" [href]="githubUrl" (click)="savePath()">Github login</a>
+<a [hidden]="authService.isLogged" [href]="githubUrl" (click)="savePath()">Github login</a>
 
-<div [hidden]="!service.isLogged">
+<div *ngIf="authService.isLogged && profile">
     <div class="profile">
-        <img class="profile-avatar" src="{{ service.loggedUser?.avatar_url }}" alt="">
+        <img class="profile-avatar" [src]="profile.avatar_url" alt="">
         <div class="profile-name">
-            <p>{{ service.loggedUser?.name || service.loggedUser?.login }} <span class="glyphicon glyphicon-log-out profile-logout" (click)="logout()"></span></p>
+            <p>{{ profile.name || profile.login }} <span class="glyphicon glyphicon-log-out profile-logout" (click)="logout()"></span></p>
         </div>
     </div>
 </div>
