@@ -1,21 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import {} from '../../services/auth.service';
-import { AuthService } from "../../services/auth.service";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute }                                 from "@angular/router";
+
+import { AuthService }     from '../../services/index';
+import { CommentsService } from '../../services/index';
 
 @Component({
     selector: 'comment-from',
     templateUrl: 'comment-form.component.html'
 })
 export class CommentFormComponent implements OnInit {
+    @Input() postId: string;
+    @Output() addComment = new EventEmitter();
+    name = this.route.snapshot.params['name'];
+    repo = this.route.snapshot.params['repo'];
 
-    constructor(public authService: AuthService) { }
+    constructor(private route: ActivatedRoute,
+                public authService: AuthService,
+                private commentsService: CommentsService) { }
 
-    ngOnInit() {
+    ngOnInit() { }
 
-    }
-
-    submit(value) {
-        // console.log(value);
+    submit(input) {
+        this.commentsService.add(this.name, this.repo, this.postId, input.value)
+            .then(() => {
+                this.addComment.emit(input.value);
+                input.editor.value('');
+            })
     }
 
 }

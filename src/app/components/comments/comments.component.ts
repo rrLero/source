@@ -3,6 +3,7 @@ import { ActivatedRoute }           from '@angular/router';
 
 import { Comment }         from '../../shared/comment.model'
 import { CommentsService } from '../../services/index';
+import { AuthService } from '../../services/index';
 
 @Component({
     selector: 'comments',
@@ -17,6 +18,7 @@ export class CommentsComponent implements OnInit {
     // access;
 
     constructor(private route: ActivatedRoute,
+                private authService: AuthService,
                 private commentsService: CommentsService) { }
 
     ngOnInit() {
@@ -43,6 +45,21 @@ export class CommentsComponent implements OnInit {
                 const index = this.comments.indexOf(comment);
                 this.comments.splice(index, 1);
             });
+    }
+
+    addCommentHandler(value) {
+        this.authService.getProfile().subscribe(() => {
+            const user = this.authService.loggedUser.login;
+            const avatar_url = this.authService.loggedUser.avatar_url;
+            const created_at = new Date();
+
+            this.comments.push({
+                user,
+                avatar_url,
+                created_at: created_at.toISOString(),
+                body: value
+            })
+        });
     }
 
 }

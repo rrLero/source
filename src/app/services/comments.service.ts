@@ -9,15 +9,26 @@ export class CommentsService {
     constructor(private http: Http) { }
 
     get(name: string, repo: string, postId: string) {
-        return this.http.get(`${this.host}/${name}/${repo}/api/get_comments/${postId}`)
+        return this.http
+            .get(`${this.host}/${name}/${repo}/api/get_comments/${postId}`)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
+    add(name: string, repo: string, postId: string, body: string) {
+        let token = localStorage.getItem('access_token');
+        return this.http
+            .post(`${this.host}/${name}/${repo}/api/get_comments/${postId}?access_token=${token}`, { body })
+            .toPromise()
+            .then(response => response.status)
+            .catch(this.handleError);
+    }
+
     remove(name: string, repo: string, id: number) {
         let token = localStorage.getItem('access_token');
-        return this.http.delete(`${this.host}/${name}/${repo}/api/get_comments/${id}?access_token=${token}`,)
+        return this.http
+            .delete(`${this.host}/${name}/${repo}/api/get_comments/${id}?access_token=${token}`,)
             .toPromise()
             .then(response => response.status)
             .catch(this.handleError);
