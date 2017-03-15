@@ -1,12 +1,15 @@
 html {
     position: relative;
     min-height: 100%;
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
 }
 body {
   background-color: #eee;
   font: 1.25em/1.5 "Open Sans", Arial, sans-serif;
   overflow-x: hidden;
 }
+
 .cbalink {
     display: none !important;
 }
