@@ -5,7 +5,10 @@
                 <md-editor #textarea></md-editor>
             </div>
             <div class="form-group">
-                <button [disabled]="!textarea.value" class="btn btn-primary" type="submit">Add comment</button>
+                <button [disabled]="!textarea.value || loading" class="btn btn-primary" type="submit">
+                    Add comment
+                    <span *ngIf="loading" class="glyphicon glyphicon-refresh loading"></span>
+                </button>
             </div>
         </form>
     </div>
