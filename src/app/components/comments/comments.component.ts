@@ -1,20 +1,43 @@
-import { Component, OnInit, Input } from '@angular/core';
+// import { Component, OnInit, Input } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnInit,
+    trigger,
+    state,
+    style,
+    transition,
+    animate
+}                                 from '@angular/core';
 import { ActivatedRoute }           from '@angular/router';
 
-import { Comment }         from '../../shared/comment.model'
+import { Comment }         from '../../shared/comment.model';
 import { CommentsService } from '../../services/index';
 import { AuthService } from '../../services/index';
 
 @Component({
     selector: 'comments',
     templateUrl: 'comments.component.html',
-    styleUrls: ['comments.component.scss']
+    styleUrls: ['comments.component.scss'],
+    animations: [
+        trigger('comment', [
+            state('in', style({ opacity: '1' })),
+            transition('void => *', [
+                style({ opacity: '0' }),
+                animate(300)
+            ]),
+            transition('* => void', [
+                animate(300, style({ opacity: '0' }))
+            ])
+        ])
+    ]
 })
 export class CommentsComponent implements OnInit {
     @Input() postId: string;
     comments: Comment[] = [];
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
+    url = 'https://github.com/';
     // access;
 
     constructor(private route: ActivatedRoute,
@@ -48,7 +71,6 @@ export class CommentsComponent implements OnInit {
     }
 
     addCommentHandler(data) {
-        this.comments.push(data)
+        this.comments.push(data);
     }
-
 }

@@ -3,10 +3,10 @@
 
     <ul class="comments-list" *ngIf="comments.length">
         <li class="comment" *ngFor="let comment of comments">
-            <a class="pull-left" href="#">
+            <a class="pull-left" [href]="url + comment.user" [@comment]="comment.state" target="_blank">
                 <img class="avatar" [src]="comment.avatar_url" alt="avatar">
             </a>
-            <div class="comment-body">
+            <div class="comment-body" [@comment]="comment.state">
                 <div class="comment-heading">
                     <h4 class="user">{{ comment.user }}</h4>
                     <h5 class="time">{{ comment.created_at | date:'y-MM-dd HH:mm' }}</h5>
