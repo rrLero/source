@@ -1,7 +1,7 @@
 .post-footer {
   margin: 30px 0;
   border-top: 1px solid #ddd;
-  padding: 15px;
+  padding: 15px 0;
 }
 
 .post-footer h3 {
@@ -47,6 +47,10 @@
   color: #aaa;
   margin-top: 0;
   display: inline;
+}
+
+.comment-body p {
+  word-wrap: break-word;
 }
 
 .comment-body {

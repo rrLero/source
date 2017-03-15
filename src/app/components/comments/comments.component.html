@@ -9,7 +9,7 @@
             <div class="comment-body">
                 <div class="comment-heading">
                     <h4 class="user">{{ comment.user }}</h4>
-                    <h5 class="time">{{ comment.created_at | date:'y-mm-dd HH:mm' }}</h5>
+                    <h5 class="time">{{ comment.created_at | date:'y-MM-dd HH:mm' }}</h5>
                     <span (click)="remove(comment)" class="glyphicon glyphicon-trash delete"></span>
                 </div>
                 <p [innerHTML]="comment.body | markdown | safeHtml"></p>
