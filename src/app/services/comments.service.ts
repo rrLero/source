@@ -21,7 +21,7 @@ export class CommentsService {
         return this.http
             .post(`${this.host}/${name}/${repo}/api/get_comments/${postId}?access_token=${token}`, { body })
             .toPromise()
-            .then(response => response.status)
+            .then(response => response.json())
             .catch(this.handleError);
     }
 

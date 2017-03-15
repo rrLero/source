@@ -22,8 +22,8 @@ export class CommentFormComponent implements OnInit {
 
     submit(input) {
         this.commentsService.add(this.name, this.repo, this.postId, input.value)
-            .then(() => {
-                this.addComment.emit(input.value);
+            .then((data) => {
+                this.addComment.emit(data[0]);
                 input.editor.value('');
             })
     }

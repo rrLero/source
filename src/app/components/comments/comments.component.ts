@@ -12,7 +12,7 @@ import { AuthService } from '../../services/index';
 })
 export class CommentsComponent implements OnInit {
     @Input() postId: string;
-    comments: Comment[];
+    comments: Comment[] = [];
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     // access;
@@ -47,19 +47,8 @@ export class CommentsComponent implements OnInit {
             });
     }
 
-    addCommentHandler(value) {
-        this.authService.getProfile().subscribe(() => {
-            const user = this.authService.loggedUser.login;
-            const avatar_url = this.authService.loggedUser.avatar_url;
-            const created_at = new Date();
-
-            this.comments.push({
-                user,
-                avatar_url,
-                created_at: created_at.toISOString(),
-                body: value
-            })
-        });
+    addCommentHandler(data) {
+        this.comments.push(data)
     }
 
 }
