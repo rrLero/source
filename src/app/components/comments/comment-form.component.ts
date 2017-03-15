@@ -15,6 +15,7 @@ export class CommentFormComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     loading: boolean = false;
+    error: boolean = false;
 
     constructor(private route: ActivatedRoute,
                 public authService: AuthService,
@@ -24,12 +25,16 @@ export class CommentFormComponent implements OnInit {
 
     submit(input) {
         this.loading = true;
+        this.error = false;
         this.commentsService.add(this.name, this.repo, this.postId, input.value)
             .then((data) => {
                 this.addComment.emit(data[0]);
                 input.editor.value('');
                 this.loading = false;
-            })
+            }).catch(() => {
+                this.loading = false;
+                this.error = true;
+            });
     }
 
 }
