@@ -34,6 +34,7 @@ import { AuthService } from '../../services/index';
 })
 export class CommentsComponent implements OnInit {
     @Input() postId: string;
+    @Input() logged: string;
     comments: Comment[] = [];
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];

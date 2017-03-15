@@ -18,6 +18,7 @@
     </ul>
 
     <p *ngIf="!comments.length">No comments. You will be first.</p>
+    <p *ngIf="!logged">You must be logged in to post a comment.</p>
 
     <comment-from (addComment)="addCommentHandler($event)" [postId]="postId"></comment-from>
 </div>
