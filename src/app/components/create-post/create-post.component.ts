@@ -31,7 +31,9 @@ export class CreatePostComponent implements OnInit {
         this.datetime = date + time;
         if (this.authService.isLogged) {
             this.authService.getProfile().subscribe();
-            this.author = this.authService.loggedUser.name;
+            this.author = this.authService.loggedUser.name
+                ? this.authService.loggedUser.name
+                : this.authService.loggedUser.login;
         }
     }
     goBack() {
