@@ -1,4 +1,4 @@
-<a [hidden]="authService.isLogged" [href]="githubUrl" (click)="savePath()">Github login</a>
+<a *ngIf="!authService.isLogged" [href]="githubUrl" (click)="savePath()">Github login</a>
 
 <div *ngIf="authService.isLogged && profile">
     <div class="profile">

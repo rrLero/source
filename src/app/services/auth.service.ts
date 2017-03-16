@@ -12,26 +12,25 @@ export class AuthService {
         this._isLogged = !!localStorage.getItem('user');
     }
 
-    getToken(code): Observable<string> {
+    getToken(code) {
         const url = `http://localhost:9999/authenticate/${code}`;
         // const url = `http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth?code=${code}`;
         return this.http.get(url)
-            .map(response => response.json())
-            .do(response => {
+            .toPromise()
+            .then(response => response.json())
+            .then(response => {
                 // if (response && response.access_token) {
                 if (response && response.token) {
-                    // localStorage.setItem('access_token', response.access_token);
-                    // localStorage.setItem('access_token', response.token);
-                    this.userService.getProfile(response.token).then(data => {
-                        const user = {
-                            access_token: response.token,
-                            login: data.login,
-                            name: data.name,
-                            avatar_url: data.avatar_url,
-                        };
-                        localStorage.setItem('user', JSON.stringify(user));
-                    });
-                    this._isLogged = true;
+                    // return this.userService.getProfile(response.access_token)
+                    return this.userService.getProfile(response.token)
+                        .then((data) => {
+                            this._isLogged = true;
+                            return {
+                                ...data,
+                                // token: response.access_token,
+                                token: response.token,
+                            }
+                        });
                 }
             })
             .catch(this.handleError);
