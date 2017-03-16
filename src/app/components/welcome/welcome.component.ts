@@ -44,7 +44,8 @@ export class WelcomeComponent implements OnInit {
                 this.blogs = blogs;
             });
     }
-    go(name, repo) {
-        this.router.navigate([`${name}/${repo.value}`]);
+    go() {
+        this.router.navigate(['/start']);
+        // this.router.navigate([`${name}/${repo.value}`]);
     }
 }
