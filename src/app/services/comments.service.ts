@@ -1,12 +1,14 @@
 import { Injectable }     from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
+import { UserService }    from './user.service';
 
 @Injectable()
 export class CommentsService {
     private host = 'http://gitblog.pythonanywhere.com';
 
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+                private userService: UserService) { }
 
     get(name: string, repo: string, postId: string) {
         return this.http
@@ -17,7 +19,7 @@ export class CommentsService {
     }
 
     add(name: string, repo: string, postId: string, body: string) {
-        let token = localStorage.getItem('access_token');
+        let token = this.userService.getUser().access_token;
         return this.http
             .post(`${this.host}/${name}/${repo}/api/get_comments/${postId}?access_token=${token}`, { body })
             .toPromise()
@@ -26,7 +28,7 @@ export class CommentsService {
     }
 
     remove(name: string, repo: string, id: number) {
-        let token = localStorage.getItem('access_token');
+        let token = this.userService.getUser().access_token;
         return this.http
             .delete(`${this.host}/${name}/${repo}/api/get_comments/${id}?access_token=${token}`,)
             .toPromise()

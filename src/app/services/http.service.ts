@@ -1,21 +1,23 @@
-import { Injectable }    from '@angular/core';
+import { Injectable }                    from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 
-import { Post }          from '../shared/post.model';
+import { Post }        from '../shared/post.model';
+import { UserService } from './user.service';
 
 @Injectable()
 export class HttpService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private host = 'http://gitblog.pythonanywhere.com';
     private url: string;
-    constructor(private http: Http) { }
+    constructor(private http: Http,
+                private userService: UserService) { }
 
     getUrl(name: string, repo: string) {
         this.url = `${this.host}/${name}/${repo}/api`;
     }
     updateBlog(name: string, repo: string) {
         this.getUrl(name, repo);
-        const token = localStorage.getItem('access_token');
+        const token = this.userService.getUser().access_token;
         const url = `${this.url}/update?access_token=${token}`;
         return this.http.get(url).catch(this.handleError);
     }
@@ -47,7 +49,7 @@ export class HttpService {
     }
     update(name: string, repo: string, id: string, sha: string, post: Post): Promise<Post> {
         this.getUrl(name, repo);
-        const token = localStorage.getItem('access_token');
+        const token = this.userService.getUser().access_token;
         const url = `${this.url}/put/${id}/${sha}?access_token=${token}`;
         return this.http
             .post(url, JSON.stringify(post), { headers: this.headers })
@@ -57,7 +59,7 @@ export class HttpService {
     }
     create(name: string, repo: string, post: Post): Promise<Post> {
         this.getUrl(name, repo);
-        const token = localStorage.getItem('access_token');
+        const token = this.userService.getUser().access_token;
         const url = `${this.url}/put/test/test?access_token=${token}`;
         return this.http
             .put(url, JSON.stringify(post), { headers: this.headers })
@@ -67,7 +69,7 @@ export class HttpService {
     }
     delete(name: string, repo: string, id: string, sha: string): Promise<void> {
         this.getUrl(name, repo);
-        const token = localStorage.getItem('access_token');
+        const token = this.userService.getUser().access_token;
         const headers = new Headers({ 'Authorization': 'token ' + token });
         const options = new RequestOptions({ headers: headers });
         const url = `${this.url}/put/${id}/${sha}?access_token=${token}`;
@@ -79,7 +81,7 @@ export class HttpService {
     }
     deleteBlog(name: string, repo: string): Promise<void> {
         this.getUrl(name, repo);
-        const token = localStorage.getItem('access_token');
+        const token = this.userService.getUser().access_token;
         const headers = new Headers({ 'Authorization': 'token ' + token });
         const options = new RequestOptions({ headers: headers });
         const url = `${this.url}/del_repo?access_token=${token}`;
