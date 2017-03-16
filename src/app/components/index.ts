@@ -13,6 +13,7 @@ import { CommentsComponent }   from './comments/comments.component';
 import { CommentFormComponent }   from './comments/comment-form.component';
 import { PopupComponent }       from './popup/popup.component';
 import { ControlsComponent }       from './controls/controls.component';
+import { StartComponent }       from './start/start.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -21,6 +22,7 @@ export { CreatePostComponent };
 export { EditPostComponent };
 export { NotFoundComponent };
 export { AuthComponent };
+export { StartComponent };
 
 export const components = [
     WelcomeComponent,
@@ -37,5 +39,6 @@ export const components = [
     CommentsComponent,
     CommentFormComponent,
     PopupComponent,
-    ControlsComponent
+    ControlsComponent,
+    StartComponent
 ];

@@ -18,7 +18,15 @@ export class AuthComponent implements OnInit {
             (param: any) => {
                 let code = param['code'];
                 this.authService.getToken(code)
-                    .subscribe(() => {
+                    .then((data) => {
+                        const user = {
+                            access_token: data.token,
+                            login: data.login,
+                            name: data.name,
+                            avatar_url: data.avatar_url,
+                        };
+                        localStorage.setItem('user', JSON.stringify(user));
+
                         let path = localStorage.getItem('path');
                         if (path) {
                             this.router.navigate([path]);

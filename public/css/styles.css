@@ -31,3 +31,8 @@ a:focus {
 .add-comment .CodeMirror-scroll {
   min-height: initial;
 }
+img {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+}

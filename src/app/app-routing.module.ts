@@ -8,11 +8,16 @@ import { CreatePostComponent }  from './components/index';
 import { EditPostComponent }    from './components/index';
 import { NotFoundComponent }    from './components/index';
 import { AuthComponent }        from './components/index';
+import { StartComponent }        from './components/index';
 
 const routes: Routes = [
     {
         path: 'welcome',
         component: WelcomeComponent
+    },
+    {
+        path: 'start',
+        component: StartComponent
     },
     {
         path: ':name/:repo',
