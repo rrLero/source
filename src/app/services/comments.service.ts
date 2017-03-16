@@ -6,9 +6,14 @@ import { UserService }    from './user.service';
 @Injectable()
 export class CommentsService {
     private host = 'http://gitblog.pythonanywhere.com';
+    private url: string;
 
     constructor(private http: Http,
-                private userService: UserService) { }
+        private userService: UserService) { }
+
+    getUrl(name: string, repo: string) {
+        this.url = `${this.host}/${name}/${repo}/api`;
+    }
 
     get(name: string, repo: string, postId: string) {
         return this.http
@@ -26,11 +31,40 @@ export class CommentsService {
             .then(response => response.json())
             .catch(this.handleError);
     }
-
     remove(name: string, repo: string, id: number) {
         let token = this.userService.getUser().access_token;
         return this.http
-            .delete(`${this.host}/${name}/${repo}/api/get_comments/${id}?access_token=${token}`,)
+            .delete(`${this.host}/${name}/${repo}/api/get_comments/${id}?access_token=${token}`, )
+            .toPromise()
+            .then(response => response.status)
+            .catch(this.handleError);
+    }
+    // getCommentsStatus(name: string, repo: string, id: string) {
+    //     this.getUrl(name, repo);
+    //     const token = this.userService.getUser().access_token;
+    //     const url = `${this.url}/lock_comments/${id}?access_token=${token}`;
+    //     return this.http
+    //         .get(url)
+    //         .toPromise()
+    //         .then(response => response.status)
+    //         .catch(this.handleError);
+    // }
+    unLockComments(name: string, repo: string, id: string) {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/lock_comments/${id}?access_token=${token}`;
+        return this.http
+            .delete(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+    lockComments(name: string, repo: string, id: string) {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/lock_comments/${id}?access_token=${token}`;
+        return this.http
+            .get(url)
             .toPromise()
             .then(response => response.status)
             .catch(this.handleError);
@@ -49,5 +83,4 @@ export class CommentsService {
 
         return Observable.throw(errMessage);
     }
-
 }

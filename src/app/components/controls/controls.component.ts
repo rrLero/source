@@ -43,8 +43,10 @@ export class ControlsComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+
         private httpService: HttpService) {
     }
+
     delete() {
         this.hidden = false;
         if (confirm('delete post?')) {

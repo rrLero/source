@@ -10,7 +10,7 @@ import {
 }                                 from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { HttpService }            from '../../services/index';
+import { HttpService, CommentsService }            from '../../services/index';
 import { Post }                   from '../../shared/post.model';
 
 @Component({
@@ -32,14 +32,16 @@ import { Post }                   from '../../shared/post.model';
 })
 export class PostComponent implements OnInit {
     post: Post;
+    commentsStatus = true;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
-    canEdit = false;
+    canEdit = true;
     url = `/${this.name}/${this.repo}/post/${this.title}`;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+            private commentsService: CommentsService,
         private httpService: HttpService) {
     }
 
@@ -51,6 +53,21 @@ export class PostComponent implements OnInit {
         .switchMap(({ name, repo, title }) =>
             this.httpService.getPost(name, repo, title))
             .subscribe(post => this.post = post);
+    }
+    unLockComments() {
+        this.commentsService
+            .unLockComments(this.name, this.repo, this.post.id)
+            .then(() => this.commentsStatus = true);
+    }
+    lockComments() {
+        this.commentsService
+            .lockComments(this.name, this.repo, this.post.id)
+            .then(() => this.commentsStatus = false);
+    }
+    statusComments() {
+        this.commentsService
+            .lockComments(this.name, this.repo, this.post.id)
+            .then((res) => console.log(res));
     }
     goBack(): void {
         let loadPage = localStorage.getItem('page') ? localStorage.getItem('page') : '1';
