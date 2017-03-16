@@ -3,7 +3,7 @@
         <form class="add-comment" (ngSubmit)="submit(textarea)">
             <div class="form-group" [class.has-error]="error">
                 <md-editor #textarea></md-editor>
-                <span *ngIf="error" class="help-block">Something went wrong! Try again or contact with administrator.</span>
+                <span *ngIf="error" class="help-block">{{ error }}</span>
             </div>
             <div class="form-group">
                 <button [disabled]="!textarea.value || loading" class="btn btn-primary" type="submit">
