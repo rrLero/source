@@ -30,7 +30,7 @@ export class CommentFormComponent implements OnInit {
             .then((data) => {
                 if (Object.keys(data).length === 0) {
                     this.loading = false;
-                    this.error = 'Your repository does not allow you to add comments!';
+                    this.error = 'This repository does not allow you to add comments!';
                     return;
                 }
                 this.addComment.emit(data[0]);
