@@ -1,7 +1,7 @@
-import { Injectable }                              from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable }                              from 'rxjs/Observable';
-import { UserService } from './user.service';
+import { Injectable }     from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Observable }     from 'rxjs/Observable';
+import { UserService }    from './user.service';
 
 @Injectable()
 export class AuthService {
@@ -34,43 +34,6 @@ export class AuthService {
                     this._isLogged = true;
                 }
             })
-            .catch(this.handleError);
-    }
-
-    // getProfile() {
-    //     let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem('access_token') });
-    //     let options = new RequestOptions({ headers: headers });
-    //
-    //     return this.http.get('https://api.github.com/user', options)
-    //         .map(response => response.json())
-    //         .do(response => {
-    //             this._loggedUser = response;
-    //         })
-    //         .catch(this.handleError);
-    // }
-
-    // getPermission(name: string, repo: string, login: string) {
-    //     let headers = new Headers({ 'Authorization': 'Bearer ' + localStorage.getItem("access_token") });
-    //     headers.append('Accept', 'application/vnd.github.korra-preview');
-    //     let options = new RequestOptions({ headers: headers });
-    //
-    //     return this.http.get(`https://api.github.com/repos/${name}/${repo}/collaborators/${login}/permission`, options)
-    //         .toPromise()
-    //         .then(response => response.json())
-    //         .then(response => {
-    //             this._access = response.permission !== 'none' && response.permission !== 'read';
-    //         })
-    //         .catch(() => {
-    //             this._access = false;
-    //         });
-    // }
-
-    getPermission(name: string, repo: string, login: string) {
-        const token = localStorage.getItem("access_token");
-
-        return this.http.get(`http://gitblog.pythonanywhere.com/api/repo_master/${name}/${repo}/${login}?access_token=${token}`)
-            .toPromise()
-            .then(response => response.json())
             .catch(this.handleError);
     }
 

@@ -17,6 +17,7 @@ export class AuthProfileComponent implements OnInit {
     login: string;
     canEdit: boolean = false;
     logged: boolean = false;
+    profile: any;
     githubUrl = 'https://github.com/login/oauth/authorize?client_id=caf9e03a36ecdaadcfb1&scope=repo&redirect_uri=http://localhost:8080/auth';
     // githubUrl = 'https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=http://acid.zzz.com.ua/auth';
     constructor(
@@ -26,7 +27,9 @@ export class AuthProfileComponent implements OnInit {
         public authService: AuthService,
         private userService: UserService) { };
     ngOnInit() {
+        console.log(this.authService.isLogged);
         if (this.authService.isLogged) {
+            this.profile = this.userService.getUser();
             // TODO: console.log print 'null' after login user
             console.log(this.profile);
             this.logged = true;
@@ -35,10 +38,6 @@ export class AuthProfileComponent implements OnInit {
                 .getPermission(this.name, this.repo, this.login)
                 .then(({ access }) => this.canEdit = access);
         }
-    }
-
-    get profile() {
-        return this.userService.getUser();
     }
 
     logout() {
