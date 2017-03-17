@@ -1,13 +1,9 @@
 <auth-profile #profile></auth-profile>
-<controls *ngIf="profile.canEdit" [post]="post"></controls>
+<controls *ngIf="profile.canEdit" [post]="post" [status]="comments" (comments)="commentsHandler($event)"></controls>
 
 <section *ngIf="post" [@post]="post.state">
     <h2>{{ post.title }}</h2>
     <div class="text" [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
     <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
-
-    <comments *ngIf="commentsStatus"  [logged]="profile.logged" [postId]="post.id" [login]="profile.login"></comments>
-
-    <!-- <button *ngIf="commentsStatus" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
-    <button *ngIf="!commentsStatus" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button> -->
+    <comments *ngIf="comments" [logged]="profile.logged" [postId]="post.id" [login]="profile.login"></comments>
 </section>

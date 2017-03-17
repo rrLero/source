@@ -49,16 +49,15 @@ export class CommentsService {
             .then(response => response.status)
             .catch(this.handleError);
     }
-    // getCommentsStatus(name: string, repo: string, id: string) {
-    //     this.getUrl(name, repo);
-    //     const token = this.userService.getUser().access_token;
-    //     const url = `${this.url}/lock_comments/${id}?access_token=${token}`;
-    //     return this.http
-    //         .get(url)
-    //         .toPromise()
-    //         .then(response => response.status)
-    //         .catch(this.handleError);
-    // }
+    getCommentsStatus(name: string, repo: string, id: string) {
+        this.getUrl(name, repo);
+        const url = `${this.url}/lock_status/${id}`;
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
     unLockComments(name: string, repo: string, id: string) {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
@@ -76,7 +75,7 @@ export class CommentsService {
         return this.http
             .get(url)
             .toPromise()
-            .then(response => response.status)
+            .then(response => response.json())
             .catch(this.handleError);
     }
 

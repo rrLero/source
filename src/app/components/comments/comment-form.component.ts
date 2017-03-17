@@ -1,5 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute }                                 from "@angular/router";
+// import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input, Output, EventEmitter,
+    trigger,
+    state,
+    style,
+    transition,
+    animate
+}                          from '@angular/core';
+import { ActivatedRoute }  from '@angular/router';
 
 import { AuthService }     from '../../services/index';
 import { CommentsService } from '../../services/index';
@@ -7,7 +17,19 @@ import { CommentsService } from '../../services/index';
 @Component({
     selector: 'comment-from',
     templateUrl: 'comment-form.component.html',
-    styleUrls: ['comment-form.component.scss']
+    styleUrls: ['comment-form.component.scss'],
+    animations: [
+        trigger('form', [
+            state('in', style({ opacity: '1' })),
+            transition('void => *', [
+                style({ opacity: '0' }),
+                animate(200)
+            ]),
+            transition('* => void', [
+                animate(300, style({ opacity: '0' }))
+            ])
+        ])
+    ]
 })
 export class CommentFormComponent implements OnInit {
     @Input() postId: string;

@@ -2,6 +2,8 @@
 import {
     Component,
     Input,
+    Output,
+    EventEmitter,
     trigger,
     state,
     style,
@@ -10,7 +12,7 @@ import {
 }                                 from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { HttpService }            from '../../services/index';
+import { HttpService, CommentsService }            from '../../services/index';
 import { Post }                   from '../../shared/post.model';
 
 @Component({
@@ -33,6 +35,9 @@ import { Post }                   from '../../shared/post.model';
 export class ControlsComponent {
     @Input() post: Post;
     @Input() owner: string;
+    @Input() filename: string;
+    @Input() status: boolean;
+    @Output() comments = new EventEmitter();
     hidden = true;
     popupText = 'deleting...';
     name = this.route.snapshot.params['name'];
@@ -43,10 +48,19 @@ export class ControlsComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-
+        private commentsService: CommentsService,
         private httpService: HttpService) {
     }
-
+    unLockComments() {
+        this.commentsService
+            .unLockComments(this.name, this.repo, this.post.id)
+            .then(() => this.comments.emit(true));
+    }
+    lockComments() {
+        this.commentsService
+            .lockComments(this.name, this.repo, this.post.id)
+            .then(() => this.comments.emit(false));
+    }
     delete() {
         this.hidden = false;
         if (confirm('delete post?')) {

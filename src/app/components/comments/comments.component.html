@@ -12,27 +12,29 @@
                     <h5 class="time">{{ comment.created_at | date:'y-MM-dd HH:mm' }}</h5>
 
                     <span
-                    (click)="remove(comment)"
-                    class="glyphicon glyphicon-trash delete"
-                    *ngIf="login && comment.user === login || login && name === login.toLowerCase()"></span>
+                        *ngIf="login && comment.user === login || login && name === login.toLowerCase()"
+                        (click)="remove(comment)"
+                        class="glyphicon glyphicon-trash delete"
+                    ></span>
 
                     <span
-                    (click)="edit(comment)"
-                    class="glyphicon glyphicon-pencil delete"
-                    *ngIf="login && comment.user === login"></span>
+                        *ngIf="login && comment.user === login"
+                        (click)="edit(comment)"
+                        class="glyphicon glyphicon-pencil delete"
+                    ></span>
+
                 </div>
 
                 <p [innerHTML]="comment.body | markdown | safeHtml"></p>
 
                 <comment-from
+                *ngIf="comment.id == commentId"
                 (updatedComment)="editCommentHandler($event, comment)"
                 [hidden]="!onEdit"
-                *ngIf="comment.id == commentId"
                 [onEdit]="comment.body"
                 [commentId]="comment.id"></comment-from>
 
             </div>
-
         </li>
     </ul>
 

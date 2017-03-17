@@ -32,45 +32,40 @@ import { Post }                   from '../../shared/post.model';
 })
 export class PostComponent implements OnInit {
     post: Post;
-    commentsStatus = true;
+    comments: boolean;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
     canEdit = false;
     url = `/${this.name}/${this.repo}/post/${this.title}`;
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-            private commentsService: CommentsService,
-        private httpService: HttpService) {
-    }
+
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private commentsService: CommentsService,
+                private httpService: HttpService) { }
 
     ngOnInit(): void {
         this.getPost();
+        this.statusComments();
     }
     getPost() {
         this.route.params
         .switchMap(({ name, repo, title }) =>
             this.httpService.getPost(name, repo, title))
-            .subscribe(post => this.post = post);
-    }
-    unLockComments() {
-        this.commentsService
-            .unLockComments(this.name, this.repo, this.post.id)
-            .then(() => this.commentsStatus = true);
-    }
-    lockComments() {
-        this.commentsService
-            .lockComments(this.name, this.repo, this.post.id)
-            .then(() => this.commentsStatus = false);
+            .subscribe(post => {
+                this.post = post;
+            });
     }
     statusComments() {
         this.commentsService
-            .lockComments(this.name, this.repo, this.post.id)
-            .then((res) => console.log(res));
+            .getCommentsStatus(this.name, this.repo, this.title)
+            .then(res => this.comments = res.status );
+    }
+    commentsHandler(status) {
+        this.comments = status;
     }
     goBack(): void {
-        let loadPage = localStorage.getItem('page') ? localStorage.getItem('page') : '1';
+        let loadPage = localStorage.getItem('page') ? localStorage.getItem('page') : 1;
         this.router.navigate([`/${this.name}/${this.repo}/page/${loadPage}`]);
         localStorage.removeItem('page');
         // this.location.back();

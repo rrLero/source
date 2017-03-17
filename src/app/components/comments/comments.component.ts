@@ -53,7 +53,6 @@ export class CommentsComponent implements OnInit {
             .then(data => {
                 if (data.length > 0) {
                     this.comments = data;
-                    console.log(data);
                 }
             });
         // if (this.authService.isLogged) {
