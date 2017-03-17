@@ -11,7 +11,10 @@ import { CommentsService } from '../../services/index';
 })
 export class CommentFormComponent implements OnInit {
     @Input() postId: string;
+    @Input() onEdit: string;
+    @Input() commentId: number;
     @Output() addComment = new EventEmitter();
+    @Output() updatedComment = new EventEmitter();
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     loading: boolean = false;
@@ -26,17 +29,25 @@ export class CommentFormComponent implements OnInit {
     submit(input) {
         this.loading = true;
         this.error = '';
-        this.commentsService.add(this.name, this.repo, this.postId, input.value)
-            .then((data) => {
-                if (Object.keys(data).length === 0) {
+        if (this.onEdit) {
+            this.commentsService
+                .edit(this.name, this.repo, this.commentId, input.value)
+                .then(() => {
+                    this.updatedComment.emit(input.value);
                     this.loading = false;
-                    this.error = 'This repository does not allow you to add comments!';
-                    return;
-                }
-                this.addComment.emit(data[0]);
-                input.editor.value('');
-                this.loading = false;
-            });
+                });
+        } else {
+            this.commentsService.add(this.name, this.repo, this.postId, input.value)
+                .then((data) => {
+                    if (Object.keys(data).length === 0) {
+                        this.loading = false;
+                        this.error = 'This repository does not allow you to add comments!';
+                        return;
+                    }
+                    this.addComment.emit(data[0]);
+                    input.editor.value('');
+                    this.loading = false;
+                });
+        }
     }
-
 }

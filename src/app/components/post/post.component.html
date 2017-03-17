@@ -6,8 +6,8 @@
     <div class="text" [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
     <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
 
-    <comments *ngIf="commentsStatus"  [logged]="profile.logged" [postId]="post.id"></comments>
-    
-    <button *ngIf="commentsStatus" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
-    <button *ngIf="!commentsStatus" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button>
+    <comments *ngIf="commentsStatus"  [logged]="profile.logged" [postId]="post.id" [login]="profile.login"></comments>
+
+    <!-- <button *ngIf="commentsStatus" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
+    <button *ngIf="!commentsStatus" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button> -->
 </section>

@@ -36,7 +36,7 @@ export class PostComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
-    canEdit = true;
+    canEdit = false;
     url = `/${this.name}/${this.repo}/post/${this.title}`;
     constructor(
         private router: Router,

@@ -39,6 +39,16 @@ export class CommentsService {
             .then(response => response.status)
             .catch(this.handleError);
     }
+    edit(name: string, repo: string, id: number, body: string) {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/get_comments/${id}?access_token=${token}`;
+        return this.http
+            .put(url, { body })
+            .toPromise()
+            .then(response => response.status)
+            .catch(this.handleError);
+    }
     // getCommentsStatus(name: string, repo: string, id: string) {
     //     this.getUrl(name, repo);
     //     const token = this.userService.getUser().access_token;
