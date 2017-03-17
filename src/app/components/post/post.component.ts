@@ -10,7 +10,7 @@ import {
 }                                 from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { HttpService, CommentsService }            from '../../services/index';
+import { HttpService, CommentsService, AuthService } from '../../services/index';
 import { Post }                   from '../../shared/post.model';
 
 @Component({
@@ -38,11 +38,14 @@ export class PostComponent implements OnInit {
     title = this.route.snapshot.params['title'];
     canEdit = true;
     url = `/${this.name}/${this.repo}/post/${this.title}`;
+    hidden = true;
+    popupText = 'deleting...';
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-            private commentsService: CommentsService,
-        private httpService: HttpService) {
+        private commentsService: CommentsService,
+        private httpService: HttpService,
+        public authService: AuthService) {
     }
 
     ngOnInit(): void {
@@ -74,5 +77,23 @@ export class PostComponent implements OnInit {
         this.router.navigate([`/${this.name}/${this.repo}/page/${loadPage}`]);
         localStorage.removeItem('page');
         // this.location.back();
+    }
+
+    delete() {
+        this.hidden = false;
+        if (confirm('delete post?')) {
+            this.httpService
+                .delete(this.name, this.repo, this.post.id, this.post.sha)
+                .then(() =>
+                    this.httpService.updateBlog(this.name, this.repo)
+                        .subscribe(() => {
+                            this.popupText = 'done!';
+                            setTimeout(() => this.hidden = true, 1500);
+                            setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
+                        })
+                );
+        } else {
+            this.hidden = true;
+        }
     }
 }

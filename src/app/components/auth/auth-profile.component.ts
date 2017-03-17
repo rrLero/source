@@ -26,9 +26,7 @@ export class AuthProfileComponent implements OnInit {
         public authService: AuthService,
         private userService: UserService) { };
     ngOnInit() {
-        console.log(this.authService.isLogged);
         if (this.authService.isLogged) {
-            console.log(2);
             this.profile = this.userService.getUser();
             this.logged = true;
             this.login = this.profile.login;

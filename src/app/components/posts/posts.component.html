@@ -39,13 +39,16 @@
         <pagination #page></pagination>
     </div>
     <div class="col-md-4">
-        <div class="widget">
+        <div class="widget" *ngIf="authService.isLogged">
             <h4>Actions</h4>
-            <auth-profile #profile></auth-profile>
-            <controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>
+            <!--<auth-profile #profile></auth-profile>-->
+            <!--<controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>-->
+            <a class="btn btn-primary" [routerLink]="[url, 'create']">Add post</a>
+            <button *ngIf="owner && owner.toLowerCase() === name"  class="btn btn-danger" (click)="deleteBlog()">Remove blog</button>
         </div>
         <div class="widget">
             <search></search>
         </div>
     </div>
 </div>
+<popup [hidden]="hidden" [popupText]="popupText"></popup>
