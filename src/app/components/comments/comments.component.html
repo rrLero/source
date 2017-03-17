@@ -1,7 +1,7 @@
 <div class="comments-wrap">
     <h3>Comments ({{ comments.length }})</h3>
 
-    <ul class="comments-list" *ngIf="comments.length">
+    <ul class="comments-list" *ngIf="comments && comments.length">
         <li class="comment" *ngFor="let comment of comments">
             <a class="pull-left" [href]="url + comment.user" [@comment]="comment.state" target="_blank">
                 <img class="avatar" [src]="comment.avatar_url" alt="avatar">
@@ -10,9 +10,30 @@
                 <div class="comment-heading">
                     <h4 class="user">{{ comment.user }}</h4>
                     <h5 class="time">{{ comment.created_at | date:'y-MM-dd HH:mm' }}</h5>
-                    <span (click)="remove(comment)" class="glyphicon glyphicon-trash delete"></span>
+
+                    <span
+                        *ngIf="login && comment.user === login || login && name === login.toLowerCase()"
+                        (click)="remove(comment)"
+                        class="glyphicon glyphicon-trash delete"
+                    ></span>
+
+                    <span
+                        *ngIf="login && comment.user === login"
+                        (click)="edit(comment)"
+                        class="glyphicon glyphicon-pencil delete"
+                    ></span>
+
                 </div>
+
                 <p [innerHTML]="comment.body | markdown | safeHtml"></p>
+
+                <comment-from
+                *ngIf="comment.id == commentId"
+                (updatedComment)="editCommentHandler($event, comment)"
+                [hidden]="!onEdit"
+                [onEdit]="comment.body"
+                [commentId]="comment.id"></comment-from>
+
             </div>
         </li>
     </ul>

@@ -35,6 +35,9 @@ import { AuthService } from '../../services/index';
 export class CommentsComponent implements OnInit {
     @Input() postId: string;
     @Input() logged: string;
+    @Input() login: string;
+    onEdit = false;
+    commentId: number;
     comments: Comment[] = [];
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
@@ -70,8 +73,15 @@ export class CommentsComponent implements OnInit {
                 this.comments.splice(index, 1);
             });
     }
-
+    edit(comment) {
+        this.commentId = comment.id;
+        this.onEdit = !this.onEdit;
+    }
     addCommentHandler(data) {
         this.comments.push(data);
+    }
+    editCommentHandler(data, comment) {
+        this.onEdit = !this.onEdit;
+        comment.body = data;
     }
 }
