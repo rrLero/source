@@ -10,7 +10,7 @@ import {
 }                                 from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { HttpService, CommentsService }            from '../../services/index';
+import { HttpService, CommentsService, AuthService }            from '../../services/index';
 import { Post }                   from '../../shared/post.model';
 
 @Component({

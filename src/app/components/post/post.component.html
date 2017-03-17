@@ -27,11 +27,11 @@
                 </footer>
             </article>
 
-            <comments *ngIf="commentsStatus"  [logged]="authService.isLogged" [postId]="post.id"></comments>
+            <comments *ngIf="comments"  [logged]="authService.isLogged" [postId]="post.id"></comments>
 
             <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
-            <button *ngIf="commentsStatus" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
-            <button *ngIf="!commentsStatus" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button>
+            <button *ngIf="comments" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
+            <button *ngIf="!comments" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button>
             <button class="btn btn-primary" [routerLink]="[url, 'edit']">Edit post</button>
             <button class="btn btn-danger" (click)="delete()">Remove post</button>
         </div>
