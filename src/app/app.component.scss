@@ -1,4 +1,41 @@
-h1 {
-  font-size: 3em;
-  color: #666;
+.wrapper {
+  min-height: 100%;
+  padding-bottom: 55px;
+}
+
+.header {
+  background-color: #fff;
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 3px 5px rgba(0,0,0,.05);
+  box-shadow: 0 3px 5px rgba(0,0,0,.05);
+  padding: 15px 0;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 3px 0 0;
+    a {
+      color: #222;
+    }
+  }
+}
+.create {
+  margin-left: 10px;
+}
+
+.main {
+  padding: 40px 0;
+}
+
+.footer {
+  background: #181818;
+  color: #fff;
+  padding: 20px 0;
+  height: 55px;
+  margin-top: -55px;
+
+  p {
+    margin: 0;
+    color: #888;
+  }
 }

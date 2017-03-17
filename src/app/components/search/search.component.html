@@ -1,8 +1,10 @@
-<div  [@search]="searchBox.state" class="search-component">
-    <input #searchBox (keyup)="search(searchBox.value)" placeholder="Post Search">
-    <div>
-        <div *ngFor="let post of posts | async" (click)="gotoDetail(post)" class="search-result">
-            {{ post.title }}
-        </div>
+<div  [@search]="searchBox.state" class="search">
+    <input #searchBox (keyup)="search(searchBox.value)" class="form-control" placeholder="Search">
+    <div class="search-result">
+        <ul>
+            <li *ngFor="let post of posts | async" (click)="gotoDetail(post)">
+                {{ post.title }}
+            </li>
+        </ul>
     </div>
 </div>

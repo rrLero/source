@@ -1,8 +1,41 @@
-.wrap {
-  min-height: 3em;
-  margin-top: 1em;
+.blog-list {
+  background: #fff;
+  padding: 30px 60px;
 }
-.own-blogs {
-  float: right;
-  text-align: right;
+
+.blog-list h3 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.blogs {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  height: 45vh;
+}
+
+.blog {
+  display: block;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.blog:not(:first-child) {
+  margin-top: -1px;
+}
+
+.blog-author {
+  color: #aaa;
+}
+
+.blog-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
 }

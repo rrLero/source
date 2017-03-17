@@ -1,10 +1,14 @@
-<a *ngIf="!authService.isLogged" [href]="githubUrl" (click)="savePath()">Github login</a>
+<!--<a *ngIf="!authService.isLogged" [href]="githubUrl" (click)="savePath()">Github login</a>-->
 
-<div *ngIf="authService.isLogged && profile">
-    <div class="profile">
-        <img class="profile-avatar" [src]="profile.avatar_url" alt="">
-        <div class="profile-name">
-            <p>{{ profile.name || profile.login }} <span class="glyphicon glyphicon-log-out profile-logout" (click)="logout()"></span></p>
+<div *ngIf="authService.isLogged && profile" class="profile-wrap">
+    <div class="dropdown">
+        <div class="dropdown-toggle" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <img class="profile-avatar" [src]="profile.avatar_url" alt="">
+            <span class="caret"></span>
         </div>
+        <ul class="dropdown-menu pull-right" aria-labelledby="profile-menu">
+            <li><a href="">{{ profile.name || profile.login }}</a></li>
+            <li><a href="" (click)="logout()">Logout</a></li>
+        </ul>
     </div>
 </div>

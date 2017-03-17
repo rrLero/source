@@ -1,17 +1,51 @@
-<auth-profile #profile></auth-profile>
-<controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>
-<search></search>
-
-<section>
-    <div [@posts]="post.state" *ngFor="let post of page.pagedItems">
-        <h3>
-            <a [routerLink]="[url, 'post', post.id]" (click)="savePage()">{{ post.title }}</a>
-        </h3>
-        <div>{{ post.date | slice:0:10 }}</div>
-        <div>tags: {{ post.tags }}</div>
-        <div>author: {{ post.author || 'user' }}</div>
-        <!-- <a [routerLink]="[url, 'post', post.id]">...read more</a> -->
+<div class="row">
+    <div class="col-md-8">
+        <article class="entry" [@posts]="post.state" *ngFor="let post of page.pagedItems">
+            <header>
+                <div class="entry-date icons">
+                    <i class="material-icons">access_time</i>
+                    <span>{{ post.date | date:'yMMMd' }}</span>
+                </div>
+                <h2 class="entry-title">
+                    <a [routerLink]="[url, 'post', post.id]" (click)="savePage()">
+                        {{ post.title }}
+                    </a>
+                </h2>
+            </header>
+            <!--<div class="entry-summary">-->
+                <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, animi asperiores consequuntur cum-->
+                    <!--ipsa ipsam modi necessitatibus perspiciatis quis quisquam recusandae repudiandae, rerum. Aliquid-->
+                    <!--atque fuga nostrum quas vel. Unde? Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad-->
+                    <!--deleniti dolorem facere illum in iste, odit officiis qui quis repellat similique vitae. Consequuntur-->
+                    <!--earum est inventore nostrum quisquam voluptas!</p>-->
+            <!--</div>-->
+            <footer class="entry-footer">
+                <ul class="entry-meta pull-left">
+                    <li class="entry-author icons">
+                        <i class="material-icons">person</i>
+                        <span>{{ post.author || 'user' }}</span>
+                    </li>
+                    <li class="entry-tags icons">
+                        <i class="material-icons">local_offer</i>
+                        <span>{{ post.tags }}</span>
+                    </li>
+                </ul>
+                <div class="entry-comment icons pull-right">
+                    <i class="material-icons">chat_bubble_outline</i>
+                    <span>Comments (0)</span>
+                </div>
+            </footer>
+        </article>
+        <pagination #page></pagination>
     </div>
-</section>
-
-<pagination #page></pagination>
+    <div class="col-md-4">
+        <div class="widget">
+            <h4>Actions</h4>
+            <auth-profile #profile></auth-profile>
+            <controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>
+        </div>
+        <div class="widget">
+            <search></search>
+        </div>
+    </div>
+</div>

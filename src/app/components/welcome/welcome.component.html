@@ -1,15 +1,15 @@
-<auth-profile #profile></auth-profile>
+<!--<auth-profile #profile></auth-profile>-->
 
-<button class="btn btn-primary" type="button" (click)="go()">Create Blog</button>
+<!--<button class="btn btn-primary" type="button" (click)="go()">Create Blog</button>-->
 
-<div *ngIf="profile.logged" class="own-blogs">
-    <h3>Your blogs:</h3>
-    <div *ngFor="let blog of blogs">
-        <h4 *ngIf="blog.name === profile.login.toLowerCase()" [@welcome]="blog.state">
-            <a [routerLink]="['/' + blog.name + '/' + blog.repo]">{{ blog.repo }}</a>
-        </h4>
-    </div>
-</div>
+<!--<div *ngIf="profile.logged" class="own-blogs">-->
+    <!--<h3>Your blogs:</h3>-->
+    <!--<div *ngFor="let blog of blogs">-->
+        <!--<h4 *ngIf="blog.name === profile.login.toLowerCase()" [@welcome]="blog.state">-->
+            <!--<a [routerLink]="['/' + blog.name + '/' + blog.repo]">{{ blog.repo }}</a>-->
+        <!--</h4>-->
+    <!--</div>-->
+<!--</div>-->
 
 <!-- <div class="wrap">
     <form [@welcome]="form.state" #form *ngIf="profile.logged" (submit)="go(profile.login, repoEl)" class="form-inline">
@@ -18,9 +18,17 @@
     </form>
 </div> -->
 
-<h3>All blogs:</h3>
-<section [@welcome]="blog.state" *ngFor="let blog of blogs">
-    <h4>
-        <a [routerLink]="['/' + blog.name + '/' + blog.repo]">{{ blog.name }} - {{  blog.repo }}</a>
-    </h4>
-</section>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="blog-list">
+            <h3 class="text-center">Blogs:</h3>
+            <ul class="blogs">
+                <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs" [routerLink]="['/' + blog.name + '/' + blog.repo]">
+                    <p class="blog-name">{{  blog.repo }}</p>
+                    <span class="blog-author">by {{ blog.name }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

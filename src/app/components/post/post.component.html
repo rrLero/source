@@ -1,13 +1,48 @@
 <auth-profile #profile></auth-profile>
 <controls *ngIf="profile.canEdit" [post]="post"></controls>
 
-<section *ngIf="post" [@post]="post.state">
-    <h2>{{ post.title }}</h2>
-    <div class="text" [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>
-    <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
+<div class="row" *ngIf="post" [@post]="post.state">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="entry-wrap">
+            <article class="entry">
+                <header>
+                    <h1 class="entry-title">{{ post.title }}</h1>
+                    <ul class="entry-meta">
+                        <li class="entry-author icons">
+                            <i class="material-icons">person</i>
+                            <span>{{ post.author || 'user' }}</span>
+                        </li>
+                        <li class="entry-date icons">
+                            <i class="material-icons">access_time</i>
+                            <span>{{ post.date | date:'yMMMd' }}</span>
+                        </li>
+                    </ul>
+                </header>
+                <div class="entry-content" [innerHTML]="post.text_full_strings | markdown | safeHtml"></div>
+                <footer class="entry-footer">
+                    <div class="entry-tags icons">
+                        <i class="material-icons">local_offer</i>
+                        <span>{{ post.tags }}</span>
+                    </div>
+                </footer>
+            </article>
 
-    <comments *ngIf="commentsStatus"  [logged]="profile.logged" [postId]="post.id"></comments>
-    
-    <button *ngIf="commentsStatus" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
-    <button *ngIf="!commentsStatus" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button>
-</section>
+            <comments *ngIf="commentsStatus"  [logged]="profile.logged" [postId]="post.id"></comments>
+
+            <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
+            <button *ngIf="commentsStatus" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
+            <button *ngIf="!commentsStatus" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button>
+        </div>
+    </div>
+</div>
+
+<!--<section *ngIf="post" [@post]="post.state">-->
+    <!--<h2>{{ post.title }}</h2>-->
+    <!--<div class="text" [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>-->
+    <!--<button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>-->
+
+    <!--<comments *ngIf="commentsStatus"  [logged]="profile.logged" [postId]="post.id"></comments>-->
+    <!---->
+    <!--<button *ngIf="commentsStatus" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>-->
+    <!--<button *ngIf="!commentsStatus" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button>-->
+<!--</section>-->

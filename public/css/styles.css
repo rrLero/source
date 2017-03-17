@@ -1,26 +1,48 @@
-html {
-    position: relative;
-    min-height: 100%;
-    margin-left: calc(100vw - 100%);
-    margin-right: 0;
+html, body {
+  height: 100%;
 }
+
 body {
-  background-color: #eee;
-  font: 1.25em/1.5 "Open Sans", Arial, sans-serif;
-  overflow-x: hidden;
+  font: 1.25em/1.5 'Lato', Arial, sans-serif;
+  font-weight: 300;
+  line-height: normal;
+  background: #eceff4;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.entry-content {
+
+}
+
+.entry-content ul, .entry-content ol {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #888;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
 }
 
 .cbalink {
-    display: none !important;
+  display: none !important;
 }
+
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
+
 a:active {
-    text-decoration: none;
+  text-decoration: none;
 }
+
 a:focus {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .add-comment .CodeMirror {
@@ -31,8 +53,143 @@ a:focus {
 .add-comment .CodeMirror-scroll {
   min-height: initial;
 }
+
 img {
-    display: block;
-    width: 100%;
-    max-width: 400px;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+}
+/* ---------------------------------------------------------  */
+/* ------------------------ Buttons ------------------------  */
+/* ---------------------------------------------------------  */
+.btn {
+  border-radius: 1.2em;
+}
+
+.btn-primary {
+  background: #039BE5;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #0288D1;
+}
+
+.btn-danger {
+  border: none;
+  background: #F44336;
+}
+
+.btn-danger {
+  background: #E53935;
+}
+
+.btn-default {
+  border: 1px solid #e3e3e3;
+}
+
+.btn-default:hover {
+  border: 1px solid #e3e3e3;
+  background: #F5F5F5;
+}
+/* ---------------------------------------------------------  */
+/* ------------------------- Input -------------------------  */
+/* ---------------------------------------------------------  */
+.form-control {
+  border: 1px solid #e3e3e3;
+  border-radius: 0;
+  padding: 10px 15px;
+  height: auto;
+}
+
+.form-control:focus {
+  border-color: #0288D1;
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------  */
+/* ------------------------ Spinner ------------------------  */
+/* ---------------------------------------------------------  */
+.spinner {
+  background-color: #ddd;
+  height: 32px;
+  left: 50%;
+  margin-left: -16px;
+  margin-top: -16px;
+  position: fixed;
+  width: 32px;
+  top: 50%;
+}
+.spinner [class^="spinner-square-"] {
+  background-color: #333;
+  height: 50%;
+  position: absolute;
+  width: 50%;
+}
+.spinner .spinner-square-1 {
+  animation: spin1 1s linear infinite;
+  left: 0;
+  top: 0;
+}
+.spinner .spinner-square-2 {
+  animation: spin1 1s linear infinite;
+  animation-delay: 0.25s;
+  right: 0;
+  top: 0;
+}
+.spinner .spinner-square-3 {
+  animation: spin1 1s linear infinite;
+  animation-delay: 0.75s;
+  bottom: 0;
+  left: 0;
+}
+.spinner .spinner-square-4 {
+  animation: spin1 1s linear infinite;
+  animation-delay: 0.5s;
+  bottom: 0;
+  right: 0;
+}
+@-moz-keyframes spin1 {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #333;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+@-webkit-keyframes spin1 {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #333;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+@-o-keyframes spin1 {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #333;
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+@keyframes spin1 {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #333;
+  }
+  100% {
+    background-color: transparent;
+  }
 }
