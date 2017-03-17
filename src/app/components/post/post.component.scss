@@ -3,33 +3,30 @@
   padding: 30px;
 }
 
-.entry {
+.entry h1 {
+  margin: 0 0 15px;
+}
 
-  h1 {
-    margin: 0 0 15px;
-  }
+.entry header {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+}
 
-  header {
-    border-bottom: 1px solid #eee;
-    margin-bottom: 20px;
-  }
+.entry .icons {
+  color: #aaa;
+}
 
-  .icons {
-    color: #aaa;
+.entry .icons span {
+  display: inline-block;
+  line-height: 24px;
+}
 
-    span {
-      display: inline-block;
-      line-height: 24px;
-    }
+.entry .icons span, .entry .icons i {
+  vertical-align: middle;
+}
 
-    span, i {
-      vertical-align: middle;
-    }
-
-    i {
-      margin-right: 5px;
-    }
-  }
+.entry .icons i {
+  margin-right: 5px;
 }
 
 .entry-meta {

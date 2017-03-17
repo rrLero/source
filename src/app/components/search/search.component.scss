@@ -1,28 +1,29 @@
 .search-result {
   margin-top: 15px;
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    li {
-      display: block;
-      padding: 6px 12px;
-      border-bottom: 1px dashed #ddd;
-      cursor: pointer;
-      font-size: 16px;
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      &:before {
-        content: 'keyboard_arrow_right';
-        margin-right: 8px;
-        font-family: 'Material Icons';
-        vertical-align: bottom;
-      }
-    }
-  }
 }
+
+.search-result ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.search-result ul li {
+  display: block;
+  padding: 6px 12px;
+  border-bottom: 1px dashed #ddd;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-result ul li:last-child {
+  border-bottom: none;
+}
+
+.search-result ul li:before {
+  content: 'keyboard_arrow_right';
+  margin-right: 8px;
+  font-family: 'Material Icons';
+  vertical-align: bottom;
+}
+

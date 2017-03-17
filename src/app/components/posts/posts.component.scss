@@ -1,37 +1,35 @@
 .entry, .widget {
   background: #fff;
-  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,.05);
-  -moz-box-shadow: 0 3px 5px rgba(0,0,0,.05);
-  box-shadow: 0 3px 5px rgba(0,0,0,.05);
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
   margin-bottom: 30px;
 }
 
 .entry {
   padding: 30px;
+}
 
-  .icons {
-    span {
-      display: inline-block;
-      line-height: 24px;
-    }
+.entry .icons span {
+  display: inline-block;
+  line-height: 24px;
+}
 
-    span, i {
-      vertical-align: middle;
-    }
+.entry .icons span, .entry .icons i {
+  vertical-align: middle;
+}
 
-    i {
-      margin-right: 5px;
-    }
-  }
+.entry .icons i {
+  margin-right: 5px;
 }
 
 .entry-date {
   color: #888;
   margin-bottom: 15px;
+}
 
-  span {
-    text-transform: uppercase;
-  }
+.entry-date span {
+  text-transform: uppercase;
 }
 
 .entry-title {
@@ -39,13 +37,14 @@
   line-height: 32px;
   margin: 0 0 15px;
   font-weight: 700;
+}
 
-  a {
-    color: #303136;
-    &:hover {
-      color: #039be5;
-    }
-  }
+.entry-title a {
+  color: #303136;
+}
+
+.entry-title a:hover {
+  color: #039be5;
 }
 
 .entry-summary p {
@@ -80,10 +79,10 @@
 
 .widget {
   padding: 20px;
+}
 
-  h4 {
-    margin: 0 0 15px;
-    font-weight: bold;
-    font-size: 20px;
-  }
+.widget h4 {
+  margin: 0 0 15px;
+  font-weight: bold;
+  font-size: 20px;
 }
