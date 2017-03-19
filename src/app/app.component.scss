@@ -1,6 +1,6 @@
 .wrapper {
   min-height: 100%;
-  padding-bottom: 55px;
+  padding-bottom: 64px;
 }
 
 .header {
@@ -30,14 +30,16 @@
 }
 
 .footer {
-  background: #181818;
   color: #fff;
   padding: 20px 0;
-  height: 55px;
-  margin-top: -55px;
+  height: 64px;
+  margin-top: -64px;
+  border-top: 1px solid #ddd;
 }
 
 .footer p {
   margin: 0;
   color: #888;
+  font-size: 14px;
+  text-align: center;
 }

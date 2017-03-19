@@ -22,7 +22,7 @@ p {
 .entry-content ul, .entry-content ol {
   font-size: 16px;
   line-height: 1.5;
-  color: #888;
+  color: #333;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -62,27 +62,24 @@ img {
 /* ---------------------------------------------------------  */
 /* ------------------------ Buttons ------------------------  */
 /* ---------------------------------------------------------  */
-.btn {
-  border-radius: 1.2em;
-}
 
-.btn-primary {
-  background: #039BE5;
-  border: none;
-}
+/*.btn-primary {*/
+  /*background: #039BE5;*/
+  /*border: none;*/
+/*}*/
 
-.btn-primary:hover {
-  background: #0288D1;
-}
+/*.btn-primary:hover {*/
+  /*background: #0288D1;*/
+/*}*/
 
-.btn-danger {
-  border: none;
-  background: #F44336;
-}
+/*.btn-danger {*/
+  /*border: none;*/
+  /*background: #F44336;*/
+/*}*/
 
-.btn-danger {
-  background: #E53935;
-}
+/*.btn-danger {*/
+  /*background: #E53935;*/
+/*}*/
 
 .btn-default {
   border: 1px solid #e3e3e3;
