@@ -44,7 +44,7 @@
             <!--<auth-profile #profile></auth-profile>-->
             <!--<controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>-->
             <a class="btn btn-primary" [routerLink]="[url, 'create']">Add post</a>
-            <button *ngIf="owner && owner.toLowerCase() === name"  class="btn btn-danger" (click)="deleteBlog()">Remove blog</button>
+            <button *ngIf="user && user.login.toLowerCase() === name"  class="btn btn-danger" (click)="deleteBlog()">Remove blog</button>
         </div>
         <div class="widget">
             <search></search>

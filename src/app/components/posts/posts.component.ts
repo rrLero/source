@@ -38,7 +38,7 @@ export class PostsComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     id = this.route.snapshot.params['id'];
     url = `/${this.name}/${this.repo}/`;
-    owner: string;
+    user: string;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -49,7 +49,7 @@ export class PostsComponent implements OnInit {
 
     ngOnInit() {
         this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
-        this.owner = this.userService.getUser().login;
+        this.user = this.userService.getUser();
     }
     savePage() {
         let page = this.location.path().split('/')[4];

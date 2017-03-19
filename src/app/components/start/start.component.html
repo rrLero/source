@@ -1,5 +1,3 @@
-<auth-profile #profile></auth-profile>
-
 <section [@start]="faq.state">
 
     <h4 >
@@ -12,10 +10,10 @@
         <li>активировать блог (ввести имя созданного репозитория в форму)</li>
     </ul>
 
-    <form #form (submit)="go(profile.login, repoEl)" class="form-inline">
-        <input [disabled]="!profile.logged" #repoEl type="text" class="form-control" placeholder="Repository name" required>
-        <button [disabled]="!profile.logged" class="btn btn-primary" type="submit">Activate Blog</button>
-        <span *ngIf="!profile.logged">Необходима авторизация</span>
+    <form #form (submit)="go(user.login, repoEl)" class="form-inline">
+        <input [disabled]="!user" #repoEl type="text" class="form-control" placeholder="Repository name" required>
+        <button [disabled]="!user" class="btn btn-primary" type="submit">Activate Blog</button>
+        <span *ngIf="!user">Необходима авторизация</span>
     </form>
 
     <hr>

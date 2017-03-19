@@ -1,5 +1,6 @@
 import {
     Component,
+    OnInit,
     trigger,
     state,
     style,
@@ -7,6 +8,8 @@ import {
     animate
 }                 from '@angular/core';
 import { Router } from '@angular/router';
+
+import { UserService } from '../../services/index';
 
 const faq = {
     friends: false,
@@ -31,9 +34,15 @@ const faq = {
         ])
     ]
 })
-export class StartComponent {
+export class StartComponent implements OnInit {
     faq: any = faq;
-    constructor(private router: Router) { }
+    user: any;
+    constructor(private router: Router,
+                private userService: UserService) { }
+
+    ngOnInit() {
+        this.user = this.userService.getUser();
+    }
 
     go(name, repo) {
         this.router.navigate([`${name}/${repo.value}`]);
