@@ -7,6 +7,7 @@ body {
   font-weight: 300;
   line-height: normal;
   background: #eceff4;
+  overflow-x: hidden;
 }
 
 p {

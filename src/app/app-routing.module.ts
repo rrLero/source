@@ -9,6 +9,7 @@ import { EditPostComponent }    from './components/index';
 import { NotFoundComponent }    from './components/index';
 import { AuthComponent }        from './components/index';
 import { StartComponent }        from './components/index';
+import { AccountComponent }        from './components/index';
 
 const routes: Routes = [
     {
@@ -18,6 +19,10 @@ const routes: Routes = [
     {
         path: 'start',
         component: StartComponent
+    },
+    {
+        path: 'account/:name',
+        component: AccountComponent
     },
     {
         path: ':name/:repo',

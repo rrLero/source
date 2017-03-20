@@ -14,6 +14,7 @@ import { CommentFormComponent }   from './comments/comment-form.component';
 import { PopupComponent }       from './popup/popup.component';
 import { ControlsComponent }       from './controls/controls.component';
 import { StartComponent }       from './start/start.component';
+import { AccountComponent }       from './account/account.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -23,6 +24,7 @@ export { EditPostComponent };
 export { NotFoundComponent };
 export { AuthComponent };
 export { StartComponent };
+export { AccountComponent };
 
 export const components = [
     WelcomeComponent,
@@ -40,5 +42,6 @@ export const components = [
     CommentFormComponent,
     PopupComponent,
     ControlsComponent,
-    StartComponent
+    StartComponent,
+    AccountComponent
 ];

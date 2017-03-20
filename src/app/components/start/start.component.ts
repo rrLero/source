@@ -45,6 +45,6 @@ export class StartComponent implements OnInit {
     }
 
     go(name, repo) {
-        this.router.navigate([`${name}/${repo.value}`]);
+        this.router.navigate([`${this.user.login}/${repo.value}`]);
     }
 }

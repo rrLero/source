@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Location }               from '@angular/common';
 
 import { HttpService, AuthService } from '../../services/index';
-import { UserService } from "../../services/user.service";
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'posts',
@@ -55,19 +55,18 @@ export class PostsComponent implements OnInit {
         let page = this.location.path().split('/')[4];
         localStorage.setItem('page', page);
     }
-
-    deleteBlog() {
-        this.hidden = false;
-        if (confirm('Remove blog?')) {
-            this.httpService
-                .deleteBlog(this.name, this.repo)
-                .then(() => {
-                    this.popupText = 'done!';
-                    setTimeout(() => this.hidden = true, 1500);
-                    setTimeout(() => this.router.navigate(['/']), 1800);
-                });
-        } else {
-            this.hidden = true;
-        }
-    }
+    // deleteBlog(name, repo) {
+    //     this.hidden = false;
+    //     if (confirm('Remove blog?')) {
+    //         this.httpService
+    //             .deleteBlog(name, repo)
+    //             .then(() => {
+    //                 this.popupText = 'done!';
+    //                 setTimeout(() => this.hidden = true, 1500);
+    //                 setTimeout(() => this.router.navigate(['/']), 1800);
+    //             });
+    //     } else {
+    //         this.hidden = true;
+    //     }
+    // }
 }

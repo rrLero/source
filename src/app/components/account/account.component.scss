@@ -1,0 +1,63 @@
+.entry {
+  min-height: 40vh;
+  background-color: #fff;
+  padding: 2em;
+}
+.profile {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid #e3e3e3;
+  display: inline-block;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+}
+.blog-list {
+  margin-bottom: 2em;
+  background: #fff;
+  padding: 30px 60px;
+}
+
+h3 {
+  margin: 1em 10% 0;
+  color: #000f62;
+}
+
+.blogs {
+  margin: 0;
+  padding: 0;
+}
+
+.blog {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 10px 20px;
+}
+
+.blog:not(:first-child) {
+  margin-top: -1px;
+}
+
+.blog-name {
+  min-width: 5em;
+  font-size: 24px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.5em;
+}
+form {
+  margin-top: 5em;
+}

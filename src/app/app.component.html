@@ -8,11 +8,11 @@
                     </h1>
                 </div>
                 <div class="col-md-9">
-                    <a href="" [routerLink]="['/start']" class="btn btn-primary pull-right create">Create blog</a>
+                    <a *ngIf="!authService.isLogged" href="" [routerLink]="['/start']" class="btn btn-primary pull-right create">Get started</a>
                     <div class="account pull-right" *ngIf="authService.isLogged">
                         <auth-profile #profile></auth-profile>
                     </div>
-                    <a *ngIf="!authService.isLogged" [href]="githubUrl" class="btn btn-default pull-right">Login</a>
+                    <a *ngIf="!authService.isLogged" [href]="githubUrl" class="btn btn-default pull-right" (click)="savePath()">Login</a>
                 </div>
             </div>
         </div>
