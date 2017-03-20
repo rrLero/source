@@ -19,6 +19,7 @@
             </div>
             <hr>
 
+            <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" class="btn btn-default update" (click)="toggleUpdateBtns()">{{ update ? 'Hide' : 'Update' }}</button>
             <h3>Blogs:</h3>
             <div class="blog-list">
                 <div class="blogs">
@@ -30,7 +31,7 @@
 
                             <!-- Blog controls -->
                             <div>
-                                <button type="button" (click)="updateBlog(blog.repo)">upd</button>
+                                <button type="button" (click)="updateBlog(blog.repo)" class="btn btn-success" [class.hidden]="!update">Update blog</button>
                                 <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-primary" [routerLink]="['/', blog.name, blog.repo, 'create']">Add post</a>
                                 <a [routerLink]="['/', blog.name, blog.repo]" class="btn btn-primary">Go to blog</a>
                                 <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="deleteBlog(blog.name, blog.repo, i)" class="btn btn-danger">Remove blog</button>

@@ -31,6 +31,7 @@ export class AccountComponent implements OnInit {
     user: any;
     blogs: any[];
     hidden = true;
+    update = false;
     popupText = 'deleting blog...';
     githubUrl = `https://github.com/`;
     name: string;
@@ -82,5 +83,8 @@ export class AccountComponent implements OnInit {
         } else {
             this.hidden = true;
         }
+    }
+    toggleUpdateBtns() {
+        this.update = !this.update;
     }
 }
