@@ -1,13 +1,12 @@
 .entry {
-  min-height: 50vh;
-  background-color: #fff;
   padding: 1em 2em;
   font-size: 1.25em;
+  background-color: #fff;
   word-wrap: break-word;
 }
 .title {
-  font-size: 1.3em;
   margin-bottom: 1.5em;
+  font-size: 1.3em;
 }
 form {
   margin-top: 2em;
@@ -23,7 +22,7 @@ span {
   color: #d53f17;
 }
 .panel-heading h4 {
-  cursor: pointer;
-  color: #888;
   font-size: 90%;
+  color: #888;
+  cursor: pointer;
 }

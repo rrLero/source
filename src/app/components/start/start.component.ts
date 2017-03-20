@@ -14,6 +14,7 @@ import { UserService } from '../../services/index';
 const faq = {
     capabilities: false,
     friends: false,
+    problems: false,
     github: false,
     comments: false
 };
