@@ -5,6 +5,7 @@ export class Post {
     date: string;
     tags: string[];
     title: string;
+    preview: string;
     text_full_strings: string;
     text_full_md: string;
     sha: string;
@@ -23,10 +24,11 @@ export class FullMd {
         tags: string,
         author: string,
         date: string,
+        preview: string,
         text: string) {
         fullMd = `
 ---
-layout:
+preview: ${preview}
 title: ${title}
 tags: ${tags}
 author: ${author}

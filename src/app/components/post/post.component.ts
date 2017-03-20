@@ -66,6 +66,7 @@ export class PostComponent implements OnInit {
             this.httpService.getPost(name, repo, title))
             .subscribe(post => {
                 this.post = post;
+                console.log(this.post);
             });
     }
     statusComments() {

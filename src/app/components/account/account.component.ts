@@ -53,6 +53,10 @@ export class AccountComponent implements OnInit {
     createBlog(name, repo) {
         this.router.navigate([`${name}/${repo.value}`]);
     }
+    updateBlog(repo) {
+        this.httpService.updateBlog(this.name, repo)
+        .subscribe(() => alert('done'));
+    }
     deleteBlog(name, repo, index) {
         this.hidden = false;
         if (confirm('Remove blog?')) {

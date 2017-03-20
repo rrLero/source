@@ -44,12 +44,13 @@ export class CreatePostComponent implements OnInit {
             filenameEl.value = filenameEl.value.replace(/\s+/g, '-');
         }
     }
-    create(filenameEl, titleEl, tagsEl, textEl) {
+    create(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         new FullMd(
             titleEl.value,
             tagsEl.value,
             this.author,
             this.datetime,
+            prevEl.value,
             textEl.value
         );
         new Post(
@@ -57,8 +58,8 @@ export class CreatePostComponent implements OnInit {
             fullMd.trim()
         );
     }
-    push(filenameEl, titleEl, tagsEl, textEl) {
-        this.create(filenameEl, titleEl, tagsEl, textEl);
+    push(filenameEl, titleEl, tagsEl, prevEl, textEl) {
+        this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
         this.hidden = false;
         this.httpService.create(this.name, this.repo, post)
         .then(() =>

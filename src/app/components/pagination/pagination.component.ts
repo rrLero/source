@@ -36,7 +36,6 @@ export class PaginationComponent implements OnInit {
                     this.posts = posts;
                     this.setPage();
                 }
-                // console.log(this.posts);
             });
     }
     setPage(page?): void {

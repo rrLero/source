@@ -37,9 +37,10 @@ export class EditPostComponent implements OnInit {
                 localStorage.setItem('text', this.post.text_full_strings);
             });
     }
-    save(titleEl, tagsEl, textEl): void {
+    save(titleEl, tagsEl, prevEl, textEl): void {
         this.post.title = titleEl.value;
         this.post.tags = tagsEl.value.split(',');
+        this.post.preview = prevEl.value;
         this.post.text_full_strings = textEl.value;
         this.hidden = !this.hidden;
         this.buildFullMd();
@@ -51,9 +52,10 @@ export class EditPostComponent implements OnInit {
             this.post.tags.join(', '),
             this.post.author,
             this.post.date,
+            this.post.preview,
             this.post.text_full_strings
         );
-        this.post.text_full_md = fullMd.trim();
+        this.post.text_full_md = fullMd;
     }
     update(): void {
         this.httpService.update(

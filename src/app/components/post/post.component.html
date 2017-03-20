@@ -16,6 +16,7 @@
                         </li>
                     </ul>
                 </header>
+                <div class="entry-content" [innerHTML]="post.preview | markdown | safeHtml"></div>
                 <div class="entry-content" [innerHTML]="post.text_full_strings | markdown | safeHtml"></div>
                 <footer class="entry-footer">
                     <div class="entry-tags icons">
@@ -26,7 +27,7 @@
             </article>
 
             <comments *ngIf="comments" [postId]="post.id"></comments>
-
+            <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
             <controls *ngIf="user && canEdit" [status]="comments" (comments)="commentsHandler($event)" [post]="post"></controls>
             <!-- <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
             <button *ngIf="comments" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>

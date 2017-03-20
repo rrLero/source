@@ -4,7 +4,7 @@
     <div class="col-md-10 col-md-offset-1">
         <div><b>Author:</b> {{ author }}</div>
         <div><b>Date:</b> {{ datetime }}</div>
-        <form (submit)="push(filename, title, tags, text)">
+        <form (submit)="push(filename, title, tags, preview, text)">
             <div class="form-group">
                 <label for="filename">Filename:</label>
                 <input #filename class="form-control" type="text" id="filename" placeholder="Filename" (change)="repalceSpace(filename)" required>
@@ -16,6 +16,10 @@
             <div class="form-group">
                 <label for="tags">Tags:</label>
                 <input #tags class="form-control" type="text" id="tags" placeholder="Tags" required>
+            </div>
+            <div class="form-group">
+                <label>Preview:</label>
+                <md-editor #preview></md-editor>
             </div>
             <div class="form-group">
                 <label>Text:</label>
