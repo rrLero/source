@@ -7,7 +7,7 @@
             <ul>
                 <li>быть пользователем <a href="https://github.com" target="_blank">GitHub</a></li>
                 <li>создать репозиторий на <a href="https://github.com/new" target="_blank">GitHub</a></li>
-                <li><a href="https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=http://acid.zzz.com.ua/auth">авторизироваться</a> на платформе</li>
+                <li><a href="https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=http://acid.zzz.com.ua/auth" (click)="savePath()">авторизироваться</a> на платформе</li>
                 <li>активировать блог (ввести имя созданного репозитория в форму)</li>
             </ul>
 
@@ -64,8 +64,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="panel panel-default">
                     <div class="panel-heading" (click)="faq.problems=!faq.problems">
                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
@@ -112,28 +110,12 @@
                                 <div class="panel-collapse collapse" [class.in]="faq.comments">
                                     <div class="panel-body">
                                         В форкнутом репозиторие нет возможности оставлять комментарии. <br> Необходимо использовать свой репозиторий
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="panel panel-default">
-                    <div class="panel-heading" (click)="faq.comments=!faq.comments">
-                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                            Недоступность комментариев
-                        </a></h4>
-                    </div>
-                    <div class="panel-collapse collapse" [class.in]="faq.comments">
-                        <div class="panel-body">
-                            В форкнутом репозиторие нет возможности оставлять комментарии. <br> Необходимо использовать свой репозиторий
-
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>

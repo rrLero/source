@@ -1,22 +1,24 @@
 <div #controls [@controls]="controls.state" class="controls">
 
     <a class="btn btn-primary" [routerLink]="[create]" [class.hidden]="post">Add post</a>
-    <a class="btn btn-primary" [class.hidden]="!post" [routerLink]="[edit]">Edit post</a>
 
-    <div class="[ form-group ]" [class.hidden]="!post">
-        <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" [checked]="status" (click)="check.checked ?  unLockComments() :lockComments()">
-        <div class="[ btn-group ]">
-            <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
-                <span class="[ glyphicon glyphicon-ok ]"></span>
-                <span> </span>
-            </label>
-            <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
-                Comments
-            </label>
+    <div class="post">
+        <div class="[ form-group ] text-center" [class.hidden]="!post">
+            <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" [checked]="status" (click)="check.checked ?  unLockComments() :lockComments()">
+            <div class="[ btn-group ]">
+                <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
+                    <span class="[ glyphicon glyphicon-ok ]"></span>
+                    <span> </span>
+                </label>
+                <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
+                    Comments
+                </label>
+            </div>
         </div>
-    </div>
 
-    <button class="btn btn-danger" [class.hidden]="!post" (click)="delete()">Remove post</button>
+        <a class="btn btn-primary" [class.hidden]="!post" [routerLink]="[edit]">Edit post</a>
+        <button class="btn btn-danger" [class.hidden]="!post" (click)="delete()">Remove post</button>
+    </div>
 
 </div>
 <popup [hidden]="hidden" [popupText]="popupText"></popup>

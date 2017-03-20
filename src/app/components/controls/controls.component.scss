@@ -1,10 +1,9 @@
 .controls {
   position: relative;
   z-index: 100;
-  min-height: 3em;
 }
-.form-group {
-  float: left;
+.post {
+  float: right;
 }
 .form-group input[type="checkbox"] {
     display: none;

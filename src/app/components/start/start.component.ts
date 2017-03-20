@@ -8,6 +8,7 @@ import {
     animate
 }                 from '@angular/core';
 import { Router } from '@angular/router';
+import { Location }  from '@angular/common';
 
 import { UserService } from '../../services/index';
 
@@ -40,6 +41,7 @@ export class StartComponent implements OnInit {
     faq: any = faq;
     user: any;
     constructor(private router: Router,
+                private location: Location,
                 private userService: UserService) { }
 
     ngOnInit() {
@@ -48,5 +50,8 @@ export class StartComponent implements OnInit {
 
     go(name, repo) {
         this.router.navigate([`${this.user.login}/${repo.value}`]);
+    }
+    savePath() {
+        localStorage.setItem('path', this.location.path());
     }
 }

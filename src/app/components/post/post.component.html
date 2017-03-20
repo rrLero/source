@@ -3,6 +3,7 @@
     <div class="col-md-10 col-md-offset-1">
         <div class="entry-wrap">
             <article class="entry">
+                <controls *ngIf="user && canEdit" [status]="comments" (comments)="commentsHandler($event)" [post]="post"></controls>
                 <header>
                     <h1 class="entry-title">{{ post.title }}</h1>
                     <ul class="entry-meta">
@@ -28,19 +29,6 @@
 
             <comments *ngIf="comments" [postId]="post.id"></comments>
             <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
-            <controls *ngIf="user && canEdit" [status]="comments" (comments)="commentsHandler($event)" [post]="post"></controls>
-            <!-- <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
-            <button *ngIf="comments" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
-            <button *ngIf="!comments" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button>
-            <button class="btn btn-primary" [routerLink]="[url, 'edit']">Edit post</button>
-            <button class="btn btn-danger" (click)="delete()">Remove post</button> -->
         </div>
     </div>
 </div>
-
-<!--<section *ngIf="post" [@post]="post.state">-->
-    <!--<h2>{{ post.title }}</h2>-->
-    <!--<div class="text" [innerHTML]="post.text_full_strings | markdown | safeHtml "></div>-->
-    <!--<button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>-->
-    <!--<comments *ngIf="comments" [logged]="profile.logged" [postId]="post.id" [login]="profile.login"></comments>-->
-<!--</section>-->
