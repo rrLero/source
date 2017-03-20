@@ -13,7 +13,7 @@ import { ActivatedRoute }           from '@angular/router';
 
 import { Comment }         from '../../shared/comment.model';
 import { CommentsService } from '../../services/index';
-import { AuthService } from '../../services/index';
+import { AuthService, UserService } from '../../services/index';
 
 @Component({
     selector: 'comments',
@@ -34,18 +34,20 @@ import { AuthService } from '../../services/index';
 })
 export class CommentsComponent implements OnInit {
     @Input() postId: string;
-    @Input() logged: string;
-    @Input() login: string;
+    // @Input() logged: string;
+    // @Input() login: string;
     onEdit = false;
     commentId: number;
     comments: Comment[] = [];
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = 'https://github.com/';
+    user: any;
     // access;
 
     constructor(private route: ActivatedRoute,
                 private authService: AuthService,
+                private userService: UserService,
                 private commentsService: CommentsService) { }
 
     ngOnInit() {
@@ -55,6 +57,7 @@ export class CommentsComponent implements OnInit {
                     this.comments = data;
                 }
             });
+        this.user = this.userService.getUser();
         // if (this.authService.isLogged) {
         //     this.authService.getProfile().subscribe(() => {
         //         const login = this.authService.loggedUser.login;

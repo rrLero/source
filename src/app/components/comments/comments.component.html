@@ -12,13 +12,13 @@
                     <h5 class="time">{{ comment.created_at | date:'y-MM-dd HH:mm' }}</h5>
 
                     <span
-                        *ngIf="login && comment.user === login || login && name === login.toLowerCase()"
+                        *ngIf="user && comment.user === user.login || user && name === user.login.toLowerCase()"
                         (click)="remove(comment)"
                         class="glyphicon glyphicon-trash delete"
                     ></span>
 
                     <span
-                        *ngIf="login && comment.user === login"
+                        *ngIf="user && comment.user === user.login"
                         (click)="edit(comment)"
                         class="glyphicon glyphicon-pencil delete"
                     ></span>
@@ -39,7 +39,7 @@
     </ul>
 
     <p *ngIf="!comments.length">No comments. You will be first.</p>
-    <p *ngIf="!logged">You must be logged in to post a comment.</p>
+    <p *ngIf="!user">You must be logged in to post a comment.</p>
 
     <comment-from (addComment)="addCommentHandler($event)" [postId]="postId"></comment-from>
 </div>

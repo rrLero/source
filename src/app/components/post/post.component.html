@@ -25,7 +25,7 @@
                 </footer>
             </article>
 
-            <comments *ngIf="comments"  [logged]="authService.isLogged" [postId]="post.id"></comments>
+            <comments *ngIf="comments" [postId]="post.id"></comments>
 
             <controls *ngIf="user && canEdit" [status]="comments" (comments)="commentsHandler($event)" [post]="post"></controls>
             <!-- <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
