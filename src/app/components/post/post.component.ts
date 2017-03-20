@@ -10,7 +10,7 @@ import {
 }                                 from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { HttpService, CommentsService, AuthService }            from '../../services/index';
+import { HttpService, CommentsService, AuthService, UserService }            from '../../services/index';
 import { Post }                   from '../../shared/post.model';
 
 @Component({
@@ -33,6 +33,7 @@ import { Post }                   from '../../shared/post.model';
 export class PostComponent implements OnInit {
     post: Post;
     comments: boolean;
+    user: any;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
@@ -45,12 +46,19 @@ export class PostComponent implements OnInit {
         private route: ActivatedRoute,
         private commentsService: CommentsService,
         private httpService: HttpService,
+        private userService: UserService,
         public authService: AuthService) {
     }
 
     ngOnInit(): void {
         this.getPost();
         this.statusComments();
+        this.user = this.userService.getUser();
+        if (this.user) {
+            this.userService.getPermission(this.name, this.repo, this.user.login)
+                .then(res => this.canEdit = res.access);
+        }
+
     }
     getPost() {
         this.route.params

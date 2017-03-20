@@ -1,6 +1,7 @@
 // import { Component, Input }       from '@angular/core';
 import {
     Component,
+    OnInit,
     Input,
     Output,
     EventEmitter,
@@ -32,12 +33,13 @@ import { Post }                   from '../../shared/post.model';
         ])
     ]
 })
-export class ControlsComponent {
+export class ControlsComponent implements OnInit {
     @Input() post: Post;
     @Input() owner: string;
     @Input() filename: string;
     @Input() status: boolean;
     @Output() comments = new EventEmitter();
+    user: any;
     hidden = true;
     popupText = 'deleting...';
     name = this.route.snapshot.params['name'];
@@ -51,6 +53,8 @@ export class ControlsComponent {
         private commentsService: CommentsService,
         private httpService: HttpService) {
     }
+
+    ngOnInit() { }
     unLockComments() {
         this.commentsService
             .unLockComments(this.name, this.repo, this.post.id)
@@ -78,18 +82,18 @@ export class ControlsComponent {
             this.hidden = true;
         }
     }
-    deleteBlog() {
-        this.hidden = false;
-        if (confirm('Remove blog?')) {
-            this.httpService
-            .deleteBlog(this.name, this.repo)
-            .then(() => {
-                this.popupText = 'done!';
-                setTimeout(() => this.hidden = true, 1500);
-                setTimeout(() => this.router.navigate(['/']), 1800);
-            });
-        } else {
-            this.hidden = true;
-        }
-    }
+    // deleteBlog() {
+    //     this.hidden = false;
+    //     if (confirm('Remove blog?')) {
+    //         this.httpService
+    //         .deleteBlog(this.name, this.repo)
+    //         .then(() => {
+    //             this.popupText = 'done!';
+    //             setTimeout(() => this.hidden = true, 1500);
+    //             setTimeout(() => this.router.navigate(['/']), 1800);
+    //         });
+    //     } else {
+    //         this.hidden = true;
+    //     }
+    // }
 }

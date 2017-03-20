@@ -1,7 +1,5 @@
-<!--<auth-profile #profile></auth-profile>-->
-<!--<controls *ngIf="profile.canEdit" [post]="post"></controls>-->
-
 <div class="row" *ngIf="post" [@post]="post.state">
+
     <div class="col-md-10 col-md-offset-1">
         <div class="entry-wrap">
             <article class="entry">
@@ -29,11 +27,12 @@
 
             <comments *ngIf="comments"  [logged]="authService.isLogged" [postId]="post.id"></comments>
 
-            <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
+            <controls *ngIf="user && canEdit" [status]="comments" (comments)="commentsHandler($event)" [post]="post"></controls>
+            <!-- <button class="btn btn-primary" type="button" (click)="goBack()">Go back</button>
             <button *ngIf="comments" class="btn btn-primary" type="button" (click)="lockComments()">Disable comments</button>
             <button *ngIf="!comments" class="btn btn-primary"  type="button" (click)="unLockComments()">Enable comments</button>
             <button class="btn btn-primary" [routerLink]="[url, 'edit']">Edit post</button>
-            <button class="btn btn-danger" (click)="delete()">Remove post</button>
+            <button class="btn btn-danger" (click)="delete()">Remove post</button> -->
         </div>
     </div>
 </div>

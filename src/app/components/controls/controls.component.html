@@ -1,7 +1,7 @@
-<div [@controls]="control.state" class="controls">
+<div #controls [@controls]="controls.state" class="controls">
 
-    <a #control class="btn btn-primary" [routerLink]="[create]" [class.hidden]="post">Add post</a>
-    <a #control class="btn btn-primary" [class.hidden]="!post" [routerLink]="[edit]">Edit post</a>
+    <a class="btn btn-primary" [routerLink]="[create]" [class.hidden]="post">Add post</a>
+    <a class="btn btn-primary" [class.hidden]="!post" [routerLink]="[edit]">Edit post</a>
 
     <div class="[ form-group ]" [class.hidden]="!post">
         <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" [checked]="status" (click)="check.checked ?  unLockComments() :lockComments()">
@@ -16,8 +16,7 @@
         </div>
     </div>
 
-    <button #control class="btn btn-danger" [class.hidden]="!post" (click)="delete()">Remove post</button>
-    <button #control *ngIf="owner && owner.toLowerCase() === name" class="btn btn-danger" [class.hidden]="post" (click)="deleteBlog()">Remove blog</button>
+    <button class="btn btn-danger" [class.hidden]="!post" (click)="delete()">Remove post</button>
 
 </div>
 <popup [hidden]="hidden" [popupText]="popupText"></popup>

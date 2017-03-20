@@ -1,5 +1,6 @@
 .controls {
-  float: right;
+  position: relative;
+  z-index: 100;
   min-height: 3em;
 }
 .form-group {

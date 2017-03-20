@@ -38,7 +38,8 @@ export class PostsComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     id = this.route.snapshot.params['id'];
     url = `/${this.name}/${this.repo}/`;
-    user: string;
+    canEdit = false;
+    user: any;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -50,6 +51,10 @@ export class PostsComponent implements OnInit {
     ngOnInit() {
         this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
         this.user = this.userService.getUser();
+        if (this.user) {
+            this.userService.getPermission(this.name, this.repo, this.user.login)
+                .then(res => this.canEdit = res.access);
+        }
     }
     savePage() {
         let page = this.location.path().split('/')[4];

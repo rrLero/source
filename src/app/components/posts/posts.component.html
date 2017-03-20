@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8">
-        <article class="entry" [@posts]="post.state" *ngFor="let post of page.pagedItems">
+        <article class="entry" *ngFor="let post of page.pagedItems" [@posts]="post.state">
             <header>
                 <div class="entry-date icons">
                     <i class="material-icons">access_time</i>
@@ -39,22 +39,23 @@
         <pagination #page></pagination>
     </div>
     <div class="col-md-4">
-        <div class="widget" *ngIf="authService.isLogged">
-            <h4>Actions</h4>
-            <!--<auth-profile #profile></auth-profile>-->
-            <!--<controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>-->
-            <a class="btn btn-primary" [routerLink]="[url, 'create']">Add post</a>
-            <!-- <button *ngIf="user && user.login.toLowerCase() === name"  class="btn btn-danger" (click)="deleteBlog()">Remove blog</button> -->
-        </div>
         <div class="widget">
             <search></search>
         </div>
+        <div class="widget" *ngIf="user && canEdit">
+            <h4>Actions</h4>
+            <!--<auth-profile #profile></auth-profile>-->
+            <!--<controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>-->
+            <!-- <a class="btn btn-primary" [routerLink]="[url, 'create']">Add post</a> -->
+            <controls ></controls>
+        </div>
+
     </div>
 </div>
 <popup [hidden]="hidden" [popupText]="popupText"></popup>
 
 <!--<auth-profile #profile></auth-profile>-->
-<!--<controls *ngIf="profile.canEdit" [owner]="profile.login" [post]="post"></controls>-->
+<!-- <controls *ngIf="profile.canEdit" [owner]="profile.login" [post]="post"></controls> -->
 <!--<search></search>-->
 
 <!--<section>-->
