@@ -1,5 +1,3 @@
-<!--<a *ngIf="!authService.isLogged" [href]="githubUrl" (click)="savePath()">Github login</a>-->
-
 <div *ngIf="authService.isLogged && profile" class="profile-wrap" (click)="getPath()">
     <div class="dropdown">
         <div class="dropdown-toggle" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -8,9 +6,7 @@
             <span class="caret"></span>
         </div>
         <ul class="dropdown-menu pull-right" aria-labelledby="profile-menu">
-            <li><a>{{ profile.name || profile.login }}</a></li>
-            <li *ngIf="path === 'account' && user.toLowerCase() !== profile.login.toLowerCase()"><a [href]="'/account/' + profile.login">Account link</a></li>
-            <li *ngIf="path !== 'account'"><a [routerLink]="['/account', profile.login]">Account router</a></li>
+            <li><a [routerLink]="['/account', profile.login]">Account</a></li>
             <li><a (click)="logout()">Logout</a></li>
         </ul>
     </div>

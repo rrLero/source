@@ -33,30 +33,38 @@ export class AccountComponent implements OnInit {
     hidden = true;
     popupText = 'deleting blog...';
     githubUrl = `https://github.com/`;
-    name = this.route.snapshot.params['name'];
+    name: string;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private httpService: HttpService,
-                private userService: UserService) { };
+                private userService: UserService) {
+    };
 
 
     ngOnInit() {
         this.user = this.userService.getUser();
+        this.route.params.forEach(param => {
+            this.name = param.name;
+        });
         this.getBlogs();
     }
+
     getBlogs() {
         this.httpService
             .getBlogs()
             .then(blogs => this.blogs = blogs);
     }
+
     createBlog(name, repo) {
         this.router.navigate([`${name}/${repo.value}`]);
     }
+
     updateBlog(repo) {
         this.httpService.updateBlog(this.name, repo)
-        .subscribe(() => alert('done'));
+            .subscribe(() => alert('done'));
     }
+
     deleteBlog(name, repo, index) {
         this.hidden = false;
         if (confirm('Remove blog?')) {
