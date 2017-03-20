@@ -1,94 +1,112 @@
-<section [@start]="faq.state">
+<section class="row" [@start]="faq.state">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="entry">
+            <h4 class="title">
+                Для того, что-бы начать пользоваться платформой, достатачно
+            </h4>
+            <ul>
+                <li>быть пользователем <a href="https://github.com" target="_blank">GitHub</a></li>
+                <li>создать репозиторий на <a href="https://github.com/new" target="_blank">GitHub</a></li>
+                <li><a href="https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=http://acid.zzz.com.ua/auth">авторизироваться</a> на платформе</li>
+                <li>активировать блог (ввести имя созданного репозитория в форму)</li>
+            </ul>
 
-    <h4 >
-        Для того, что-бы начать пользоваться платформой <b><i>itworks</i></b>, достатачно
-    </h4>
-    <ul>
-        <li>быть пользователем GitHub</li>
-        <li>создать репозиторий на GitHub</li>
-        <li>авторизироваться на платформе</li>
-        <li>активировать блог (ввести имя созданного репозитория в форму)</li>
-    </ul>
+            <form #form (submit)="go(user.login, repoEl)" class="form-inline">
+                <input [disabled]="!user" #repoEl type="text" class="form-control" placeholder="Repository name" required>
+                <button [disabled]="!user" class="btn btn-primary" type="submit">Activate Blog</button>
+                <span *ngIf="!user">Необходима авторизация</span>
+            </form>
 
-    <form #form (submit)="go(user.login, repoEl)" class="form-inline">
-        <input [disabled]="!user" #repoEl type="text" class="form-control" placeholder="Repository name" required>
-        <button [disabled]="!user" class="btn btn-primary" type="submit">Activate Blog</button>
-        <span *ngIf="!user">Необходима авторизация</span>
-    </form>
+            <p class="alert alert-info">
+                Для корректной работы блога, все изменения необходимо производить через интерфейс платформы
+            </p>
 
-    <hr>
-    <p class="alert alert-info">
-        Для корректной работы блога, все изменения необходимо производить через интерфейс платформы
-    </p>
+            <div class="panel-group" id="accordion1">
 
-    <div class="panel-group" id="accordion1">
-
-        <div class="panel panel-default">
-            <div class="panel-heading" (click)="faq.friends=!faq.friends">
-                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                    Как вести вести блог нескольким людям
-                </a></h4>
-            </div>
-            <div class="panel-collapse collapse" [class.in]="faq.friends">
-                <div class="panel-body">
-                    Чтобы блог могли вести одновременно несколько человек, то необходимо:
-                    <hr>
-                    <ul>
-
-                        <li>в своем репозитории зайти в настройки (<code>Settings</code>)</li>
-                        <li>выбрать пункт <code>Collaborators</code></li>
-                        <li>в поле ввести имя пользователя, которому предоставляется доступ</li>
-                        <li>нажать кнопку <code>Add collaborator</code></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading" (click)="faq.github=!faq.github">
-                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                    Проблемы с обновлением блога
-                </a></h4>
-            </div>
-            <div class="panel-collapse collapse" [class.in]="faq.github">
-                <div class="panel-body">
-                    Скорее всего Вы работаете с блогом минуя платформу. <br> Для корректной работы блога, все изменения необходимо производить через интерфейс платформы <br> Если у вас есть непреодолимое желание использовать интерфейс GitHub или <code>git push</code>,
-                    тогда необходимо:
-                    <hr>
-                    <ul>
-                        <li>или настроить webhook:
+                <div class="panel panel-default">
+                    <div class="panel-heading" (click)="faq.friends=!faq.friends">
+                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
+                            Возможности платформы
+                        </a></h4>
+                    </div>
+                    <div class="panel-collapse collapse" [class.in]="faq.friends">
+                        <div class="panel-body">
+                            Краткий перечень возможностей платформы:
+                            <hr>
                             <ul>
-
-                                <li>в своем репозитории зайти в настройки</li>
-                                <li>выбрать пункт add Webhooks</li>
-                                <li>в поле Payload url вставить http://gitblog.pythonanywhere.com/`git_username`/`git_repo_name`/api/web_hook, где git_username это имя вашего аккаунта GitHub, а git_repo_name - репозитория</li>
-                                <li>вcontent type выбрать application/json</li>
-                                <li>Just the push event и Active должны быть отмечены</li>
-                                <li>финальный аккорд - Add Webhook</li>
-                                <li>или обновлять блог с помощью кнопки Update</li>
+                                <li>создание / удаление блогов</li>
+                                <li>создание / редактирование/ удаление постов</li>
+                                <li>включение / отключение комментариев</li>
+                                <li>добавление / редактирование / удаление комментариев</li>
+                                <li>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" (click)="faq.capabilities=!faq.capabilities">
+                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
+                                            Коллективное ведение блога
+                                        </a></h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" [class.in]="faq.capabilities">
+                                            <div class="panel-body">
+                                                Чтобы один блог могли вести несколько человек, необходимо:
+                                                <hr>
+                                                <ul>
+                                                    <li>в своем репозитории зайти в настройки (<code>Settings</code>)</li>
+                                                    <li>выбрать пункт <code>Collaborators</code></li>
+                                                    <li>в поле ввести имя пользователя, которому предоставляется доступ</li>
+                                                    <li>нажать кнопку <code>Add collaborator</code></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
 
-                        </li>
-                        <li>или обновлять блог с помощью кнопки Update</li>
-                    </ul>
 
+                <div class="panel panel-default">
+                    <div class="panel-heading" (click)="faq.github=!faq.github">
+                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
+                            Проблемы с обновлением блога
+                        </a></h4>
+                    </div>
+                    <div class="panel-collapse collapse" [class.in]="faq.github">
+                        <div class="panel-body">
+                            Скорее всего Вы работаете с блогом минуя платформу. <br> Для корректной работы блога, все изменения необходимо производить через интерфейс платформы. <br> Если у Вас есть причины не использовать интерфейс платформы, тогда необходимо:
+                            <hr>
+                            <ul>
+                                <li>или настроить <code>webhook</code>:
+                                    <ul>
+                                        <li>в своем репозитории зайти в настройки</li>
+                                        <li>выбрать пункт <code>add Webhooks</code> </li>
+                                        <li>в поле <code> Payload url</code> вставить http://gitblog.pythonanywhere.com/<code>git_username</code>/<code>git_repo_name</code>/api/web_hook, где <code>git_username</code> это имя вашего аккаунта GitHub, а <code>git_repo_name</code>                                            - репозитория</li>
+                                        <li>в <code>content type</code> выбрать <code>application/json</code></li>
+                                        <li><code>Just the push event</code> и <code>Active</code> должны быть отмечены</li>
+                                        <li>финальный аккорд - <code>Add Webhook</code></li>
+                                    </ul>
+
+                                </li>
+                                <li>или обновлять блог с помощью кнопки <code>Update</code></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" (click)="faq.comments=!faq.comments">
+                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
+                            Недоступность комментариев
+                        </a></h4>
+                    </div>
+                    <div class="panel-collapse collapse" [class.in]="faq.comments">
+                        <div class="panel-body">
+                            В форкнутом репозиторие нет возможности оставлять комментарии. <br> Необходимо использовать свой репозиторий
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading" (click)="faq.comments=!faq.comments">
-                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                    Почему недоступны комментарии
-                </a></h4>
-            </div>
-            <div class="panel-collapse collapse" [class.in]="faq.comments">
-                <div class="panel-body">
-                    В форкнутом репозиторие нет возможности оставлять комментарии. <br> Необходимо использовать свой репозиторий
-
-                </div>
-            </div>
-        </div>
-
     </div>
 </section>

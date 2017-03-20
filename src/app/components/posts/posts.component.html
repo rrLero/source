@@ -13,7 +13,7 @@
                 </h2>
             </header>
             <div class="entry-summary">
-                <p [innerHTML]="post.preview"></p>
+                <p [innerHTML]="post.preview | markdown | safeHtml"></p>
             </div>
             <footer class="entry-footer">
                 <ul class="entry-meta pull-left">

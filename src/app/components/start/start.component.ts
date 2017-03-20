@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/index';
 
 const faq = {
+    capabilities: false,
     friends: false,
     github: false,
     comments: false
