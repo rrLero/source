@@ -21,6 +21,10 @@ const routes: Routes = [
         component: StartComponent
     },
     {
+        path: 'auth',
+        component: AuthComponent
+    },
+    {
         path: ':name',
         component: AccountComponent
     },
@@ -43,10 +47,6 @@ const routes: Routes = [
     {
         path: ':name/:repo/create',
         component: CreatePostComponent
-    },
-    {
-        path: 'auth',
-        component: AuthComponent
     },
     { path: '', redirectTo: '/welcome', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }
