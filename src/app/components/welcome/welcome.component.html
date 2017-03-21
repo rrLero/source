@@ -5,7 +5,7 @@
             <ul class="blogs">
                 <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs" [routerLink]="['/', blog.name, blog.repo]">
                     <p class="blog-name">{{  blog.repo }}</p>
-                    <a [routerLink]="['/account', blog.name]" class="blog-author">by {{ blog.name }}</a>
+                    <a [routerLink]="['/', blog.name]" class="blog-author">by {{ blog.name }}</a>
                 </li>
             </ul>
         </div>

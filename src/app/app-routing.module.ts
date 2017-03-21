@@ -8,8 +8,8 @@ import { CreatePostComponent }  from './components/index';
 import { EditPostComponent }    from './components/index';
 import { NotFoundComponent }    from './components/index';
 import { AuthComponent }        from './components/index';
-import { StartComponent }        from './components/index';
-import { AccountComponent }        from './components/index';
+import { StartComponent }       from './components/index';
+import { AccountComponent }     from './components/index';
 
 const routes: Routes = [
     {
@@ -21,7 +21,7 @@ const routes: Routes = [
         component: StartComponent
     },
     {
-        path: 'account/:name',
+        path: ':name',
         component: AccountComponent
     },
     {
