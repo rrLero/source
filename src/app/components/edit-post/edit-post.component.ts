@@ -12,7 +12,7 @@ import { Post, FullMd, fullMd }   from '../../shared/post.model';
 export class EditPostComponent implements OnInit {
     post: Post;
     hidden = true;
-    popupText = 'updating...';
+    popupText = 'Updating...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
@@ -30,17 +30,12 @@ export class EditPostComponent implements OnInit {
         this.route.params
         .switchMap(({ name, repo, title }) =>
             this.httpService.getPost(name, repo, title))
-            .subscribe(post => {
-                this.post = post;
-                localStorage.setItem('title', this.post.title);
-                localStorage.setItem('tags', JSON.stringify(this.post.tags));
-                localStorage.setItem('text', this.post.text_full_strings);
-            });
+            .subscribe(post => this.post = post);
     }
-    save(titleEl, tagsEl, prevEl, textEl): void {
+    save(titleEl, tagsEl, previewEl, textEl): void {
         this.post.title = titleEl.value;
         this.post.tags = tagsEl.value.split(',');
-        this.post.preview = prevEl.value;
+        this.post.preview = previewEl.value;
         this.post.text_full_strings = textEl.value;
         this.hidden = !this.hidden;
         this.buildFullMd();
@@ -55,7 +50,7 @@ export class EditPostComponent implements OnInit {
             this.post.preview,
             this.post.text_full_strings
         );
-        this.post.text_full_md = fullMd;
+        this.post.text_full_md = fullMd.trim();
     }
     update(): void {
         this.httpService.update(
@@ -67,27 +62,19 @@ export class EditPostComponent implements OnInit {
             .then(() =>
                 this.httpService.updateBlog(this.name, this.repo)
                 .subscribe(() => {
-                    this.popupText = 'done!';
+                    this.popupText = 'Done!';
                     setTimeout(() => this.hidden = true, 1500);
                     setTimeout(() => this.goBack(), 1800);
                 })
             );
     }
-    cancel(textEl): void {
-        let title = localStorage.getItem('title');
-        let tags = JSON.parse(localStorage.getItem('tags'));
-        let text = localStorage.getItem('text');
-        this.post.title = title;
-        this.post.tags = tags;
-        textEl.setValue(text.trim());
-    }
-    clearLocalStorage() {
-        localStorage.removeItem('title');
-        localStorage.removeItem('tags');
-        localStorage.removeItem('text');
+    cancel(titleEl, tagsEl, textEl, previewEl): void {
+        titleEl.value = this.post.title;
+        tagsEl.value = this.post.tags;
+        previewEl.setValue(this.post.preview);
+        textEl.setValue(this.post.text_full_strings.trim());
     }
     goBack(): void {
-        this.clearLocalStorage();
         this.router.navigate([this.url]);
         // this.location.back();
     }

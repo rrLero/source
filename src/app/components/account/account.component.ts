@@ -32,7 +32,9 @@ export class AccountComponent implements OnInit {
     blogs: any[];
     hidden = true;
     update = false;
-    popupText = 'deleting blog...';
+    confirm = true;
+    deletedBlog: any = {};
+    popupText = 'Remove blog?';
     githubUrl = `https://github.com/`;
     name: string;
 
@@ -65,21 +67,27 @@ export class AccountComponent implements OnInit {
         this.httpService.updateBlog(this.name, repo)
             .subscribe(() => alert('done'));
     }
-
-    deleteBlog(name, repo, index) {
+    prepareDelete(name, repo, index) {
         this.hidden = false;
-        if (confirm('Remove blog?')) {
-            if (confirm('Are you sure?')) {
-                this.httpService
-                    .deleteBlog(name, repo)
-                    .then(() => {
+        this.deletedBlog.name = name;
+        this.deletedBlog.repo = repo;
+        this.deletedBlog.index = index;
+    }
+    deleteBlog(name, repo, index) {
+        this.popupText = 'Deleting...';
+        this.httpService
+            .deleteBlog(name, repo)
+            .then(() =>
+                this.httpService.updateBlog(name, repo)
+                    .subscribe(() => {
                         this.blogs.splice(index, 1);
-                        this.popupText = 'done!';
+                        this.popupText = 'Done!';
                         setTimeout(() => this.hidden = true, 1500);
-                    });
-            } else {
-                this.hidden = true;
-            }
+                    }));
+    }
+    popupHandler(confirm) {
+        if (confirm) {
+            this.deleteBlog(this.deletedBlog.name, this.deletedBlog.repo, this.deletedBlog.index);
         } else {
             this.hidden = true;
         }

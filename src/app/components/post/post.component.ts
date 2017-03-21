@@ -34,21 +34,18 @@ export class PostComponent implements OnInit {
     post: Post;
     comments: boolean;
     user: any;
+    canEdit = false;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
-    canEdit = false;
     url = `/${this.name}/${this.repo}/post/${this.title}`;
-    hidden = true;
-    popupText = 'deleting...';
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private commentsService: CommentsService,
-        private httpService: HttpService,
-        private userService: UserService,
-        public authService: AuthService) {
-    }
+
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private commentsService: CommentsService,
+                private httpService: HttpService,
+                private userService: UserService,
+                public authService: AuthService) { }
 
     ngOnInit(): void {
         this.getPost();
@@ -58,7 +55,6 @@ export class PostComponent implements OnInit {
             this.userService.getPermission(this.name, this.repo, this.user.login)
                 .then(res => this.canEdit = res.access);
         }
-
     }
     getPost() {
         this.route.params
@@ -66,7 +62,7 @@ export class PostComponent implements OnInit {
             this.httpService.getPost(name, repo, title))
             .subscribe(post => {
                 this.post = post;
-                console.log(this.post);
+                // console.log(this.post);
             });
     }
     statusComments() {
@@ -82,23 +78,5 @@ export class PostComponent implements OnInit {
         this.router.navigate([`/${this.name}/${this.repo}/page/${loadPage}`]);
         localStorage.removeItem('page');
         // this.location.back();
-    }
-
-    delete() {
-        this.hidden = false;
-        if (confirm('delete post?')) {
-            this.httpService
-                .delete(this.name, this.repo, this.post.id, this.post.sha)
-                .then(() =>
-                    this.httpService.updateBlog(this.name, this.repo)
-                        .subscribe(() => {
-                            this.popupText = 'done!';
-                            setTimeout(() => this.hidden = true, 1500);
-                            setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
-                        })
-                );
-        } else {
-            this.hidden = true;
-        }
     }
 }

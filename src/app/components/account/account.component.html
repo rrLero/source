@@ -34,7 +34,7 @@
                                 <button type="button" (click)="updateBlog(blog.repo)" class="btn btn-success" [class.hidden]="!update">Update blog</button>
                                 <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-primary" [routerLink]="['/', blog.name, blog.repo, 'create']">Add post</a>
                                 <a [routerLink]="['/', blog.name, blog.repo]" class="btn btn-primary">Go to blog</a>
-                                <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="deleteBlog(blog.name, blog.repo, i)" class="btn btn-danger">Remove blog</button>
+                                <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="prepareDelete(blog.name, blog.repo, i)" class="btn btn-danger">Remove blog</button>
                             </div>
                         </div>
 
@@ -51,4 +51,4 @@
     </div>
 </div>
 
-<popup [hidden]="hidden" [popupText]="popupText"></popup>
+<popup (answer)="popupHandler($event)" [hidden]="hidden" [popupText]="popupText" [confirm]="confirm"></popup>

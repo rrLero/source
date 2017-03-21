@@ -15,7 +15,7 @@ export class CreatePostComponent implements OnInit {
     author: string;
     datetime: string;
     hidden = true;
-    popupText = 'creating...';
+    popupText = 'Creating...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
@@ -65,7 +65,7 @@ export class CreatePostComponent implements OnInit {
         .then(() =>
             this.httpService.updateBlog(this.name, this.repo)
             .subscribe(() => {
-                this.popupText = 'done!';
+                this.popupText = 'Done!';
                 setTimeout(() => this.hidden = true, 1500);
                 setTimeout(() => this.router.navigate([this.url]), 1800);
             })

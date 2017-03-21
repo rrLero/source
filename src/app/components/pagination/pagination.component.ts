@@ -14,6 +14,7 @@ export class PaginationComponent implements OnInit {
     posts: Post[];
     pager: any = {};
     pagedItems: any[];
+    empty: boolean;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = this.route.snapshot.params['id'];
@@ -32,9 +33,11 @@ export class PaginationComponent implements OnInit {
     getPosts(): void {
         this.httpService.getPosts(this.name, this.repo)
             .then(posts => {
-                if (posts) {
+                if (posts instanceof Array) {
                     this.posts = posts;
                     this.setPage();
+                } else {
+                    this.empty = true;
                 }
             });
     }

@@ -1,9 +1,14 @@
-.absolute {
-  position: absolute;
-  top: 20%;
-    left: 50%;
-    transform: translate(-50%);
-  //   right: 0;
-  //   bottom: 0;
-  //   margin: auto;
+.popup {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: 25em;
+  z-index: 500;
+}
+.btn {
+  min-width: 6em;
+}
+.btn-danger {
+  float: left;
 }

@@ -1,20 +1,14 @@
-<!-- <div [class.hidden]="hidden" class="popup" [innerHTML]="popupText"></div> -->
-<!-- Modal -->
-<!-- <div id="myModal" class="modal" role="dialog" [class.hidden]="!hidden" > -->
-  <div class="modal-dialog absolute"  [class.hidden]="hidden">
-    <!-- Modal content-->
+<div class="modal-dialog popup" [class.hidden]="hidden">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p [innerHTML]="popupText">Some text in the modal.</p>
-      </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div> -->
+        <div class="modal-header ">
+            <h4 class="modal-title text-center">Blog platform</h4>
+        </div>
+        <div class="modal-body">
+            <p [innerHTML]="popupComments || popupText" class="text-center"></p>
+        </div>
+        <div *ngIf="confirm" class="modal-footer text-center">
+            <button (click)="remove()" type="button" class="btn btn-danger">Remove</button>
+            <button (click)="cancel()" type="button" class="btn btn-primary">Cancel</button>
+        </div>
     </div>
-
-  </div>
-<!-- </div> -->
+</div>

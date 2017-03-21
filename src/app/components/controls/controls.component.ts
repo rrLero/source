@@ -35,13 +35,13 @@ import { Post }                   from '../../shared/post.model';
 })
 export class ControlsComponent implements OnInit {
     @Input() post: Post;
-    @Input() owner: string;
-    @Input() filename: string;
     @Input() status: boolean;
     @Output() comments = new EventEmitter();
     user: any;
     hidden = true;
-    popupText = 'deleting...';
+    confirm = true;
+    popupText = 'Remove post?';
+    popupComments: string;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
@@ -55,45 +55,52 @@ export class ControlsComponent implements OnInit {
     }
 
     ngOnInit() { }
+
     unLockComments() {
+        this.togglePopup();
+        this.popupComments = 'Enabling...';
         this.commentsService
             .unLockComments(this.name, this.repo, this.post.id)
-            .then(() => this.comments.emit(true));
+            .then(() => {
+                this.popupComments = 'Done!';
+                setTimeout(() => this.togglePopup(), 1500);
+                setTimeout(() => this.comments.emit(true), 1800);
+            });
     }
     lockComments() {
+        this.togglePopup();
+        this.popupComments = 'Disabling...';
         this.commentsService
             .lockComments(this.name, this.repo, this.post.id)
-            .then(() => this.comments.emit(false));
+            .then(() => {
+                this.popupComments = 'Done!';
+                setTimeout(() => this.togglePopup(), 1500);
+                setTimeout(() => this.comments.emit(false), 1800);
+            });
     }
     delete() {
-        this.hidden = false;
-        if (confirm('delete post?')) {
-            this.httpService
+        this.popupText = 'Deleting...';
+        this.httpService
             .delete(this.name, this.repo, this.post.id, this.post.sha)
             .then(() =>
                 this.httpService.updateBlog(this.name, this.repo)
-                .subscribe(() => {
-                    this.popupText = 'done!';
-                    setTimeout(() => this.hidden = true, 1500);
-                    setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
-                })
+                    .subscribe(() => {
+                        this.popupText = 'Done!';
+                        setTimeout(() => this.hidden = true, 1500);
+                        setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
+                    })
             );
+    }
+    popupHandler(confirm) {
+        if (confirm) {
+            this.delete();
         } else {
             this.hidden = true;
         }
     }
-    // deleteBlog() {
-    //     this.hidden = false;
-    //     if (confirm('Remove blog?')) {
-    //         this.httpService
-    //         .deleteBlog(this.name, this.repo)
-    //         .then(() => {
-    //             this.popupText = 'done!';
-    //             setTimeout(() => this.hidden = true, 1500);
-    //             setTimeout(() => this.router.navigate(['/']), 1800);
-    //         });
-    //     } else {
-    //         this.hidden = true;
-    //     }
-    // }
+    togglePopup() {
+        this.confirm = !this.confirm;
+        this.hidden = !this.hidden;
+        this.popupComments = '';
+    }
 }

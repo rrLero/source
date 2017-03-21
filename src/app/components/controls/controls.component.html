@@ -17,8 +17,8 @@
         </div>
 
         <a class="btn btn-primary" [class.hidden]="!post" [routerLink]="[edit]">Edit post</a>
-        <button class="btn btn-danger" [class.hidden]="!post" (click)="delete()">Remove post</button>
+        <button class="btn btn-danger" [class.hidden]="!post" (click)="hidden = false">Remove post</button>
     </div>
 
 </div>
-<popup [hidden]="hidden" [popupText]="popupText"></popup>
+<popup (answer)="popupHandler($event)" [hidden]="hidden" [popupText]="popupText" [popupComments]="popupComments" [confirm]="confirm"></popup>

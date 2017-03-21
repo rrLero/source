@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'popup',
@@ -7,5 +7,15 @@ import { Component, Input } from '@angular/core';
 })
 export class PopupComponent {
     @Input() hidden: boolean;
+    @Input() confirm: boolean;
     @Input() popupText: string;
+    @Input() popupComments: string;
+    @Output() answer = new EventEmitter();
+
+    remove() {
+        this.answer.emit(true);
+    }
+    cancel() {
+        this.answer.emit(false);
+    }
 }
