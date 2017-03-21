@@ -36,34 +36,12 @@
         <pagination #page></pagination>
     </div>
     <div class="col-md-4">
-        <div class="widget">
+        <div *ngIf="page.pagedItems" class="widget">
             <search></search>
         </div>
         <div class="widget" *ngIf="user && canEdit">
             <h4>Actions</h4>
             <controls></controls>
-            <!--<auth-profile #profile></auth-profile>-->
-            <!--<controls *ngIf="profile.canEdit" [owner]="profile.login"></controls>-->
-            <!-- <a class="btn btn-primary" [routerLink]="[url, 'create']">Add post</a> -->
         </div>
     </div>
 </div>
-<!-- <popup [hidden]="!hidden" [popupText]="popupText"></popup> -->
-
-<!--<auth-profile #profile></auth-profile>-->
-<!-- <controls *ngIf="profile.canEdit" [owner]="profile.login" [post]="post"></controls> -->
-<!--<search></search>-->
-
-<!--<section>-->
-    <!--<div [@posts]="post.state" *ngFor="let post of page.pagedItems">-->
-        <!--<h3>-->
-            <!--<a [routerLink]="[url, 'post', post.id]" (click)="savePage()">{{ post.title }}</a>-->
-        <!--</h3>-->
-        <!--<div>{{ post.date | slice:0:10 }}</div>-->
-        <!--<div>tags: {{ post.tags }}</div>-->
-        <!--<div>author: {{ post.author || 'user' }}</div>-->
-        <!--&lt;!&ndash; <a [routerLink]="[url, 'post', post.id]">...read more</a> &ndash;&gt;-->
-    <!--</div>-->
-<!--</section>-->
-
-<!--<pagination #page></pagination>-->

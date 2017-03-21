@@ -35,6 +35,7 @@ export class PostComponent implements OnInit {
     comments: boolean;
     user: any;
     canEdit = false;
+    controls = false;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
@@ -64,6 +65,9 @@ export class PostComponent implements OnInit {
                 this.post = post;
                 // console.log(this.post);
             });
+    }
+    toggleControls() {
+        this.controls = !this.controls;
     }
     statusComments() {
         this.commentsService

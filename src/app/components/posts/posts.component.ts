@@ -60,18 +60,4 @@ export class PostsComponent implements OnInit {
         let page = this.location.path().split('/')[4];
         localStorage.setItem('page', page);
     }
-    // deleteBlog(name, repo) {
-    //     this.hidden = false;
-    //     if (confirm('Remove blog?')) {
-    //         this.httpService
-    //             .deleteBlog(name, repo)
-    //             .then(() => {
-    //                 this.popupText = 'done!';
-    //                 setTimeout(() => this.hidden = true, 1500);
-    //                 setTimeout(() => this.router.navigate(['/']), 1800);
-    //             });
-    //     } else {
-    //         this.hidden = true;
-    //     }
-    // }
 }

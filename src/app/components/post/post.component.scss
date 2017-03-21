@@ -18,6 +18,9 @@
 .entry .icons {
   color: #aaa;
 }
+.entry-controls {
+  cursor: pointer;
+}
 
 .entry .icons span {
   display: inline-block;
@@ -52,4 +55,7 @@
   border-top: 1px solid #eee;
   padding-top: 20px;
   margin-top: 30px;
+}
+.go-back {
+  margin-top: 1em;
 }
