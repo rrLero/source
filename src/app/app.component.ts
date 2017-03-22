@@ -43,11 +43,11 @@ export class AppComponent implements OnInit {
             })
             .filter(route => route.outlet === 'primary')
             .mergeMap(route => route.params)
-            .subscribe((event) => {
+            .subscribe(event => {
                 this.name = event['name'];
                 this.repo = event['repo'];
                 this.titleService.setTitle(
-                    this.repo && `${this.name} : ${this.repo}`
+                    this.repo && `${this.name} :: ${this.repo}`
                     || this.name
                     || 'Blog Platform'
                 );

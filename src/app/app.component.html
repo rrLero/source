@@ -9,7 +9,8 @@
                 </div>
                 <div class="col-md-4">
                     <div *ngIf="repo" class="blog-info">
-                        <span class="blog-name">{{ repo }}</span><br> by <span class="blog-author">{{ name }}</span>
+                        <a [routerLink]="[name, repo]" class="blog-name">{{ repo }}</a><br>
+                        by <a [routerLink]="[name]" class="blog-author">{{ name }}</a>
                     </div>
                 </div>
                 <div class="col-md-3">
