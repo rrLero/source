@@ -9,6 +9,8 @@ export class Post {
     text_full_strings: string;
     text_full_md: string;
     sha: string;
+    comments_status: boolean;
+    comments: number;
     constructor(filename: string, text_full_md: string) {
         post = {
             filename: filename,

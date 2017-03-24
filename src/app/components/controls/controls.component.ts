@@ -47,11 +47,11 @@ export class ControlsComponent implements OnInit {
     title = this.route.snapshot.params['title'];
     create = `/${this.name}/${this.repo}/create`;
     edit = `/${this.name}/${this.repo}/post/${this.title}/edit`;
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private commentsService: CommentsService,
-        private httpService: HttpService) {
+
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private commentsService: CommentsService,
+                private httpService: HttpService) {
     }
 
     ngOnInit() { }
@@ -61,22 +61,29 @@ export class ControlsComponent implements OnInit {
         this.popupComments = 'Enabling...';
         this.commentsService
             .unLockComments(this.name, this.repo, this.post.id)
-            .then(() => {
-                this.popupComments = 'Done!';
-                setTimeout(() => this.togglePopup(), 1500);
-                setTimeout(() => this.comments.emit(true), 1800);
-            });
+            .then(() =>
+                this.httpService.updateBlog(this.name, this.repo)
+                    .subscribe(() => {
+                        this.popupComments = 'Done!';
+                        setTimeout(() => this.togglePopup(), 1500);
+                        setTimeout(() => this.comments.emit(true), 1800);
+                    })
+            );
+
     }
     lockComments() {
         this.togglePopup();
         this.popupComments = 'Disabling...';
         this.commentsService
             .lockComments(this.name, this.repo, this.post.id)
-            .then(() => {
-                this.popupComments = 'Done!';
-                setTimeout(() => this.togglePopup(), 1500);
-                setTimeout(() => this.comments.emit(false), 1800);
-            });
+            .then(() =>
+                this.httpService.updateBlog(this.name, this.repo)
+                    .subscribe(() => {
+                        this.popupComments = 'Done!';
+                        setTimeout(() => this.togglePopup(), 1500);
+                        setTimeout(() => this.comments.emit(true), 1800);
+                    })
+            );
     }
     delete() {
         this.popupText = 'Deleting...';

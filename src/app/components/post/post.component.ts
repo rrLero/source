@@ -2,6 +2,7 @@
 import {
     Component,
     OnInit,
+    OnDestroy,
     trigger,
     state,
     style,
@@ -30,7 +31,7 @@ import { Post }                   from '../../shared/post.model';
         ])
     ]
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
     post: Post;
     comments: boolean;
     user: any;
@@ -50,12 +51,17 @@ export class PostComponent implements OnInit {
 
     ngOnInit(): void {
         this.getPost();
-        this.statusComments();
+        // this.statusComments();
         this.user = this.userService.getUser();
         if (this.user) {
             this.userService.getPermission(this.name, this.repo, this.user.login)
                 .then(res => this.canEdit = res.access);
         }
+    }
+    ngOnDestroy() {
+        console.log('destroy');
+        // this.httpService.updateBlog(this.name, this.repo)
+        // .subscribe(() => console.log(true));
     }
     getPost() {
         this.route.params
@@ -63,17 +69,18 @@ export class PostComponent implements OnInit {
             this.httpService.getPost(name, repo, title))
             .subscribe(post => {
                 this.post = post;
-                // console.log(this.post);
+                this.comments = this.post.comments_status;
+                console.log(this.post);
             });
     }
     toggleControls() {
         this.controls = !this.controls;
     }
-    statusComments() {
-        this.commentsService
-            .getCommentsStatus(this.name, this.repo, this.title)
-            .then(res => this.comments = res.status );
-    }
+    // statusComments() {
+    //     this.commentsService
+    //         .getCommentsStatus(this.name, this.repo, this.title)
+    //         .then(res => this.comments = res.status );
+    // }
     commentsHandler(status) {
         this.comments = status;
     }
