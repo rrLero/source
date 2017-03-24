@@ -81,7 +81,7 @@ export class ControlsComponent implements OnInit {
                     .subscribe(() => {
                         this.popupComments = 'Done!';
                         setTimeout(() => this.togglePopup(), 1500);
-                        setTimeout(() => this.comments.emit(true), 1800);
+                        setTimeout(() => this.comments.emit(false), 1800);
                     })
             );
     }
