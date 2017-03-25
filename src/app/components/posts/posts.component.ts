@@ -44,7 +44,7 @@ export class PostsComponent implements OnInit {
         }
     }
     savePage() {
-        let page = this.location.path().split('/')[4];
+        let page = this.location.path().split('/')[4] || '1';
         localStorage.setItem('page', page);
     }
 }

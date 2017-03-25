@@ -26,6 +26,7 @@ export class AccountComponent implements OnInit {
     hidden = true;
     update = false;
     confirm = true;
+    noUser = true;
     deletedBlog: any = {};
     popupText = 'Remove blog?';
     githubUrl = `https://github.com/`;
@@ -37,19 +38,25 @@ export class AccountComponent implements OnInit {
                 private userService: UserService) {
     };
 
-
     ngOnInit() {
         this.user = this.userService.getUser();
         this.route.params.forEach(param => {
             this.name = param.name;
+            this.getBlogs();
         });
-        this.getBlogs();
     }
 
     getBlogs() {
         this.httpService
             .getBlogs()
-            .then(blogs => this.blogs = blogs);
+            .then(blogs => {
+                this.blogs = blogs;
+                this.blogs.forEach(item => {
+                    if (item.name === this.name.toLowerCase()) {
+                        this.noUser = false;
+                    }
+                });
+            });
     }
 
     createBlog(name, repo) {

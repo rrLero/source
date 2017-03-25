@@ -3,7 +3,7 @@ import { PagerService }    from './pager.service';
 import { SearchService }   from './search.service';
 import { AuthService }     from './auth.service';
 import { CommentsService } from './comments.service';
-import { UserService } from './user.service';
+import { UserService }     from './user.service';
 
 export { HttpService };
 export { PagerService };

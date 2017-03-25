@@ -2,51 +2,53 @@
     <div class="col-md-8 col-md-offset-2">
 
         <div class="entry">
-            <!-- Profile -->
-            <div class="profile text-center" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
-                <img class="profile-avatar" [src]="user.avatar_url" alt="">
-                <div>{{ user.name || user.login }}</div>
-            </div>
-            <div *ngIf="user && user.login.toLowerCase() !== name.toLowerCase() || !user" class="profile text-center">{{ name }}</div>
-
-
-
-            <!-- GitHub info -->
-            <div class="info text-center">
-                <a class="btn btn-default controls" [href]="githubUrl + name" target="_blank">GitHub account</a><br>
-                <a class="btn btn-default controls" [href]="githubUrl + name + '?tab=repositories'" target="_blank">GitHub repositories</a><br>
-                <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-default controls" [href]="githubUrl + 'new'" target="_blank">Create repository</a>
-            </div>
-            <hr>
-
-            <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" class="btn btn-default update" (click)="toggleUpdateBtns()">{{ update ? 'Hide' : 'Update' }}</button>
-            <h3>Blogs:</h3>
-            <div class="blog-list">
-                <div class="blogs">
-                    <div *ngFor="let blog of blogs; let i=index">
-
-                        <!-- Blog -->
-                        <div *ngIf="blog.name === name.toLowerCase()" class="blog">
-                            <a [routerLink]="['/', blog.name, blog.repo]" class="blog-name">{{ blog.repo }}</a>
-
-                            <!-- Blog controls -->
-                            <div>
-                                <button type="button" (click)="updateBlog(blog.repo)" class="btn btn-success" [class.hidden]="!update">Update blog</button>
-                                <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-primary" [routerLink]="['/', blog.name, blog.repo, 'create']">Add post</a>
-                                <a [routerLink]="['/', blog.name, blog.repo]" class="btn btn-primary">Go to blog</a>
-                                <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="prepareDelete(blog.name, blog.repo, i)" class="btn btn-danger">Remove blog</button>
-                            </div>
-                        </div>
-
-                    </div>
+            <h3 *ngIf="noUser" class="text-center">No user</h3>
+            <div *ngIf="!noUser">
+                <!-- Profile -->
+                <div class="profile text-center" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
+                    <img class="profile-avatar" [src]="user.avatar_url" alt="">
+                    <div>{{ user.name || user.login }}</div>
                 </div>
-                <!-- Activate blog -->
-                <form (submit)="createBlog(user.login, repoEl)" class="form-inline text-center" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
-                    <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
-                    <button class="btn btn-primary" type="submit">Activate blog</button>
-                </form>
-            </div>
+                <div *ngIf="user && user.login.toLowerCase() !== name.toLowerCase() || !user" class="profile text-center">{{ name }}</div>
 
+
+
+                <!-- GitHub info -->
+                <div class="info text-center">
+                    <a class="btn btn-default controls" [href]="githubUrl + name" target="_blank">GitHub account</a><br>
+                    <a class="btn btn-default controls" [href]="githubUrl + name + '?tab=repositories'" target="_blank">GitHub repositories</a><br>
+                    <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-default controls" [href]="githubUrl + 'new'" target="_blank">Create repository</a>
+                </div>
+                <hr>
+
+                <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" class="btn btn-default update" (click)="toggleUpdateBtns()">{{ update ? 'Hide' : 'Update' }}</button>
+                <h3>Blogs:</h3>
+                <div class="blog-list">
+                    <div class="blogs">
+                        <div *ngFor="let blog of blogs; let i=index">
+
+                            <!-- Blog -->
+                            <div *ngIf="blog.name === name.toLowerCase()" class="blog">
+                                <a [routerLink]="['/', blog.name, blog.repo]" class="blog-name">{{ blog.repo }}</a>
+
+                                <!-- Blog controls -->
+                                <div>
+                                    <button type="button" (click)="updateBlog(blog.repo)" class="btn btn-success" [class.hidden]="!update">Update blog</button>
+                                    <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-primary" [routerLink]="['/', blog.name, blog.repo, 'create']">Add post</a>
+                                    <a [routerLink]="['/', blog.name, blog.repo]" class="btn btn-primary">Go to blog</a>
+                                    <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="prepareDelete(blog.name, blog.repo, i)" class="btn btn-danger">Remove blog</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Activate blog -->
+                    <form (submit)="createBlog(user.login, repoEl)" class="form-inline text-center" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
+                        <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
+                        <button class="btn btn-primary" type="submit">Activate blog</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

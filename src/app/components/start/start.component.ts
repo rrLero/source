@@ -44,6 +44,11 @@ export class StartComponent implements OnInit {
     go(name, repo) {
         this.router.navigate([`${this.user.login}/${repo.value}`]);
     }
+    // createBlog(repo) {
+    //     this.httpService
+    //         .createBlog(this.user.login, repo)
+    //         .subscribe(() => this.router.navigate([`${this.user.login}/${repo.value}`]))
+    // }
     savePath() {
         localStorage.setItem('path', this.location.path());
     }

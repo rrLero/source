@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy }               from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, CommentsService, AuthService, UserService } from '../../services/index';
-import { Post }                                                   from '../../shared/post.model';
+import { HttpService, CommentsService, UserService }  from '../../services/index';
+import { Post }                                       from '../../shared/post.model';
 
 @Component({
     selector: 'post',
@@ -37,42 +37,34 @@ export class PostComponent implements OnInit, OnDestroy {
                 private route: ActivatedRoute,
                 private commentsService: CommentsService,
                 private httpService: HttpService,
-                private userService: UserService,
-                public authService: AuthService) { }
+                private userService: UserService) { }
 
     ngOnInit(): void {
         this.getPost();
-        // this.statusComments();
         this.user = this.userService.getUser();
         if (this.user) {
             this.userService.getPermission(this.name, this.repo, this.user.login)
                 .then(res => this.canEdit = res.access);
         }
     }
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         console.log('destroy');
         // this.httpService.updateBlog(this.name, this.repo)
         // .subscribe(() => console.log(true));
     }
-    getPost() {
+    getPost(): void {
         this.route.params
         .switchMap(({ name, repo, title }) =>
             this.httpService.getPost(name, repo, title))
             .subscribe(post => {
                 this.post = post;
                 this.comments = this.post.comments_status;
-                console.log(this.post);
             });
     }
-    toggleControls() {
+    toggleControls(): void {
         this.controls = !this.controls;
     }
-    // statusComments() {
-    //     this.commentsService
-    //         .getCommentsStatus(this.name, this.repo, this.title)
-    //         .then(res => this.comments = res.status );
-    // }
-    commentsHandler(status) {
+    commentsHandler(status): void {
         this.comments = status;
     }
     goBack(): void {

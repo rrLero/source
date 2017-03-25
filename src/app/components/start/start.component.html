@@ -9,6 +9,7 @@
                 <li><a href="https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=http://acid.zzz.com.ua/auth" (click)="savePath()">авторизироваться</a> на платформе</li>
                 <li>создать <a href="https://github.com/new" target="_blank">репозиторий</a></li>
                 <li>активировать блог (ввести имя созданного репозитория в форму)</li>
+                <!-- <li>активировать блог (будет создан репозиторий)</li> -->
             </ul>
 
             <form #form (submit)="go(user.login, repoEl)" class="form-inline">
@@ -16,6 +17,12 @@
                 <button [disabled]="!user" class="btn btn-primary" type="submit">Activate Blog</button>
                 <span *ngIf="!user">Необходима авторизация</span>
             </form>
+
+            <!-- <form #form (submit)="createBlog(repoEl)" class="form-inline">
+                <input [disabled]="!user" #repoEl type="text" class="form-control" placeholder="Repository name" required>
+                <button [disabled]="!user" class="btn btn-primary" type="submit">Activate Blog</button>
+                <span *ngIf="!user">Необходима авторизация</span>
+            </form> -->
 
             <p class="alert alert-info">
                 Для корректной работы блога, все изменения необходимо производить через интерфейс платформы
