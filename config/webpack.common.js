@@ -61,7 +61,7 @@ module.exports = {
             name: ['app', 'vendor', 'polyfills']
         }),
         new webpack.ContextReplacementPlugin(
-            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            /angular(\\|\/)core(\\|\/)@angular/,
             helpers.root(), {}
         ),
         new HtmlWebpackPlugin({

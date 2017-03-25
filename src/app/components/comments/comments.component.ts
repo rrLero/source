@@ -1,19 +1,9 @@
-// import { Component, OnInit, Input } from '@angular/core';
-import {
-    Component,
-    Input,
-    OnInit,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-}                                 from '@angular/core';
-import { ActivatedRoute }           from '@angular/router';
+import { Component, OnInit, Input }                   from '@angular/core';
+import { ActivatedRoute }                             from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { Comment }         from '../../shared/comment.model';
-import { CommentsService } from '../../services/index';
-import { AuthService, UserService } from '../../services/index';
+import { AuthService, UserService, CommentsService }  from '../../services/index';
+import { Comment }                                    from '../../shared/comment.model';
 
 @Component({
     selector: 'comments',

@@ -1,15 +1,6 @@
-// import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {
-    Component,
-    OnInit,
-    Input, Output, EventEmitter,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-}                          from '@angular/core';
-import { ActivatedRoute }  from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute }                                 from '@angular/router';
+import { trigger, state, style, transition, animate }     from '@angular/animations';
 
 import { AuthService }     from '../../services/index';
 import { CommentsService } from '../../services/index';

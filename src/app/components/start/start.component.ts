@@ -1,14 +1,7 @@
-import {
-    Component,
-    OnInit,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-}                 from '@angular/core';
-import { Router } from '@angular/router';
-import { Location }  from '@angular/common';
+import { Component, OnInit }                          from '@angular/core';
+import { Router }                                     from '@angular/router';
+import { Location }                                   from '@angular/common';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { UserService } from '../../services/index';
 

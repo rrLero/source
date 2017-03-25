@@ -1,18 +1,9 @@
-// import { Component, OnInit }      from '@angular/core';
-import {
-    Component,
-    OnInit,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-}                                 from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Component, OnInit }                          from '@angular/core';
+import { Router, ActivatedRoute }                     from '@angular/router';
+import { Location }                                   from '@angular/common';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, AuthService } from '../../services/index';
-import { UserService } from '../../services/user.service';
+import { HttpService, AuthService, UserService }      from '../../services/index';
 
 @Component({
     selector: 'posts',

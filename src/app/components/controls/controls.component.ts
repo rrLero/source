@@ -1,20 +1,9 @@
-// import { Component, Input }       from '@angular/core';
-import {
-    Component,
-    OnInit,
-    Input,
-    Output,
-    EventEmitter,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-}                                 from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute }                         from '@angular/router';
+import { trigger, state, style, transition, animate }     from '@angular/animations';
 
-import { HttpService, CommentsService }            from '../../services/index';
-import { Post }                   from '../../shared/post.model';
+import { HttpService, CommentsService } from '../../services/index';
+import { Post }                         from '../../shared/post.model';
 
 @Component({
     selector: 'controls',

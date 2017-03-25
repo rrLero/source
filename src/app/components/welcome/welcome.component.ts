@@ -1,16 +1,8 @@
-// import { Component, OnInit } from '@angular/core';
-import {
-    Component,
-    OnInit,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-}                            from '@angular/core';
-import { Router }            from '@angular/router';
+import { Component, OnInit }                          from '@angular/core';
+import { Router }                                     from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService }       from '../../services/index';
+import { HttpService } from '../../services/index';
 
 @Component({
     selector: 'welcome',
@@ -44,8 +36,4 @@ export class WelcomeComponent implements OnInit {
                 this.blogs = blogs;
             });
     }
-    // go() {
-    //     this.router.navigate(['/start']);
-    //     // this.router.navigate([`${name}/${repo.value}`]);
-    // }
 }

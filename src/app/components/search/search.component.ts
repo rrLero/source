@@ -1,19 +1,11 @@
-// import { Component, OnInit }      from '@angular/core';
-import {
-    Component,
-    OnInit,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-}                                 from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable }             from 'rxjs/Observable';
-import { Subject }                from 'rxjs/Subject';
+import { Component, OnInit }                          from '@angular/core';
+import { Router, ActivatedRoute }                     from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Observable }                                 from 'rxjs/Observable';
+import { Subject }                                    from 'rxjs/Subject';
 
-import { SearchService }          from '../../services/index';
-import { Post }                   from '../../shared/post.model';
+import { SearchService } from '../../services/index';
+import { Post }          from '../../shared/post.model';
 
 @Component({
     selector: 'search',

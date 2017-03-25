@@ -4,16 +4,26 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackChunkHash = require('webpack-chunk-hash');
-const helpers = require('./helpers');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
+const helpers = require('./helpers');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
+
+// commonConfig.entry.app = './src/app/main.aot';
+// commonConfig.module.rules.push({
+//     test: /\.ts$/,
+//     use: '@ngtools/webpack'
+// });
 
 commonConfig.entry.app = './src/app/main.aot';
 commonConfig.module.rules.push({
     test: /\.ts$/,
-    use: '@ngtools/webpack'
+    use: [
+        'awesome-typescript-loader',
+        'angular2-router-loader',
+        'angular2-template-loader'
+    ]
 });
 
 module.exports = webpackMerge(commonConfig, {
@@ -26,10 +36,10 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     plugins: [
-        new ngToolsWebpack.AotPlugin({
-            tsConfigPath: './tsconfig.json',
-            entryModule: helpers.root('src') + '/app/app.module#AppModule',
-        }),
+        // new ngToolsWebpack.AotPlugin({
+        //     tsConfigPath: './tsconfig.json',
+        //     entryModule: helpers.root('src') + '/app/app.module#AppModule',
+        // }),
         new webpack.LoaderOptionsPlugin({
             minimize: false,
             debug: false

@@ -16,6 +16,7 @@ export class AuthProfileComponent implements OnInit {
     url = `/${this.name}/${this.repo}/`;
     canEdit: boolean = false;
     logged: boolean = false;
+    dropdown = false;
     path: string;
     user: string;
     login: string;

@@ -1,13 +1,6 @@
-import {
-    Component,
-    OnInit,
-    trigger,
-    state,
-    style,
-    transition,
-    animate
-}                                   from '@angular/core';
-import { Router, ActivatedRoute }   from '@angular/router';
+import { Component, OnInit }                          from '@angular/core';
+import { Router, ActivatedRoute }                     from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { HttpService, UserService } from '../../services/index';
 
