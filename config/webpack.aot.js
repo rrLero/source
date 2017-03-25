@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const ngToolsWebpack = require('@ngtools/webpack');
+const aotLoader = require('@ultimate/aot-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -10,22 +10,10 @@ const helpers = require('./helpers');
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
-// commonConfig.entry.app = './src/app/main.aot';
-// commonConfig.module.rules.push({
-//     test: /\.ts$/,
-//     use: '@ngtools/webpack'
-// });
-
-commonConfig.entry.app = './src/app/main.aot';
 commonConfig.module.rules.push({
     test: /\.ts$/,
-    use: [
-        'awesome-typescript-loader',
-        'angular2-router-loader',
-        'angular2-template-loader'
-    ]
+    loaders: ['@ultimate/aot-loader']
 });
-
 module.exports = webpackMerge(commonConfig, {
     devtool: 'source-map',
 
@@ -36,10 +24,10 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     plugins: [
-        // new ngToolsWebpack.AotPlugin({
-        //     tsConfigPath: './tsconfig.json',
-        //     entryModule: helpers.root('src') + '/app/app.module#AppModule',
-        // }),
+        new aotLoader.AotPlugin({
+            entryModule: './src/app/app.module#AppModule',
+            tsConfig: './tsconfig.json'
+        }),
         new webpack.LoaderOptionsPlugin({
             minimize: false,
             debug: false

@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "start": "webpack-dev-server --progress",
-    "build-aot": "rm -rf dist && ngc && webpack --config config/webpack.aot.js && rm -rf lib && rm -rf src/app/ngfactory"
+    "build-aot": "rm -rf dist && webpack --config config/webpack.aot.js"
   },
   "dependencies": {
     "@angular/animations": "^4.0.0",
@@ -27,8 +27,8 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "^4.0.0",
-    "@ngtools/webpack": "^1.2.10",
     "@types/node": "^6.0.58",
+    "@ultimate/aot-loader": "^0.1.15",
     "angular2-router-loader": "^0.3.5",
     "angular2-template-loader": "^0.6.0",
     "autoprefixer": "^6.4.1",

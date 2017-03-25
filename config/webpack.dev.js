@@ -7,7 +7,6 @@ const helpers = require('./helpers');
 
 const ENV = process.env.ENV = process.env.NODE_ENV = 'dev';
 
-commonConfig.entry.app = './src/app/main';
 commonConfig.module.rules.push({
     test: /\.ts$/,
     use: [
@@ -16,7 +15,6 @@ commonConfig.module.rules.push({
         'angular2-template-loader'
     ]
 });
-
 module.exports = webpackMerge(commonConfig, {
     // devtool: 'cheap-module-source-map',
     devtool: 'eval-source-map',

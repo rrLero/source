@@ -11,17 +11,11 @@
             "es2015",
             "dom"
         ],
-        "outDir": "lib",
         "skipLibCheck": true,
         "rootDir": "."
     },
     "exclude": [
-        "node_modules",
-        "src/app/main.aot.ts"
-
+        "node_modules"
     ],
-    "compileOnSave": false,
-    "angularCompilerOptions": {
-        "genDir": "./src/app/ngfactory"
-    }
+    "compileOnSave": false
 }

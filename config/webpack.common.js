@@ -6,7 +6,8 @@ const helpers = require('./helpers');
 module.exports = {
     entry: {
         polyfills: './src/app/polyfills',
-        vendor: './src/app/vendor'
+        vendor: './src/app/vendor',
+        app: './src/app/main'
     },
 
     resolve: {
