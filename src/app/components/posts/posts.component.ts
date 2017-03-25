@@ -3,7 +3,7 @@ import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, AuthService, UserService }      from '../../services/index';
+import { HttpService, UserService } from '../../services/index';
 
 @Component({
     selector: 'posts',
@@ -23,27 +23,23 @@ import { HttpService, AuthService, UserService }      from '../../services/index
     ]
 })
 export class PostsComponent implements OnInit {
-    hidden = true;
-    popupText = 'deleting...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = this.route.snapshot.params['id'];
     url = `/${this.name}/${this.repo}/`;
     canEdit = false;
     user: any;
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private location: Location,
-        private httpService: HttpService,
-        public authService: AuthService,
-        private userService: UserService) { };
+    constructor(private router: Router,
+                private location: Location,
+                private route: ActivatedRoute,
+                private httpService: HttpService,
+                private userService: UserService) { };
 
     ngOnInit() {
-        this.router.navigate([`${this.name}/${this.repo}/page/${this.id || 1}`]);
         this.user = this.userService.getUser();
         if (this.user) {
-            this.userService.getPermission(this.name, this.repo, this.user.login)
+            this.userService
+                .getPermission(this.name, this.repo, this.user.login)
                 .then(res => this.canEdit = res.access);
         }
     }

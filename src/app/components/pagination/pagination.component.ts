@@ -44,7 +44,7 @@ export class PaginationComponent implements OnInit {
     setPage(page?): void {
         if (!page) {
             let path = this.location.path().split('/');
-            page = parseFloat(path[4]);
+            page = parseFloat(path[4]) || 1;
         }
         if (this.posts) {
             this.pager = this.pagerService.getPager(this.posts.length, page);
