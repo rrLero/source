@@ -25,7 +25,7 @@ import { Post }                                       from '../../shared/post.mo
 export class PostComponent implements OnInit, OnDestroy {
     post: Post;
     user: any;
-    comments: boolean;
+    commentsStatus: boolean;
     commentsAmount: number;
     canEdit = false;
     controls = false;
@@ -61,7 +61,7 @@ export class PostComponent implements OnInit, OnDestroy {
             this.httpService.getPost(name, repo, title))
             .subscribe(post => {
                 this.post = post;
-                this.comments = this.post.comments_status;
+                this.commentsStatus = this.post.comments_status;
                 this.commentsAmount = this.post.comments;
             });
     }
@@ -69,8 +69,11 @@ export class PostComponent implements OnInit, OnDestroy {
         this.controls = !this.controls;
     }
     commentsHandler(data): void {
-        this.comments = data;
-        this.commentsAmount = data;
+        if (typeof data === 'boolean') {
+            this.commentsStatus = data;
+        } else if (typeof data === 'number') {
+            this.commentsAmount = data;
+        }
     }
     goBack(): void {
         let loadPage = localStorage.getItem('page') ? localStorage.getItem('page') : 1;
