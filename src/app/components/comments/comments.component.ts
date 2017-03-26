@@ -1,4 +1,4 @@
-import { Component, OnInit, Input }                   from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter }                   from '@angular/core';
 import { ActivatedRoute }                             from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
@@ -24,8 +24,7 @@ import { Comment }                                    from '../../shared/comment
 })
 export class CommentsComponent implements OnInit {
     @Input() postId: string;
-    // @Input() logged: string;
-    // @Input() login: string;
+    @Output() commentsAmount = new EventEmitter();
     onEdit = false;
     commentId: number;
     comments: Comment[] = [];
@@ -64,6 +63,7 @@ export class CommentsComponent implements OnInit {
             .then(() => {
                 const index = this.comments.indexOf(comment);
                 this.comments.splice(index, 1);
+                this.commentsAmount.emit(this.comments.length);
             });
     }
     edit(comment) {
@@ -72,6 +72,7 @@ export class CommentsComponent implements OnInit {
     }
     addCommentHandler(data) {
         this.comments.push(data);
+        this.commentsAmount.emit(this.comments.length);
     }
     editCommentHandler(data, comment) {
         this.onEdit = !this.onEdit;

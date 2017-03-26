@@ -24,8 +24,9 @@ import { Post }                                       from '../../shared/post.mo
 })
 export class PostComponent implements OnInit, OnDestroy {
     post: Post;
-    comments: boolean;
     user: any;
+    comments: boolean;
+    commentsAmount: number;
     canEdit = false;
     controls = false;
     name = this.route.snapshot.params['name'];
@@ -48,9 +49,11 @@ export class PostComponent implements OnInit, OnDestroy {
         }
     }
     ngOnDestroy(): void {
-        console.log('destroy');
-        // this.httpService.updateBlog(this.name, this.repo)
-        // .subscribe(() => console.log(true));
+        if (this.post.comments !== this.commentsAmount) {
+            this.httpService
+                .updateBlog(this.name, this.repo)
+                .subscribe();
+        }
     }
     getPost(): void {
         this.route.params
@@ -59,13 +62,15 @@ export class PostComponent implements OnInit, OnDestroy {
             .subscribe(post => {
                 this.post = post;
                 this.comments = this.post.comments_status;
+                this.commentsAmount = this.post.comments;
             });
     }
     toggleControls(): void {
         this.controls = !this.controls;
     }
-    commentsHandler(status): void {
-        this.comments = status;
+    commentsHandler(data): void {
+        this.comments = data;
+        this.commentsAmount = data;
     }
     goBack(): void {
         let loadPage = localStorage.getItem('page') ? localStorage.getItem('page') : 1;
