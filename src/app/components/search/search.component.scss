@@ -1,11 +1,17 @@
 .search-result {
+  position: absolute;
+  left: 0;
+  width: 100%;
   margin-top: 15px;
+  z-index: 1000;
+  background-color: #fff;
 }
 
 .search-result ul {
   margin: 0;
   padding: 0;
   list-style: none;
+  box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.7);
 }
 
 .search-result ul li {
@@ -14,6 +20,13 @@
   border-bottom: 1px dashed #ddd;
   cursor: pointer;
   font-size: 16px;
+  &:hover {
+    background-color: #337ab7;
+    color: #fff;
+  }
+  &:last-child {
+    padding-bottom: 12px;
+  }
 }
 
 .search-result ul li:last-child {
@@ -26,4 +39,3 @@
   font-family: 'Material Icons';
   vertical-align: bottom;
 }
-

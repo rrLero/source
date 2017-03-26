@@ -33,10 +33,10 @@
 
                                 <!-- Blog controls -->
                                 <div>
-                                    <button type="button" (click)="updateBlog(blog.repo)" class="btn btn-success" [class.hidden]="!update">Update blog</button>
+                                    <button type="button" (click)="updateBlog(blog.repo)" class="btn btn-success" [class.hidden]="!update">Update</button>
                                     <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-primary" [routerLink]="['/', blog.name, blog.repo, 'create']">Add post</a>
                                     <a [routerLink]="['/', blog.name, blog.repo]" class="btn btn-primary">Go to blog</a>
-                                    <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="prepareDelete(blog.name, blog.repo, i)" class="btn btn-danger">Remove blog</button>
+                                    <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="prepareDelete(blog.name, blog.repo, i)" class="btn btn-danger">Remove</button>
                                 </div>
                             </div>
 

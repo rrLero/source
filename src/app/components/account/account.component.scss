@@ -72,5 +72,10 @@ form {
 }
 .update {
   float: right;
-  min-width: 5em;
+}
+.btn {
+  min-width: 6.7em;
+  @media (max-width: 768px) {
+    margin-bottom: 5px;
+  }
 }
