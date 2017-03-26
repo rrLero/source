@@ -1,13 +1,20 @@
-.entry, .widget {
+.entry,
+.widget {
   background: #fff;
   -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
   -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
   box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
   margin-bottom: 30px;
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+  }
 }
 
 .entry {
   padding: 30px;
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
 }
 
 .entry .icons span {
@@ -15,7 +22,8 @@
   line-height: 24px;
 }
 
-.entry .icons span, .entry .icons i {
+.entry .icons i,
+.entry .icons span {
   vertical-align: middle;
 }
 
@@ -59,7 +67,8 @@
   overflow: hidden;
 }
 
-.entry-meta, .entry-comment {
+.entry-comment,
+.entry-meta {
   padding: 0;
   margin: 15px 0 0;
   color: #aaa;

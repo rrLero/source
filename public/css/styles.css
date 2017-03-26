@@ -11,15 +11,17 @@ body {
   overflow-x: hidden;
 }
 
+article.entry {
+  word-wrap: break-word;
+}
+
 p {
   font-size: 16px;
   line-height: 1.5;
   color: #333;
 }
 
-.entry-content {
-
-}
+.entry-content {}
 
 .entry-content ul, .entry-content ol {
   font-size: 16px;
@@ -61,26 +63,62 @@ img {
   width: 100%;
   max-width: 400px;
 }
+
+@media (max-width: 768px) {
+  .col-md-8, .col-md-10 {
+    padding: 0;
+  }
+}
+
+
 /* ---------------------------------------------------------  */
+
+
 /* ------------------------ Buttons ------------------------  */
+
+
 /* ---------------------------------------------------------  */
+
 
 /*.btn-primary {*/
-  /*background: #039BE5;*/
-  /*border: none;*/
+
+
+/*background: #039BE5;*/
+
+
+/*border: none;*/
+
+
 /*}*/
+
 
 /*.btn-primary:hover {*/
-  /*background: #0288D1;*/
+
+
+/*background: #0288D1;*/
+
+
 /*}*/
 
-/*.btn-danger {*/
-  /*border: none;*/
-  /*background: #F44336;*/
-/*}*/
 
 /*.btn-danger {*/
-  /*background: #E53935;*/
+
+
+/*border: none;*/
+
+
+/*background: #F44336;*/
+
+
+/*}*/
+
+
+/*.btn-danger {*/
+
+
+/*background: #E53935;*/
+
+
 /*}*/
 
 .btn-default {
@@ -91,9 +129,16 @@ img {
   border: 1px solid #e3e3e3;
   background: #F5F5F5;
 }
+
+
 /* ---------------------------------------------------------  */
+
+
 /* ------------------------- Input -------------------------  */
+
+
 /* ---------------------------------------------------------  */
+
 .form-control {
   border: 1px solid #e3e3e3;
   border-radius: 0;
@@ -106,9 +151,15 @@ img {
   box-shadow: none;
 }
 
+
 /* ---------------------------------------------------------  */
+
+
 /* ------------------------ Spinner ------------------------  */
+
+
 /* ---------------------------------------------------------  */
+
 .spinner {
   background-color: #ddd;
   height: 32px;
@@ -119,35 +170,41 @@ img {
   width: 32px;
   top: 50%;
 }
+
 .spinner [class^="spinner-square-"] {
   background-color: #333;
   height: 50%;
   position: absolute;
   width: 50%;
 }
+
 .spinner .spinner-square-1 {
   animation: spin1 1s linear infinite;
   left: 0;
   top: 0;
 }
+
 .spinner .spinner-square-2 {
   animation: spin1 1s linear infinite;
   animation-delay: 0.25s;
   right: 0;
   top: 0;
 }
+
 .spinner .spinner-square-3 {
   animation: spin1 1s linear infinite;
   animation-delay: 0.75s;
   bottom: 0;
   left: 0;
 }
+
 .spinner .spinner-square-4 {
   animation: spin1 1s linear infinite;
   animation-delay: 0.5s;
   bottom: 0;
   right: 0;
 }
+
 @-moz-keyframes spin1 {
   0% {
     background-color: transparent;
@@ -159,6 +216,7 @@ img {
     background-color: transparent;
   }
 }
+
 @-webkit-keyframes spin1 {
   0% {
     background-color: transparent;
@@ -170,6 +228,7 @@ img {
     background-color: transparent;
   }
 }
+
 @-o-keyframes spin1 {
   0% {
     background-color: transparent;
@@ -181,6 +240,7 @@ img {
     background-color: transparent;
   }
 }
+
 @keyframes spin1 {
   0% {
     background-color: transparent;
