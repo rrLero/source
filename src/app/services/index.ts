@@ -4,6 +4,7 @@ import { SearchService }   from './search.service';
 import { AuthService }     from './auth.service';
 import { CommentsService } from './comments.service';
 import { UserService }     from './user.service';
+import { ToastService }    from './toast.service';
 
 export { HttpService };
 export { PagerService };
@@ -11,6 +12,7 @@ export { SearchService };
 export { AuthService };
 export { CommentsService };
 export { UserService };
+export { ToastService };
 
 export const services = [
     HttpService,
@@ -18,5 +20,6 @@ export const services = [
     AuthService,
     CommentsService,
     UserService,
+    ToastService
     // SearchService
 ];

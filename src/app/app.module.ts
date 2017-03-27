@@ -3,6 +3,7 @@ import { BrowserModule }           from '@angular/platform-browser';
 import { HttpModule }              from '@angular/http';
 import { FormsModule }             from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule }             from 'ng2-toastr/ng2-toastr';
 import { AppRoutingModule }        from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -16,7 +17,8 @@ import { pipes }        from './pipes/index';
         HttpModule,
         FormsModule,
         AppRoutingModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ToastModule.forRoot()
     ],
     declarations: [
         AppComponent,

@@ -1,7 +1,8 @@
-import { Component, OnInit }                     from '@angular/core';
+import { Component, OnInit, ViewContainerRef }   from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title }                                 from '@angular/platform-browser';
 import { Location }                              from '@angular/common';
+import { ToastsManager }                         from 'ng2-toastr/ng2-toastr';
 import { AuthService }                           from './services/index';
 
 import 'rxjs/add/operator/map';
@@ -26,7 +27,10 @@ export class AppComponent implements OnInit {
                 private location: Location,
                 private titleService: Title,
                 public authService: AuthService,
-                private activatedRoute: ActivatedRoute) { }
+                public toastr: ToastsManager, vcr: ViewContainerRef,
+                private activatedRoute: ActivatedRoute) {
+                toastr.setRootViewContainerRef(vcr);
+    }
 
     ngOnInit() {
         this.getParams();

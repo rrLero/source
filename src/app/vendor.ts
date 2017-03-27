@@ -27,3 +27,4 @@ if (process.env.ENV !== 'production') {
 import 'underscore';
 import 'marked';
 import 'simplemde';
+import 'ng2-toastr/ng2-toastr';

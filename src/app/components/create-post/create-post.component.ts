@@ -2,9 +2,8 @@ import { Component, OnInit }          from '@angular/core';
 import { Router, ActivatedRoute }     from '@angular/router';
 import { Location }                   from '@angular/common';
 
-import { HttpService, AuthService }   from '../../services/index';
+import { HttpService, AuthService, ToastService, UserService }   from '../../services/index';
 import { Post, post, FullMd, fullMd } from '../../shared/post.model';
-import { UserService } from "../../services/user.service";
 
 @Component({
     templateUrl: 'create-post.component.html',
@@ -14,8 +13,8 @@ export class CreatePostComponent implements OnInit {
     date = new Date();
     author: string;
     datetime: string;
-    hidden = true;
-    popupText = 'Creating...';
+    // hidden = true;
+    // popupText = 'Creating...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
@@ -23,6 +22,7 @@ export class CreatePostComponent implements OnInit {
         private router: Router,
         private location: Location,
         private route: ActivatedRoute,
+        public toastService: ToastService,
         private authService: AuthService,
         private userService: UserService,
         private httpService: HttpService) { }
@@ -60,13 +60,15 @@ export class CreatePostComponent implements OnInit {
     }
     push(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
-        this.hidden = false;
+        // this.hidden = false;
+        this.toastService.showInfo('Creating...');
         this.httpService.create(this.name, this.repo, post)
         .then(() =>
             this.httpService.updateBlog(this.name, this.repo)
             .subscribe(() => {
-                this.popupText = 'Done!';
-                setTimeout(() => this.hidden = true, 1500);
+                // this.popupText = 'Done!';
+                // setTimeout(() => this.hidden = true, 1500);
+                this.toastService.showSuccess('Done!');
                 setTimeout(() => this.router.navigate([this.url]), 1800);
             })
         );

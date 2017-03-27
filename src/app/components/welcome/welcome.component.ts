@@ -23,17 +23,15 @@ import { HttpService } from '../../services/index';
 })
 export class WelcomeComponent implements OnInit {
     blogs: string[];
-    constructor(
-        private router: Router,
-        private httpService: HttpService) { }
+    constructor(private router: Router,
+                private httpService: HttpService) { }
 
     ngOnInit() {
         this.getBlogs();
     }
     getBlogs() {
-        this.httpService.getBlogs()
-            .then(blogs => {
-                this.blogs = blogs;
-            });
+        this.httpService
+            .getBlogs()
+            .then(blogs => this.blogs = blogs);
     }
 }

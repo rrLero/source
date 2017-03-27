@@ -2,8 +2,8 @@ import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location }               from '@angular/common';
 
-import { HttpService }            from '../../services/index';
-import { Post, FullMd, fullMd }   from '../../shared/post.model';
+import { HttpService, ToastService } from '../../services/index';
+import { Post, FullMd, fullMd }      from '../../shared/post.model';
 
 @Component({
     templateUrl: 'edit-post.component.html',
@@ -11,8 +11,8 @@ import { Post, FullMd, fullMd }   from '../../shared/post.model';
 })
 export class EditPostComponent implements OnInit {
     post: Post;
-    hidden = true;
-    popupText = 'Updating...';
+    // hidden = true;
+    // popupText = 'Updating...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
@@ -21,6 +21,7 @@ export class EditPostComponent implements OnInit {
         private router: Router,
         private location: Location,
         private route: ActivatedRoute,
+        public toastService: ToastService,
         private httpService: HttpService) { }
 
     ngOnInit(): void {
@@ -37,7 +38,8 @@ export class EditPostComponent implements OnInit {
         this.post.tags = tagsEl.value.split(',');
         this.post.preview = previewEl.value;
         this.post.text_full_strings = textEl.value;
-        this.hidden = !this.hidden;
+        this.toastService.showInfo('In process...');
+        // this.hidden = !this.hidden;
         this.buildFullMd();
         this.update();
     }
@@ -62,8 +64,9 @@ export class EditPostComponent implements OnInit {
             .then(() =>
                 this.httpService.updateBlog(this.name, this.repo)
                 .subscribe(() => {
-                    this.popupText = 'Done!';
-                    setTimeout(() => this.hidden = true, 1500);
+                    // this.popupText = 'Done!';
+                    // setTimeout(() => this.hidden = true, 1500);
+                    this.toastService.showSuccess('Done!');
                     setTimeout(() => this.goBack(), 1800);
                 })
             );

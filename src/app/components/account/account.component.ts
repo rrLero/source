@@ -2,7 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, UserService } from '../../services/index';
+import { HttpService, UserService, ToastService } from '../../services/index';
 
 @Component({
     templateUrl: 'account.component.html',
@@ -34,6 +34,7 @@ export class AccountComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
+                public toastService: ToastService,
                 private httpService: HttpService,
                 private userService: UserService) {
     };
@@ -64,8 +65,10 @@ export class AccountComponent implements OnInit {
     }
 
     updateBlog(repo) {
-        this.httpService.updateBlog(this.name, repo)
-            .subscribe(() => alert('done'));
+        this.toastService.showInfo('Updating...');
+        this.httpService
+            .updateBlog(this.name, repo)
+            .subscribe(() => this.toastService.showSuccess('Done!'));
     }
     prepareDelete(name, repo, index) {
         this.hidden = false;
@@ -74,19 +77,22 @@ export class AccountComponent implements OnInit {
         this.deletedBlog.index = index;
     }
     deleteBlog(name, repo, index) {
-        this.popupText = 'Deleting...';
+        // this.popupText = 'Deleting...';
+        this.toastService.showInfo('Deleting...');
         this.httpService
             .deleteBlog(name, repo)
             .then(() =>
                 this.httpService.updateBlog(name, repo)
                     .subscribe(() => {
                         this.blogs.splice(index, 1);
-                        this.popupText = 'Done!';
-                        setTimeout(() => this.hidden = true, 1500);
+                        this.toastService.showSuccess('Done!');
+                        // this.popupText = 'Done!';
+                        // setTimeout(() => this.hidden = true, 1500);
                     }));
     }
     popupHandler(confirm) {
         if (confirm) {
+            this.hidden = true;
             this.deleteBlog(this.deletedBlog.name, this.deletedBlog.repo, this.deletedBlog.index);
         } else {
             this.hidden = true;
