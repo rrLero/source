@@ -38,6 +38,15 @@ export class HttpService {
             .then(response => response.json() as Post[])
             .catch(this.handleError);
     }
+    getPage(name: string, repo: string, page: number, size: number): Promise<Post[]> {
+        this.getUrl(name, repo);
+        const url = `${this.url}/get?page=${page}&per_page=${size}`;
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
     getPost(name: string, repo: string, id: string): Promise<Post> {
         this.getUrl(name, repo);
         const url = `${this.url}/get/id/${id}`;

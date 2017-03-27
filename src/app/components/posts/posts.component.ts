@@ -23,6 +23,7 @@ import { HttpService, UserService } from '../../services/index';
     ]
 })
 export class PostsComponent implements OnInit {
+    posts;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = this.route.snapshot.params['id'];
@@ -36,12 +37,23 @@ export class PostsComponent implements OnInit {
                 private userService: UserService) { };
 
     ngOnInit() {
+        this.getUser();
+        this.getPage();
+    }
+    getUser() {
         this.user = this.userService.getUser();
         if (this.user) {
             this.userService
                 .getPermission(this.name, this.repo, this.user.login)
                 .then(res => this.canEdit = res.access);
         }
+    }
+    getPage(id: number = this.id): void {
+        this.httpService
+            .getPage(this.name, this.repo, id, 5)
+            .then(res => {
+                console.log(res);
+            });
     }
     savePage() {
         let page = this.location.path().split('/')[4] || '1';
