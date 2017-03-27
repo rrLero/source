@@ -3,7 +3,7 @@ import { Router }                                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { UserService } from '../../services/index';
+import { UserService, HttpService, ToastService }     from '../../services/index';
 
 const faq = {
     capabilities: false,
@@ -35,20 +35,23 @@ export class StartComponent implements OnInit {
     user: any;
     constructor(private router: Router,
                 private location: Location,
+                public toastService: ToastService,
+                private httpService: HttpService,
                 private userService: UserService) { }
 
     ngOnInit() {
         this.user = this.userService.getUser();
     }
 
-    go(name, repo) {
-        this.router.navigate([`${this.user.login}/${repo.value}`]);
+    createBlog(repo) {
+        this.toastService.showInfo('Activating blog...');
+        this.httpService
+            .createBlog(this.user.login, repo.value)
+            .then(() => {
+                this.toastService.showSuccess('Done! You will be redirect to your blog');
+                setTimeout(() => this.router.navigate([`${this.user.login}/${repo.value}`]), 2000);
+            });
     }
-    // createBlog(repo) {
-    //     this.httpService
-    //         .createBlog(this.user.login, repo)
-    //         .subscribe(() => this.router.navigate([`${this.user.login}/${repo.value}`]))
-    // }
     savePath() {
         localStorage.setItem('path', this.location.path());
     }

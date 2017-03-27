@@ -44,26 +44,29 @@ export class PostComponent implements OnInit, OnDestroy {
         this.getPost();
         this.user = this.userService.getUser();
         if (this.user) {
-            this.userService.getPermission(this.name, this.repo, this.user.login)
+            this.userService
+                .getPermission(this.name, this.repo, this.user.login)
                 .then(res => this.canEdit = res.access);
         }
     }
     ngOnDestroy(): void {
         if (this.post.comments !== this.commentsAmount) {
-            this.httpService
-                .updateBlog(this.name, this.repo)
-                .subscribe();
+            setTimeout(() =>
+                this.httpService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(), 0);
         }
     }
     getPost(): void {
         this.route.params
-        .switchMap(({ name, repo, title }) =>
-            this.httpService.getPost(name, repo, title))
-            .subscribe(post => {
-                this.post = post;
-                this.commentsStatus = this.post.comments_status;
-                this.commentsAmount = this.post.comments;
-            });
+            .switchMap(({ name, repo, title }) =>
+                this.httpService
+                    .getPost(name, repo, title))
+                    .subscribe(post => {
+                        this.post = post;
+                        this.commentsStatus = this.post.comments_status;
+                        this.commentsAmount = this.post.comments;
+                    });
     }
     toggleControls(): void {
         this.controls = !this.controls;

@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<div *ngIf="!page.pagedItems" class="spinner">
+<div *ngIf="!page.pagedItems && !page.empty" class="spinner">
     <div class="spinner-square-1"></div>
     <div class="spinner-square-2"></div>
     <div class="spinner-square-3"></div>

@@ -67,6 +67,16 @@ export class HttpService {
             .then(() => post)
             .catch(this.handleError);
     }
+    createBlog(name: string, repo: string): Promise<any> {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/get?access_token=${token}`;
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
     delete(name: string, repo: string, id: string, sha: string): Promise<void> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
@@ -92,7 +102,6 @@ export class HttpService {
             .catch(this.handleError);
     }
     private handleError(error: any): Promise<any> {
-        console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
 }

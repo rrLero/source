@@ -33,10 +33,10 @@ export class AccountComponent implements OnInit {
     name: string;
 
     constructor(private router: Router,
-                private route: ActivatedRoute,
-                public toastService: ToastService,
-                private httpService: HttpService,
-                private userService: UserService) {
+        private route: ActivatedRoute,
+        public toastService: ToastService,
+        private httpService: HttpService,
+        private userService: UserService) {
     };
 
     ngOnInit() {
@@ -61,7 +61,13 @@ export class AccountComponent implements OnInit {
     }
 
     createBlog(name, repo) {
-        this.router.navigate([`${name}/${repo.value}`]);
+        this.toastService.showInfo('Activating blog...');
+        this.httpService
+            .createBlog(name, repo.value)
+            .then(() => {
+                this.toastService.showSuccess('Done! You will be redirect to your blog');
+                setTimeout(() => this.router.navigate([`${name}/${repo.value}`]), 2000);
+            });
     }
 
     updateBlog(repo) {
