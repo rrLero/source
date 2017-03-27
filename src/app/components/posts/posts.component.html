@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-8">
-        <h3 *ngIf="page.empty">No posts</h3>
-        <article class="entry" *ngFor="let post of page.pagedItems" [@posts]="post.state">
+        <h3 *ngIf="!posts">No posts</h3>
+        <article class="entry" *ngFor="let post of posts" [@posts]="post.state">
             <header>
                 <div class="entry-date icons">
                     <i class="material-icons">access_time</i>
@@ -33,10 +33,16 @@
                 </div>
             </footer>
         </article>
-        <pagination #page></pagination>
+        <pagination
+            *ngIf="total"
+            [currentPage]="id"
+            [total]="total"
+            [perPage]="perPage"
+            (pageChange)="handlePageChange($event)">
+        </pagination>
     </div>
     <div class="col-md-4">
-        <div *ngIf="page.pagedItems" class="widget">
+        <div *ngIf="posts" class="widget">
             <search></search>
         </div>
         <div class="widget" *ngIf="user && canEdit">
@@ -46,9 +52,9 @@
     </div>
 </div>
 
-<div *ngIf="!page.pagedItems && !page.empty" class="spinner">
+<!-- <div *ngIf="!posts" class="spinner">
     <div class="spinner-square-1"></div>
     <div class="spinner-square-2"></div>
     <div class="spinner-square-3"></div>
     <div class="spinner-square-4"></div>
-</div>
+</div> -->
