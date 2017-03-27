@@ -33,10 +33,10 @@ export class AccountComponent implements OnInit {
     name: string;
 
     constructor(private router: Router,
-        private route: ActivatedRoute,
-        public toastService: ToastService,
-        private httpService: HttpService,
-        private userService: UserService) {
+                private route: ActivatedRoute,
+                public toastService: ToastService,
+                private httpService: HttpService,
+                private userService: UserService) {
     };
 
     ngOnInit() {
@@ -52,11 +52,15 @@ export class AccountComponent implements OnInit {
             .getBlogs()
             .then(blogs => {
                 this.blogs = blogs;
-                this.blogs.forEach(item => {
-                    if (item.name === this.name.toLowerCase()) {
-                        this.noUser = false;
-                    }
-                });
+                if (this.user && this.user.login.toLowerCase() === this.name) {
+                    this.noUser = false;
+                } else {
+                    this.blogs.forEach(item => {
+                        if (item.name === this.name.toLowerCase()) {
+                            this.noUser = false;
+                        }
+                    });
+                }
             });
     }
 
