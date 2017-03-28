@@ -8,21 +8,21 @@ export class PagerService {
         let totalPages = Math.ceil(totalItems / pageSize);
 
         let startPage: number, endPage: number;
-        if (totalPages <= 10) {
+        if (totalPages <= 7) {
             // less than 10 total pages so show all
             startPage = 1;
             endPage = totalPages;
         } else {
             // more than 10 total pages so calculate start and end pages
-            if (currentPage <= 6) {
+            if (currentPage <= 4) {
                 startPage = 1;
-                endPage = 10;
-            } else if (currentPage + 4 >= totalPages) {
-                startPage = totalPages - 9;
+                endPage = 7;
+            } else if (currentPage + 2 >= totalPages) {
+                startPage = totalPages - 6;
                 endPage = totalPages;
             } else {
-                startPage = currentPage - 5;
-                endPage = currentPage + 4;
+                startPage = currentPage - 3;
+                endPage = currentPage + 3;
             }
         }
 

@@ -1,19 +1,28 @@
 <div class="pagination-wrap" *ngIf="pager.pages && pager.pages.length > 1">
     <ul class="pagination">
-        <li [ngClass]="{disabled:pager.currentPage === 1}" *ngIf="pager.pages.length > 2">
-            <a (click)="onPageChange(1)" [routerLink]="[url, 1]">First</a>
-        </li>
-        <li [ngClass]="{disabled:pager.currentPage === 1}" *ngIf="pager.pages.length > 2">
-            <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, pager.currentPage - 1]">Previous</a>
-        </li>
-        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-            <a (click)="onPageChange(page)" [routerLink]="[url, page]">{{ page }}</a>
-        </li>
-        <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.pages.length > 2">
-            <a (click)="onPageChange(pager.currentPage + 1)" [routerLink]="[url, pager.currentPage + 1]">Next</a>
-        </li>
-        <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.pages.length > 2">
-            <a (click)="onPageChange(pager.totalPages)" [routerLink]="[url, pager.pages.length]">Last</a>
+        <li>
+            <ul class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}" *ngIf="pager.pages.length > 2">
+                    <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, pager.currentPage - 1]">Prev</a>
+                </li>
+                <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.pages.length > 2">
+                    <a (click)="onPageChange(pager.currentPage + 1)" [routerLink]="[url, pager.currentPage + 1]">Next</a>
+                </li>
+            </ul>
+        </li><br>
+
+        <li>
+            <ul class="pagination">
+                <li  [ngClass]="{disabled:pager.currentPage === 1}" *ngIf="pager.pages.length > 2">
+                    <a (click)="onPageChange(1)" [routerLink]="[url, 1]">First</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="onPageChange(page)" [routerLink]="[url, page]">{{ page }}</a>
+                </li>
+                <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.totalPages > 2">
+                    <a (click)="onPageChange(pager.totalPages)" [routerLink]="[url, pager.totalPages]">Last</a>
+                </li>
+            </ul>
         </li>
     </ul>
 </div>
