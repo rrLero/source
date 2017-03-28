@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter }                   from
 import { ActivatedRoute }                             from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { AuthService, UserService, CommentsService }  from '../../services/index';
+import { AuthService, UserService, CommentsService, ToastService }  from '../../services/index';
 import { Comment }                                    from '../../shared/comment.model';
 
 @Component({
@@ -37,6 +37,7 @@ export class CommentsComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private authService: AuthService,
                 private userService: UserService,
+                public toastService: ToastService,
                 private commentsService: CommentsService) { }
 
     ngOnInit() {
@@ -45,7 +46,8 @@ export class CommentsComponent implements OnInit {
                 if (data.length > 0) {
                     this.comments = data;
                 }
-            });
+            })
+            .catch(error => this.toastService.showError(error));
         this.user = this.userService.getUser();
         // if (this.authService.isLogged) {
         //     this.authService.getProfile().subscribe(() => {
@@ -64,7 +66,8 @@ export class CommentsComponent implements OnInit {
                 const index = this.comments.indexOf(comment);
                 this.comments.splice(index, 1);
                 this.commentsAmount.emit(this.comments.length);
-            });
+            })
+            .catch(error => this.toastService.showError(error));
     }
     edit(comment) {
         this.commentId = comment.id;

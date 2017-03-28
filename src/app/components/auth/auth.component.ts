@@ -1,7 +1,7 @@
 import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthService }            from '../../services/auth.service';
+import { AuthService, ToastService }            from '../../services/index';
 
 @Component({
     template: `<p>Authenticate</p>`,
@@ -10,6 +10,7 @@ export class AuthComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
+                public toastService: ToastService,
                 private authService: AuthService) {
     }
 
@@ -34,8 +35,8 @@ export class AuthComponent implements OnInit {
                         } else {
                             this.router.navigate(['/']);
                         }
-                    });
-                    // .subscribe(() => this.router.navigate(['/']));
+                    })
+                    .catch(error => this.toastService.showError(error));
             });
     }
 

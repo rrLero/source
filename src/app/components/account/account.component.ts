@@ -59,7 +59,8 @@ export class AccountComponent implements OnInit {
                 } else {
                     this.checkBlogs(this.blogs);
                 }
-            });
+            })
+            .catch(error => this.toastService.showError(error));
     }
     checkBlogs(blogs) {
         blogs.forEach(item => {
@@ -70,21 +71,28 @@ export class AccountComponent implements OnInit {
         });
     }
     createBlog(name, repo) {
-        let blog = repo.value.replace(/\s+/g, '-');
-        this.toastService.showInfo('Activating blog...');
-        this.httpService
+        if (repo.value) {
+            let blog = repo.value.replace(/\s+/g, '-');
+            this.toastService.showInfo('Activating blog...');
+            this.httpService
             .createBlog(name, repo.value)
             .then(() => {
                 this.toastService.showSuccess('Done! You will be redirect to your blog');
                 setTimeout(() => this.router.navigate([`${name}/${blog}`]), 3000);
-            });
+            })
+            .catch(error => this.toastService.showError(error));
+        } else {
+            this.toastService.showWarning('Set blog name');
+        }
     }
 
     updateBlog(repo) {
         this.toastService.showInfo('Updating...');
         this.httpService
             .updateBlog(this.name, repo)
-            .subscribe(() => this.toastService.showSuccess('Done!'));
+            .subscribe(
+                () => this.toastService.showSuccess('Done!'),
+                error => this.toastService.showError(error));
     }
     prepareDelete(name, repo, index) {
         this.hidden = false;
@@ -104,7 +112,9 @@ export class AccountComponent implements OnInit {
                         this.toastService.showSuccess('Done!');
                         // this.popupText = 'Done!';
                         // setTimeout(() => this.hidden = true, 1500);
-                    }));
+                    })
+                )
+                .catch(error => this.toastService.showError(error));
     }
     popupHandler(confirm) {
         if (confirm) {

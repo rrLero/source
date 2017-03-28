@@ -76,13 +76,15 @@ export class EditPostComponent implements OnInit {
             this.post)
             .then(() =>
                 this.httpService.updateBlog(this.name, this.repo)
-                .subscribe(() => {
+                .subscribe(
+                    () => {
                     // this.popupText = 'Done!';
                     // setTimeout(() => this.hidden = true, 1500);
                     this.toastService.showSuccess('Done!');
                     setTimeout(() => this.goBack(), 1800);
-                })
-            );
+                    },
+                    error => this.toastService.showError(error))            )
+            .catch(error => this.toastService.showError(error));
     }
     cancel(titleEl, tagsEl, textEl, previewEl): void {
         titleEl.value = this.post.title;

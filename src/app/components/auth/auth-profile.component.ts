@@ -2,8 +2,7 @@ import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location }               from '@angular/common';
 
-import { AuthService } from '../../services/index';
-import { UserService } from '../../services/index';
+import { AuthService, UserService, ToastService } from '../../services/index';
 
 @Component({
     selector: 'auth-profile',
@@ -26,6 +25,7 @@ export class AuthProfileComponent implements OnInit {
                 private location: Location,
                 private route: ActivatedRoute,
                 public authService: AuthService,
+                public toastService: ToastService,
                 private userService: UserService) { };
 
     ngOnInit() {
@@ -35,7 +35,8 @@ export class AuthProfileComponent implements OnInit {
             this.login = this.profile.login;
             this.userService
                 .getPermission(this.name, this.repo, this.login)
-                .then(({ access }) => this.canEdit = access);
+                .then(({ access }) => this.canEdit = access)
+                .catch(error => this.toastService.showError(error));
         }
     }
     logout() {

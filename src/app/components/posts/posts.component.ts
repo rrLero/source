@@ -3,7 +3,7 @@ import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, UserService } from '../../services/index';
+import { HttpService, UserService, ToastService } from '../../services/index';
 
 import { Post } from '../../shared/post.model';
 
@@ -38,6 +38,7 @@ export class PostsComponent implements OnInit {
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
+                public toastService: ToastService,
                 private httpService: HttpService,
                 private userService: UserService) {
         // location.subscribe(() => this.handlePageChange());
@@ -52,7 +53,8 @@ export class PostsComponent implements OnInit {
         if (this.user) {
             this.userService
                 .getPermission(this.name, this.repo, this.user.login)
-                .then(res => this.canEdit = res.access);
+                .then(res => this.canEdit = res.access)
+                .catch(error => this.toastService.showError(error));
         }
     }
     getPage(id: number = this.id): void {
@@ -67,7 +69,8 @@ export class PostsComponent implements OnInit {
                     this.empty = true;
                 }
 
-            });
+            })
+            .catch(error => this.toastService.showError(error));
     }
     handlePageChange(page) {
         // if (!page) {

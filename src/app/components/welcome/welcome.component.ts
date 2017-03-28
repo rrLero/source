@@ -2,7 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router }                                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService } from '../../services/index';
+import { HttpService, ToastService } from '../../services/index';
 
 @Component({
     selector: 'welcome',
@@ -24,6 +24,7 @@ import { HttpService } from '../../services/index';
 export class WelcomeComponent implements OnInit {
     blogs: string[];
     constructor(private router: Router,
+                public toastService: ToastService,
                 private httpService: HttpService) { }
 
     ngOnInit() {
@@ -32,6 +33,7 @@ export class WelcomeComponent implements OnInit {
     getBlogs() {
         this.httpService
             .getBlogs()
-            .then(blogs => this.blogs = blogs);
+            .then(blogs => this.blogs = blogs)
+            .catch(error => this.toastService.showError(error));
     }
 }

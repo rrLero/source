@@ -60,7 +60,8 @@ export class ControlsComponent implements OnInit {
                         this.toastService.showSuccess('Done!');
                         setTimeout(() => this.comments.emit(true), 1800);
                     })
-            );
+            )
+            .catch(error => this.toastService.showError(error));
 
     }
     lockComments() {
@@ -71,13 +72,15 @@ export class ControlsComponent implements OnInit {
             .lockComments(this.name, this.repo, this.post.id)
             .then(() =>
                 this.httpService.updateBlog(this.name, this.repo)
-                    .subscribe(() => {
+                    .subscribe(
+                        () => {
                         // this.popupComments = 'Done!';
                         // setTimeout(() => this.togglePopup(), 1500);
                         this.toastService.showSuccess('Done!');
                         setTimeout(() => this.comments.emit(false), 1800);
-                    })
-            );
+                        },
+                        error => this.toastService.showError(error)))
+            .catch(error => this.toastService.showError(error));
     }
     delete() {
         // this.popupText = 'Deleting...';
@@ -86,13 +89,15 @@ export class ControlsComponent implements OnInit {
             .delete(this.name, this.repo, this.post.id, this.post.sha)
             .then(() =>
                 this.httpService.updateBlog(this.name, this.repo)
-                    .subscribe(() => {
+                    .subscribe(
+                        () => {
                         // this.popupText = 'Done!';
                         // setTimeout(() => this.hidden = true, 1500);
                         this.toastService.showSuccess('Done!');
                         setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
-                    })
-            );
+                        },
+                        error => this.toastService.showError(error)))
+            .catch(error => this.toastService.showError(error));
     }
     popupHandler(confirm) {
         if (confirm) {
