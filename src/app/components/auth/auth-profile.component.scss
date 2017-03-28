@@ -52,6 +52,9 @@
   right: 0;
   min-width: 150px;
 }
+.dropdown-toggle, li>a {
+  cursor: pointer;
+}
 
 .profile-menu:before,
 .profile-menu:after {

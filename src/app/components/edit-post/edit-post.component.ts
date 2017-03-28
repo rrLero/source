@@ -1,13 +1,26 @@
 import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location }               from '@angular/common';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { HttpService, ToastService } from '../../services/index';
 import { Post, FullMd, fullMd }      from '../../shared/post.model';
 
 @Component({
     templateUrl: 'edit-post.component.html',
-    styleUrls: ['edit-post.component.scss']
+    styleUrls: ['edit-post.component.scss'],
+    animations: [
+        trigger('edit', [
+            state('in', style({ opacity: '1' })),
+            transition('void => *', [
+                style({ opacity: '0' }),
+                animate(200)
+            ]),
+            transition('* => void', [
+                animate(300, style({ opacity: '0' }))
+            ])
+        ])
+    ]
 })
 export class EditPostComponent implements OnInit {
     post: Post;

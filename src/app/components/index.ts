@@ -15,6 +15,7 @@ import { PopupComponent }       from './popup/popup.component';
 import { ControlsComponent }       from './controls/controls.component';
 import { StartComponent }       from './start/start.component';
 import { AccountComponent }       from './account/account.component';
+import { SpinnerComponent }       from './spinner/spinner.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -25,6 +26,7 @@ export { NotFoundComponent };
 export { AuthComponent };
 export { StartComponent };
 export { AccountComponent };
+export { SpinnerComponent };
 
 export const components = [
     WelcomeComponent,
@@ -43,5 +45,6 @@ export const components = [
     PopupComponent,
     ControlsComponent,
     StartComponent,
-    AccountComponent
+    AccountComponent,
+    SpinnerComponent
 ];

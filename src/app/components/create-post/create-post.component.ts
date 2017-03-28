@@ -1,13 +1,26 @@
 import { Component, OnInit }          from '@angular/core';
 import { Router, ActivatedRoute }     from '@angular/router';
 import { Location }                   from '@angular/common';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { HttpService, AuthService, ToastService, UserService }   from '../../services/index';
 import { Post, post, FullMd, fullMd } from '../../shared/post.model';
 
 @Component({
     templateUrl: 'create-post.component.html',
-    styleUrls: ['create-post.component.scss']
+    styleUrls: ['create-post.component.scss'],
+    animations: [
+        trigger('create', [
+            state('in', style({ opacity: '1' })),
+            transition('void => *', [
+                style({ opacity: '0' }),
+                animate(200)
+            ]),
+            transition('* => void', [
+                animate(300, style({ opacity: '0' }))
+            ])
+        ])
+    ]
 })
 export class CreatePostComponent implements OnInit {
     date = new Date();
