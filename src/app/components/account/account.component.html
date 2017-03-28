@@ -17,12 +17,13 @@
                 <div class="info text-center">
                     <a class="btn btn-default controls" [href]="githubUrl + name" target="_blank">GitHub account</a><br>
                     <a class="btn btn-default controls" [href]="githubUrl + name + '?tab=repositories'" target="_blank">GitHub repositories</a><br>
-                    <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-default controls" [href]="githubUrl + 'new'" target="_blank">Create repository</a>
+                    <!-- <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-default controls" [href]="githubUrl + 'new'" target="_blank">Create repository</a> -->
                 </div>
                 <hr>
 
-                <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" class="btn btn-default update" (click)="toggleUpdateBtns()">{{ update ? 'Hide' : 'Update' }}</button>
-                <h3>Blogs:</h3>
+                <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && !noBlogs" type="button" class="btn btn-default update" (click)="toggleUpdateBtns()">{{ update ? 'Hide' : 'Update' }}</button>
+                <h3 *ngIf="!noBlogs">Blogs:</h3>
+                <h3 *ngIf="noBlogs">No Blogs</h3>
                 <div class="blog-list">
                     <div class="blogs">
                         <div *ngFor="let blog of blogs; let i=index">
@@ -44,7 +45,7 @@
                     </div>
                     <!-- Activate blog -->
                     <form (submit)="createBlog(user.login, repoEl)" class="form-inline text-center" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
-                        <input #repoEl type="text" class="form-control" placeholder="Repository name" required id="repo">
+                        <input #repoEl type="text" class="form-control" placeholder="Blog name" required id="repo">
                         <button class="btn btn-primary" type="submit">Activate blog</button>
                     </form>
                 </div>

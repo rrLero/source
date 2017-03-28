@@ -27,6 +27,7 @@ export class AccountComponent implements OnInit {
     update = false;
     confirm = true;
     noUser = true;
+    noBlogs = false;
     deletedBlog: any = {};
     popupText = 'Remove blog?';
     githubUrl = `https://github.com/`;
@@ -54,6 +55,11 @@ export class AccountComponent implements OnInit {
                 this.blogs = blogs;
                 if (this.user && this.user.login.toLowerCase() === this.name) {
                     this.noUser = false;
+                    this.blogs.forEach(item => {
+                        if (item.name !== this.name.toLowerCase()) {
+                            this.noBlogs = true;
+                        }
+                    });
                 } else {
                     this.blogs.forEach(item => {
                         if (item.name === this.name.toLowerCase()) {

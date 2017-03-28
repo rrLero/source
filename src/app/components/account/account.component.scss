@@ -67,6 +67,7 @@ form {
 .form-control {
   width: 15em;
   max-width: 100%;
+  min-width: 7.8em;
   max-height: 2.5em;
   border-radius: 5px;
 }
@@ -78,4 +79,7 @@ form {
   @media (max-width: 768px) {
     margin-bottom: 5px;
   }
+}
+.controls {
+  min-width: 11em;
 }
