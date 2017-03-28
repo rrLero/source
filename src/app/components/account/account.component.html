@@ -22,8 +22,7 @@
                 <hr>
 
                 <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && !noBlogs" type="button" class="btn btn-default update" (click)="toggleUpdateBtns()">{{ update ? 'Hide' : 'Update' }}</button>
-                <h3 *ngIf="!noBlogs">Blogs:</h3>
-                <h3 *ngIf="noBlogs">No Blogs</h3>
+                <h3>{{ noBlogs ? 'No Blogs' : 'Blogs:'}}</h3>
                 <div class="blog-list">
                     <div class="blogs">
                         <div *ngFor="let blog of blogs; let i=index">

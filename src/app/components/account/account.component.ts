@@ -27,7 +27,7 @@ export class AccountComponent implements OnInit {
     update = false;
     confirm = true;
     noUser = true;
-    noBlogs = false;
+    noBlogs = true;
     deletedBlog: any = {};
     popupText = 'Remove blog?';
     githubUrl = `https://github.com/`;
@@ -53,30 +53,30 @@ export class AccountComponent implements OnInit {
             .getBlogs()
             .then(blogs => {
                 this.blogs = blogs;
-                if (this.user && this.user.login.toLowerCase() === this.name) {
+                if (this.user && this.user.login.toLowerCase() === this.name.toLowerCase()) {
                     this.noUser = false;
-                    this.blogs.forEach(item => {
-                        if (item.name !== this.name.toLowerCase()) {
-                            this.noBlogs = true;
-                        }
-                    });
+                    this.checkBlogs(this.blogs);
                 } else {
-                    this.blogs.forEach(item => {
-                        if (item.name === this.name.toLowerCase()) {
-                            this.noUser = false;
-                        }
-                    });
+                    this.checkBlogs(this.blogs);
                 }
             });
     }
-
+    checkBlogs(blogs) {
+        blogs.forEach(item => {
+            if (item.name === this.name.toLowerCase()) {
+                this.noUser = false;
+                this.noBlogs = false;
+            }
+        });
+    }
     createBlog(name, repo) {
+        let blog = repo.value.replace(/\s+/g, '-');
         this.toastService.showInfo('Activating blog...');
         this.httpService
             .createBlog(name, repo.value)
             .then(() => {
                 this.toastService.showSuccess('Done! You will be redirect to your blog');
-                setTimeout(() => this.router.navigate([`${name}/${repo.value}`]), 2000);
+                setTimeout(() => this.router.navigate([`${name}/${blog}`]), 3000);
             });
     }
 
