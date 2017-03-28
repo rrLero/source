@@ -33,13 +33,14 @@ export class PostsComponent implements OnInit {
     id = +this.route.snapshot.params['id'] || 1;
     url = `/${this.name}/${this.repo}/`;
     canEdit = false;
+    empty = false;
     user: any;
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
                 private httpService: HttpService,
                 private userService: UserService) {
-        location.subscribe(() => this.handlePageChange());
+        // location.subscribe(() => this.handlePageChange());
     };
 
     ngOnInit() {
@@ -58,17 +59,22 @@ export class PostsComponent implements OnInit {
         this.httpService
             .getPage(this.name, this.repo, id, this.perPage)
             .then(res => {
-                this.posts = res.items;
-                this.total = res.total;
-                window.scrollTo(0, 0);
+                if (res.items) {
+                    this.posts = res.items;
+                    this.total = res.total;
+                    window.scrollTo(0, 0);
+                } else {
+                    this.empty = true;
+                }
+
             });
     }
-    handlePageChange(page?) {
-        if (!page) {
-            let path = this.location.path().split('/');
-            page = parseFloat(path[4]) || 1;
-        }
-        this.getPage(page)
+    handlePageChange(page) {
+        // if (!page) {
+        //     let path = this.location.path().split('/');
+        //     page = parseFloat(path[4]) || 1;
+        // }
+        this.getPage(page);
     }
     savePage() {
         let page = this.location.path().split('/')[4] || '1';

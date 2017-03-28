@@ -21,18 +21,25 @@ export class PaginationComponent implements OnInit {
     @Input() perPage: number;
     @Input() currentPage: number;
     @Output() pageChange = new EventEmitter();
-    pager;
+    pager: any;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}/page/`;
     constructor(private route: ActivatedRoute,
-                private pagerService: PagerService) { }
+                private location: Location,
+                private pagerService: PagerService) {
+                location.subscribe(() => this.onPageChange());
+    }
 
     ngOnInit() {
         this.getPager(this.currentPage);
     }
 
-    onPageChange(page: number) {
+    onPageChange(page?: number) {
+        if (!page) {
+            let path = this.location.path().split('/');
+            page = +path[4] || 1;
+        }
         this.getPager(page);
         this.pageChange.emit(page);
     }
