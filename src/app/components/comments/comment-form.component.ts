@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute }                                 from '@angular/router';
 import { trigger, state, style, transition, animate }     from '@angular/animations';
 
-import { AuthService }     from '../../services/index';
+import { AuthService, ToastService }     from '../../services/index';
 import { CommentsService } from '../../services/index';
 
 @Component({
@@ -35,6 +35,7 @@ export class CommentFormComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 public authService: AuthService,
+                public toastService: ToastService,
                 private commentsService: CommentsService) { }
 
     ngOnInit() { }
@@ -48,7 +49,8 @@ export class CommentFormComponent implements OnInit {
                 .then(() => {
                     this.updatedComment.emit(input.value);
                     this.loading = false;
-                });
+                })
+                .catch(error => this.toastService.showError(error));
         } else {
             this.commentsService.add(this.name, this.repo, this.postId, input.value)
                 .then((data) => {
@@ -60,7 +62,8 @@ export class CommentFormComponent implements OnInit {
                     this.addComment.emit(data[0]);
                     input.editor.value('');
                     this.loading = false;
-                });
+                })
+                .catch(error => this.toastService.showError(error));
         }
     }
 }

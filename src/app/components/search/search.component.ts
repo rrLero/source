@@ -4,7 +4,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Observable }                                 from 'rxjs/Observable';
 import { Subject }                                    from 'rxjs/Subject';
 
-import { SearchService } from '../../services/index';
+import { SearchService, ToastService } from '../../services/index';
 import { Post }          from '../../shared/post.model';
 
 @Component({
@@ -34,6 +34,7 @@ export class SearchComponent implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+        public toastService: ToastService,
         private searchService: SearchService) { }
 
     search(term: string): void {
@@ -47,8 +48,7 @@ export class SearchComponent implements OnInit {
                 ? this.searchService.search(this.name, this.repo, term)
                 : Observable.of<Post[]>([]))
             .catch(error => {
-                // TODO: add real error handling
-                console.log(error);
+                this.toastService.showError(error);
                 return Observable.of<Post[]>([]);
             });
     }

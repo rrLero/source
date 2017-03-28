@@ -78,12 +78,15 @@ export class CreatePostComponent implements OnInit {
         this.httpService.create(this.name, this.repo, post)
         .then(() =>
             this.httpService.updateBlog(this.name, this.repo)
-            .subscribe(() => {
+            .subscribe(
+                () => {
                 // this.popupText = 'Done!';
                 // setTimeout(() => this.hidden = true, 1500);
                 this.toastService.showSuccess('Done!');
                 setTimeout(() => this.router.navigate([this.url]), 1800);
-            })
-        );
+                },
+                error => this.toastService.showError(error))
+        )
+        .catch(error => this.toastService.showError(error));
     }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy }               from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, CommentsService, UserService }  from '../../services/index';
+import { HttpService, CommentsService, UserService, ToastService }  from '../../services/index';
 import { Post }                                       from '../../shared/post.model';
 
 @Component({
@@ -37,6 +37,7 @@ export class PostComponent implements OnInit, OnDestroy {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private commentsService: CommentsService,
+                public toastService: ToastService,
                 private httpService: HttpService,
                 private userService: UserService) { }
 
@@ -46,7 +47,8 @@ export class PostComponent implements OnInit, OnDestroy {
         if (this.user) {
             this.userService
                 .getPermission(this.name, this.repo, this.user.login)
-                .then(res => this.canEdit = res.access);
+                .then(res => this.canEdit = res.access)
+                .catch(error => this.toastService.showError(error));
         }
     }
     ngOnDestroy(): void {
@@ -62,11 +64,13 @@ export class PostComponent implements OnInit, OnDestroy {
             .switchMap(({ name, repo, title }) =>
                 this.httpService
                     .getPost(name, repo, title))
-                    .subscribe(post => {
-                        this.post = post;
-                        this.commentsStatus = this.post.comments_status;
-                        this.commentsAmount = this.post.comments;
-                    });
+                    .subscribe(
+                        post => {
+                            this.post = post;
+                            this.commentsStatus = this.post.comments_status;
+                            this.commentsAmount = this.post.comments;
+                        },
+                        error => this.toastService.showError(error));
     }
     toggleControls(): void {
         this.controls = !this.controls;

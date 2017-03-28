@@ -44,8 +44,8 @@
                     </div>
                     <!-- Activate blog -->
                     <form (submit)="createBlog(user.login, repoEl)" class="form-inline text-center" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
-                        <input #repoEl type="text" class="form-control" placeholder="Blog name" required id="repo">
-                        <button class="btn btn-primary" type="submit">Activate blog</button>
+                        <input #repoEl type="text" class="form-control" placeholder="Blog name" required>
+                        <button [disabled]="repoEl.value" class="btn btn-primary" type="submit">Activate blog</button>
                     </form>
                 </div>
             </div>
