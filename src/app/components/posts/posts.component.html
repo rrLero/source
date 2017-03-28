@@ -45,7 +45,7 @@
         <div *ngIf="posts" class="widget">
             <search></search>
         </div>
-        <div class="widget" *ngIf="user && canEdit">
+        <div class="widget" *ngIf="user && canEdit && posts || user && canEdit && empty">
             <h4>Actions</h4>
             <controls></controls>
         </div>
