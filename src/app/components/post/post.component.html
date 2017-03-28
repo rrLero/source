@@ -15,7 +15,7 @@
                         </li>
                         <li class="entry-date icons">
                             <i class="material-icons">access_time</i>
-                            <span>{{ post.date | date:'yMMMd' }}</span>
+                            <span>{{ post.date | amTimeAgo }}</span>
                         </li>
                         <li class="entry-controls icons" (click)="toggleControls()" *ngIf="user && canEdit" [@post]="controls.state">
                             <i class="material-icons">build</i>

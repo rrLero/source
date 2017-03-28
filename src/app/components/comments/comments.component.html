@@ -9,7 +9,7 @@
             <div class="comment-body" [@comment]="comment.state">
                 <div class="comment-heading">
                     <h4 class="user">{{ comment.user }}</h4>
-                    <h5 class="time">{{ comment.created_at | date:'y-MM-dd HH:mm' }}</h5>
+                    <h5 class="time">{{ comment.created_at | amTimeAgo }}</h5>
 
                     <span
                         *ngIf="user && comment.user === user.login || user && name === user.login.toLowerCase()"
