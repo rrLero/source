@@ -26,7 +26,7 @@ import { Post } from '../../shared/post.model';
 export class PostsByTagComponent implements OnInit {
     posts: Post[];
     total = 0;
-    perPage = 2;
+    perPage = 5;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     tag: string;

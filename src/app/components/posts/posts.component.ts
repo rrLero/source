@@ -27,7 +27,7 @@ import { Post } from '../../shared/post.model';
 export class PostsComponent implements OnInit {
     posts: Post[];
     total = 0;
-    perPage = 3;
+    perPage = 5;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = +this.route.snapshot.params['id'] || 1;
