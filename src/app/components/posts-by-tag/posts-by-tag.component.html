@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-md-8">
         <h3 *ngIf="empty">No posts</h3>
+        <h3 *ngIf="!empty" class="found-tag">Tag: {{ tag }}</h3>
         <article class="entry" *ngFor="let post of posts" [@posts]="post.state">
             <header>
                 <div class="entry-date icons">
@@ -39,7 +40,7 @@
         </article>
         <pagination
             *ngIf="total"
-            [url]="url"
+            [url]="paginationUrl"
             [currentPage]="id"
             [total]="total"
             [perPage]="perPage"

@@ -1,16 +1,17 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { WelcomeComponent }     from './components/index';
-import { PostsComponent }       from './components/index';
-import { PostComponent }        from './components/index';
-import { CreatePostComponent }  from './components/index';
-import { EditPostComponent }    from './components/index';
-import { NotFoundComponent }    from './components/index';
-import { AuthComponent }        from './components/index';
-import { StartComponent }       from './components/index';
-import { AccountComponent }     from './components/index';
-import { DraftsComponent }      from './components/index';
+import { WelcomeComponent }     from './components';
+import { PostsComponent }       from './components';
+import { PostComponent }        from './components';
+import { CreatePostComponent }  from './components';
+import { EditPostComponent }    from './components';
+import { NotFoundComponent }    from './components';
+import { AuthComponent }        from './components';
+import { StartComponent }       from './components';
+import { AccountComponent }     from './components';
+import { DraftsComponent }      from './components';
+import { PostsByTagComponent }  from './components';
 
 const routes: Routes = [
     {
@@ -36,6 +37,14 @@ const routes: Routes = [
     {
         path: ':name/:repo/page/:id',
         component: PostsComponent
+    },
+    {
+        path: ':name/:repo/tag/:tag',
+        component: PostsByTagComponent
+    },
+    {
+        path: ':name/:repo/tag/:tag/page/:id',
+        component: PostsByTagComponent
     },
     {
         path: ':name/:repo/post/:title',
