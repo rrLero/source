@@ -33,6 +33,14 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
 }
 
+pre {
+  background-color: #252525;
+  color: #eee;
+  border-radius: 0;
+  border: none;
+  padding: 15px;
+}
+
 pre > code {
   display: block;
   white-space: pre;
