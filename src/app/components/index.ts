@@ -16,6 +16,7 @@ import { ControlsComponent }       from './controls/controls.component';
 import { StartComponent }       from './start/start.component';
 import { AccountComponent }       from './account/account.component';
 import { SpinnerComponent }       from './spinner/spinner.component';
+import { DraftsComponent }       from './drafts/drafts.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -27,6 +28,7 @@ export { AuthComponent };
 export { StartComponent };
 export { AccountComponent };
 export { SpinnerComponent };
+export { DraftsComponent };
 
 export const components = [
     WelcomeComponent,
@@ -46,5 +48,6 @@ export const components = [
     ControlsComponent,
     StartComponent,
     AccountComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DraftsComponent
 ];

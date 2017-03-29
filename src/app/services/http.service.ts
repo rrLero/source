@@ -56,6 +56,26 @@ export class HttpService {
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
+    getDrafts(name: string, repo: string, page: number, size: number) {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/get_branch_posts?access_token=${token}&page=${page}&per_page=${size}`;
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+    getDraft(name: string, repo: string, id: string) {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/get_branch_posts/id/${id}?access_token=${token}`;
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
     update(name: string, repo: string, id: string, sha: string, post: Post): Promise<Post> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;

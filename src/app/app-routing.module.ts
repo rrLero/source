@@ -10,6 +10,7 @@ import { NotFoundComponent }    from './components/index';
 import { AuthComponent }        from './components/index';
 import { StartComponent }       from './components/index';
 import { AccountComponent }     from './components/index';
+import { DraftsComponent }      from './components/index';
 
 const routes: Routes = [
     {
@@ -47,6 +48,14 @@ const routes: Routes = [
     {
         path: ':name/:repo/create',
         component: CreatePostComponent
+    },
+    {
+        path: ':name/:repo/drafts',
+        component: DraftsComponent
+    },
+    {
+        path: ':name/:repo/drafts/page/:id',
+        component: DraftsComponent
     },
     { path: '', redirectTo: '/welcome', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }
