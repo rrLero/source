@@ -46,7 +46,7 @@
             (pageChange)="handlePageChange($event)">
         </pagination>
     </div> -->
-
+<div class="col-md-8">
     <posts-template
         *ngIf="posts"
         [posts]="posts"
@@ -70,7 +70,7 @@
         [perPage]="perPage"
         (pageChange)="handlePageChange($event)">
     </pagination>
-
+</div>
     <div class="col-md-4">
         <div *ngIf="posts" class="widget">
             <search></search>

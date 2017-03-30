@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<!-- <div class="col-md-8"> -->
     <h3 *ngIf="empty">No posts</h3>
     <h3 *ngIf="!empty && tag" class="found-tag">Tag: {{ tag }}</h3>
     <article class="entry" *ngFor="let post of posts" [@posts]="post.state">
@@ -46,4 +46,4 @@
         [perPage]="perPage"
         (pageChange)="handlePageChange($event)">
     </pagination> -->
-</div>
+<!-- </div> -->
