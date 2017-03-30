@@ -80,7 +80,7 @@ export class AccountComponent implements OnInit {
             let blog = repo.value.replace(/\s+/g, '-');
             this.toastService.showInfo('Activating blog...');
             this.httpService
-            .createBlog(name, repo.value)
+            .createBlog(name, blog)
             .then(() => {
                 this.toastService.showSuccess('Done! You will be redirect to your blog');
                 setTimeout(() => this.router.navigate([`${name}/${blog}`]), 3000);

@@ -4,7 +4,7 @@
             <h3 class="text-center">Blogs:</h3>
             <ul class="blogs">
                 <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs" [routerLink]="['/', blog.name, blog.repo]">
-                    <p class="blog-name">{{  blog.repo }}</p>
+                    <p class="blog-name">{{  blog.repo | titlecase }}</p>
                     <a [routerLink]="['/', blog.name]" class="blog-author">by {{ blog.name }}</a>
                 </li>
             </ul>

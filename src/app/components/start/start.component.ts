@@ -48,7 +48,7 @@ export class StartComponent implements OnInit {
             let blog = repo.value.replace(/\s+/g, '-');
             this.toastService.showInfo('Activating blog...');
             this.httpService
-            .createBlog(this.user.login, repo.value)
+            .createBlog(this.user.login, blog)
             .then(() => {
                 this.toastService.showSuccess('Done! You will be redirect to your blog');
                 setTimeout(() => this.router.navigate([`${this.user.login}/${blog}`]), 2000);

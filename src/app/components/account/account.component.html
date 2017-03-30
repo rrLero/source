@@ -29,7 +29,7 @@
 
                             <!-- Blog -->
                             <div *ngIf="blog.name === name.toLowerCase()" class="blog">
-                                <a [routerLink]="['/', blog.name, blog.repo]" class="blog-name">{{ blog.repo }}</a>
+                                <a [routerLink]="['/', blog.name, blog.repo]" class="blog-name">{{ blog.repo | titlecase }}</a>
 
                                 <!-- Blog controls -->
                                 <div>
