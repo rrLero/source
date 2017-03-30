@@ -18,6 +18,7 @@ import { AccountComponent }     from './account/account.component';
 import { SpinnerComponent }     from './spinner/spinner.component';
 import { DraftsComponent }      from './drafts/drafts.component';
 import { PostsByTagComponent }  from './posts-by-tag/posts-by-tag.component';
+import { PostsTemplateComponent }  from './posts-template/posts-template.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -52,5 +53,6 @@ export const components = [
     AccountComponent,
     SpinnerComponent,
     DraftsComponent,
-    PostsByTagComponent
+    PostsByTagComponent,
+    PostsTemplateComponent
 ];

@@ -69,6 +69,11 @@ export class AccountComponent implements OnInit {
                 this.noBlogs = false;
             }
         });
+        // setTimeout(() => {
+        //     if (this.noUser && this.noBlogs) {
+        //         this.router.navigate(['/']);
+        //     }
+        // }, 0);
     }
     createBlog(name, repo) {
         if (repo.value) {

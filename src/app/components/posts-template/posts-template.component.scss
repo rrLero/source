@@ -1,0 +1,120 @@
+.entry,
+.widget {
+  position: relative;
+  background: #fff;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
+  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
+  margin-bottom: 30px;
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+  }
+}
+
+.entry {
+  padding: 30px;
+  @media (max-width: 768px) {
+    padding: 15px;
+  }
+}
+
+.entry .icons span {
+  display: inline-block;
+  line-height: 24px;
+}
+
+.entry .icons i,
+.entry .icons span {
+  vertical-align: middle;
+}
+
+.entry .icons i {
+  margin-right: 5px;
+}
+
+.entry-date {
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.entry-date span {
+  text-transform: uppercase;
+}
+
+.entry-title {
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0 0 15px;
+  font-weight: 700;
+}
+
+.entry-title a {
+  color: #555;
+}
+
+.entry-title a:hover {
+  color: #888;
+}
+
+.entry-summary p {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+}
+
+.entry-footer {
+  border-top: 1px solid #eeeeee;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.entry-comment,
+.entry-meta {
+  padding: 0;
+  margin: 15px 0 0;
+  color: #aaa;
+}
+
+.entry-meta > li {
+  display: inline-block;
+  border-left: 1px solid #eee;
+  padding: 0 15px;
+}
+
+.entry-meta > li:first-child {
+  border: none;
+  padding-left: 0;
+}
+
+.tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline;
+
+  li {
+    display: inline;
+
+    &:not(:last-child):after {
+      content: ', ';
+      position: relative;
+      left: -2px;
+    }
+  }
+}
+
+.widget {
+  padding: 20px;
+}
+
+.widget h4 {
+  margin: 0 0 15px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.found-tag {
+  background: #fff;
+  padding: 30px;
+  margin: 0 0 20px;
+}
