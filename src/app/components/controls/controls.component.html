@@ -1,10 +1,16 @@
 <div #controls [@controls]="controls.state" class="controls">
 
-    <a class="btn btn-primary" [routerLink]="[create]" [class.hidden]="post">Add post</a>
-
+    <a [routerLink]="[create]" [class.hidden]="post" class="btn btn-primary">Add post</a>
     <div class="post">
-        <div class="[ form-group ] text-center" [class.hidden]="!post" *ngIf="!draft">
-            <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" [checked]="status" (click)="check.checked ?  unLockComments() :lockComments()">
+        <div *ngIf="!draft" [class.hidden]="!post" class="[ form-group ] text-center">
+            <input
+                #check
+                (click)="check.checked ?  unLockComments() :lockComments()"
+                [checked]="status"
+                type="checkbox"
+                name="fancy-checkbox-primary"
+                id="fancy-checkbox-primary"
+                autocomplete="off">
             <div class="[ btn-group ]">
                 <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
                     <span class="[ glyphicon glyphicon-ok ]"></span>
@@ -15,11 +21,15 @@
                 </label>
             </div>
         </div>
-
-        <button *ngIf="draft" type="button" class="btn btn-success" (click)="publish()">Publish</button>
-        <a class="btn btn-primary" [class.hidden]="!post" [routerLink]="['edit']">Edit</a>
-        <button class="btn btn-danger" [class.hidden]="!post" (click)="hidden = false">Remove</button>
+        <button *ngIf="draft" (click)="publish()" type="button" class="btn btn-success" >Publish</button>
+        <a [routerLink]="['edit']" [class.hidden]="!post" class="btn btn-primary">Edit</a>
+        <button (click)="hidden = false" [class.hidden]="!post" class="btn btn-danger">Remove</button>
     </div>
 
 </div>
-<popup (answer)="popupHandler($event)" [hidden]="hidden" [popupText]="popupText" [popupComments]="popupComments" [confirm]="confirm"></popup>
+<popup
+    (answer)="popupHandler($event)"
+    [hidden]="hidden"
+    [popupText]="popupText"
+    [confirm]="confirm">
+</popup>

@@ -7,7 +7,7 @@ import {
     DraftService,
     CommentsService,
     ToastService
-}               from '../../services/index';
+}               from '../../services';
 import { Post } from '../../shared/post.model';
 
 @Component({
@@ -29,8 +29,8 @@ import { Post } from '../../shared/post.model';
 })
 export class ControlsComponent implements OnInit {
     @Input() post: Post;
-    @Input() status: boolean;
     @Input() draft: boolean;
+    @Input() status: boolean;
     @Output() comments = new EventEmitter();
     user: any;
     hidden = true;
@@ -40,84 +40,71 @@ export class ControlsComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
     create = `/${this.name}/${this.repo}/create`;
-
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                public toastService: ToastService,
                 private commentsService: CommentsService,
                 private draftService: DraftService,
-                private httpService: HttpService) {
-    }
+                private httpService: HttpService,
+                public toastService: ToastService) { }
 
-    ngOnInit() { }
+    ngOnInit(): void { }
 
-    unLockComments() {
+    unLockComments(): void {
         this.toastService.showInfo('Enabling...');
         this.commentsService
             .unLockComments(this.name, this.repo, this.post.id)
-            .then(() =>
-                this.httpService
-                    .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('Done!');
-                            setTimeout(() => this.comments.emit(true), 1800);
-                        },
-                        error => this.toastService.showError(error)))
+            .then(() => this.updateComments(true))
             .catch(error => this.toastService.showError(error));
 
     }
-    lockComments() {
+    lockComments(): void {
         this.toastService.showInfo('Disabling...');
         this.commentsService
             .lockComments(this.name, this.repo, this.post.id)
-            .then(() =>
-                this.httpService
-                    .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('Done!');
-                            setTimeout(() => this.comments.emit(false), 1800);
-                        },
-                        error => this.toastService.showError(error)))
+            .then(() => this.updateComments(false))
             .catch(error => this.toastService.showError(error));
     }
-    delete() {
+    updateComments(status: boolean): void {
+        this.httpService
+            .updateBlog(this.name, this.repo)
+            .subscribe(
+                () => {
+                    this.toastService.showSuccess('Done!');
+                    setTimeout(() => this.comments.emit(status), 2000);
+                },
+                error => this.toastService.showError(error));
+    }
+    delete(): void {
         this.toastService.showInfo('Deleting...');
         this.httpService
             .delete(this.name, this.repo, this.post.id, this.post.sha)
             .then(() =>
                 this.httpService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('Done!');
-                            setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 1800);
-                        },
+                    .subscribe(() =>
+                        this.callback(),
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
-    deleteDraft() {
+    deleteDraft(): void {
         this.toastService.showInfo('Deleting...');
         this.draftService
             .delete(this.name, this.repo, this.post.id)
-            .then(() => {
-                this.toastService.showSuccess('Done!');
-                setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/drafts`]), 1800);
-            })
+            .then(() => this.callback('drafts'))
             .catch(error => this.toastService.showError(error));
     }
-    publish() {
+    publish(): void {
         this.toastService.showInfo('Publishing...');
         this.draftService
             .publish(this.name, this.repo, this.title)
-            .then(() => {
-                this.toastService.showSuccess('Done!');
-                setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}`]), 3000);
-            })
-        .catch(error => this.toastService.showError(error));
+            .then(() => this.callback())
+            .catch(error => this.toastService.showError(error));
     }
-    popupHandler(confirm) {
+    callback(path = ''): void {
+        this.toastService.showSuccess('Done!');
+        setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/${path}`]), 5000);
+    }
+    popupHandler(confirm: boolean): void {
         if (confirm) {
             this.hidden = true;
             this.draft ? this.deleteDraft() : this.delete();
