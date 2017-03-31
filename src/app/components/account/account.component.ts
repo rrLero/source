@@ -54,14 +54,17 @@ export class AccountComponent implements OnInit {
             .getBlogs()
             .then(blogs => {
                 this.blogs = blogs;
-                if (this.user && this.user.login.toLowerCase() === this.name.toLowerCase()) {
-                    this.noUser = false;
-                    this.checkBlogs(this.blogs);
-                } else {
-                    this.checkBlogs(this.blogs);
-                }
+                this.checkUser();
             })
             .catch(error => this.toastService.showError(error));
+    }
+    checkUser() {
+        if (this.user && this.user.login.toLowerCase() === this.name.toLowerCase()) {
+            this.noUser = false;
+            this.checkBlogs(this.blogs);
+        } else {
+            this.checkBlogs(this.blogs);
+        }
     }
     checkBlogs(blogs: any[]): void {
         blogs.forEach(item => {

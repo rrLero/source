@@ -1,37 +1,37 @@
-    <h3 *ngIf="!empty && tag" class="found-tag">Tag: {{ tag }}</h3>
-    <article class="entry" *ngFor="let post of posts" [@posts]="post.state">
-        <header>
-            <div class="entry-date icons">
-                <i class="material-icons">access_time</i>
-                <span>{{ post.date | amTimeAgo }}</span>
-            </div>
-            <h2 class="entry-title">
+<h3 *ngIf="tag" class="found-tag">Tag: {{ tag }}</h3>
+<article class="entry" *ngFor="let post of posts" [@posts]="post.state">
+    <header>
+        <div class="entry-date icons">
+            <i class="material-icons">access_time</i>
+            <span>{{ post.date | amTimeAgo }}</span>
+        </div>
+        <h2 class="entry-title">
                 <a [routerLink]="[url, 'post', post.id]" (click)="savePage()">
                     {{ post.title }}
                 </a>
             </h2>
-        </header>
-        <div class="entry-summary">
-            <p [innerHTML]="post.preview | markdown | safeHtml"></p>
+    </header>
+    <div class="entry-summary">
+        <p [innerHTML]="post.preview | markdown | safeHtml"></p>
+    </div>
+    <footer class="entry-footer">
+        <ul class="entry-meta pull-left">
+            <li class="entry-author icons">
+                <i class="material-icons">person</i>
+                <span>{{ post.author || 'user' }}</span>
+            </li>
+            <li class="entry-tags icons">
+                <i class="material-icons">local_offer</i>
+                <ul class="tags">
+                    <li *ngFor="let tag of post.tags">
+                        <a [routerLink]="[url, 'tag', tag]">{{ tag }}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="entry-comment icons pull-right">
+            <i class="material-icons">chat_bubble_outline</i>
+            <span>Comments ({{ post.comments }})</span>
         </div>
-        <footer class="entry-footer">
-            <ul class="entry-meta pull-left">
-                <li class="entry-author icons">
-                    <i class="material-icons">person</i>
-                    <span>{{ post.author || 'user' }}</span>
-                </li>
-                <li class="entry-tags icons">
-                    <i class="material-icons">local_offer</i>
-                    <ul class="tags">
-                        <li *ngFor="let tag of post.tags">
-                            <a [routerLink]="[url, 'tag', tag]">{{ tag }}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="entry-comment icons pull-right">
-                <i class="material-icons">chat_bubble_outline</i>
-                <span>Comments ({{ post.comments }})</span>
-            </div>
-        </footer>
-    </article>
+    </footer>
+</article>

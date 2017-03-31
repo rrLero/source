@@ -1,54 +1,36 @@
-import { Component, OnInit }                          from '@angular/core';
-import { Router, ActivatedRoute }                     from '@angular/router';
-// import { Location }                                   from '@angular/common';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, OnInit }                      from '@angular/core';
+import { Router, ActivatedRoute }                 from '@angular/router';
 
-import { HttpService, UserService, ToastService } from '../../services/index';
-
-import { Post } from '../../shared/post.model';
+import { HttpService, UserService, ToastService } from '../../services';
+import { Post }                                   from '../../shared/post.model';
 
 @Component({
     selector: 'posts',
     templateUrl: 'posts.component.html',
-    styleUrls: ['posts.component.scss'],
-    animations: [
-        trigger('posts', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(0, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    styleUrls: ['posts.component.scss']
 })
 export class PostsComponent implements OnInit {
     posts: Post[];
+    user: any;
     total = 0;
     perPage = 5;
+    empty = false;
+    canEdit = false;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = +this.route.snapshot.params['id'] || 1;
     url = `/${this.name}/${this.repo}/`;
-    canEdit = false;
-    empty = false;
-    user: any;
     constructor(private router: Router,
-                // private location: Location,
                 private route: ActivatedRoute,
-                public toastService: ToastService,
                 private httpService: HttpService,
-                private userService: UserService) {
-                // location.subscribe(() => this.handlePageChange());
-    };
+                private userService: UserService,
+                public toastService: ToastService) { };
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.getUser();
         this.getPage();
     }
-    getUser() {
+    getUser(): void {
         this.user = this.userService.getUser();
         if (this.user) {
             this.userService
@@ -68,16 +50,10 @@ export class PostsComponent implements OnInit {
                 } else {
                     this.empty = true;
                 }
-
             })
             .catch(error => this.toastService.showError(error));
     }
     handlePageChange(page: number): void {
         this.getPage(page);
-    }
-    savePage() {
-        // let page = this.location.path().split('/')[4] || '1';
-        let page = JSON.stringify(this.id);
-        localStorage.setItem('page', page);
     }
 }

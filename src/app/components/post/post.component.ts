@@ -2,8 +2,13 @@ import { Component, OnInit, OnDestroy }               from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, CommentsService, UserService, ToastService }  from '../../services/index';
-import { Post }                                       from '../../shared/post.model';
+import {
+    HttpService,
+    CommentsService,
+    UserService,
+    ToastService
+}                from '../../services';
+import { Post }  from '../../shared/post.model';
 
 @Component({
     selector: 'post',
@@ -37,9 +42,9 @@ export class PostComponent implements OnInit, OnDestroy {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private commentsService: CommentsService,
-                public toastService: ToastService,
                 private httpService: HttpService,
-                private userService: UserService) { }
+                private userService: UserService,
+                public toastService: ToastService) { }
 
     ngOnInit(): void {
         this.getPost();
@@ -83,9 +88,8 @@ export class PostComponent implements OnInit, OnDestroy {
         }
     }
     goBack(): void {
-        let loadPage = localStorage.getItem('page') ? localStorage.getItem('page') : 1;
-        this.router.navigate([`/${this.name}/${this.repo}/page/${loadPage}`]);
+        let loadPage = localStorage.getItem('page') ? JSON.parse(localStorage.getItem('page')) : 1;
+        this.router.navigate([`/${this.name}/${this.repo}/page/${+loadPage}`]);
         localStorage.removeItem('page');
-        // this.location.back();
     }
 }
