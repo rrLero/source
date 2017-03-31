@@ -4,7 +4,7 @@
             <h2 class="text-center">Create post</h2>
             <div><b>Author:</b> {{ author }}</div>
             <div><b>Date:</b> {{ datetime }}</div>
-            <form (submit)="push(filename, title, tags, preview, text)">
+            <form (submit)="check.checked ? publish(filename, title, tags, preview, text) : save(filename, title, tags, preview, text)">
                 <div class="form-group">
                     <label for="filename">Filename:</label>
                     <input #filename class="form-control" type="text" id="filename" placeholder="Filename" (change)="repalceSpace(filename)" required>
@@ -28,6 +28,20 @@
                 <div class="form-group">
                     <button [disabled]="!text.value" type="submit" class="btn btn-primary">Create</button>
                     <button type="button" class="btn" (click)="goBack()">Back</button>
+
+                    <div class="[ form-group ] text-center publish">
+                        <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" checked>
+                        <div class="[ btn-group ]">
+                            <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                <span> </span>
+                            </label>
+                            <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
+                                Publish
+                            </label>
+                        </div>
+                    </div>
+
                 </div>
             </form>
         </div>

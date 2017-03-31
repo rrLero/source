@@ -48,20 +48,17 @@
         </pagination>
     </div> -->
     <div class="col-md-8">
+        <h3 *ngIf="empty">No posts</h3>
         <posts-template
             *ngIf="posts"
             [posts]="posts"
-            [total]="total"
-            [perPage]="perPage"
             [name]="name"
             [repo]="repo"
             [id]="id"
             [tag]="tag"
             [url]="url"
             [canEdit]="canEdit"
-            [empty]="empty"
-            [user]="user"
-            (pageChange)="handlePageChange($event)">
+            [user]="user">
         </posts-template>
 
         <pagination
@@ -72,7 +69,7 @@
             [perPage]="perPage"
             (pageChange)="handlePageChange($event)">
         </pagination>
-    </div>    
+    </div>
 
     <div class="col-md-4">
         <div *ngIf="posts" class="widget">

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter }     from '@angular/core';
+import { Component, Input }     from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { Post } from '../../shared/post.model';
@@ -22,8 +22,6 @@ import { Post } from '../../shared/post.model';
 })
 export class PostsTemplateComponent {
     @Input() posts: Post[];
-    @Input() total: number;
-    @Input() perPage: number;
     @Input() name: string;
     @Input() repo: string;
     @Input() id: number;
@@ -32,11 +30,7 @@ export class PostsTemplateComponent {
     @Input() canEdit: boolean;
     @Input() empty: boolean;
     @Input() user: any;
-    @Output() pageChange = new EventEmitter();
 
-    handlePageChange(page: number): void {
-        this.pageChange.emit(page);
-    }
     savePage() {
         let page = JSON.stringify(this.id);
         localStorage.setItem('page', page);

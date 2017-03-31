@@ -69,23 +69,18 @@ export class AccountComponent implements OnInit {
                 this.noBlogs = false;
             }
         });
-        // setTimeout(() => {
-        //     if (this.noUser && this.noBlogs) {
-        //         this.router.navigate(['/']);
-        //     }
-        // }, 0);
     }
     createBlog(name, repo) {
         if (repo.value) {
             let blog = repo.value.replace(/\s+/g, '-');
             this.toastService.showInfo('Activating blog...');
             this.httpService
-            .createBlog(name, blog)
-            .then(() => {
-                this.toastService.showSuccess('Done! You will be redirect to your blog');
-                setTimeout(() => this.router.navigate([`${name}/${blog}`]), 3000);
-            })
-            .catch(error => this.toastService.showError(error));
+                .createBlog(name, blog)
+                .then(() => {
+                    this.toastService.showSuccess('Done! You will be redirect to your blog');
+                    setTimeout(() => this.router.navigate([`${name}/${blog}`]), 3000);
+                })
+                .catch(error => this.toastService.showError(error));
         } else {
             this.toastService.showWarning('Set blog name');
         }
@@ -106,19 +101,17 @@ export class AccountComponent implements OnInit {
         this.deletedBlog.index = index;
     }
     deleteBlog(name, repo, index) {
-        // this.popupText = 'Deleting...';
         this.toastService.showInfo('Deleting...');
         this.httpService
             .deleteBlog(name, repo)
             .then(() =>
                 this.httpService.updateBlog(name, repo)
-                    .subscribe(() => {
-                        this.blogs.splice(index, 1);
-                        this.toastService.showSuccess('Done!');
-                        // this.popupText = 'Done!';
-                        // setTimeout(() => this.hidden = true, 1500);
-                    })
-                )
+                    .subscribe(
+                        () => {
+                            this.blogs.splice(index, 1);
+                            this.toastService.showSuccess('Done!');
+                        },
+                        error => this.toastService.showError(error)))
                 .catch(error => this.toastService.showError(error));
     }
     popupHandler(confirm) {

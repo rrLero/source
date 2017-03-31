@@ -46,31 +46,28 @@
             (pageChange)="handlePageChange($event)">
         </pagination>
     </div> -->
-<div class="col-md-8">
-    <posts-template
-        *ngIf="posts"
-        [posts]="posts"
-        [total]="total"
-        [perPage]="perPage"
-        [name]="name"
-        [repo]="repo"
-        [id]="id"
-        [url]="url"
-        [canEdit]="canEdit"
-        [empty]="empty"
-        [user]="user"
-        (pageChange)="handlePageChange($event)">
-    </posts-template>
+    <div class="col-md-8">
+        <h3 *ngIf="empty">No posts</h3>
+        <posts-template
+            *ngIf="posts"
+            [posts]="posts"
+            [name]="name"
+            [repo]="repo"
+            [id]="id"
+            [canEdit]="canEdit"
+            [empty]="empty"
+            [user]="user">
+        </posts-template>
 
-    <pagination
-        *ngIf="total"
-        [url]="url"
-        [currentPage]="id"
-        [total]="total"
-        [perPage]="perPage"
-        (pageChange)="handlePageChange($event)">
-    </pagination>
-</div>
+        <pagination
+            *ngIf="total"
+            [url]="url"
+            [currentPage]="id"
+            [total]="total"
+            [perPage]="perPage"
+            (pageChange)="handlePageChange($event)">
+        </pagination>
+    </div>
     <div class="col-md-4">
         <div *ngIf="posts" class="widget">
             <search></search>

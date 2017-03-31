@@ -2,8 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, UserService, ToastService }     from '../../services/index';
-
+import { DraftService, UserService, ToastService }    from '../../services/index';
 import { Post } from '../../shared/post.model';
 
 @Component({
@@ -26,7 +25,7 @@ import { Post } from '../../shared/post.model';
 export class DraftsComponent implements OnInit {
     posts: Post[];
     total = 0;
-    perPage = 3;
+    perPage = 5;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = +this.route.snapshot.params['id'] || 1;
@@ -36,9 +35,10 @@ export class DraftsComponent implements OnInit {
     user: any;
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                public toastService: ToastService,
-                private httpService: HttpService,
-                private userService: UserService) { };
+                // private httpService: HttpService,
+                private userService: UserService,
+                private draftService: DraftService,
+                public toastService: ToastService) { };
 
     ngOnInit() {
         this.getUser();
@@ -54,7 +54,7 @@ export class DraftsComponent implements OnInit {
         }
     }
     getPage(id: number = this.id): void {
-        this.httpService
+        this.draftService
             .getDrafts(this.name, this.repo, id, this.perPage)
             .then(res => {
                 if (res.items.length) {
@@ -66,9 +66,6 @@ export class DraftsComponent implements OnInit {
                 }
             })
             .catch(error => this.toastService.showError(error));
-    }
-    handlePageChange(page) {
-        this.getPage(page);
     }
     savePage() {
         let page = JSON.stringify(this.id);

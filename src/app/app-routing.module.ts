@@ -11,6 +11,7 @@ import { AuthComponent }        from './components';
 import { StartComponent }       from './components';
 import { AccountComponent }     from './components';
 import { DraftsComponent }      from './components';
+import { DraftComponent }       from './components';
 import { PostsByTagComponent }  from './components';
 
 const routes: Routes = [
@@ -65,6 +66,14 @@ const routes: Routes = [
     {
         path: ':name/:repo/drafts/page/:id',
         component: DraftsComponent
+    },
+    {
+        path: ':name/:repo/drafts/post/:title',
+        component: DraftComponent
+    },
+    {
+        path: ':name/:repo/drafts/post/:title/edit',
+        component: EditPostComponent
     },
     { path: '', redirectTo: '/welcome', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }

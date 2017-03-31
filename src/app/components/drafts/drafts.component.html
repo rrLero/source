@@ -1,62 +1,20 @@
-<div class="row">
-    <!-- <div class="col-md-8">
-        <h3 *ngIf="empty">No posts</h3>
-        <article class="entry" *ngFor="let post of posts" [@posts]="post.state">
-            <header>
-                <div class="entry-date icons">
-                    <i class="material-icons">access_time</i>
-                    <span>{{ post.date | amTimeAgo }}</span>
-                </div>
-                <h2 class="entry-title">
-                    <a [routerLink]="[url, 'post', post.id]" (click)="savePage()">
-                        {{ post.title }}
-                    </a>
-                </h2>
-            </header>
-            <div class="entry-summary">
-                <p [innerHTML]="post.preview | markdown | safeHtml"></p>
-            </div>
-            <footer class="entry-footer">
-                <ul class="entry-meta pull-left">
-                    <li class="entry-author icons">
-                        <i class="material-icons">person</i>
-                        <span>{{ post.author || 'user' }}</span>
-                    </li>
-                    <li class="entry-tags icons">
-                        <i class="material-icons">local_offer</i>
-                        <span>{{ post.tags }}</span>
-                    </li>
-                </ul>
-                <div class="entry-comment icons pull-right">
-                    <i class="material-icons">chat_bubble_outline</i>
-                    <span>Comments ({{ post.comments }})</span>
-                </div>
-            </footer>
-        </article>
-        <pagination
-            *ngIf="total"
-            [url]="url"
-            [currentPage]="id"
-            [total]="total"
-            [perPage]="perPage"
-            (pageChange)="handlePageChange($event)">
-        </pagination>
-    </div> -->
+<h3 *ngIf="user && user.login.toLowerCase() !== name.toLowerCase()">Private</h3>
+
+<div class="row" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
     <div class="col-md-8">
+
+        <h3 *ngIf="empty">No posts</h3>
+
         <posts-template
             *ngIf="posts"
             [posts]="posts"
-            [total]="total"
-            [perPage]="perPage"
             [name]="name"
             [repo]="repo"
             [id]="id"
             [tag]="tag"
             [url]="url"
             [canEdit]="canEdit"
-            [empty]="empty"
-            [user]="user"
-            (pageChange)="handlePageChange($event)">
+            [user]="user">
         </posts-template>
 
         <pagination
@@ -67,16 +25,19 @@
             [perPage]="perPage"
             (pageChange)="handlePageChange($event)">
         </pagination>
+
     </div>
+
     <div class="col-md-4">
-        <div *ngIf="posts" class="widget">
+        <!-- <div *ngIf="posts" class="widget">
             <search></search>
-        </div>
+        </div> -->
         <div class="widget" *ngIf="user && canEdit && posts || user && canEdit && empty">
             <h4>Actions</h4>
             <controls></controls>
         </div>
     </div>
+
 </div>
 
 <spinner *ngIf="!posts && !empty"></spinner>

@@ -12,22 +12,8 @@ export class HttpService {
     constructor(private http: Http,
                 private userService: UserService) { }
 
-    getUrl(name: string, repo: string) {
+    getUrl(name: string, repo: string): void {
         this.url = `${this.host}/${name}/${repo}/api`;
-    }
-    updateBlog(name: string, repo: string) {
-        this.getUrl(name, repo);
-        const token = this.userService.getUser().access_token;
-        const url = `${this.url}/update?access_token=${token}`;
-        return this.http.get(url).catch(this.handleError);
-    }
-    getBlogs(): Promise<any> {
-        const url = `${this.host}/api/blog_list`;
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
     }
     getPosts(name: string, repo: string): Promise<Post[]> {
         this.getUrl(name, repo);
@@ -65,26 +51,6 @@ export class HttpService {
             .then(response => response.json() as Post)
             .catch(this.handleError);
     }
-    getDrafts(name: string, repo: string, page: number, size: number) {
-        this.getUrl(name, repo);
-        const token = this.userService.getUser().access_token;
-        const url = `${this.url}/get_branch_posts?access_token=${token}&page=${page}&per_page=${size}`;
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
-    }
-    getDraft(name: string, repo: string, id: string) {
-        this.getUrl(name, repo);
-        const token = this.userService.getUser().access_token;
-        const url = `${this.url}/get_branch_posts/id/${id}?access_token=${token}`;
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
-    }
     update(name: string, repo: string, id: string, sha: string, post: Post): Promise<Post> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
@@ -98,21 +64,11 @@ export class HttpService {
     create(name: string, repo: string, post: Post): Promise<Post> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
-        const url = `${this.url}/put/test/test?access_token=${token}`;
+        const url = `${this.url}/put/master?access_token=${token}`;
         return this.http
             .put(url, JSON.stringify(post), { headers: this.headers })
             .toPromise()
             .then(() => post)
-            .catch(this.handleError);
-    }
-    createBlog(name: string, repo: string): Promise<any> {
-        this.getUrl(name, repo);
-        const token = this.userService.getUser().access_token;
-        const url = `${this.url}/get?access_token=${token}`;
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(response => response.json())
             .catch(this.handleError);
     }
     delete(name: string, repo: string, id: string, sha: string): Promise<void> {
@@ -122,9 +78,33 @@ export class HttpService {
         const options = new RequestOptions({ headers: headers });
         const url = `${this.url}/put/${id}/${sha}?access_token=${token}`;
         return this.http
-            .delete(url, options)
+        .delete(url, options)
+        .toPromise()
+        .then(() => null)
+        .catch(this.handleError);
+    }
+    getBlogs(): Promise<any> {
+        const url = `${this.host}/api/blog_list`;
+        return this.http
+        .get(url)
+        .toPromise()
+        .then(response => response.json())
+        .catch(this.handleError);
+    }
+    updateBlog(name: string, repo: string) {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/update?access_token=${token}`;
+        return this.http.get(url).catch(this.handleError);
+    }
+    createBlog(name: string, repo: string): Promise<any> {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/get?access_token=${token}`;
+        return this.http
+            .get(url)
             .toPromise()
-            .then(() => null)
+            .then(response => response.json())
             .catch(this.handleError);
     }
     deleteBlog(name: string, repo: string): Promise<void> {

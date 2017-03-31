@@ -3,7 +3,7 @@
     <a class="btn btn-primary" [routerLink]="[create]" [class.hidden]="post">Add post</a>
 
     <div class="post">
-        <div class="[ form-group ] text-center" [class.hidden]="!post">
+        <div class="[ form-group ] text-center" [class.hidden]="!post" *ngIf="!draft">
             <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" [checked]="status" (click)="check.checked ?  unLockComments() :lockComments()">
             <div class="[ btn-group ]">
                 <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
@@ -16,7 +16,8 @@
             </div>
         </div>
 
-        <a class="btn btn-primary" [class.hidden]="!post" [routerLink]="[edit]">Edit</a>
+        <button *ngIf="draft" type="button" class="btn btn-success" (click)="publish()">Publish</button>
+        <a class="btn btn-primary" [class.hidden]="!post" [routerLink]="['edit']">Edit</a>
         <button class="btn btn-danger" [class.hidden]="!post" (click)="hidden = false">Remove</button>
     </div>
 

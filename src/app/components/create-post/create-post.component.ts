@@ -3,7 +3,13 @@ import { Router, ActivatedRoute }     from '@angular/router';
 import { Location }                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, AuthService, ToastService, UserService }   from '../../services/index';
+import {
+    HttpService,
+    DraftService,
+    AuthService,
+    ToastService,
+    UserService
+}                                     from '../../services/index';
 import { Post, post, FullMd, fullMd } from '../../shared/post.model';
 
 @Component({
@@ -26,19 +32,17 @@ export class CreatePostComponent implements OnInit {
     date = new Date();
     author: string;
     datetime: string;
-    // hidden = true;
-    // popupText = 'Creating...';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
-    constructor(
-        private router: Router,
-        private location: Location,
-        private route: ActivatedRoute,
-        public toastService: ToastService,
-        private authService: AuthService,
-        private userService: UserService,
-        private httpService: HttpService) { }
+    constructor(private router: Router,
+                private location: Location,
+                private route: ActivatedRoute,
+                private authService: AuthService,
+                private userService: UserService,
+                private httpService: HttpService,
+                private draftService: DraftService,
+                public toastService: ToastService) { }
 
     ngOnInit() {
         let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
@@ -46,11 +50,9 @@ export class CreatePostComponent implements OnInit {
         this.datetime = date + time;
         if (this.authService.isLogged) {
             const profile = this.userService.getUser();
-            this.author = profile.name || profile.login;
+            this.author = profile.login;
+            // this.author = profile.name || profile.login;
         }
-    }
-    goBack() {
-        this.location.back();
     }
     repalceSpace(filenameEl) {
         if (filenameEl.value) {
@@ -71,22 +73,35 @@ export class CreatePostComponent implements OnInit {
             fullMd.trim()
         );
     }
-    push(filenameEl, titleEl, tagsEl, prevEl, textEl) {
+    save(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
-        // this.hidden = false;
         this.toastService.showInfo('Creating...');
-        this.httpService.create(this.name, this.repo, post)
-        .then(() =>
-            this.httpService.updateBlog(this.name, this.repo)
-            .subscribe(
-                () => {
-                // this.popupText = 'Done!';
-                // setTimeout(() => this.hidden = true, 1500);
+        this.draftService
+            .create(this.name, this.repo, post)
+            .then(() => {
                 this.toastService.showSuccess('Done!');
-                setTimeout(() => this.router.navigate([this.url]), 1800);
-                },
-                error => this.toastService.showError(error))
-        )
-        .catch(error => this.toastService.showError(error));
+                setTimeout(() => this.router.navigate([this.url, 'drafts']), 1800);
+            })
+            .catch(error => this.toastService.showError(error));
+    }
+    publish(filenameEl, titleEl, tagsEl, prevEl, textEl) {
+        this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
+        this.toastService.showInfo('Creating...');
+        this.httpService
+            .create(this.name, this.repo, post)
+            .then(() =>
+                this.httpService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(
+                    () => {
+                        this.toastService.showSuccess('Done!');
+                        setTimeout(() => this.router.navigate([this.url]), 1800);
+                    },
+                    error => this.toastService.showError(error))
+            )
+            .catch(error => this.toastService.showError(error));
+    }
+    goBack() {
+        this.location.back();
     }
 }

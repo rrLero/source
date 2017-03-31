@@ -46,7 +46,10 @@ pre > code {
   white-space: pre;
   overflow-x: auto;
 }
-
+table, td, th {
+    border: 1px solid #cdcdcd;
+    padding: 5px;
+}
 .cbalink {
   display: none !important;
 }

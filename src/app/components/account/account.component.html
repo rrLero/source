@@ -36,6 +36,7 @@
                                     <button type="button" (click)="updateBlog(blog.repo)" class="btn btn-success" [class.hidden]="!update">Update</button>
                                     <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-primary" [routerLink]="['/', blog.name, blog.repo, 'create']">Add post</a>
                                     <a [routerLink]="['/', blog.name, blog.repo]" class="btn btn-primary">Go to blog</a>
+                                    <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" [routerLink]="['/', blog.name, blog.repo, 'drafts']" class="btn btn-primary">Go to drafts</a>
                                     <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="prepareDelete(blog.name, blog.repo, i)" class="btn btn-danger">Remove</button>
                                 </div>
                             </div>
