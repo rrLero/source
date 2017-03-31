@@ -2,7 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, UserService, ToastService } from '../../services/index';
+import { HttpService, UserService, ToastService }     from '../../services';
 
 @Component({
     templateUrl: 'account.component.html',
@@ -22,6 +22,7 @@ import { HttpService, UserService, ToastService } from '../../services/index';
 })
 export class AccountComponent implements OnInit {
     user: any;
+    name: string;
     blogs: any[];
     hidden = true;
     update = false;
@@ -31,24 +32,24 @@ export class AccountComponent implements OnInit {
     deletedBlog: any = {};
     popupText = 'Remove blog?';
     githubUrl = `https://github.com/`;
-    name: string;
-
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                public toastService: ToastService,
                 private httpService: HttpService,
-                private userService: UserService) {
-    };
+                private userService: UserService,
+                public toastService: ToastService) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.user = this.userService.getUser();
+        this.getName();
+    }
+
+    getName(): void {
         this.route.params.forEach(param => {
             this.name = param.name;
             this.getBlogs();
         });
     }
-
-    getBlogs() {
+    getBlogs(): void {
         this.httpService
             .getBlogs()
             .then(blogs => {
@@ -62,7 +63,7 @@ export class AccountComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
-    checkBlogs(blogs) {
+    checkBlogs(blogs: any[]): void {
         blogs.forEach(item => {
             if (item.name === this.name.toLowerCase()) {
                 this.noUser = false;
@@ -70,9 +71,9 @@ export class AccountComponent implements OnInit {
             }
         });
     }
-    createBlog(name, repo) {
-        if (repo.value) {
-            let blog = repo.value.replace(/\s+/g, '-');
+    createBlog(name: string, repoEl: HTMLInputElement): void {
+        if (repoEl.value) {
+            let blog = repoEl.value.replace(/\s+/g, '-');
             this.toastService.showInfo('Activating blog...');
             this.httpService
                 .createBlog(name, blog)
@@ -85,8 +86,7 @@ export class AccountComponent implements OnInit {
             this.toastService.showWarning('Set blog name');
         }
     }
-
-    updateBlog(repo) {
+    updateBlog(repo: string): void {
         this.toastService.showInfo('Updating...');
         this.httpService
             .updateBlog(this.name, repo)
@@ -94,13 +94,13 @@ export class AccountComponent implements OnInit {
                 () => this.toastService.showSuccess('Done!'),
                 error => this.toastService.showError(error));
     }
-    prepareDelete(name, repo, index) {
+    prepareDelete(name: string, repo: string, index: number): void {
         this.hidden = false;
         this.deletedBlog.name = name;
         this.deletedBlog.repo = repo;
         this.deletedBlog.index = index;
     }
-    deleteBlog(name, repo, index) {
+    deleteBlog(name: string, repo: string, index: number): void {
         this.toastService.showInfo('Deleting...');
         this.httpService
             .deleteBlog(name, repo)
@@ -112,9 +112,9 @@ export class AccountComponent implements OnInit {
                             this.toastService.showSuccess('Done!');
                         },
                         error => this.toastService.showError(error)))
-                .catch(error => this.toastService.showError(error));
+            .catch(error => this.toastService.showError(error));
     }
-    popupHandler(confirm) {
+    popupHandler(confirm: boolean): void {
         if (confirm) {
             this.hidden = true;
             this.deleteBlog(this.deletedBlog.name, this.deletedBlog.repo, this.deletedBlog.index);
@@ -122,7 +122,7 @@ export class AccountComponent implements OnInit {
             this.hidden = true;
         }
     }
-    toggleUpdateBtns() {
+    toggleUpdateBtns(): void {
         this.update = !this.update;
     }
 }

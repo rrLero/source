@@ -1,18 +1,21 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { WelcomeComponent }     from './components';
-import { PostsComponent }       from './components';
-import { PostComponent }        from './components';
-import { CreatePostComponent }  from './components';
-import { EditPostComponent }    from './components';
-import { NotFoundComponent }    from './components';
-import { AuthComponent }        from './components';
-import { StartComponent }       from './components';
-import { AccountComponent }     from './components';
-import { DraftsComponent }      from './components';
-import { DraftComponent }       from './components';
-import { PostsByTagComponent }  from './components';
+import {
+    WelcomeComponent,
+    PostsComponent,
+    PostComponent,
+    CreatePostComponent,
+    EditPostComponent,
+    NotFoundComponent,
+    AuthComponent,
+    StartComponent,
+    AccountComponent,
+    DraftsComponent,
+    DraftComponent,
+    PostsByTagComponent
+
+}  from './components';
 
 const routes: Routes = [
     {
@@ -81,6 +84,6 @@ const routes: Routes = [
 
 @NgModule({
     imports: [ RouterModule.forRoot(routes) ],
-    exports: [ RouterModule ]
+    exports: [ RouterModule]
 })
 export class AppRoutingModule { }

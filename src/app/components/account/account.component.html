@@ -1,53 +1,102 @@
-<div class="row" *ngIf="blogs" [@account]="blogs.state">
+<div *ngIf="blogs" [@account]="blogs.state" class="row">
     <div class="col-md-8 col-md-offset-2">
 
         <div class="entry">
+
             <h3 *ngIf="noUser" class="text-center">No user</h3>
             <div *ngIf="!noUser">
+
                 <!-- Profile -->
-                <div class="profile text-center" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
-                    <img class="profile-avatar" [src]="user.avatar_url" alt="">
+                <div *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="profile text-center" >
+                    <img [src]="user.avatar_url" class="profile-avatar" [alt]="name + ' avatar'">
                     <div>{{ user.name || user.login }}</div>
                 </div>
-                <div *ngIf="user && user.login.toLowerCase() !== name.toLowerCase() || !user" class="profile text-center">{{ name }}</div>
-
-
+                <div
+                    *ngIf="user && user.login.toLowerCase() !== name.toLowerCase() || !user"
+                    class="profile text-center">
+                    {{ name }}
+                </div>
 
                 <!-- GitHub info -->
                 <div class="info text-center">
-                    <a class="btn btn-default controls" [href]="githubUrl + name" target="_blank">GitHub account</a><br>
-                    <a class="btn btn-default controls" [href]="githubUrl + name + '?tab=repositories'" target="_blank">GitHub repositories</a><br>
-                    <!-- <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-default controls" [href]="githubUrl + 'new'" target="_blank">Create repository</a> -->
+                    <a [href]="githubUrl + name" target="_blank" class="btn btn-default controls">GitHub account</a><br>
+                    <a
+                        [href]="githubUrl + name + '?tab=repositories'"
+                        target="_blank"
+                        class="btn btn-default controls">
+                        GitHub repositories
+                    </a>
+                    <br>
                 </div>
                 <hr>
 
-                <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && !noBlogs" type="button" class="btn btn-default update" (click)="toggleUpdateBtns()">{{ update ? 'Hide' : 'Update' }}</button>
+                <!-- Update toggle button -->
+                <button
+                    *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && !noBlogs"
+                    (click)="toggleUpdateBtns()"
+                    type="button"
+                    class="btn btn-default update">
+                    {{ update ? 'Hide' : 'Update' }}
+                </button>
+
                 <h3>{{ noBlogs ? 'No Blogs' : 'Blogs:'}}</h3>
+
                 <div class="blog-list">
                     <div class="blogs">
                         <div *ngFor="let blog of blogs; let i=index">
 
                             <!-- Blog -->
                             <div *ngIf="blog.name === name.toLowerCase()" class="blog">
+
                                 <a [routerLink]="['/', blog.name, blog.repo]" class="blog-name">{{ blog.repo | titlecase }}</a>
 
                                 <!-- Blog controls -->
                                 <div>
-                                    <button type="button" (click)="updateBlog(blog.repo)" class="btn btn-success" [class.hidden]="!update">Update</button>
-                                    <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" class="btn btn-primary" [routerLink]="['/', blog.name, blog.repo, 'create']">Add post</a>
-                                    <a [routerLink]="['/', blog.name, blog.repo]" class="btn btn-primary">Go to blog</a>
-                                    <a *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" [routerLink]="['/', blog.name, blog.repo, 'drafts']" class="btn btn-primary">Go to drafts</a>
-                                    <button *ngIf="user && user.login.toLowerCase() === name.toLowerCase()" type="button" (click)="prepareDelete(blog.name, blog.repo, i)" class="btn btn-danger">Remove</button>
+                                    <button
+                                        (click)="updateBlog(blog.repo)"
+                                        [class.hidden]="!update"
+                                        type="button"
+                                        class="btn btn-success">
+                                        Update
+                                     </button>
+                                    <a
+                                        *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                                        [routerLink]="['/', blog.name, blog.repo, 'create']"
+                                        class="btn btn-primary">
+                                        Add post
+                                    </a>
+                                    <a
+                                        [routerLink]="['/', blog.name, blog.repo]"
+                                        class="btn btn-primary">
+                                        Go to blog
+                                    </a>
+                                    <a
+                                        *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                                        [routerLink]="['/', blog.name, blog.repo, 'drafts']"
+                                        class="btn btn-primary">
+                                        Go to drafts
+                                    </a>
+                                    <button
+                                        *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                                        (click)="prepareDelete(blog.name, blog.repo, i)"
+                                        type="button"
+                                        class="btn btn-danger">
+                                        Remove
+                                    </button>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
+
                     <!-- Activate blog -->
-                    <form (submit)="createBlog(user.login, repoEl)" class="form-inline text-center" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
+                    <form *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                        (submit)="createBlog(user.login, repoEl)"
+                        class="form-inline text-center">
                         <input #repoEl type="text" class="form-control" placeholder="Blog name" required>
-                        <button [disabled]="repoEl.value" class="btn btn-primary" type="submit">Activate blog</button>
+                        <button [disabled]="repoEl.value" type="submit" class="btn btn-primary" >Activate blog</button>
                     </form>
+
                 </div>
             </div>
         </div>
