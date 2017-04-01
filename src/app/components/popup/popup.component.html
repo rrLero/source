@@ -1,12 +1,12 @@
-<div class="modal-dialog popup" [class.hidden]="hidden">
+<div #popup *ngIf="!hidden" [@popup]="popup.state" class="modal-dialog popup">
     <div class="modal-content">
-        <div class="modal-header ">
+        <div class="modal-header">
             <h4 class="modal-title text-center">Blog platform</h4>
         </div>
         <div class="modal-body">
-            <p [innerHTML]="popupComments || popupText" class="text-center"></p>
+            <p [innerHTML]="text" class="text-center"></p>
         </div>
-        <div *ngIf="confirm" class="modal-footer text-center">
+        <div class="modal-footer text-center">
             <button (click)="remove()" type="button" class="btn btn-danger">Remove</button>
             <button (click)="cancel()" type="button" class="btn btn-primary">Cancel</button>
         </div>

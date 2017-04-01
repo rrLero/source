@@ -27,9 +27,4 @@
     </div>
 
 </div>
-<popup
-    (answer)="popupHandler($event)"
-    [hidden]="hidden"
-    [popupText]="popupText"
-    [confirm]="confirm">
-</popup>
+<popup (answer)="popupHandler($event)" [hidden]="hidden" [text]="popupText"></popup>

@@ -32,7 +32,7 @@ export class ToastService {
             .error(msg, 'Oops!', { dismiss: 'controlled' })
             .then(() => setTimeout(() => this.toastr.dispose(), 5000));
     }
-    showWarning(msg: string) {
+    showWarning(msg: string): void {
         this.toastr.warning(msg, 'Alert!');
     }
     showInfo(msg: string): void {
