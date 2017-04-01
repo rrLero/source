@@ -40,7 +40,13 @@ pre {
   border: none;
   padding: 15px;
 }
-
+code {
+  background-color: #ededed;
+  color: #222;
+  border: 1px solid #d0d0d0;
+  font-style: normal;
+  padding: 2px 3px;
+}
 pre > code {
   display: block;
   white-space: pre;

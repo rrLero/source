@@ -58,7 +58,7 @@ export class AccountComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
-    checkUser() {
+    checkUser(): void {
         if (this.user && this.user.login.toLowerCase() === this.name.toLowerCase()) {
             this.noUser = false;
             this.checkBlogs(this.blogs);
