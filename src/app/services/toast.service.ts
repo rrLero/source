@@ -19,15 +19,15 @@ export class ToastConfig extends ToastOptions {
 
 @Injectable()
 export class ToastService {
-
+    toastLife = 2000;
     constructor(public toastr: ToastsManager) { }
 
-    showSuccess(msg: string) {
+    showSuccess(msg: string): void {
         this.toastr
             .success(msg, 'Success!', { dismiss: 'controlled' })
-            .then(() => setTimeout(() => this.toastr.dispose(), 2000));
+            .then(() => setTimeout(() => this.toastr.dispose(), this.toastLife));
     }
-    showError(msg: string) {
+    showError(msg: string): void {
         this.toastr
             .error(msg, 'Oops!', { dismiss: 'controlled' })
             .then(() => setTimeout(() => this.toastr.dispose(), 5000));
@@ -35,7 +35,7 @@ export class ToastService {
     showWarning(msg: string) {
         this.toastr.warning(msg, 'Alert!');
     }
-    showInfo(msg: string) {
+    showInfo(msg: string): void {
         this.toastr
             .info(msg, null, { dismiss: 'controlled' })
             .then(toast => {
@@ -44,7 +44,10 @@ export class ToastService {
                 }
             });
     }
-    showCustom(msg: string) {
+    showCustom(msg: string): void {
         this.toastr.custom(msg, null, { enableHTML: true });
+    }
+    life(): number {
+        return this.toastLife;
     }
 }

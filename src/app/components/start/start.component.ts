@@ -51,7 +51,7 @@ export class StartComponent implements OnInit {
             .createBlog(this.user.login, blog)
             .then(() => {
                 this.toastService.showSuccess('Done! You will be redirect to your blog');
-                setTimeout(() => this.router.navigate([`${this.user.login}/${blog}`]), 2000);
+                setTimeout(() => this.router.navigate([`${this.user.login}/${blog}`]), this.toastService.life());
             })
             .catch(error => this.toastService.showError(error));
         } else {

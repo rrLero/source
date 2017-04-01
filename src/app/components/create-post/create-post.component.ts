@@ -1,6 +1,6 @@
-import { Component, OnInit }          from '@angular/core';
-import { Router, ActivatedRoute }     from '@angular/router';
-import { Location }                   from '@angular/common';
+import { Component, OnInit }                          from '@angular/core';
+import { Router, ActivatedRoute }                     from '@angular/router';
+import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import {
@@ -9,7 +9,7 @@ import {
     AuthService,
     ToastService,
     UserService
-}                                     from '../../services/index';
+}                                     from '../../services';
 import { Post, post, FullMd, fullMd } from '../../shared/post.model';
 
 @Component({
@@ -80,7 +80,7 @@ export class CreatePostComponent implements OnInit {
             .create(this.name, this.repo, post)
             .then(() => {
                 this.toastService.showSuccess('Done!');
-                setTimeout(() => this.router.navigate([this.url, 'drafts']), 2000);
+                setTimeout(() => this.router.navigate([this.url, 'drafts']), this.toastService.life());
             })
             .catch(error => this.toastService.showError(error));
     }
@@ -95,7 +95,7 @@ export class CreatePostComponent implements OnInit {
                     .subscribe(
                     () => {
                         this.toastService.showSuccess('Done!');
-                        setTimeout(() => this.router.navigate([this.url]), 2000);
+                        setTimeout(() => this.router.navigate([this.url]), this.toastService.life());
                     },
                     error => this.toastService.showError(error))
             )

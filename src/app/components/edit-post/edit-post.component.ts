@@ -102,9 +102,9 @@ export class EditPostComponent implements OnInit {
                     .subscribe(
                         () => {
                             this.toastService.showSuccess('Done!');
-                            setTimeout(() => this.goBack(), 2000);
+                            setTimeout(() => this.goBack(), this.toastService.life());
                         },
-                        error => this.toastService.showError(error))            )
+                        error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
     updateDraft(): void {
@@ -116,7 +116,7 @@ export class EditPostComponent implements OnInit {
                 this.post)
             .then(() => {
                 this.toastService.showSuccess('Done!');
-                setTimeout(() => this.location.back(), 2000);
+                setTimeout(() => this.goBack(), this.toastService.life());
             })
             .catch(error => this.toastService.showError(error));
     }
@@ -127,6 +127,6 @@ export class EditPostComponent implements OnInit {
         textEl.setValue(this.post.text_full_strings.trim());
     }
     goBack(): void {
-        this.router.navigate([this.url]);
+        this.location.back();
     }
 }

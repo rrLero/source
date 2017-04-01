@@ -70,7 +70,7 @@ export class ControlsComponent implements OnInit {
             .subscribe(
                 () => {
                     this.toastService.showSuccess('Done!');
-                    setTimeout(() => this.comments.emit(status), 2000);
+                    setTimeout(() => this.comments.emit(status), this.toastService.life());
                 },
                 error => this.toastService.showError(error));
     }
@@ -102,7 +102,7 @@ export class ControlsComponent implements OnInit {
     }
     callback(path = ''): void {
         this.toastService.showSuccess('Done!');
-        setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/${path}`]), 2000);
+        setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/${path}`]), this.toastService.life());
     }
     popupHandler(confirm: boolean): void {
         if (confirm) {
