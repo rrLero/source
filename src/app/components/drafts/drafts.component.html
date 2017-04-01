@@ -2,21 +2,15 @@
 
 <div class="row" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
     <div class="col-md-8">
-
         <h3 *ngIf="empty">No posts</h3>
-
         <posts-template
             *ngIf="posts"
             [posts]="posts"
             [name]="name"
             [repo]="repo"
-            [id]="id"
-            [tag]="tag"
             [url]="url"
-            [canEdit]="canEdit"
-            [user]="user">
+            [canEdit]="canEdit">
         </posts-template>
-
         <pagination
             *ngIf="total"
             [url]="url"
@@ -25,9 +19,7 @@
             [perPage]="perPage"
             (pageChange)="handlePageChange($event)">
         </pagination>
-
     </div>
-
     <div class="col-md-4">
         <!-- <div *ngIf="posts" class="widget">
             <search></search>
@@ -37,7 +29,6 @@
             <controls></controls>
         </div>
     </div>
-
 </div>
 
 <spinner *ngIf="!posts && !empty"></spinner>

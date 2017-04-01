@@ -1,5 +1,4 @@
 import { Component, Input, OnInit }                   from '@angular/core';
-import { ActivatedRoute }                             from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { Post } from '../../shared/post.model';
@@ -28,21 +27,6 @@ export class PostsTemplateComponent implements OnInit {
     @Input() tag: string;
     @Input() url: string;
     @Input() canEdit: boolean;
-    @Input() user: any;
-    id: string;
-    constructor(private route: ActivatedRoute) { }
-
-    ngOnInit(): void {
-        this.getPageId();
-    }
-
-    getPageId(): void {
-        this.route.params.forEach(param => {
-            this.id = param.id;
-        });
-    }
-    savePage(): void {
-        let page = this.id || '1';
-        localStorage.setItem('page', page);
-    }
+    constructor() { }
+    ngOnInit(): void { }
 }

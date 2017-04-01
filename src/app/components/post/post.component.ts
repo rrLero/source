@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy }               from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
+import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import {
@@ -38,8 +39,8 @@ export class PostComponent implements OnInit, OnDestroy {
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
     url = `/${this.name}/${this.repo}/post/${this.title}`;
-
     constructor(private router: Router,
+                private location: Location,
                 private route: ActivatedRoute,
                 private commentsService: CommentsService,
                 private httpService: HttpService,
@@ -88,8 +89,6 @@ export class PostComponent implements OnInit, OnDestroy {
         }
     }
     goBack(): void {
-        let loadPage = localStorage.getItem('page') ? JSON.parse(localStorage.getItem('page')) : 1;
-        this.router.navigate([`/${this.name}/${this.repo}/page/${+loadPage}`]);
-        localStorage.removeItem('page');
+        this.location.back();
     }
 }
