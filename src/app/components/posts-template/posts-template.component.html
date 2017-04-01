@@ -18,7 +18,7 @@
         <ul class="entry-meta pull-left">
             <li class="entry-author icons">
                 <i class="material-icons">person</i>
-                <span>{{ post.author || 'user' }}</span>
+                <a [routerLink]="['/', post.author | lowercase]">{{ post.author || 'user' }}</a>
             </li>
             <li class="entry-tags icons">
                 <i class="material-icons">local_offer</i>
