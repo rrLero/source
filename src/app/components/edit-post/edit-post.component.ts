@@ -102,7 +102,7 @@ export class EditPostComponent implements OnInit {
                     .subscribe(
                         () => {
                             this.toastService.showSuccess('Done!');
-                            setTimeout(() => this.goBack(), 1800);
+                            setTimeout(() => this.goBack(), 2000);
                         },
                         error => this.toastService.showError(error))            )
             .catch(error => this.toastService.showError(error));
@@ -116,7 +116,7 @@ export class EditPostComponent implements OnInit {
                 this.post)
             .then(() => {
                 this.toastService.showSuccess('Done!');
-                setTimeout(() => this.location.back(), 1800);
+                setTimeout(() => this.location.back(), 2000);
             })
             .catch(error => this.toastService.showError(error));
     }

@@ -4,9 +4,11 @@ import { SearchService }   from './search.service';
 import { AuthService }     from './auth.service';
 import { CommentsService } from './comments.service';
 import { UserService }     from './user.service';
-import { ToastService }    from './toast.service';
 import { RouterService }   from './router.service';
 import { DraftService }    from './draft.service';
+import { ToastService }    from './toast.service';
+import { ToastConfig }     from './toast.service';
+import { ToastOptions }    from 'ng2-toastr';
 
 export { HttpService };
 export { PagerService };
@@ -24,7 +26,7 @@ export const services = [
     AuthService,
     CommentsService,
     UserService,
-    ToastService,
     RouterService,
-    DraftService
+    DraftService,
+    ToastService, { provide: ToastOptions, useClass: ToastConfig }
 ];

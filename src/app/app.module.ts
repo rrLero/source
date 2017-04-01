@@ -3,8 +3,8 @@ import { BrowserModule }           from '@angular/platform-browser';
 import { HttpModule }              from '@angular/http';
 import { FormsModule }             from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastModule }             from 'ng2-toastr/ng2-toastr';
-import { MomentModule }              from 'angular2-moment';
+import { ToastModule }             from 'ng2-toastr';
+import { MomentModule }            from 'angular2-moment';
 import { AppRoutingModule }        from './app-routing.module';
 
 import { AppComponent } from './app.component';

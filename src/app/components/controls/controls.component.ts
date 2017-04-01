@@ -102,7 +102,7 @@ export class ControlsComponent implements OnInit {
     }
     callback(path = ''): void {
         this.toastService.showSuccess('Done!');
-        setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/${path}`]), 5000);
+        setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/${path}`]), 2000);
     }
     popupHandler(confirm: boolean): void {
         if (confirm) {

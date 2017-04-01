@@ -80,7 +80,7 @@ export class CreatePostComponent implements OnInit {
             .create(this.name, this.repo, post)
             .then(() => {
                 this.toastService.showSuccess('Done!');
-                setTimeout(() => this.router.navigate([this.url, 'drafts']), 1800);
+                setTimeout(() => this.router.navigate([this.url, 'drafts']), 2000);
             })
             .catch(error => this.toastService.showError(error));
     }
@@ -95,7 +95,7 @@ export class CreatePostComponent implements OnInit {
                     .subscribe(
                     () => {
                         this.toastService.showSuccess('Done!');
-                        setTimeout(() => this.router.navigate([this.url]), 1800);
+                        setTimeout(() => this.router.navigate([this.url]), 2000);
                     },
                     error => this.toastService.showError(error))
             )

@@ -82,7 +82,7 @@ export class AccountComponent implements OnInit {
                 .createBlog(name, blog)
                 .then(() => {
                     this.toastService.showSuccess('Done! You will be redirect to your blog');
-                    setTimeout(() => this.router.navigate([`${name}/${blog}`]), 3000);
+                    setTimeout(() => this.router.navigate([`${name}/${blog}`]), 2000);
                 })
                 .catch(error => this.toastService.showError(error));
         } else {
