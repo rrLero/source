@@ -18,7 +18,11 @@
         <ul class="entry-meta pull-left">
             <li class="entry-author icons">
                 <i class="material-icons">person</i>
-                <a [routerLink]="['/', post.author | lowercase]">{{ post.author || 'user' }}</a>
+                <ul class="authors">
+                    <li *ngFor="let author of post.author.split(',')">
+                        <a [routerLink]="['/', author.trim() | lowercase]">{{ author }}</a>
+                    </li>
+                </ul>
             </li>
             <li class="entry-tags icons">
                 <i class="material-icons">local_offer</i>

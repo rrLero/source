@@ -2,9 +2,16 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="entry">
             <h2 class="text-center">Edit post</h2>
-            <div><b>Author:</b> {{ post.author }}</div>
+            <div>
+                <b>Author:</b>
+                {{ post.author }}
+                <span (click)="toggleCoAuthorInput(coAuthor)" class="add-author glyphicon glyphicon-{{ coAuthorInput ? 'remove' : 'plus' }}"></span>
+            </div>
+            <div [class.hidden]="!coAuthorInput" class="form-group">
+                <input #coAuthor class="form-control" type="text" name="title" placeholder="Name">
+            </div>
             <div><b>Date:</b> {{ post.date }}</div>
-            <form #form="ngForm" novalidate (ngSubmit)="check.checked ? moveToDrafts(title, tags, preview, text) : save(title, tags, preview, text)">
+            <form #form="ngForm" novalidate (ngSubmit)="check.checked ? moveToDrafts(title, tags, preview, text, coAuthor) : save(title, tags, preview, text, coAuthor)">
                 <div class="form-group">
                     <label>Title:</label>
                     <input #title [ngModel]="post.title" class="form-control" type="text" name="title" placeholder="Title" required>
@@ -23,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <button [disabled]="!text.value || !preview.value || form.invalid" type="submit" class="btn btn-primary">Update</button>
-                    <button type="button" (click)="cancel(title, tags, text, preview)" class="btn">Cancel</button>
+                    <button type="button" (click)="cancel(title, tags, text, preview, coAuthor)" class="btn">Cancel</button>
                     <button type="button" (click)="goBack()" class="btn">Back</button>
 
                     <div class="[ form-group ] text-center publish">
