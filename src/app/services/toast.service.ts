@@ -45,7 +45,7 @@ export class ToastService {
             });
     }
     showCustom(msg: string): void {
-        this.toastr.custom(msg, null, { enableHTML: true });
+        this.toastr.custom(`<span class="custom-toast-color">${msg}</span>`, null, { enableHTML: true });
     }
     life(): number {
         return this.toastLife;

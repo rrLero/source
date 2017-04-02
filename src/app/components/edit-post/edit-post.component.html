@@ -26,9 +26,9 @@
                     <button type="button" (click)="cancel(title, tags, text, preview)" class="btn">Cancel</button>
                     <button type="button" (click)="goBack()" class="btn">Back</button>
 
-                    <div *ngIf="!draft" class="[ form-group ] text-center publish">
+                    <div class="[ form-group ] text-center publish">
                         <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off">
-                        <div class="[ btn-group ]">
+                        <div *ngIf="!draft" class="[ btn-group ]">
                             <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
                                 <span class="[ glyphicon glyphicon-ok ]"></span>
                                 <span> </span>
