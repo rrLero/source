@@ -11,7 +11,7 @@
                     <ul class="entry-meta">
                         <li class="entry-author icons">
                             <i class="material-icons">person</i>
-                            <span>{{ post.author || 'user' }}</span>
+                            <a  [routerLink]="['/', post.author | lowercase]">{{ post.author || 'user' }}</a>
                         </li>
                         <li class="entry-date icons">
                             <i class="material-icons">access_time</i>
@@ -28,7 +28,11 @@
                 <footer class="entry-footer">
                     <div class="entry-tags icons">
                         <i class="material-icons">local_offer</i>
-                        <span>{{ post.tags }}</span>
+                        <ul class="tags">
+                            <li *ngFor="let tag of post.tags">
+                                <a [routerLink]="['/', name, repo, 'tag', tag]">{{ tag }}</a>
+                            </li>
+                        </ul>
                     </div>
                 </footer>
             </article>

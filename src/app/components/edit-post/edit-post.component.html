@@ -4,7 +4,7 @@
             <h2 class="text-center">Edit post</h2>
             <div><b>Author:</b> {{ post.author }}</div>
             <div><b>Date:</b> {{ post.date }}</div>
-            <form #form="ngForm" novalidate (ngSubmit)="save(title, tags, preview, text)">
+            <form #form="ngForm" novalidate (ngSubmit)="check.checked ? moveToDrafts(title, tags, preview, text) : save(title, tags, preview, text)">
                 <div class="form-group">
                     <label>Title:</label>
                     <input #title [ngModel]="post.title" class="form-control" type="text" name="title" placeholder="Title" required>
@@ -25,6 +25,19 @@
                     <button [disabled]="!text.value || !preview.value || form.invalid" type="submit" class="btn btn-primary">Update</button>
                     <button type="button" (click)="cancel(title, tags, text, preview)" class="btn">Cancel</button>
                     <button type="button" (click)="goBack()" class="btn">Back</button>
+
+                    <div *ngIf="!draft" class="[ form-group ] text-center publish">
+                        <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off">
+                        <div class="[ btn-group ]">
+                            <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
+                                <span class="[ glyphicon glyphicon-ok ]"></span>
+                                <span> </span>
+                            </label>
+                            <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
+                                Move to drafts
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </form>
 

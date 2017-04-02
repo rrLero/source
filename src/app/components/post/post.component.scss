@@ -62,3 +62,19 @@
 .go-back {
   margin-top: 1em;
 }
+.tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline;
+
+  li {
+    display: inline;
+
+    &:not(:last-child):after {
+      content: ', ';
+      position: relative;
+      left: -2px;
+    }
+  }
+}

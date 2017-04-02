@@ -47,8 +47,6 @@ export class PostsComponent implements OnInit {
                     this.posts = res.items;
                     this.total = res.total;
                     window.scrollTo(0, 0);
-                } else if (res.message === 'unable create repo') {
-                    this.router.navigate(['page-not-found']);
                 } else {
                     this.empty = true;
                 }

@@ -2,8 +2,8 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { DraftService, UserService, ToastService }    from '../../services/index';
-import { Post } from '../../shared/post.model';
+import { DraftService, UserService, ToastService }    from '../../services';
+import { Post }                                       from '../../shared/post.model';
 
 @Component({
     selector: 'drafts',
@@ -24,18 +24,17 @@ import { Post } from '../../shared/post.model';
 })
 export class DraftsComponent implements OnInit {
     posts: Post[];
+    user: any;
     total = 0;
     perPage = 5;
+    empty = false;
+    canEdit = false;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = +this.route.snapshot.params['id'] || 1;
     url = `/${this.name}/${this.repo}/drafts/`;
-    canEdit = false;
-    empty = false;
-    user: any;
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                // private httpService: HttpService,
                 private userService: UserService,
                 private draftService: DraftService,
                 public toastService: ToastService) { };
@@ -67,8 +66,7 @@ export class DraftsComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
-    savePage() {
-        let page = JSON.stringify(this.id);
-        localStorage.setItem('page', page);
+    handlePageChange(page: number): void {
+        this.getPage(page);
     }
 }

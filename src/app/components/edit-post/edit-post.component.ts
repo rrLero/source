@@ -1,10 +1,10 @@
-import { Component, OnInit }      from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Component, OnInit }                          from '@angular/core';
+import { Router, ActivatedRoute }                     from '@angular/router';
+import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, DraftService, ToastService } from '../../services/index';
-import { Post, FullMd, fullMd }                    from '../../shared/post.model';
+import { HttpService, DraftService, ToastService }    from '../../services';
+import { Post, post, FullMd, fullMd }                 from '../../shared/post.model';
 
 @Component({
     templateUrl: 'edit-post.component.html',
@@ -33,22 +33,21 @@ export class EditPostComponent implements OnInit {
         private router: Router,
         private location: Location,
         private route: ActivatedRoute,
-        public toastService: ToastService,
         private draftService: DraftService,
-        private httpService: HttpService) { }
+        private httpService: HttpService,
+        public toastService: ToastService) { }
 
     ngOnInit(): void {
+        this.checkPath();
+        this.draft ? this.getDraft() : this.getPost();
+    }
+    checkPath(): void {
         let path = this.location.path().split('/');
         path.forEach(item => {
             if (item === 'drafts') {
                 this.draft = true;
             }
         });
-        if (this.draft) {
-            this.getDraft();
-        } else {
-            this.getPost();
-        }
     }
     getPost(): void {
         this.route.params
@@ -117,6 +116,41 @@ export class EditPostComponent implements OnInit {
             .then(() => {
                 this.toastService.showSuccess('Done!');
                 setTimeout(() => this.goBack(), this.toastService.life());
+            })
+            .catch(error => this.toastService.showError(error));
+    }
+    create(titleEl, tagsEl, prevEl, textEl): void {
+        new FullMd(
+            titleEl.value,
+            tagsEl.value,
+            this.post.author,
+            this.post.date,
+            prevEl.value,
+            textEl.value
+        );
+        new Post(
+            this.post.id.slice(20),
+            fullMd.trim()
+        );
+    }
+    moveToDrafts(titleEl, tagsEl, prevEl, textEl): void {
+        this.create(titleEl, tagsEl, prevEl, textEl);
+        this.toastService.showInfo('Moving...');
+        this.draftService
+            .create(this.name, this.repo, post)
+            .then(() => {
+                this.httpService
+                    .delete(this.name, this.repo, this.post.id, this.post.sha)
+                    .then(() =>
+                        this.httpService
+                            .updateBlog(this.name, this.repo)
+                            .subscribe(
+                                () => {
+                                    this.toastService.showSuccess('Done!');
+                                    setTimeout(() => this.router.navigate([this.name, this.repo, 'drafts']), this.toastService.life());
+                                },
+                                error => this.toastService.showError(error)))
+                    .catch(error => this.toastService.showError(error));
             })
             .catch(error => this.toastService.showError(error));
     }
