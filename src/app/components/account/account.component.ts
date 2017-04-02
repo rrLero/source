@@ -28,7 +28,6 @@ export class AccountComponent implements OnInit {
     update = false;
     confirm = true;
     noUser = true;
-    noBlogs = true;
     deletedBlog: any = {};
     popupText = 'Remove blog?';
     githubUrl = `https://github.com/`;
@@ -53,41 +52,33 @@ export class AccountComponent implements OnInit {
         this.httpService
             .getBlogs()
             .then(blogs => {
-                this.blogs = blogs;
-                this.checkUser();
+                this.blogs = blogs.filter(item => item.name === this.name.toLowerCase());
+                this.checkUser(blogs);
             })
             .catch(error => this.toastService.showError(error));
     }
-    checkUser(): void {
+    checkUser(blogs: any[]): void {
         if (this.user && this.user.login.toLowerCase() === this.name.toLowerCase()) {
             this.noUser = false;
-            this.checkBlogs(this.blogs);
         } else {
-            this.checkBlogs(this.blogs);
+            blogs.forEach(item => {
+                if (item.name === this.name.toLowerCase()) {
+                    this.noUser = false;
+                }
+            });
         }
-    }
-    checkBlogs(blogs: any[]): void {
-        blogs.forEach(item => {
-            if (item.name === this.name.toLowerCase()) {
-                this.noUser = false;
-                this.noBlogs = false;
-            }
-        });
     }
     createBlog(name: string, repoEl: HTMLInputElement): void {
-        if (repoEl.value) {
-            let blog = repoEl.value.replace(/\s+/g, '-');
-            this.toastService.showInfo('Activating blog...');
-            this.httpService
-                .createBlog(name, blog)
-                .then(() => {
-                    this.toastService.showSuccess('Done! You will be redirect to your blog');
-                    setTimeout(() => this.router.navigate([`${name}/${blog}`]), this.toastService.life());
-                })
-                .catch(error => this.toastService.showError(error));
-        } else {
-            this.toastService.showWarning('Set blog name');
-        }
+        let blog = repoEl.value.replace(/\s+/g, '-');
+        this.toastService.showInfo('Activating blog...');
+        this.httpService
+            .createBlog(name, blog)
+            .then(() => {
+                this.toastService.showSuccess('Done!');
+                this.blogs.push({ name: name, repo: blog });
+                repoEl.value = null;
+            })
+            .catch(error => this.toastService.showError(error));
     }
     updateBlog(repo: string): void {
         this.toastService.showInfo('Updating...');
@@ -108,7 +99,8 @@ export class AccountComponent implements OnInit {
         this.httpService
             .deleteBlog(name, repo)
             .then(() =>
-                this.httpService.updateBlog(name, repo)
+                this.httpService
+                    .updateBlog(name, repo)
                     .subscribe(
                         () => {
                             this.blogs.splice(index, 1);

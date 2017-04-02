@@ -93,12 +93,11 @@ export class CreatePostComponent implements OnInit {
                 this.httpService
                     .updateBlog(this.name, this.repo)
                     .subscribe(
-                    () => {
-                        this.toastService.showSuccess('Done!');
-                        setTimeout(() => this.router.navigate([this.url]), this.toastService.life());
-                    },
-                    error => this.toastService.showError(error))
-            )
+                        () => {
+                            this.toastService.showSuccess('Done!');
+                            setTimeout(() => this.router.navigate([this.url]), this.toastService.life());
+                        },
+                        error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
     goBack() {

@@ -32,14 +32,14 @@
 
                 <!-- Update toggle button -->
                 <button
-                    *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && !noBlogs"
+                    *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && blogs.length"
                     (click)="toggleUpdateBtns()"
                     type="button"
                     class="btn btn-default update">
                     {{ update ? 'Hide' : 'Update' }}
                 </button>
 
-                <h3>{{ noBlogs ? 'No Blogs' : 'Blogs:'}}</h3>
+                <h3>{{ blogs.length ? 'Blogs' : 'No blogs'}}</h3>
 
                 <div class="blog-list">
                     <div class="blogs">
@@ -90,11 +90,11 @@
                     </div>
 
                     <!-- Activate blog -->
-                    <form *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
-                        (submit)="createBlog(user.login, repoEl)"
+                    <form #form="ngForm" novalidate *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                        (ngSubmit)="createBlog(user.login, repoEl)"
                         class="form-inline text-center">
-                        <input #repoEl type="text" class="form-control" placeholder="Blog name" required>
-                        <button [disabled]="repoEl.value" type="submit" class="btn btn-primary" >Activate blog</button>
+                        <input #repoEl type="text" [ngModel]="repoEl.value" name="repoEl" class="form-control" placeholder="Blog name" required>
+                        <button [disabled]="form.invalid" type="submit" class="btn btn-primary" >Activate blog</button>
                     </form>
 
                 </div>

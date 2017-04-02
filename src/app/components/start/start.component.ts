@@ -3,7 +3,7 @@ import { Router }                                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { UserService, HttpService, ToastService }     from '../../services/index';
+import { UserService, HttpService, ToastService }     from '../../services';
 
 const faq = {
     capabilities: false,
@@ -31,32 +31,28 @@ const faq = {
     ]
 })
 export class StartComponent implements OnInit {
-    faq: any = faq;
     user: any;
+    faq: any = faq;
     constructor(private router: Router,
                 private location: Location,
-                public toastService: ToastService,
                 private httpService: HttpService,
-                private userService: UserService) { }
+                private userService: UserService,
+                public toastService: ToastService) { }
 
     ngOnInit() {
         this.user = this.userService.getUser();
     }
 
     createBlog(repo) {
-        if (repo.value) {
-            let blog = repo.value.replace(/\s+/g, '-');
-            this.toastService.showInfo('Activating blog...');
-            this.httpService
+        let blog = repo.value.replace(/\s+/g, '-');
+        this.toastService.showInfo('Activating blog...');
+        this.httpService
             .createBlog(this.user.login, blog)
             .then(() => {
-                this.toastService.showSuccess('Done! You will be redirect to your blog');
-                setTimeout(() => this.router.navigate([`${this.user.login}/${blog}`]), this.toastService.life());
+                this.toastService.showSuccess('Done! You will be redirect to your profile');
+                setTimeout(() => this.router.navigate([`${this.user.login}`]), this.toastService.life());
             })
             .catch(error => this.toastService.showError(error));
-        } else {
-            this.toastService.showWarning('Set blog name');
-        }
     }
     savePath() {
         localStorage.setItem('path', this.location.path());

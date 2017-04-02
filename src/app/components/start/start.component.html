@@ -10,9 +10,9 @@
                 <li>активировать блог (будет создан репозиторий или использован существующий)</li>
             </ul>
 
-            <form #form (submit)="createBlog(repoEl)" class="form-inline">
-                <input [disabled]="!user" #repoEl type="text" class="form-control" placeholder="Blog name" required>
-                <button [disabled]="!user" class="btn btn-primary" type="submit">Activate Blog</button>
+            <form #form="ngForm" novalidate (ngSubmit)="createBlog(repoEl)" class="form-inline">
+                <input [disabled]="!user" #repoEl [ngModel]="repoEl.value" name="repoEl" type="text" class="form-control" placeholder="Blog name" required>
+                <button [disabled]="!user || form.invalid" class="btn btn-primary" type="submit">Activate Blog</button>
                 <span *ngIf="!user">Необходима авторизация</span>
             </form>
 
