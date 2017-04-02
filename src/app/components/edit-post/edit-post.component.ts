@@ -3,7 +3,7 @@ import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, DraftService, ToastService }    from '../../services';
+import { HttpService, DraftService, UserService, ToastService }    from '../../services';
 import { Post, post, FullMd, fullMd }                 from '../../shared/post.model';
 
 @Component({
@@ -24,8 +24,8 @@ import { Post, post, FullMd, fullMd }                 from '../../shared/post.mo
 })
 export class EditPostComponent implements OnInit {
     post: Post;
+    user: any;
     draft = false;
-    coAuthorInput = false;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
@@ -34,11 +34,13 @@ export class EditPostComponent implements OnInit {
         private router: Router,
         private location: Location,
         private route: ActivatedRoute,
+        private userService: UserService,
         private draftService: DraftService,
         private httpService: HttpService,
         public toastService: ToastService) { }
 
     ngOnInit(): void {
+        this.user = this.userService.getUser();
         this.checkPath();
         this.draft ? this.getDraft() : this.getPost();
     }
@@ -68,19 +70,17 @@ export class EditPostComponent implements OnInit {
                         post => this.post = post,
                         error => this.toastService.showError(error));
     }
-    save(titleEl, tagsEl, previewEl, textEl, coAuthorEl): void {
+    save(titleEl, tagsEl, previewEl, textEl): void {
         this.post.title = titleEl.value;
         this.post.tags = tagsEl.value.split(',');
         this.post.preview = previewEl.value;
         this.post.text_full_strings = textEl.value;
         this.toastService.showInfo('In process...');
-        this.buildFullMd(coAuthorEl);
+        this.buildFullMd();
         this.draft ? this.updateDraft() : this.update();
     }
-    buildFullMd(coAuthorEl: HTMLInputElement): void {
-        if (coAuthorEl.value) {
-            this.post.author = `${this.post.author}, ${coAuthorEl.value}`;
-        }
+    buildFullMd(): void {
+        this.addAuthors();
         new FullMd(
             this.post.title,
             this.post.tags.join(', '),
@@ -123,10 +123,8 @@ export class EditPostComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
-    create(titleEl, tagsEl, prevEl, textEl, coAuthorEl): void {
-        if (coAuthorEl.value) {
-            this.post.author = `${this.post.author}, ${coAuthorEl.value}`;
-        }
+    create(titleEl, tagsEl, prevEl, textEl): void {
+        this.addAuthors();
         new FullMd(
             titleEl.value,
             tagsEl.value,
@@ -140,8 +138,8 @@ export class EditPostComponent implements OnInit {
             fullMd.trim()
         );
     }
-    moveToDrafts(titleEl, tagsEl, prevEl, textEl, coAuthorEl): void {
-        this.create(titleEl, tagsEl, prevEl, textEl, coAuthorEl);
+    moveToDrafts(titleEl, tagsEl, prevEl, textEl): void {
+        this.create(titleEl, tagsEl, prevEl, textEl);
         this.toastService.showInfo('Moving...');
         this.draftService
             .create(this.name, this.repo, post)
@@ -161,16 +159,24 @@ export class EditPostComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
-    cancel(titleEl, tagsEl, textEl, previewEl, coAuthorEl): void {
+    cancel(titleEl, tagsEl, textEl, previewEl): void {
         titleEl.value = this.post.title;
         tagsEl.value = this.post.tags;
         previewEl.setValue(this.post.preview);
         textEl.setValue(this.post.text_full_strings.trim());
-        coAuthorEl.value = null;
     }
-    toggleCoAuthorInput(coAuthorEl: HTMLInputElement) {
-        this.coAuthorInput = !this.coAuthorInput;
-        coAuthorEl.value = null;
+    addAuthors(): void {
+        let coAuthor: boolean;
+        this.post.author
+            .split(',')
+            .forEach(item => {
+                if (this.user.login.toLowerCase() === item.trim().toLowerCase()) {
+                    coAuthor = true;
+                }
+            });
+        if (!coAuthor) {
+            this.post.author = `${this.post.author}, ${this.user.login}`;
+        }
     }
     goBack(): void {
         this.location.back();

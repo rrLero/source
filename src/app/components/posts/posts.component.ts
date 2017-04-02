@@ -43,7 +43,6 @@ export class PostsComponent implements OnInit {
         this.httpService
             .getPage(this.name, this.repo, id, this.perPage)
             .then(res => {
-                console.log(res.items);
                 if (res.items) {
                     this.posts = res.items;
                     this.total = res.total;
