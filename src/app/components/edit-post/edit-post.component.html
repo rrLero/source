@@ -4,14 +4,14 @@
             <h2 class="text-center">Edit post</h2>
             <div><b>Author:</b> {{ post.author }}</div>
             <div><b>Date:</b> {{ post.date }}</div>
-            <form (submit)="save(title, tags, preview, text)">
+            <form #form="ngForm" novalidate (ngSubmit)="save(title, tags, preview, text)">
                 <div class="form-group">
                     <label>Title:</label>
-                    <input #title [value]="post.title" class="form-control" type="text" name="title" placeholder="Title" required>
+                    <input #title [ngModel]="post.title" class="form-control" type="text" name="title" placeholder="Title" required>
                 </div>
                 <div class="form-group">
                     <label>Tags:</label>
-                    <input #tags [value]="post.tags" class="form-control" type="text" name="tags" placeholder="Tags" required>
+                    <input #tags [ngModel]="post.tags" class="form-control" type="text" name="tags" placeholder="Tags" required>
                 </div>
                 <div class="form-group">
                     <label>Preview:</label>
@@ -22,7 +22,7 @@
                     <md-editor #text [value]="post.text_full_strings.trim()"></md-editor>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button [disabled]="!text.value || !preview.value || form.invalid" type="submit" class="btn btn-primary">Update</button>
                     <button type="button" (click)="cancel(title, tags, text, preview)" class="btn">Cancel</button>
                     <button type="button" (click)="goBack()" class="btn">Back</button>
                 </div>

@@ -49,6 +49,7 @@ code {
 }
 pre > code {
   display: block;
+  border: none;
   white-space: pre;
   overflow-x: auto;
 }
