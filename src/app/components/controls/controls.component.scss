@@ -3,8 +3,11 @@
   z-index: 100;
 }
 
-a.btn {
-  min-width: 5.5em;
+a.btn, button {
+  min-width: 5.8em;
+}
+a.go-btn {
+  min-width: 7.5em;
 }
 
 .post {

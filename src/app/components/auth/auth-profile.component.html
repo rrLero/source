@@ -1,4 +1,4 @@
-<div *ngIf="authService.isLogged && profile" class="profile-wrap" (click)="getPath()">
+<div *ngIf="authService.isLogged && profile" class="profile-wrap">
     <div class="dropdown" [class.open]="dropdown" (click)="dropdown=!dropdown">
         <div class="dropdown-toggle" id="profile-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <img class="profile-avatar" [src]="profile.avatar_url" alt="">

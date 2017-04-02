@@ -13,7 +13,8 @@ import {
     AccountComponent,
     DraftsComponent,
     DraftComponent,
-    PostsByTagComponent
+    PostsByTagComponent,
+    AboutComponent
 
 }  from './components';
 
@@ -29,6 +30,10 @@ const routes: Routes = [
     {
         path: 'auth',
         component: AuthComponent
+    },
+    {
+        path: 'about',
+        component: AboutComponent
     },
     {
         path: 'page-not-found',

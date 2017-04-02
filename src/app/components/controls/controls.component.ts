@@ -30,6 +30,7 @@ import { Post } from '../../shared/post.model';
 export class ControlsComponent implements OnInit {
     @Input() post: Post;
     @Input() draft: boolean;
+    @Input() drafts: boolean;
     @Input() status: boolean;
     @Output() comments = new EventEmitter();
     user: any;
@@ -39,7 +40,7 @@ export class ControlsComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
-    create = `/${this.name}/${this.repo}/create`;
+    url = `/${this.name}/${this.repo}`;
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private commentsService: CommentsService,

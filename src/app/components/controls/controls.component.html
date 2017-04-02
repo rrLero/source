@@ -1,6 +1,8 @@
 <div #controls [@controls]="controls.state" class="controls">
 
-    <a [routerLink]="[create]" [class.hidden]="post" class="btn btn-primary">Add post</a>
+    <a [routerLink]="[url, 'create']" [class.hidden]="post" class="btn btn-primary go-btn">Add post</a>
+    <a *ngIf="!drafts" [routerLink]="[url, 'drafts']" [class.hidden]="post" class="btn btn-primary go-btn">Go to drafts</a>
+    <a *ngIf="drafts" [routerLink]="[url]" [class.hidden]="post" class="btn btn-primary go-btn">Go to blog</a>
     <div class="post">
         <div *ngIf="!draft" [class.hidden]="!post" class="[ form-group ] text-center">
             <input

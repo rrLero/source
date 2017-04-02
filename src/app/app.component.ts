@@ -55,11 +55,15 @@ export class AppComponent implements OnInit {
             .mergeMap(route => route.url)
             .subscribe(event => {
                 this.drafts = false;
+                this.title = 'Blog platform';
                 event.forEach(item => {
                     if (item.path === 'drafts') {
                         this.drafts = true;
                     }
                 });
+                if (event[0].path === 'about') {
+                    this.title = 'Blog platform / about';
+                }
             });
     }
     savePath() {

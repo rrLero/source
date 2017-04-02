@@ -20,6 +20,7 @@ import { DraftsComponent }        from './drafts/drafts.component';
 import { DraftComponent }         from './draft/draft.component';
 import { PostsByTagComponent }    from './posts-by-tag/posts-by-tag.component';
 import { PostsTemplateComponent } from './posts-template/posts-template.component';
+import { AboutComponent }         from './about/about.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -34,6 +35,7 @@ export { SpinnerComponent };
 export { DraftsComponent };
 export { DraftComponent };
 export { PostsByTagComponent };
+export { AboutComponent };
 
 export const components = [
     WelcomeComponent,
@@ -57,5 +59,6 @@ export const components = [
     DraftsComponent,
     DraftComponent,
     PostsByTagComponent,
-    PostsTemplateComponent
+    PostsTemplateComponent,
+    AboutComponent
 ];

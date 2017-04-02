@@ -22,6 +22,7 @@ import { Post } from '../../shared/post.model';
 })
 export class PostsTemplateComponent implements OnInit {
     @Input() posts: Post[];
+    @Input() drafts: boolean;
     @Input() name: string;
     @Input() repo: string;
     @Input() tag: string;

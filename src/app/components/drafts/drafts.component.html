@@ -1,11 +1,12 @@
-<h3 *ngIf="user && user.login.toLowerCase() !== name.toLowerCase()">Private</h3>
+<h3 *ngIf="user && !canEdit">Private</h3>
 
-<div class="row" *ngIf="user && user.login.toLowerCase() === name.toLowerCase()">
+<div class="row" *ngIf="user && canEdit">
     <div class="col-md-8">
         <h3 *ngIf="empty">No posts</h3>
         <posts-template
             *ngIf="posts"
             [posts]="posts"
+            [drafts]="true"
             [name]="name"
             [repo]="repo"
             [url]="url"
@@ -26,7 +27,7 @@
         </div> -->
         <div class="widget" *ngIf="user && canEdit && posts || user && canEdit && empty">
             <h4>Actions</h4>
-            <controls></controls>
+            <controls [drafts]="true"></controls>
         </div>
     </div>
 </div>

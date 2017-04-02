@@ -8,9 +8,9 @@ import { MomentModule }            from 'angular2-moment';
 import { AppRoutingModule }        from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { components }   from './components/index';
-import { services }     from './services/index';
-import { pipes }        from './pipes/index';
+import { components }   from './components';
+import { services }     from './services';
+import { pipes }        from './pipes';
 
 @NgModule({
     imports: [
