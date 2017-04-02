@@ -31,6 +31,10 @@ const routes: Routes = [
         component: AuthComponent
     },
     {
+        path: 'page-not-found',
+        component: NotFoundComponent
+    },
+    {
         path: ':name',
         component: AccountComponent
     },
