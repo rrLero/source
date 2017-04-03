@@ -3,8 +3,13 @@ import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, DraftService, UserService, ToastService }    from '../../services';
-import { Post, post, FullMd, fullMd }                 from '../../shared/post.model';
+import {
+    HttpService,
+    DraftService,
+    UserService,
+    ToastService
+}                                     from '../../services';
+import { Post, post, FullMd, fullMd } from '../../shared/post.model';
 
 @Component({
     templateUrl: 'edit-post.component.html',
@@ -25,23 +30,26 @@ import { Post, post, FullMd, fullMd }                 from '../../shared/post.mo
 export class EditPostComponent implements OnInit {
     post: Post;
     user: any;
+    confirm: boolean;
+    sessionId: string;
+    onEdit: boolean;
     draft = false;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
     url = `/${this.name}/${this.repo}/post/${this.title}`;
-    constructor(
-        private router: Router,
-        private location: Location,
-        private route: ActivatedRoute,
-        private userService: UserService,
-        private draftService: DraftService,
-        private httpService: HttpService,
-        public toastService: ToastService) { }
+
+    constructor(private router: Router,
+                private location: Location,
+                private route: ActivatedRoute,
+                private userService: UserService,
+                private draftService: DraftService,
+                private httpService: HttpService,
+                public toastService: ToastService) { }
 
     ngOnInit(): void {
-        this.user = this.userService.getUser();
         this.checkPath();
+        this.user = this.userService.getUser();
         this.draft ? this.getDraft() : this.getPost();
     }
     checkPath(): void {
@@ -52,13 +60,28 @@ export class EditPostComponent implements OnInit {
             }
         });
     }
+    isOnEdit(): void {
+        this.route.queryParams.forEach(params => this.sessionId = params['session_id']);
+        let session_id = localStorage.getItem(this.post.id);
+        let canEdit = this.sessionId === session_id ? true : false;
+
+        if (!canEdit) {
+            this.onEdit = true;
+            this.toastService.showWarning('Post locked');
+        } else if (canEdit) {
+            this.post.tags.pop();
+        }
+    }
     getPost(): void {
         this.route.params
             .switchMap(({ name, repo, title }) =>
                 this.httpService
                     .getPost(name, repo, title))
                     .subscribe(
-                        post => this.post = post,
+                        post => {
+                            this.post = post;
+                            this.isOnEdit();
+                        },
                         error => this.toastService.showError(error));
     }
     getDraft(): void {
@@ -67,7 +90,10 @@ export class EditPostComponent implements OnInit {
                 this.draftService
                     .getDraft(name, repo, title))
                     .subscribe(
-                        post => this.post = post,
+                        post => {
+                            this.post = post;
+                            this.isOnEdit();
+                        },
                         error => this.toastService.showError(error));
     }
     save(titleEl, tagsEl, previewEl, textEl): void {
@@ -78,6 +104,7 @@ export class EditPostComponent implements OnInit {
         this.toastService.showInfo('In process...');
         this.buildFullMd();
         this.draft ? this.updateDraft() : this.update();
+        localStorage.removeItem(this.post.id);
     }
     buildFullMd(): void {
         this.addAuthors();
@@ -93,12 +120,7 @@ export class EditPostComponent implements OnInit {
     }
     update(): void {
         this.httpService
-            .update(
-                this.name,
-                this.repo,
-                this.post.id,
-                this.post.sha,
-                this.post)
+            .update(this.name, this.repo, this.post.id, this.post.sha, this.post)
             .then(() =>
                 this.httpService
                     .updateBlog(this.name, this.repo)
@@ -112,17 +134,27 @@ export class EditPostComponent implements OnInit {
     }
     updateDraft(): void {
         this.draftService
-            .update(
-                this.name,
-                this.repo,
-                this.post.id,
-                this.post)
+            .update(this.name, this.repo, this.post.id, this.post)
             .then(() => {
                 this.toastService.showSuccess('Done!');
                 setTimeout(() => this.goBack(), this.toastService.life());
             })
             .catch(error => this.toastService.showError(error));
     }
+    addAuthors(): void {
+        let coAuthor: boolean;
+        this.post.author
+            .split(',')
+            .forEach(item => {
+                if (this.user.login.toLowerCase() === item.trim().toLowerCase()) {
+                    coAuthor = true;
+                }
+            });
+        if (!coAuthor) {
+            this.post.author = `${this.post.author}, ${this.user.login}`;
+        }
+    }
+
     create(titleEl, tagsEl, prevEl, textEl): void {
         this.addAuthors();
         new FullMd(
@@ -158,25 +190,13 @@ export class EditPostComponent implements OnInit {
                     .catch(error => this.toastService.showError(error));
             })
             .catch(error => this.toastService.showError(error));
+            localStorage.removeItem(this.post.id);
     }
     cancel(titleEl, tagsEl, textEl, previewEl): void {
         titleEl.value = this.post.title;
         tagsEl.value = this.post.tags;
         previewEl.setValue(this.post.preview);
         textEl.setValue(this.post.text_full_strings.trim());
-    }
-    addAuthors(): void {
-        let coAuthor: boolean;
-        this.post.author
-            .split(',')
-            .forEach(item => {
-                if (this.user.login.toLowerCase() === item.trim().toLowerCase()) {
-                    coAuthor = true;
-                }
-            });
-        if (!coAuthor) {
-            this.post.author = `${this.post.author}, ${this.user.login}`;
-        }
     }
     goBack(): void {
         this.location.back();

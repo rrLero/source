@@ -24,7 +24,8 @@
             </div>
         </div>
         <button *ngIf="draft" (click)="publish()" type="button" class="btn btn-success" >Publish</button>
-        <a [routerLink]="['edit']" [class.hidden]="!post" class="btn btn-primary">Edit</a>
+        <a (click)="getPostStatus()" [class.hidden]="!post" class="btn btn-primary">Edit</a>
+        <!-- <a [routerLink]="['edit']" [class.hidden]="!post" class="btn btn-primary">Edit</a> -->
         <button (click)="hidden = false" [class.hidden]="!post" class="btn btn-danger">Remove</button>
     </div>
 

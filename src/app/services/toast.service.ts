@@ -33,7 +33,9 @@ export class ToastService {
             .then(() => setTimeout(() => this.toastr.dispose(), 5000));
     }
     showWarning(msg: string): void {
-        this.toastr.warning(msg, 'Alert!');
+        this.toastr
+            .warning(msg, 'Alert!')
+            .then(() => setTimeout(() => this.toastr.dispose(), 5000));
     }
     showInfo(msg: string): void {
         this.toastr

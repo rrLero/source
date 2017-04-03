@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute }                         from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras }       from '@angular/router';
 import { trigger, state, style, transition, animate }     from '@angular/animations';
 
 import {
@@ -7,8 +7,8 @@ import {
     DraftService,
     CommentsService,
     ToastService
-}               from '../../services';
-import { Post } from '../../shared/post.model';
+}                               from '../../services';
+import { Post, FullMd, fullMd } from '../../shared/post.model';
 
 @Component({
     selector: 'controls',
@@ -34,6 +34,7 @@ export class ControlsComponent implements OnInit {
     @Input() status: boolean;
     @Output() comments = new EventEmitter();
     user: any;
+    savedSession: string;
     hidden = true;
     confirm = true;
     popupText = 'Remove post?';
@@ -104,6 +105,112 @@ export class ControlsComponent implements OnInit {
     callback(path = ''): void {
         this.toastService.showSuccess('Done!');
         setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/${path}`]), this.toastService.life());
+    }
+
+    getPostStatus(): void {
+        this.toastService.showInfo('Check status...');
+        if (this.draft) {
+            this.draftService
+                .getDraft(this.name, this.repo, this.title)
+                .then(post => {
+                    this.checkStatus(post);
+                })
+                .catch(error => this.toastService.showError(error));
+        } else {
+            this.httpService
+                .getPost(this.name, this.repo, this.title)
+                .then(post => {
+                    this.checkStatus(post);
+                })
+                .catch(error => this.toastService.showError(error));
+        }
+    }
+    checkStatus(post: Post): void {
+        this.savedSession = localStorage.getItem(post.id);
+        let lastInx = post.tags.length - 1;
+        let onEdit = post.tags[lastInx] === '-----on-edit';
+
+        if (onEdit && !this.savedSession) {
+            this.toastService.showWarning('Session opened!');
+        } else if (onEdit && this.savedSession) {
+            this.loadSession();
+        } else {
+            this.toastService.showInfo('Session opening...');
+            this.lock(post);
+        }
+    }
+    getSessionId(): NavigationExtras {
+        let session_id = Math.random() * Math.pow(10, 17);
+        let navigationExtras: NavigationExtras = {
+              queryParams: { 'session_id': session_id },
+        };
+
+        localStorage.setItem(this.title, JSON.stringify(session_id));
+        return navigationExtras;
+    }
+    loadSession(): void {
+        let url: string;
+        if (this.draft) {
+            url = `${this.url}/drafts/post/${this.title}/edit`;
+        } else {
+            url = `${this.url}/post/${this.title}/edit`;
+        }
+        let navigationExtras: NavigationExtras = {
+              queryParams: { 'session_id': this.savedSession },
+        };
+        this.toastService.showSuccess('Session loaded!');
+        setTimeout(() => this.router.navigate([ url ], navigationExtras), this.toastService.life());
+    }
+    lock(post: Post): void {
+        let navigationExtras = this.getSessionId();
+        post.tags.push('-----on-edit');
+        this.buildFullMd(post);
+        this.draft ? this.lockDraft(post, navigationExtras) : this.lockPost(post, navigationExtras);
+    }
+    lockPost(post: Post, navigationExtras): void {
+        this.httpService
+            .update(this.name, this.repo, post.id, post.sha, post)
+            .then(() => {
+                this.httpService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(
+                        () => {
+                            this.toastService.showSuccess('Session opened!');
+                            setTimeout(() =>
+                            this.router.navigate([this.url, 'post', this.title, 'edit'], navigationExtras),
+                            this.toastService.life());
+                        },
+                        error => this.toastService.showError(error));
+                    })
+                    .catch(error => this.toastService.showError(error));
+    }
+    lockDraft(post: Post, navigationExtras): void {
+        this.draftService
+            .update(this.name, this.repo, post.id, post)
+            .then(() => {
+                this.httpService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(
+                        () => {
+                            this.toastService.showSuccess('Session opened!');
+                            setTimeout(() =>
+                                this.router.navigate([this.url, 'drafts', 'post', this.title, 'edit'], navigationExtras),
+                                this.toastService.life());
+                        },
+                        error => this.toastService.showError(error));
+            })
+            .catch(error => this.toastService.showError(error));
+    }
+    buildFullMd(post: Post): void {
+        new FullMd(
+            post.title,
+            post.tags.join(', '),
+            post.author,
+            post.date,
+            post.preview,
+            post.text_full_strings
+        );
+        post.text_full_md = fullMd.trim();
     }
     popupHandler(confirm: boolean): void {
         if (confirm) {
