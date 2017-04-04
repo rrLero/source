@@ -33,6 +33,7 @@ export class EditPostComponent implements OnInit {
     confirm: boolean;
     sessionId: string;
     onEdit: boolean;
+    canEdit = false;
     draft = false;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
@@ -61,14 +62,16 @@ export class EditPostComponent implements OnInit {
         });
     }
     isOnEdit(): void {
-        this.route.queryParams.forEach(params => this.sessionId = params['session_id']);
-        let session_id = localStorage.getItem(this.post.id);
-        let canEdit = this.sessionId === session_id ? true : false;
-
-        if (!canEdit) {
+        if (this.user) {
+            let lastInx = this.post.tags.length - 1;
+            let lockInfo = this.post.tags[lastInx].split(':');
+            let author =  lockInfo[1];
+            this.canEdit = author === this.user.login ? true : false;
+        }
+        if (!this.canEdit) {
             this.onEdit = true;
             this.toastService.showWarning('Post locked');
-        } else if (canEdit) {
+        } else {
             this.post.tags.pop();
         }
     }
@@ -104,7 +107,6 @@ export class EditPostComponent implements OnInit {
         this.toastService.showInfo('In process...');
         this.buildFullMd();
         this.draft ? this.updateDraft() : this.update();
-        localStorage.removeItem(this.post.id);
     }
     buildFullMd(): void {
         this.addAuthors();
@@ -190,7 +192,6 @@ export class EditPostComponent implements OnInit {
                     .catch(error => this.toastService.showError(error));
             })
             .catch(error => this.toastService.showError(error));
-            localStorage.removeItem(this.post.id);
     }
     cancel(titleEl, tagsEl, textEl, previewEl): void {
         titleEl.value = this.post.title;

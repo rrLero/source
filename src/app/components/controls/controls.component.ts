@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute, NavigationExtras }       from '@angular/router';
+import { Router, ActivatedRoute }                         from '@angular/router';
 import { trigger, state, style, transition, animate }     from '@angular/animations';
 
 import {
     HttpService,
     DraftService,
     CommentsService,
+    UserService,
     ToastService
 }                               from '../../services';
 import { Post, FullMd, fullMd } from '../../shared/post.model';
@@ -42,14 +43,18 @@ export class ControlsComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
     url = `/${this.name}/${this.repo}`;
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private commentsService: CommentsService,
+                private userService: UserService,
                 private draftService: DraftService,
                 private httpService: HttpService,
                 public toastService: ToastService) { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.user = this.userService.getUser();
+    }
 
     unLockComments(): void {
         this.toastService.showInfo('Enabling...');
@@ -112,41 +117,30 @@ export class ControlsComponent implements OnInit {
         if (this.draft) {
             this.draftService
                 .getDraft(this.name, this.repo, this.title)
-                .then(post => {
-                    this.checkStatus(post);
-                })
+                .then(post => this.checkStatus(post))
                 .catch(error => this.toastService.showError(error));
         } else {
             this.httpService
                 .getPost(this.name, this.repo, this.title)
-                .then(post => {
-                    this.checkStatus(post);
-                })
+                .then(post => this.checkStatus(post))
                 .catch(error => this.toastService.showError(error));
         }
     }
     checkStatus(post: Post): void {
-        this.savedSession = localStorage.getItem(post.id);
         let lastInx = post.tags.length - 1;
-        let onEdit = post.tags[lastInx] === '-----on-edit';
+        let lockInfo = post.tags[lastInx].split(':');
+        let onEdit = lockInfo[0] === '-----post-locked-by';
+        let author = lockInfo[1];
+        let canEdit = this.user.login === author;
 
-        if (onEdit && !this.savedSession) {
-            this.toastService.showWarning('Session opened!');
-        } else if (onEdit && this.savedSession) {
+        if (onEdit && !canEdit) {
+            this.toastService.showWarning('Post locked!');
+        } else if (onEdit && canEdit) {
             this.loadSession();
         } else {
             this.toastService.showInfo('Session opening...');
             this.lock(post);
         }
-    }
-    getSessionId(): NavigationExtras {
-        let session_id = Math.random() * Math.pow(10, 17);
-        let navigationExtras: NavigationExtras = {
-              queryParams: { 'session_id': session_id },
-        };
-
-        localStorage.setItem(this.title, JSON.stringify(session_id));
-        return navigationExtras;
     }
     loadSession(): void {
         let url: string;
@@ -155,19 +149,15 @@ export class ControlsComponent implements OnInit {
         } else {
             url = `${this.url}/post/${this.title}/edit`;
         }
-        let navigationExtras: NavigationExtras = {
-              queryParams: { 'session_id': this.savedSession },
-        };
         this.toastService.showSuccess('Session loaded!');
-        setTimeout(() => this.router.navigate([ url ], navigationExtras), this.toastService.life());
+        setTimeout(() => this.router.navigate([ url ]), this.toastService.life());
     }
     lock(post: Post): void {
-        let navigationExtras = this.getSessionId();
-        post.tags.push('-----on-edit');
+        post.tags.push(`-----post-locked-by:${this.user.login}`);
         this.buildFullMd(post);
-        this.draft ? this.lockDraft(post, navigationExtras) : this.lockPost(post, navigationExtras);
+        this.draft ? this.lockDraft(post) : this.lockPost(post);
     }
-    lockPost(post: Post, navigationExtras): void {
+    lockPost(post: Post): void {
         this.httpService
             .update(this.name, this.repo, post.id, post.sha, post)
             .then(() => {
@@ -177,14 +167,14 @@ export class ControlsComponent implements OnInit {
                         () => {
                             this.toastService.showSuccess('Session opened!');
                             setTimeout(() =>
-                            this.router.navigate([this.url, 'post', this.title, 'edit'], navigationExtras),
+                            this.router.navigate([this.url, 'post', this.title, 'edit']),
                             this.toastService.life());
                         },
                         error => this.toastService.showError(error));
                     })
-                    .catch(error => this.toastService.showError(error));
+            .catch(error => this.toastService.showError(error));
     }
-    lockDraft(post: Post, navigationExtras): void {
+    lockDraft(post: Post): void {
         this.draftService
             .update(this.name, this.repo, post.id, post)
             .then(() => {
@@ -194,7 +184,7 @@ export class ControlsComponent implements OnInit {
                         () => {
                             this.toastService.showSuccess('Session opened!');
                             setTimeout(() =>
-                                this.router.navigate([this.url, 'drafts', 'post', this.title, 'edit'], navigationExtras),
+                                this.router.navigate([this.url, 'drafts', 'post', this.title, 'edit']),
                                 this.toastService.life());
                         },
                         error => this.toastService.showError(error));
