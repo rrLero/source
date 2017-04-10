@@ -5,6 +5,15 @@ import { AuthService, ToastService }            from '../../services/index';
 
 @Component({
     template: `<p>Authenticate</p>`,
+    styles: [`
+        p {
+          font-size: 60px;
+          color: #ccc;
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+    `]
 })
 export class AuthComponent implements OnInit {
 
