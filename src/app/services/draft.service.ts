@@ -77,6 +77,12 @@ export class DraftService {
             .then(() => null)
             .catch(this.handleError);
     }
+    updateBlog(name: string, repo: string) {
+        this.getUrl(name, repo);
+        const token = this.userService.getUser().access_token;
+        const url = `${this.url}/update?ref=True&access_token=${token}`;
+        return this.http.get(url).catch(this.handleError);
+    }
     private handleError(error: any): Promise<any> {
         return Promise.reject(error.message || error);
     }

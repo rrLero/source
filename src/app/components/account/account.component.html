@@ -57,7 +57,14 @@
                                         [class.hidden]="!update"
                                         type="button"
                                         class="btn btn-success">
-                                        Update
+                                        Update blog
+                                    </button>
+                                    <button
+                                        (click)="updateDraft(blog.repo)"
+                                        [class.hidden]="!update"
+                                        type="button"
+                                        class="btn btn-success">
+                                        Update draft
                                      </button>
                                     <a
                                         *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"

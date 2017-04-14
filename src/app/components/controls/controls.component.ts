@@ -97,7 +97,12 @@ export class ControlsComponent implements OnInit {
         this.toastService.showInfo('Deleting...');
         this.draftService
             .delete(this.name, this.repo, this.post.id)
-            .then(() => this.callback('drafts'))
+            .then(() =>
+                this.draftService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(() =>
+                        this.callback(),
+                        error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
     publish(): void {
@@ -178,7 +183,7 @@ export class ControlsComponent implements OnInit {
         this.draftService
             .update(this.name, this.repo, post.id, post)
             .then(() => {
-                this.httpService
+                this.draftService
                     .updateBlog(this.name, this.repo)
                     .subscribe(
                         () => {

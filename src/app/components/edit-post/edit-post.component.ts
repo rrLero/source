@@ -137,10 +137,15 @@ export class EditPostComponent implements OnInit {
     updateDraft(): void {
         this.draftService
             .update(this.name, this.repo, this.post.id, this.post)
-            .then(() => {
-                this.toastService.showSuccess('Done!');
-                setTimeout(() => this.goBack(), this.toastService.life());
-            })
+            .then(() =>
+                this.draftService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(
+                        () => {
+                            this.toastService.showSuccess('Done!');
+                            setTimeout(() => this.goBack(), this.toastService.life());
+                        },
+                        error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
     addAuthors(): void {

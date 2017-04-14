@@ -78,10 +78,15 @@ export class CreatePostComponent implements OnInit {
         this.toastService.showInfo('Creating...');
         this.draftService
             .create(this.name, this.repo, post)
-            .then(() => {
-                this.toastService.showSuccess('Done!');
-                setTimeout(() => this.router.navigate([this.url, 'drafts']), this.toastService.life());
-            })
+            .then(() =>
+                this.draftService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(
+                        () => {
+                            this.toastService.showSuccess('Done!');
+                            setTimeout(() => this.router.navigate([this.url, 'drafts']), this.toastService.life());
+                        },
+                        error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
     publish(filenameEl, titleEl, tagsEl, prevEl, textEl) {

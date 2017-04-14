@@ -2,7 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, UserService, ToastService }     from '../../services';
+import { HttpService, DraftService, UserService, ToastService }     from '../../services';
 
 @Component({
     templateUrl: 'account.component.html',
@@ -34,6 +34,7 @@ export class AccountComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private httpService: HttpService,
+                private draftService: DraftService,
                 private userService: UserService,
                 public toastService: ToastService) { }
 
@@ -83,6 +84,14 @@ export class AccountComponent implements OnInit {
     updateBlog(repo: string): void {
         this.toastService.showInfo('Updating...');
         this.httpService
+            .updateBlog(this.name, repo)
+            .subscribe(
+                () => this.toastService.showSuccess('Done!'),
+                error => this.toastService.showError(error));
+    }
+    updateDraft(repo: string): void {
+        this.toastService.showInfo('Updating...');
+        this.draftService
             .updateBlog(this.name, repo)
             .subscribe(
                 () => this.toastService.showSuccess('Done!'),
