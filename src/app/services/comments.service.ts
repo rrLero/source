@@ -28,7 +28,7 @@ export class CommentsService {
         return this.http
             .post(`${this.host}/${name}/${repo}/api/get_comments/${postId}?access_token=${token}`, { body })
             .toPromise()
-            .then(response => response.json())
+            .then(response => response.status)
             .catch(this.handleError);
     }
     remove(name: string, repo: string, id: number) {

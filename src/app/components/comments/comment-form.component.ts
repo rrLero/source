@@ -54,14 +54,19 @@ export class CommentFormComponent implements OnInit {
         } else {
             this.commentsService.add(this.name, this.repo, this.postId, input.value)
                 .then((data) => {
-                    if (Object.keys(data).length === 0) {
+                    // if (Object.keys(data).length === 0) {
+                    //     this.loading = false;
+                    //     this.error = 'This repository does not allow you to add comments!';
+                    //     return;
+                    // }
+                    // this.addComment.emit(data[0]);
+                    // input.editor.value('');
+                    // this.loading = false;
+                    if (data === 200) {
+                        input.editor.value('');
                         this.loading = false;
-                        this.error = 'This repository does not allow you to add comments!';
-                        return;
+                        this.toastService.showSuccess('Comment was added!');
                     }
-                    this.addComment.emit(data[0]);
-                    input.editor.value('');
-                    this.loading = false;
                 })
                 .catch(error => this.toastService.showError(error));
         }
