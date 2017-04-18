@@ -1,5 +1,5 @@
 import { Injectable }     from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { UserService }    from './user.service';
 
@@ -16,29 +16,34 @@ export class CommentsService {
     }
 
     get(name: string, repo: string, postId: string) {
+        this.getUrl(name, repo);
         return this.http
-            .get(`${this.host}/${name}/${repo}/api/get_comments/${postId}`)
+            .get(`${this.url}/get_comments/${postId}`)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
     add(name: string, repo: string, postId: string, body: string) {
+        this.getUrl(name, repo);
         let token = this.userService.getUser().access_token;
         return this.http
-            .post(`${this.host}/${name}/${repo}/api/get_comments/${postId}?access_token=${token}`, { body })
+            .post(`${this.url}/get_comments/${postId}?access_token=${token}`, { body })
             .toPromise()
             .then(response => response.status)
             .catch(this.handleError);
     }
+
     remove(name: string, repo: string, id: number) {
+        this.getUrl(name, repo);
         let token = this.userService.getUser().access_token;
         return this.http
-            .delete(`${this.host}/${name}/${repo}/api/get_comments/${id}?access_token=${token}`, )
+            .delete(`${this.url}/get_comments/${id}?access_token=${token}`)
             .toPromise()
             .then(response => response.status)
             .catch(this.handleError);
     }
+
     edit(name: string, repo: string, id: number, body: string) {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
@@ -49,6 +54,7 @@ export class CommentsService {
             .then(response => response.status)
             .catch(this.handleError);
     }
+
     getCommentsStatus(name: string, repo: string, id: string) {
         this.getUrl(name, repo);
         const url = `${this.url}/lock_status/${id}`;
@@ -58,6 +64,7 @@ export class CommentsService {
             .then(response => response.json())
             .catch(this.handleError);
     }
+
     unLockComments(name: string, repo: string, id: string) {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
@@ -68,12 +75,43 @@ export class CommentsService {
             .then(response => response.json())
             .catch(this.handleError);
     }
+
     lockComments(name: string, repo: string, id: string) {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
         const url = `${this.url}/lock_comments/${id}?access_token=${token}`;
         return this.http
             .get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getFromFile(name: string, repo: string) {
+        this.getUrl(name, repo);
+        return this.http
+            .get(`${this.url}/get_comments_file`)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    approve(name: string, repo: string, data) {
+        this.getUrl(name, repo);
+        let token = this.userService.getUser().access_token;
+        return this.http
+            .post(`${this.url}/get_comments_file?access_token=${token}`, data)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    removeFromFile(name: string, repo: string, data) {
+        this.getUrl(name, repo);
+        let token = this.userService.getUser().access_token;
+        let options = new RequestOptions({ body: data });
+        return this.http
+            .delete(`${this.url}/get_comments_file?access_token=${token}`, options)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);

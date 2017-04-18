@@ -14,8 +14,8 @@ import {
     DraftsComponent,
     DraftComponent,
     PostsByTagComponent,
-    AboutComponent
-
+    AboutComponent,
+    NewCommentsComponent,
 }  from './components';
 
 const routes: Routes = [
@@ -86,6 +86,10 @@ const routes: Routes = [
     {
         path: ':name/:repo/drafts/post/:title/edit',
         component: EditPostComponent
+    },
+    {
+        path: ':name/:repo/newcomments',
+        component: NewCommentsComponent
     },
     { path: '', redirectTo: '/welcome', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }

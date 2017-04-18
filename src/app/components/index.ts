@@ -21,6 +21,7 @@ import { DraftComponent }         from './draft/draft.component';
 import { PostsByTagComponent }    from './posts-by-tag/posts-by-tag.component';
 import { PostsTemplateComponent } from './posts-template/posts-template.component';
 import { AboutComponent }         from './about/about.component';
+import { NewCommentsComponent }   from './comments/new-comments.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -36,6 +37,7 @@ export { DraftsComponent };
 export { DraftComponent };
 export { PostsByTagComponent };
 export { AboutComponent };
+export { NewCommentsComponent };
 
 export const components = [
     WelcomeComponent,
@@ -60,5 +62,6 @@ export const components = [
     DraftComponent,
     PostsByTagComponent,
     PostsTemplateComponent,
-    AboutComponent
+    AboutComponent,
+    NewCommentsComponent
 ];
