@@ -28,7 +28,7 @@ export class NewCommentsComponent implements OnInit {
     ngOnInit() {
         this.user = this.userService.getUser();
 
-        if (this.user.login !== this.name) {
+        if (this.user.login.toLowerCase() !== this.name.toLowerCase()) {
             this.router.navigate(['/']);
             return;
         }
