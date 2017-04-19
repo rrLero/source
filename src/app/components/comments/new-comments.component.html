@@ -17,7 +17,7 @@
                     </tr>
                     <tr *ngFor="let comment of comments; let i = index;">
                         <td>{{ i + 1 }}</td>
-                        <td><a [routerLink]="[url, 'post', comment.title]">Link</a></td>
+                        <td><a [routerLink]="[url, 'post', comment.post_id]">{{ comment.title }}</a></td>
                         <td>{{ comment.body }}</td>
                         <td width="28px">
                             <input type="checkbox" name="selected[]" [(ngModel)]="comment.selected">
