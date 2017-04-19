@@ -12,7 +12,7 @@ import {
     styleUrls: ['new-comments.component.scss']
 })
 export class NewCommentsComponent implements OnInit {
-    comments;
+    comments = [];
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;

@@ -3,9 +3,9 @@
         <div class="paper">
             <div class="text-center">
                 <h2>New comments</h2>
-                <h4 *ngIf="!comments">No new comments</h4>
+                <h4 *ngIf="comments.length === 0">No new comments</h4>
             </div>
-            <div *ngIf="comments">
+            <div *ngIf="comments.length > 0">
                 <table class="table">
                     <tr>
                         <th>№</th>
