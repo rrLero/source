@@ -16,6 +16,7 @@ export class NewCommentsComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
+    isFetching: boolean = false;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -33,7 +34,7 @@ export class NewCommentsComponent implements OnInit {
         }
 
         this.commentsService.getFromFile(this.name, this.repo)
-            .then(data => this.comments = data)
+            .then(data => this.comments = data);
     }
 
     selectAll(e) {
@@ -58,12 +59,15 @@ export class NewCommentsComponent implements OnInit {
             return;
         }
 
+        this.isFetching = true;
+
         this.commentsService.approve(this.name, this.repo, items).then((data) => {
             const message = data.length === 1 ?
                 'Comment was approved.' :
                 `${data.length} comments were approved.`;
             this.toastService.showSuccess(message);
             this.clear();
+            this.isFetching = false;
         });
     }
 
@@ -75,9 +79,12 @@ export class NewCommentsComponent implements OnInit {
             return;
         }
 
+        this.isFetching = true;
+
         this.commentsService.removeFromFile(this.name, this.repo, items).then((data) => {
             this.toastService.showSuccess(data.message);
             this.clear();
+            this.isFetching = false;
         });
     }
 

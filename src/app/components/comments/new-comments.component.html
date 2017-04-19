@@ -25,8 +25,8 @@
                     </tr>
                 </table>
                 <div class="text-right">
-                    <button type="button" class="btn btn-danger" (click)="remove()">Remove</button>
-                    <button type="button" class="btn btn-primary" (click)="approve()">Approve</button>
+                    <button [disabled]="isFetching" type="button" class="btn btn-danger" (click)="remove()">Remove</button>
+                    <button [disabled]="isFetching" type="button" class="btn btn-primary" (click)="approve()">Approve</button>
                 </div>
             </div>
         </div>
