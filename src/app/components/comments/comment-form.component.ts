@@ -65,7 +65,7 @@ export class CommentFormComponent implements OnInit {
                     if (data === 200) {
                         input.editor.value('');
                         this.loading = false;
-                        this.toastService.showSuccess('Comment was added!');
+                        this.toastService.showSuccess('Comment was added. Wait for approval.');
                     }
                 })
                 .catch(error => this.toastService.showError(error));

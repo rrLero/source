@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute }    from '@angular/router';
+import { Router, ActivatedRoute }    from '@angular/router';
 
-import { CommentsService, ToastService } from '../../services';
+import {
+    CommentsService,
+    ToastService,
+    UserService
+} from '../../services';
 
 @Component({
     templateUrl: 'new-comments.component.html',
@@ -12,13 +16,23 @@ export class NewCommentsComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
+    user;
 
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
-        public toastService: ToastService,
+        private toastService: ToastService,
+        private userService: UserService,
         private commentsService: CommentsService) {  }
 
     ngOnInit() {
+        this.user = this.userService.getUser();
+
+        if (this.user.login !== this.name) {
+            this.router.navigate(['/']);
+            return;
+        }
+
         this.commentsService.getFromFile(this.name, this.repo).then(data => {
             this.comments = data;
         })
