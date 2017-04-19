@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute }    from '@angular/router';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {
     CommentsService,
@@ -16,26 +16,24 @@ export class NewCommentsComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
-    user;
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private toastService: ToastService,
-        private userService: UserService,
-        private commentsService: CommentsService) {  }
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private toastService: ToastService,
+                private userService: UserService,
+                private commentsService: CommentsService) {
+    }
 
     ngOnInit() {
-        this.user = this.userService.getUser();
+        const user = this.userService.getUser();
 
-        if (this.user.login.toLowerCase() !== this.name.toLowerCase()) {
+        if (user.login.toLowerCase() !== this.name.toLowerCase()) {
             this.router.navigate(['/']);
             return;
         }
 
-        this.commentsService.getFromFile(this.name, this.repo).then(data => {
-            this.comments = data;
-        })
+        this.commentsService.getFromFile(this.name, this.repo)
+            .then(data => this.comments = data)
     }
 
     selectAll(e) {
@@ -56,7 +54,7 @@ export class NewCommentsComponent implements OnInit {
         const items = this.prepareSelected();
 
         if (items.length === 0) {
-            this.toastService.showError('Please select items.')
+            this.toastService.showError('Please select items.');
             return;
         }
 
@@ -64,20 +62,26 @@ export class NewCommentsComponent implements OnInit {
             const message = data.length === 1 ?
                 'Comment was approved.' :
                 `${data.length} comments were approved.`;
-            this.toastService.showSuccess(message)
+            this.toastService.showSuccess(message);
+            this.clear();
         });
     }
 
-    delete() {
+    remove() {
         const items = this.prepareSelected();
 
         if (items.length === 0) {
-            this.toastService.showError('Please select items.')
+            this.toastService.showError('Please select items.');
             return;
         }
 
         this.commentsService.removeFromFile(this.name, this.repo, items).then((data) => {
-            this.toastService.showSuccess(data.message)
+            this.toastService.showSuccess(data.message);
+            this.clear();
         });
+    }
+
+    clear() {
+        this.comments = this.comments.filter(item => !item.selected);
     }
 }
