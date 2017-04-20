@@ -60,7 +60,7 @@ export class PostComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.post.comments !== this.commentsAmount) {
+        if (this.post && this.post.comments !== this.commentsAmount) {
             setTimeout(() =>
                 this.httpService
                     .updateBlog(this.name, this.repo)
@@ -79,7 +79,11 @@ export class PostComponent implements OnInit, OnDestroy {
                             this.commentsStatus = this.post.comments_status;
                             this.commentsAmount = this.post.comments;
                         },
-                        error => this.toastService.showError(error));
+                        error => {
+                            if (error.status === 404) {
+                                this.router.navigate(['/page-not-found']);
+                            }
+                        });
     }
 
     toggleControls(): void {

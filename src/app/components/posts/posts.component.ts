@@ -54,7 +54,11 @@ export class PostsComponent implements OnInit {
                     this.empty = true;
                 }
             })
-            .catch(error => this.toastService.showError(error));
+            .catch(error => {
+                if (error.status === 404) {
+                    this.router.navigate(['/page-not-found']);
+                }
+            });
     }
 
     handlePageChange(page: number): void {
