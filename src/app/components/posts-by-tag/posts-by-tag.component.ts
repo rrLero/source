@@ -34,6 +34,7 @@ export class PostsByTagComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     id = +this.route.snapshot.params['id'] || 1;
     url = `/${this.name}/${this.repo}`;
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private httpService: HttpService,
@@ -44,6 +45,7 @@ export class PostsByTagComponent implements OnInit {
         this.getUser();
         this.getPosts();
     }
+
     getUser(): void {
         this.user = this.userService.getUser();
         if (this.user) {
@@ -53,6 +55,7 @@ export class PostsByTagComponent implements OnInit {
                 .catch(error => this.toastService.showError(error));
         }
     }
+
     getPosts(id: number = this.id): void {
         this.route.params.forEach((param) => {
             this.tag = param.tag;
@@ -71,6 +74,7 @@ export class PostsByTagComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     handlePageChange(page: number): void {
         this.getPosts(page);
     }

@@ -33,6 +33,7 @@ const faq = {
 export class StartComponent implements OnInit {
     user: any;
     faq: any = faq;
+
     constructor(private router: Router,
                 private location: Location,
                 private httpService: HttpService,
@@ -54,6 +55,7 @@ export class StartComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     savePath() {
         localStorage.setItem('path', this.location.path());
     }

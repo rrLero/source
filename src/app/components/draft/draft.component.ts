@@ -2,7 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { DraftService, UserService, ToastService }    from '../../services/index';
+import { DraftService, UserService, ToastService }    from '../../services';
 import { Post }                                       from '../../shared/post.model';
 
 @Component({
@@ -66,9 +66,11 @@ export class DraftComponent implements OnInit {
                         },
                         error => this.toastService.showError(error));
     }
+
     toggleControls(): void {
         this.controls = !this.controls;
     }
+
     // commentsHandler(data): void {
     //     if (typeof data === 'boolean') {
     //         this.commentsStatus = data;

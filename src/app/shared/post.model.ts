@@ -11,6 +11,7 @@ export class Post {
     sha: string;
     comments_status: boolean;
     comments: number;
+
     constructor(filename: string, text_full_md: string) {
         post = {
             filename: filename,
@@ -21,13 +22,12 @@ export class Post {
 
 export let fullMd: string;
 export class FullMd {
-    constructor(
-        title: string,
-        tags: string,
-        author: string,
-        date: string,
-        preview: string,
-        text: string) {
+    constructor(title: string,
+                tags: string,
+                author: string,
+                date: string,
+                preview: string,
+                text: string) {
         fullMd = `
 ---
 preview: ${preview}

@@ -1,9 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter }                   from '@angular/core';
-import { ActivatedRoute }                             from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute }                                 from '@angular/router';
+import { trigger, state, style, transition, animate }     from '@angular/animations';
 
-import { AuthService, UserService, CommentsService, ToastService }  from '../../services/index';
-import { Comment }                                    from '../../shared/comment.model';
+import {
+    AuthService,
+    UserService,
+    CommentsService,
+    ToastService
+}  from '../../services';
+import { Comment } from '../../shared/comment.model';
 
 @Component({
     selector: 'comments',
@@ -38,7 +43,8 @@ export class CommentsComponent implements OnInit {
                 private authService: AuthService,
                 private userService: UserService,
                 public toastService: ToastService,
-                private commentsService: CommentsService) { }
+                private commentsService: CommentsService) {
+    }
 
     ngOnInit() {
         this.commentsService.get(this.name, this.repo, this.postId)
@@ -69,14 +75,17 @@ export class CommentsComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     edit(comment) {
         this.commentId = comment.id;
         this.onEdit = !this.onEdit;
     }
+
     addCommentHandler(data) {
         this.comments.push(data);
         this.commentsAmount.emit(this.comments.length);
     }
+
     editCommentHandler(data, comment) {
         this.onEdit = !this.onEdit;
         comment.body = data;

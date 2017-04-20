@@ -1,7 +1,7 @@
 import { Injectable }                  from '@angular/core';
 import { ToastsManager, ToastOptions } from 'ng2-toastr';
 
-ToastsManager.prototype.dispose = function() {
+ToastsManager.prototype.dispose = function () {
     if (this.container) {
         this.container.destroy();
         this.container = null;
@@ -20,6 +20,7 @@ export class ToastConfig extends ToastOptions {
 @Injectable()
 export class ToastService {
     toastLife = 2000;
+
     constructor(public toastr: ToastsManager) { }
 
     showSuccess(msg: string): void {
@@ -27,16 +28,19 @@ export class ToastService {
             .success(msg, 'Success!', { dismiss: 'controlled' })
             .then(() => setTimeout(() => this.toastr.dispose(), this.toastLife));
     }
+
     showError(msg: string): void {
         this.toastr
             .error(msg, 'Oops!', { dismiss: 'controlled' })
             .then(() => setTimeout(() => this.toastr.dispose(), 5000));
     }
+
     showWarning(msg: string): void {
         this.toastr
             .warning(msg, 'Alert!')
             .then(() => setTimeout(() => this.toastr.dispose(), 5000));
     }
+
     showInfo(msg: string): void {
         this.toastr
             .info(msg, null, { dismiss: 'controlled' })
@@ -46,9 +50,11 @@ export class ToastService {
                 }
             });
     }
+
     showCustom(msg: string): void {
         this.toastr.custom(`<span class="custom-toast-color">${msg}</span>`, null, { enableHTML: true });
     }
+
     life(): number {
         return this.toastLife;
     }

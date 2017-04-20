@@ -28,12 +28,12 @@
                 <p [innerHTML]="comment.body | markdown | safeHtml"></p>
 
                 <comment-from
-                *ngIf="comment.id == commentId"
-                (updatedComment)="editCommentHandler($event, comment)"
-                [hidden]="!onEdit"
-                [onEdit]="comment.body"
-                [commentId]="comment.id"></comment-from>
-
+                    *ngIf="comment.id == commentId"
+                    (updatedComment)="editCommentHandler($event, comment)"
+                    [hidden]="!onEdit"
+                    [onEdit]="comment.body"
+                    [commentId]="comment.id">
+                </comment-from>
             </div>
         </li>
     </ul>

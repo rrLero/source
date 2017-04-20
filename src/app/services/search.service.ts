@@ -8,11 +8,13 @@ import { Post }       from '../shared/post.model';
 export class SearchService {
     private host = 'http://gitblog.pythonanywhere.com';
     private url: string;
+
     constructor(private http: Http) { }
 
     getUrl(name: string, repo: string) {
         this.url = `${this.host}/${name}/${repo}/api/get?title=`;
     }
+
     search(name: string, repo: string, term: string): Observable<Post[]> {
         this.getUrl(name, repo);
         return this.http

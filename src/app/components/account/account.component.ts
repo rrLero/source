@@ -2,7 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, DraftService, UserService, ToastService }     from '../../services';
+import { HttpService, DraftService, UserService, ToastService } from '../../services';
 
 @Component({
     templateUrl: 'account.component.html',
@@ -31,6 +31,7 @@ export class AccountComponent implements OnInit {
     deletedBlog: any = {};
     popupText = 'Remove blog?';
     githubUrl = `https://github.com/`;
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private httpService: HttpService,
@@ -49,6 +50,7 @@ export class AccountComponent implements OnInit {
             this.getBlogs();
         });
     }
+
     getBlogs(): void {
         this.httpService
             .getBlogs()
@@ -58,6 +60,7 @@ export class AccountComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     checkUser(blogs: any[]): void {
         if (this.user && this.user.login.toLowerCase() === this.name.toLowerCase()) {
             this.noUser = false;
@@ -69,6 +72,7 @@ export class AccountComponent implements OnInit {
             });
         }
     }
+
     createBlog(name: string, repoEl: HTMLInputElement): void {
         let blog = repoEl.value.replace(/\s+/g, '-');
         this.toastService.showInfo('Activating blog...');
@@ -81,6 +85,7 @@ export class AccountComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     updateBlog(repo: string): void {
         this.toastService.showInfo('Updating...');
         this.httpService
@@ -89,6 +94,7 @@ export class AccountComponent implements OnInit {
                 () => this.toastService.showSuccess('Done!'),
                 error => this.toastService.showError(error));
     }
+
     updateDraft(repo: string): void {
         this.toastService.showInfo('Updating...');
         this.draftService
@@ -97,12 +103,14 @@ export class AccountComponent implements OnInit {
                 () => this.toastService.showSuccess('Done!'),
                 error => this.toastService.showError(error));
     }
+
     prepareDelete(name: string, repo: string, index: number): void {
         this.hidden = false;
         this.deletedBlog.name = name;
         this.deletedBlog.repo = repo;
         this.deletedBlog.index = index;
     }
+
     deleteBlog(name: string, repo: string, index: number): void {
         this.toastService.showInfo('Deleting...');
         this.httpService
@@ -118,6 +126,7 @@ export class AccountComponent implements OnInit {
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
+
     popupHandler(confirm: boolean): void {
         if (confirm) {
             this.hidden = true;
@@ -126,6 +135,7 @@ export class AccountComponent implements OnInit {
             this.hidden = true;
         }
     }
+
     toggleUpdateBtns(): void {
         this.update = !this.update;
     }

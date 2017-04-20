@@ -28,6 +28,8 @@ export class PostsTemplateComponent implements OnInit {
     @Input() tag: string;
     @Input() url: string;
     @Input() canEdit: boolean;
+
     constructor() { }
+
     ngOnInit(): void { }
 }

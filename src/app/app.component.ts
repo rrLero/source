@@ -28,13 +28,14 @@ export class AppComponent implements OnInit {
                 private titleService: Title,
                 public authService: AuthService,
                 public toastr: ToastsManager, vcr: ViewContainerRef) {
-                toastr.setRootViewContainerRef(vcr);
+        toastr.setRootViewContainerRef(vcr);
     }
 
     ngOnInit() {
         this.getParams();
         this.getUrl();
     }
+
     getParams() {
         this.routerService
             .getRoute()
@@ -49,6 +50,7 @@ export class AppComponent implements OnInit {
                 );
             });
     }
+
     getUrl() {
         this.routerService
             .getRoute()
@@ -66,6 +68,7 @@ export class AppComponent implements OnInit {
                 }
             });
     }
+
     savePath() {
         localStorage.setItem('path', this.location.path());
     }

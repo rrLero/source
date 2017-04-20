@@ -4,8 +4,8 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { Observable }                                 from 'rxjs/Observable';
 import { Subject }                                    from 'rxjs/Subject';
 
-import { SearchService, ToastService } from '../../services/index';
-import { Post }          from '../../shared/post.model';
+import { SearchService, ToastService } from '../../services';
+import { Post }                        from '../../shared/post.model';
 
 @Component({
     selector: 'search',
@@ -31,15 +31,16 @@ export class SearchComponent implements OnInit {
     private name = this.route.snapshot.params['name'];
     private repo = this.route.snapshot.params['repo'];
     private url = `/${this.name}/${this.repo}/post/`;
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        public toastService: ToastService,
-        private searchService: SearchService) { }
+
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                public toastService: ToastService,
+                private searchService: SearchService) { }
 
     search(term: string): void {
         this.searchTerms.next(term);
     }
+
     ngOnInit(): void {
         this.posts = this.searchTerms
             .debounceTime(300)
@@ -52,6 +53,7 @@ export class SearchComponent implements OnInit {
                 return Observable.of<Post[]>([]);
             });
     }
+
     gotoDetail(post: Post): void {
         let link = [this.url, post.id];
         this.router.navigate(link);

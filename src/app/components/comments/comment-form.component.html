@@ -1,7 +1,7 @@
 <div #form class="row" [hidden]="!authService.isLogged" [@form]="form.state">
     <div class="col-md-8">
-        <form  class="add-comment" (ngSubmit)="submit(textarea)">
-            <div  class="form-group" [class.has-error]="error">
+        <form class="add-comment" (ngSubmit)="submit(textarea)">
+            <div class="form-group" [class.has-error]="error">
                 <md-editor #textarea [value]="onEdit"></md-editor>
                 <span *ngIf="error" class="help-block">{{ error }}</span>
             </div>

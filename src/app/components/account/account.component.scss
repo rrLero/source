@@ -6,6 +6,7 @@
   -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
   box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
 }
+
 .profile {
   font-size: 2em;
   margin-bottom: 1em;
@@ -25,6 +26,7 @@
   flex-wrap: wrap;
   margin-bottom: 1em;
 }
+
 .blog-list {
   margin-bottom: 2em;
   background: #fff;
@@ -61,9 +63,11 @@ h3 {
   color: #222;
   margin-bottom: 0.5em;
 }
+
 form {
   margin-top: 5em;
 }
+
 .form-control {
   width: 15em;
   max-width: 100%;
@@ -71,15 +75,18 @@ form {
   max-height: 2.5em;
   border-radius: 5px;
 }
+
 .update {
   float: right;
 }
+
 .btn {
   min-width: 6.7em;
   @media (max-width: 768px) {
     margin-bottom: 5px;
   }
 }
+
 .controls {
   min-width: 11em;
 }

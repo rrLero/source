@@ -26,6 +26,7 @@ export class AuthProfileComponent implements OnInit {
     ngOnInit(): void {
         this.login();
     }
+
     login(): void {
         if (this.authService.isLogged) {
             this.logged = true;
@@ -36,6 +37,7 @@ export class AuthProfileComponent implements OnInit {
                 .catch(error => this.toastService.showError(error));
         }
     }
+
     logout(): void {
         this.logged = false;
         this.authService.logout();

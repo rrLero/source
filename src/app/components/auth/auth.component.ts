@@ -1,22 +1,21 @@
 import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AuthService, ToastService }            from '../../services/index';
+import { AuthService, ToastService } from '../../services';
 
 @Component({
     template: `<p>Authenticate</p>`,
     styles: [`
-        p {
-          font-size: 60px;
-          color: #ccc;
-          text-align: center;
-          text-transform: uppercase;
-          font-weight: bold;
-        }
+      p {
+        font-size: 60px;
+        color: #ccc;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
     `]
 })
 export class AuthComponent implements OnInit {
-
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 public toastService: ToastService,
@@ -48,5 +47,4 @@ export class AuthComponent implements OnInit {
                     .catch(error => this.toastService.showError(error));
             });
     }
-
 }

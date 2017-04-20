@@ -26,6 +26,7 @@ export class PopupComponent {
     remove() {
         this.answer.emit(true);
     }
+
     cancel() {
         this.answer.emit(false);
     }

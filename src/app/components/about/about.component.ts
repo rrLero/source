@@ -28,6 +28,7 @@ export class AboutComponent implements OnInit {
     post: any = {};
     title: string;
     active: string;
+
     constructor(private router: Router,
                 private location: Location,
                 private draftService: DraftService,
@@ -36,6 +37,7 @@ export class AboutComponent implements OnInit {
     ngOnInit(): void {
         this.getDrafts();
     }
+
     getDrafts(): void {
         this.draftService
             .getDrafts('blog-platform', 'dev', 1, 10)
@@ -47,6 +49,7 @@ export class AboutComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     getData(title: string): void {
         this.posts.forEach(item => {
             if (item.title === title) {
@@ -55,6 +58,7 @@ export class AboutComponent implements OnInit {
             }
         });
     }
+
     goBack(): void {
         this.location.back();
     }

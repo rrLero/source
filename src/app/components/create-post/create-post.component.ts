@@ -35,6 +35,7 @@ export class CreatePostComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
+
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
@@ -54,11 +55,13 @@ export class CreatePostComponent implements OnInit {
             // this.author = profile.name || profile.login;
         }
     }
+
     repalceSpace(filenameEl) {
         if (filenameEl.value) {
             filenameEl.value = filenameEl.value.replace(/\s+/g, '-');
         }
     }
+
     create(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         new FullMd(
             titleEl.value,
@@ -73,6 +76,7 @@ export class CreatePostComponent implements OnInit {
             fullMd.trim()
         );
     }
+
     save(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
         this.toastService.showInfo('Creating...');
@@ -89,6 +93,7 @@ export class CreatePostComponent implements OnInit {
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
+
     publish(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
         this.toastService.showInfo('Creating...');
@@ -105,6 +110,7 @@ export class CreatePostComponent implements OnInit {
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
+
     goBack() {
         this.location.back();
     }

@@ -39,6 +39,7 @@ export class PostComponent implements OnInit, OnDestroy {
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];
     url = `/${this.name}/${this.repo}/post/${this.title}`;
+
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
@@ -57,6 +58,7 @@ export class PostComponent implements OnInit, OnDestroy {
                 .catch(error => this.toastService.showError(error));
         }
     }
+
     ngOnDestroy(): void {
         if (this.post.comments !== this.commentsAmount) {
             setTimeout(() =>
@@ -65,6 +67,7 @@ export class PostComponent implements OnInit, OnDestroy {
                     .subscribe(), 0);
         }
     }
+
     getPost(): void {
         this.route.params
             .switchMap(({ name, repo, title }) =>
@@ -78,9 +81,11 @@ export class PostComponent implements OnInit, OnDestroy {
                         },
                         error => this.toastService.showError(error));
     }
+
     toggleControls(): void {
         this.controls = !this.controls;
     }
+
     commentsHandler(data): void {
         if (typeof data === 'boolean') {
             this.commentsStatus = data;
@@ -88,6 +93,7 @@ export class PostComponent implements OnInit, OnDestroy {
             this.commentsAmount = data;
         }
     }
+
     goBack(): void {
         this.location.back();
     }

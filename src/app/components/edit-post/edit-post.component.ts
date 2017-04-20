@@ -53,6 +53,7 @@ export class EditPostComponent implements OnInit {
         this.user = this.userService.getUser();
         this.draft ? this.getDraft() : this.getPost();
     }
+
     checkPath(): void {
         let path = this.location.path().split('/');
         path.forEach(item => {
@@ -61,12 +62,13 @@ export class EditPostComponent implements OnInit {
             }
         });
     }
+
     isOnEdit(): void {
         if (this.user) {
             let lastInx = this.post.tags.length - 1;
             let lockInfo = this.post.tags[lastInx].split(':');
-            let author =  lockInfo[1];
-            this.canEdit = author === this.user.login ? true : false;
+            let author = lockInfo[1];
+            this.canEdit = author === this.user.login;
         }
         if (!this.canEdit) {
             this.onEdit = true;
@@ -75,6 +77,7 @@ export class EditPostComponent implements OnInit {
             this.post.tags.pop();
         }
     }
+
     getPost(): void {
         this.route.params
             .switchMap(({ name, repo, title }) =>
@@ -87,6 +90,7 @@ export class EditPostComponent implements OnInit {
                         },
                         error => this.toastService.showError(error));
     }
+
     getDraft(): void {
         this.route.params
             .switchMap(({ name, repo, title }) =>
@@ -99,6 +103,7 @@ export class EditPostComponent implements OnInit {
                         },
                         error => this.toastService.showError(error));
     }
+
     save(titleEl, tagsEl, previewEl, textEl): void {
         this.post.title = titleEl.value;
         this.post.tags = tagsEl.value.split(',');
@@ -108,6 +113,7 @@ export class EditPostComponent implements OnInit {
         this.buildFullMd();
         this.draft ? this.updateDraft() : this.update();
     }
+
     buildFullMd(): void {
         this.addAuthors();
         new FullMd(
@@ -120,6 +126,7 @@ export class EditPostComponent implements OnInit {
         );
         this.post.text_full_md = fullMd.trim();
     }
+
     update(): void {
         this.httpService
             .update(this.name, this.repo, this.post.id, this.post.sha, this.post)
@@ -134,6 +141,7 @@ export class EditPostComponent implements OnInit {
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
+
     updateDraft(): void {
         this.draftService
             .update(this.name, this.repo, this.post.id, this.post)
@@ -148,6 +156,7 @@ export class EditPostComponent implements OnInit {
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
+
     addAuthors(): void {
         let coAuthor: boolean;
         this.post.author
@@ -177,6 +186,7 @@ export class EditPostComponent implements OnInit {
             fullMd.trim()
         );
     }
+
     moveToDrafts(titleEl, tagsEl, prevEl, textEl): void {
         this.create(titleEl, tagsEl, prevEl, textEl);
         this.toastService.showInfo('Moving...');
@@ -198,12 +208,14 @@ export class EditPostComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     cancel(titleEl, tagsEl, textEl, previewEl): void {
         titleEl.value = this.post.title;
         tagsEl.value = this.post.tags;
         previewEl.setValue(this.post.preview);
         textEl.setValue(this.post.text_full_strings.trim());
     }
+
     goBack(): void {
         this.location.back();
     }

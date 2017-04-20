@@ -1,7 +1,7 @@
-import { Injectable }     from '@angular/core';
+import { Injectable }                     from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
-import { UserService }    from './user.service';
+import { Observable }                     from 'rxjs/Observable';
+import { UserService }                    from './user.service';
 
 @Injectable()
 export class CommentsService {
@@ -9,7 +9,7 @@ export class CommentsService {
     private url: string;
 
     constructor(private http: Http,
-        private userService: UserService) { }
+                private userService: UserService) { }
 
     getUrl(name: string, repo: string) {
         this.url = `${this.host}/${name}/${repo}/api`;

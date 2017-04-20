@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Location }       from '@angular/common';
 
-import { PagerService }   from '../../services/index';
+import { PagerService }   from '../../services';
 
 @Component({
     selector: 'pagination',
@@ -22,24 +22,28 @@ export class PaginationComponent implements OnInit {
     @Input() currentPage: number;
     @Output() pageChange = new EventEmitter();
     pager: any;
+
     constructor(private route: ActivatedRoute,
                 private location: Location,
                 private pagerService: PagerService) {
-                location.subscribe(() => this.onPageChange());
+        location.subscribe(() => this.onPageChange());
     }
 
     ngOnInit(): void {
         this.getPager(this.currentPage);
     }
+
     onPageChange(page?: number): void {
         if (!page) {
             this.route.params.forEach(param => page = +param.id || 1);
         }
         setTimeout(() => this.setPage(page), 0);
     }
+
     getPager(page: number): void {
         this.pager = this.pagerService.getPager(this.total, page, this.perPage);
     }
+
     setPage(page: number): void {
         this.getPager(page);
         this.pageChange.emit(page);

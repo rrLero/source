@@ -27,7 +27,7 @@ import { pipes }        from './pipes';
         ...components,
         ...pipes
     ],
-    providers: [ ...services ],
-    bootstrap: [ AppComponent ]
+    providers: [...services],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

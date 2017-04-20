@@ -33,6 +33,7 @@ export class DraftsComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     id = +this.route.snapshot.params['id'] || 1;
     url = `/${this.name}/${this.repo}/drafts/`;
+
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private userService: UserService,
@@ -43,6 +44,7 @@ export class DraftsComponent implements OnInit {
         this.getUser();
         this.getPage();
     }
+
     getUser() {
         this.user = this.userService.getUser();
         if (this.user) {
@@ -52,6 +54,7 @@ export class DraftsComponent implements OnInit {
                 .catch(error => this.toastService.showError(error));
         }
     }
+
     getPage(id: number = this.id): void {
         this.draftService
             .getDrafts(this.name, this.repo, id, this.perPage)
@@ -66,6 +69,7 @@ export class DraftsComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     handlePageChange(page: number): void {
         this.getPage(page);
     }

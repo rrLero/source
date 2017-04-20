@@ -64,6 +64,7 @@ export class ControlsComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
 
     }
+
     lockComments(): void {
         this.toastService.showInfo('Disabling...');
         this.commentsService
@@ -71,6 +72,7 @@ export class ControlsComponent implements OnInit {
             .then(() => this.updateComments(false))
             .catch(error => this.toastService.showError(error));
     }
+
     updateComments(status: boolean): void {
         this.httpService
             .updateBlog(this.name, this.repo)
@@ -81,6 +83,7 @@ export class ControlsComponent implements OnInit {
                 },
                 error => this.toastService.showError(error));
     }
+
     delete(): void {
         this.toastService.showInfo('Deleting...');
         this.httpService
@@ -93,6 +96,7 @@ export class ControlsComponent implements OnInit {
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
+
     deleteDraft(): void {
         this.toastService.showInfo('Deleting...');
         this.draftService
@@ -105,6 +109,7 @@ export class ControlsComponent implements OnInit {
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
+
     publish(): void {
         this.toastService.showInfo('Publishing...');
         this.draftService
@@ -112,6 +117,7 @@ export class ControlsComponent implements OnInit {
             .then(() => this.callback())
             .catch(error => this.toastService.showError(error));
     }
+
     callback(path = ''): void {
         this.toastService.showSuccess('Done!');
         setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/${path}`]), this.toastService.life());
@@ -131,6 +137,7 @@ export class ControlsComponent implements OnInit {
                 .catch(error => this.toastService.showError(error));
         }
     }
+
     checkStatus(post: Post): void {
         let lastInx = post.tags.length - 1;
         let lockInfo = post.tags[lastInx].split(':');
@@ -147,6 +154,7 @@ export class ControlsComponent implements OnInit {
             this.lock(post);
         }
     }
+
     loadSession(): void {
         let url: string;
         if (this.draft) {
@@ -155,13 +163,15 @@ export class ControlsComponent implements OnInit {
             url = `${this.url}/post/${this.title}/edit`;
         }
         this.toastService.showSuccess('Session loaded!');
-        setTimeout(() => this.router.navigate([ url ]), this.toastService.life());
+        setTimeout(() => this.router.navigate([url]), this.toastService.life());
     }
+
     lock(post: Post): void {
         post.tags.push(`-----post-locked-by:${this.user.login}`);
         this.buildFullMd(post);
         this.draft ? this.lockDraft(post) : this.lockPost(post);
     }
+
     lockPost(post: Post): void {
         this.httpService
             .update(this.name, this.repo, post.id, post.sha, post)
@@ -172,13 +182,14 @@ export class ControlsComponent implements OnInit {
                         () => {
                             this.toastService.showSuccess('Session opened!');
                             setTimeout(() =>
-                            this.router.navigate([this.url, 'post', this.title, 'edit']),
-                            this.toastService.life());
+                                this.router.navigate([this.url, 'post', this.title, 'edit']),
+                                this.toastService.life());
                         },
                         error => this.toastService.showError(error));
-                    })
+            })
             .catch(error => this.toastService.showError(error));
     }
+
     lockDraft(post: Post): void {
         this.draftService
             .update(this.name, this.repo, post.id, post)
@@ -196,6 +207,7 @@ export class ControlsComponent implements OnInit {
             })
             .catch(error => this.toastService.showError(error));
     }
+
     buildFullMd(post: Post): void {
         new FullMd(
             post.title,
@@ -207,6 +219,7 @@ export class ControlsComponent implements OnInit {
         );
         post.text_full_md = fullMd.trim();
     }
+
     popupHandler(confirm: boolean): void {
         if (confirm) {
             this.hidden = true;
