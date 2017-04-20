@@ -1,7 +1,7 @@
 <div class="row" *ngIf="post" [@post]="post.state">
 
     <div class="col-md-10 col-md-offset-1">
-        <div class="entry-wrap">
+        <div class="entry-wrap paper">
             <article class="entry">
                 <div *ngIf="controls" class="controls">
                     <controls [status]="commentsStatus" (comments)="commentsHandler($event)" [post]="post"></controls>
