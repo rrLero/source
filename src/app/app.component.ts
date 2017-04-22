@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
     name: string;
     repo: string;
     drafts: boolean;
-    githubUrl = `https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=${auth.redirectUri}`;
+    githubUrl = `https://github.com/login/oauth/authorize?client_id=${auth.clientId}&scope=repo&redirect_uri=${auth.redirectUri}`;
     constructor(private routerService: RouterService,
                 private location: Location,
                 private titleService: Title,
