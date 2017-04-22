@@ -1,5 +1,6 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard }            from './services';
 
 import {
     WelcomeComponent,
@@ -65,27 +66,33 @@ const routes: Routes = [
     },
     {
         path: ':name/:repo/post/:title/edit',
-        component: EditPostComponent
+        component: EditPostComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: ':name/:repo/create',
-        component: CreatePostComponent
+        component: CreatePostComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: ':name/:repo/drafts',
-        component: DraftsComponent
+        component: DraftsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: ':name/:repo/drafts/page/:id',
-        component: DraftsComponent
+        component: DraftsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: ':name/:repo/drafts/post/:title',
-        component: DraftComponent
+        component: DraftComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: ':name/:repo/drafts/post/:title/edit',
-        component: EditPostComponent
+        component: EditPostComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: ':name/:repo/newcomments',
