@@ -18,6 +18,7 @@ export class AuthGuard implements CanActivate {
         let url: string = state.url;
         return this.checkLogin(url);
     }
+
     checkLogin(url: string): boolean {
         if (this.authService.isLogged) {
             return true;

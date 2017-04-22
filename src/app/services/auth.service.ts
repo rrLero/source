@@ -2,6 +2,7 @@ import { Injectable }     from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { UserService }    from './user.service';
+import { auth }           from '../shared/auth';
 
 @Injectable()
 export class AuthService {
@@ -13,22 +14,18 @@ export class AuthService {
     }
 
     getToken(code) {
-        // const url = `http://localhost:9999/authenticate/${code}`;
-        const url = `http://gitblog.pythonanywhere.com/rrlero/git-blog/api/oauth?code=${code}`;
+        const url = `${auth.authUri}${code}`;
         return this.http.get(url)
             .toPromise()
             .then(response => response.json())
             .then(response => {
                 if (response && response.access_token) {
-                // if (response && response.token) {
                     return this.userService.getProfile(response.access_token)
-                    // return this.userService.getProfile(response.token)
                         .then((data) => {
                             this._isLogged = true;
                             return {
                                 ...data,
                                 token: response.access_token,
-                                // token: response.token,
                             }
                         });
                 }

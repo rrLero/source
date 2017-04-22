@@ -2,7 +2,8 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Title }                               from '@angular/platform-browser';
 import { Location }                            from '@angular/common';
 import { ToastsManager }                       from 'ng2-toastr/ng2-toastr';
-import { AuthService, RouterService }          from './services/index';
+import { AuthService, RouterService }          from './services';
+import { auth }                                from './shared/auth';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
@@ -20,9 +21,7 @@ export class AppComponent implements OnInit {
     name: string;
     repo: string;
     drafts: boolean;
-    // githubUrl = 'https://github.com/login/oauth/authorize?client_id=caf9e03a36ecdaadcfb1&scope=repo&redirect_uri=http://localhost:8080/auth';
-    githubUrl = 'https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=http://acid.zzz.com.ua/auth';
-
+    githubUrl = `https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=${auth.redirectUri}`;
     constructor(private routerService: RouterService,
                 private location: Location,
                 private titleService: Title,
