@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="blog-list paper">
-            <h3 class="text-center">Blogs:</h3>
+            <h3 class="text-center">{{ 'blogs' | translate }}</h3>
             <ul class="blogs">
-                <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs" [routerLink]="['/', blog.name, blog.repo]">
+                <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs" [routerLink]="['/', blog.name, blog.repo] | localize">
                     <p class="blog-name">{{  blog.repo | titlecase }}</p>
-                    <a [routerLink]="['/', blog.name]" class="blog-author">by {{ blog.name }}</a>
+                    <a [routerLink]="['/', blog.name] | localize" class="blog-author">by {{ blog.name }}</a>
                 </li>
             </ul>
         </div>

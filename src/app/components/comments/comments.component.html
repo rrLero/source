@@ -14,14 +14,14 @@
                     <span
                         *ngIf="user && comment.user === user.login || user && name === user.login.toLowerCase()"
                         (click)="remove(comment)"
-                        class="glyphicon glyphicon-trash delete"
-                    ></span>
+                        class="glyphicon glyphicon-trash delete">
+                    </span>
 
                     <span
                         *ngIf="user && comment.user === user.login"
                         (click)="edit(comment)"
-                        class="glyphicon glyphicon-pencil delete"
-                    ></span>
+                        class="glyphicon glyphicon-pencil delete">
+                    </span>
 
                 </div>
 

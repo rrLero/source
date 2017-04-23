@@ -4,8 +4,10 @@
             <div class="row">
                 <div class="col-md-5">
                     <h1>
-                        <a routerLink="/">{{ title }}</a>
+                        <a [routerLink]="['/']">{{ title }}</a>
                     </h1>
+                    <a (click)="changeLang('en')">EN</a>
+                    <a (click)="changeLang('ru')">Рус</a>
                 </div>
                 <div class="col-md-4">
                     <div *ngIf="repo" class="blog-info">
@@ -14,12 +16,12 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <a *ngIf="authService.isLogged" [routerLink]="['/about']" class="about" title="About">?</a>
-                    <a *ngIf="!authService.isLogged" href="" [routerLink]="['/start']" class="btn btn-primary pull-right create">Get started</a>
+                    <a *ngIf="authService.isLogged" [routerLink]="['/about'] | localize" class="about" title="About">?</a>
+                    <a *ngIf="!authService.isLogged" href="" [routerLink]="['/start'] | localize" class="btn btn-primary pull-right create">{{ 'get started' | translate }}</a>
                     <div class="account pull-right" *ngIf="authService.isLogged">
                         <auth-profile #profile></auth-profile>
                     </div>
-                    <a *ngIf="!authService.isLogged" [href]="githubUrl" class="btn btn-default pull-right" (click)="savePath()">Login</a>
+                    <a *ngIf="!authService.isLogged" [href]="githubUrl" class="btn btn-default pull-right" (click)="savePath()">{{ 'login' | translate }}</a>
                 </div>
             </div>
         </div>

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Title }                               from '@angular/platform-browser';
 import { Location }                            from '@angular/common';
 import { ToastsManager }                       from 'ng2-toastr/ng2-toastr';
+import { TranslateService }                    from '@ngx-translate/core';
+import { LocalizeRouterService }               from 'localize-router';
 import { AuthService, RouterService }          from './services';
 import { auth }                                from './shared/auth';
 
@@ -21,18 +23,32 @@ export class AppComponent implements OnInit {
     name: string;
     repo: string;
     drafts: boolean;
-    githubUrl = `https://github.com/login/oauth/authorize?client_id=${auth.clientId}&scope=repo&redirect_uri=${auth.redirectUri}`;
+    lang: string;
+    redirectUri: string;
+    githubUrl: string;
     constructor(private routerService: RouterService,
                 private location: Location,
                 private titleService: Title,
+                private translate: TranslateService,
+                private localize: LocalizeRouterService,
                 public authService: AuthService,
                 public toastr: ToastsManager, vcr: ViewContainerRef) {
         toastr.setRootViewContainerRef(vcr);
+        translate.addLangs(['en', 'ru']);
+        // translate.setDefaultLang('en');
     }
 
     ngOnInit() {
         this.getParams();
         this.getUrl();
+        this.getAuthUrl();
+        this.translate.use(this.lang);
+    }
+
+    getAuthUrl() {
+        this.lang = localStorage.getItem('LOCALIZE_LOCAL_STORAGE') || 'en';
+        this.redirectUri = `${auth.redirectUri}/${this.lang}/auth`;
+        this.githubUrl = `https://github.com/login/oauth/authorize?client_id=${auth.clientId}&scope=repo&redirect_uri=${this.redirectUri}`;
     }
 
     getParams() {
@@ -66,6 +82,12 @@ export class AppComponent implements OnInit {
                     this.title = 'Blog platform / about';
                 }
             });
+    }
+
+    changeLang(lang: string) {
+        this.translate.use(lang);
+        this.localize.changeLanguage(lang);
+        this.getAuthUrl();
     }
 
     savePath() {

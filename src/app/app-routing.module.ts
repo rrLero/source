@@ -1,5 +1,6 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LocalizeRouterModule } from 'localize-router';
 import { AuthGuard }            from './services';
 
 import {
@@ -19,7 +20,7 @@ import {
     NewCommentsComponent,
 }  from './components';
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: 'welcome',
         component: WelcomeComponent
@@ -98,12 +99,18 @@ const routes: Routes = [
         path: ':name/:repo/newcomments',
         component: NewCommentsComponent
     },
-    { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+    { path: '', redirectTo: 'welcome', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    imports: [
+        LocalizeRouterModule.forRoot(routes),
+        RouterModule.forRoot(routes)
+    ],
+    exports: [
+        LocalizeRouterModule,
+        RouterModule
+    ]
 })
 export class AppRoutingModule { }

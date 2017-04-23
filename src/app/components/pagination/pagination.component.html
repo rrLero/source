@@ -3,10 +3,10 @@
         <li>
             <ul class="pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}" *ngIf="pager.pages.length > 2">
-                    <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1]">Prev</a>
+                    <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1] | localize">Prev</a>
                 </li>
                 <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.pages.length > 2">
-                    <a (click)="onPageChange(pager.currentPage + 1)" [routerLink]="[url, 'page', pager.currentPage + 1]">Next</a>
+                    <a (click)="onPageChange(pager.currentPage + 1)" [routerLink]="[url, 'page', pager.currentPage + 1] | localize">Next</a>
                 </li>
             </ul>
         </li><br>
@@ -17,10 +17,10 @@
                     <a (click)="onPageChange(1)" [routerLink]="[url, 'page', 1]">First</a>
                 </li>
                 <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                    <a (click)="onPageChange(page)" [routerLink]="[url, 'page', page]">{{ page }}</a>
+                    <a (click)="onPageChange(page)" [routerLink]="[url, 'page', page] | localize">{{ page }}</a>
                 </li>
                 <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.totalPages > 2">
-                    <a (click)="onPageChange(pager.totalPages)" [routerLink]="[url, 'page', pager.totalPages]">Last</a>
+                    <a (click)="onPageChange(pager.totalPages)" [routerLink]="[url, 'page', pager.totalPages] | localize">Last</a>
                 </li>
             </ul>
         </li>

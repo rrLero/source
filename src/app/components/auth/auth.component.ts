@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService, ToastService } from '../../services';
 
 @Component({
+    // template: `<spinner></spinner>`,
     template: `<p>Authenticate</p>`,
     styles: [`
       p {
@@ -41,7 +42,7 @@ export class AuthComponent implements OnInit {
                             this.router.navigate([path]);
                             localStorage.removeItem('path');
                         } else {
-                            this.router.navigate(['/']);
+                            this.router.navigate(['/', 'welcome']);
                         }
                     })
                     .catch(error => this.toastService.showError(error));

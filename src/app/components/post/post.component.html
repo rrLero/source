@@ -13,7 +13,7 @@
                             <i class="material-icons">person</i>
                             <ul class="authors">
                                 <li *ngFor="let author of post.author.split(',')">
-                                    <a [routerLink]="['/', author.trim() | lowercase]">{{ author }}</a>
+                                    <a [routerLink]="['/', author.trim() | lowercase] | localize">{{ author }}</a>
                                 </li>
                             </ul>
                         </li>
@@ -34,7 +34,7 @@
                         <i class="material-icons">local_offer</i>
                         <ul class="tags">
                             <li *ngFor="let tag of post.tags">
-                                <a [routerLink]="['/', name, repo, 'tag', tag]">{{ tag }}</a>
+                                <a [routerLink]="['/', name, repo, 'tag', tag] | localize">{{ tag }}</a>
                             </li>
                         </ul>
                     </div>

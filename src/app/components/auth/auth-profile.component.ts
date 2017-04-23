@@ -41,6 +41,6 @@ export class AuthProfileComponent implements OnInit {
     logout(): void {
         this.logged = false;
         this.authService.logout();
-        this.router.navigate(['/welcome']);
+        this.router.navigate(['/']);
     }
 }

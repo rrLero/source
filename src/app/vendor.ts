@@ -30,3 +30,6 @@ import 'simplemde';
 import 'ng2-toastr';
 import 'highlight.js';
 import 'angular2-moment';
+import '@ngx-translate/core';
+import '@ngx-translate/http-loader';
+import 'localize-router';

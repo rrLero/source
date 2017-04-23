@@ -48,7 +48,7 @@
                             <!-- Blog -->
                             <div *ngIf="blog.name === name.toLowerCase()" class="blog">
 
-                                <a [routerLink]="['/', blog.name, blog.repo]" class="blog-name">{{ blog.repo | titlecase }}</a>
+                                <a [routerLink]="['/', blog.name, blog.repo] | localize" class="blog-name">{{ blog.repo | titlecase }}</a>
 
                                 <!-- Blog controls -->
                                 <div>
@@ -68,18 +68,18 @@
                                      </button>
                                     <a
                                         *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
-                                        [routerLink]="['/', blog.name, blog.repo, 'create']"
+                                        [routerLink]="['/', blog.name, blog.repo, 'create'] | localize"
                                         class="btn btn-primary">
                                         Add post
                                     </a>
                                     <a
-                                        [routerLink]="['/', blog.name, blog.repo]"
+                                        [routerLink]="['/', blog.name, blog.repo] | localize"
                                         class="btn btn-primary">
                                         Go to blog
                                     </a>
                                     <a
                                         *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
-                                        [routerLink]="['/', blog.name, blog.repo, 'drafts']"
+                                        [routerLink]="['/', blog.name, blog.repo, 'drafts'] | localize"
                                         class="btn btn-primary">
                                         Go to drafts
                                     </a>

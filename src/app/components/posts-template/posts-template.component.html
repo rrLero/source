@@ -6,7 +6,7 @@
             <span>{{ post.date | amTimeAgo }}</span>
         </div>
         <h2 class="entry-title">
-                <a [routerLink]="[url, 'post', post.id]">
+                <a [routerLink]="[url, 'post', post.id] | localize">
                     {{ post.title }}
                 </a>
             </h2>
@@ -20,7 +20,7 @@
                 <i class="material-icons">person</i>
                 <ul class="authors">
                     <li *ngFor="let author of post.author.split(',')">
-                        <a [routerLink]="['/', author.trim() | lowercase]">{{ author }}</a>
+                        <a [routerLink]="['/', author.trim() | lowercase] | localize">{{ author }}</a>
                     </li>
                 </ul>
             </li>
@@ -28,14 +28,14 @@
                 <i class="material-icons">local_offer</i>
                 <ul class="tags">
                     <li *ngFor="let tag of post.tags">
-                        <a [routerLink]="[url, 'tag', tag]">{{ tag }}</a>
+                        <a [routerLink]="[url, 'tag', tag] | localize">{{ tag }}</a>
                     </li>
                 </ul>
             </li>
         </ul>
         <div *ngIf="post.comments_status && !drafts" class="entry-comment icons pull-right">
             <i class="material-icons">chat_bubble_outline</i>
-            <span>Comments ({{ post.comments }})</span>
+            <span>{{ 'comments' | translate }} ({{ post.comments }})</span>
         </div>
     </footer>
 </article>

@@ -23,7 +23,7 @@
             <search></search>
         </div>
         <div class="widget" *ngIf="user && canEdit && posts || user && canEdit && empty">
-            <h4>Actions</h4>
+            <h4>{{ 'actions' | translate }}</h4>
             <controls></controls>
         </div>
     </div>
