@@ -1,5 +1,5 @@
 <div  [@search]="searchBox.state" class="search">
-    <input #searchBox (keyup)="search(searchBox.value)" class="form-control" [placeholder]="'search' | translate">
+    <input #searchBox (keyup)="search(searchBox.value)" class="form-control" [placeholder]="'SEARCH.search' | translate">
     <div class="search-result">
         <ul>
             <li *ngFor="let post of posts | async" (click)="gotoDetail(post)">

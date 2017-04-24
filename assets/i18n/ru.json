@@ -1,8 +1,66 @@
 {
-    "blogs": "Блоги",
-    "get started": "Начать",
-    "login": "Войти",
-    "comments": "Комментарии",
-    "actions": "Действия",
-    "search": "Поиск"
+    "APP": {
+        "getStarted": "Начать",
+        "login": "Войти"
+    },
+    "WELCOME": {
+        "blogs": "Блоги"
+    },
+    "START": {
+
+    },
+    "SEARCH": {
+        "search": "Поиск"
+    },
+    "POSTS": {
+        "comments": "Комментарии",
+        "actions": "Действия"
+    },
+    "POST": {
+
+    },
+    "POPUP": {
+
+    },
+    "PAGINATION": {
+
+    },
+    "NOTFOUND": {
+
+    },
+    "EDITPOST": {
+
+    },
+    "CREATEPOST": {
+
+    },
+    "CONTROLS": {
+
+    },
+    "COMMENTS": {
+
+    },
+    "PROFILE": {
+        "account": "Аккаунт",
+        "logout": "Выйти"
+    },
+    "ACCOUNT": {
+        "nouser": "No user",
+        "account": "account",
+        "repositories": "repositories",
+        "hide": "Hide",
+        "update": "Update",
+        "blogs": "Blogs",
+        "noblogs": "No blogs",
+        "updateBlog": "Update blog",
+        "updateDraft": "Update draft",
+        "addPost": "Add post",
+        "goToBlog": "Go to blog",
+        "goToDrafts": "Go to drafts",
+        "remove": "Remove",
+        "activateBlog": "Activate blog"
+    },
+    "ABOUT": {
+
+    }
 }

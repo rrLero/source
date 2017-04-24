@@ -1,8 +1,66 @@
 {
-    "blogs": "Blogs",
-    "get started": "Get started",
-    "login": "Login",
-    "comments": "Comments",
-    "actions": "Actions",
-    "search": "Search"
+    "APP": {
+        "getStarted": "Get started",
+        "login": "Login"
+    },
+    "WELCOME": {
+        "blogs": "Blogs"
+    },
+    "START": {
+
+    },
+    "SEARCH": {
+        "search": "Search"
+    },
+    "POSTS": {
+        "comments": "Comments",
+        "actions": "Actions"
+    },
+    "POST": {
+
+    },
+    "POPUP": {
+
+    },
+    "PAGINATION": {
+
+    },
+    "NOTFOUND": {
+
+    },
+    "EDITPOST": {
+
+    },
+    "CREATEPOST": {
+
+    },
+    "CONTROLS": {
+
+    },
+    "COMMENTS": {
+
+    },
+    "PROFILE": {
+        "account": "Account",
+        "logout": "Logout"
+    },
+    "ACCOUNT": {
+        "nouser": "No user",
+        "account": "account",
+        "repositories": "repositories",
+        "hide": "Hide",
+        "update": "Update",
+        "blogs": "Blogs",
+        "noblogs": "No blogs",
+        "updateBlog": "Update blog",
+        "updateDraft": "Update draft",
+        "addPost": "Add post",
+        "goToBlog": "Go to blog",
+        "goToDrafts": "Go to drafts",
+        "remove": "Remove",
+        "activateBlog": "Activate blog"
+    },
+    "ABOUT": {
+
+    }
 }

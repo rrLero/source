@@ -11,17 +11,17 @@
                 </div>
                 <div class="col-md-4">
                     <div *ngIf="repo" class="blog-info">
-                        <a [routerLink]="[name, repo]" class="blog-name">{{ repo | titlecase }} <span>{{ drafts ? '(drafts)' : ''}}</span></a><br>
-                        by <a [routerLink]="[name]" class="blog-author">{{ name }}</a>
+                        <a [routerLink]="['/', name, repo] | localize" class="blog-name">{{ repo | titlecase }} <span>{{ drafts ? '(drafts)' : ''}}</span></a><br>
+                        by <a [routerLink]="['/', name] | localize" class="blog-author">{{ name }}</a>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <a *ngIf="authService.isLogged" [routerLink]="['/about'] | localize" class="about" title="About">?</a>
-                    <a *ngIf="!authService.isLogged" href="" [routerLink]="['/start'] | localize" class="btn btn-primary pull-right create">{{ 'get started' | translate }}</a>
+                    <a *ngIf="!authService.isLogged" href="" [routerLink]="['/start'] | localize" class="btn btn-primary pull-right create">{{ 'APP.getStarted' | translate }}</a>
                     <div class="account pull-right" *ngIf="authService.isLogged">
                         <auth-profile #profile></auth-profile>
                     </div>
-                    <a *ngIf="!authService.isLogged" [href]="githubUrl" class="btn btn-default pull-right" (click)="savePath()">{{ 'login' | translate }}</a>
+                    <a *ngIf="!authService.isLogged" [href]="githubUrl" class="btn btn-default pull-right" (click)="savePath()">{{ 'APP.login' | translate }}</a>
                 </div>
             </div>
         </div>
