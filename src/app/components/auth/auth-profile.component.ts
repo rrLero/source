@@ -1,6 +1,6 @@
 import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { LocalizeRouterService }  from 'localize-router';
 import { AuthService, UserService, ToastService } from '../../services';
 
 @Component({
@@ -20,6 +20,7 @@ export class AuthProfileComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private userService: UserService,
+                private localize: LocalizeRouterService,
                 public authService: AuthService,
                 public toastService: ToastService) { };
 
@@ -41,6 +42,6 @@ export class AuthProfileComponent implements OnInit {
     logout(): void {
         this.logged = false;
         this.authService.logout();
-        this.router.navigate(['/']);
+        this.router.navigate([this.localize.translateRoute('/')]);
     }
 }

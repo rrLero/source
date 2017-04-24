@@ -1,6 +1,6 @@
 import { Component, OnInit }                      from '@angular/core';
 import { Router, ActivatedRoute }                 from '@angular/router';
-
+import { LocalizeRouterService }                  from 'localize-router';
 import { HttpService, UserService, ToastService } from '../../services';
 import { Post }                                   from '../../shared/post.model';
 
@@ -23,6 +23,7 @@ export class PostsComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
+                private localize: LocalizeRouterService,
                 private httpService: HttpService,
                 private userService: UserService,
                 public toastService: ToastService) { };
@@ -56,7 +57,8 @@ export class PostsComponent implements OnInit {
             })
             .catch(error => {
                 if (error.status === 404) {
-                    this.router.navigate(['/page-not-found']);
+                    let localUrl = this.localize.translateRoute('/page-not-found');
+                    this.router.navigate([localUrl]);
                 }
             });
     }

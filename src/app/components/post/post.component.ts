@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy }               from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { LocalizeRouterService }                      from 'localize-router';
 
 import {
     HttpService,
@@ -43,6 +44,7 @@ export class PostComponent implements OnInit, OnDestroy {
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
+                private localize: LocalizeRouterService,
                 private commentsService: CommentsService,
                 private httpService: HttpService,
                 private userService: UserService,
@@ -81,7 +83,8 @@ export class PostComponent implements OnInit, OnDestroy {
                         },
                         error => {
                             if (error.status === 404) {
-                                this.router.navigate(['/page-not-found']);
+                                let localUrl = this.localize.translateRoute('/page-not-found');
+                                this.router.navigate([localUrl]);
                             }
                         });
     }
