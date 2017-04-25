@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
                 public authService: AuthService,
                 public toastr: ToastsManager, vcr: ViewContainerRef) {
         toastr.setRootViewContainerRef(vcr);
-        translate.addLangs(['en', 'ru']);
+        translate.addLangs(['en', 'ru', 'uk']);
         // translate.setDefaultLang('en');
     }
 
