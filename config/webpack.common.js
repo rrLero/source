@@ -21,11 +21,35 @@ module.exports = {
                 use: 'raw-loader'
             },
             {
-                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+                test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico)$/,
                 use: [{
                     loader: 'file-loader',
                     options: {
-                        name: 'assets/[name].[hash].[ext]'
+                        name: 'assets/img/[name].[ext]'
+                    }
+                }]
+            },
+            {
+                test: /\.svg$/,
+                include: [
+                    helpers.root('node_modules')
+                ],
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: 'flags/4x3/[name].[ext]'
+                    }
+                }]
+            },
+            {
+                test: /\.json$/,
+                include: [
+                    helpers.root('public/i18n')
+                ],
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: 'assets/i18n/[name].[ext]'
                     }
                 }]
             },
@@ -43,8 +67,7 @@ module.exports = {
                             sourceMap: false,
                             minimize: true
                         }
-                    }],
-                    publicPath: '/dist/'
+                    }]
                 })
             },
             {

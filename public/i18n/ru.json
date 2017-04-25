@@ -1,7 +1,10 @@
 {
     "APP": {
-        "getStarted": "Почати",
-        "login": "Увійти"
+        "getStarted": "Начать",
+        "login": "Войти",
+        "drafts": "(черновики)",
+        "languages": "Языки",
+        "madeBy": "Made by super team"
     },
     "WELCOME": {
         "blogs": "Блоги"
@@ -10,16 +13,18 @@
 
     },
     "SEARCH": {
-        "search": "Пошук"
+        "search": "Поиск"
     },
     "POSTS": {
-        "comments": "Comments",
-        "actions": "Actions",
-        "tag": "Tag",
-        "noPosts": "No posts"
+        "comments": "Комментарии",
+        "actions": "Действия",
+        "tag": "Тег",
+        "noPosts": "Нет постов",
+        "private": "Private"
     },
     "POST": {
-        "goBack": "Go back"
+        "controls": "Управление",
+        "goBack": "Назад"
     },
     "POPUP": {
         "remove": "Remove",
@@ -59,13 +64,13 @@
         "publish": "Publish"
     },
     "CONTROLS": {
-        "addPost": "Add post",
-        "goToDrafts": "Go to drafts",
-        "goYoBlog": "Go to blog",
-        "comments": "Comments",
-        "publish": "Publish",
-        "edit": "Edit",
-        "remove": "Remove"
+        "addPost": "Добавить пост",
+        "goToDrafts": "К черновикам",
+        "goToBlog": "К блогу",
+        "comments": "Комментарии",
+        "publish": "Опубликовать",
+        "edit": "Редактировать",
+        "remove": "Удалить"
     },
     "COMMENTS": {
         "comments": "Comments",
@@ -86,24 +91,25 @@
     },
     "PROFILE": {
         "account": "Аккаунт",
-        "logout": "Вийти"
+        "about": "About",
+        "logout": "Выйти"
     },
     "ACCOUNT": {
-        "nouser": "Нема користувача",
+        "nouser": "Нет пользователя",
         "account": "аккаунт",
-        "repositories": "репозиторії",
-        "hide": "Сховати",
-        "update": "Оновити",
+        "repositories": "репозитории",
+        "hide": "Спрятать",
+        "update": "Обновить",
         "blogs": "Блоги",
-        "noblogs": "Немає блогів",
-        "updateBlog": "Оновити блог",
-        "updateDraft": "Оновити чернетку",
-        "addPost": "Додати пост",
-        "goToBlog": "Перейти до блогу",
-        "goToDrafts": "Перейти до чернеток",
-        "remove": "Видалити",
-        "activateBlog": "Активувати блог",
-        "blogName": "Ім'я блогу"
+        "noblogs": "Нет блогов",
+        "updateBlog": "Обновить блог",
+        "updateDraft": "Обновить черновики",
+        "addPost": "Добавить пост",
+        "goToBlog": "К блогу",
+        "goToDrafts": "К черновикам",
+        "remove": "Удалить",
+        "activateBlog": "Активировать блог",
+        "blogName": "Имя блога"
     },
     "ABOUT": {
         "goBack": "Go back"

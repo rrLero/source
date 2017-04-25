@@ -1,25 +1,30 @@
 {
     "APP": {
-        "getStarted": "Get started",
-        "login": "Login"
+        "getStarted": "Почати",
+        "login": "Увійти",
+        "drafts": "(чернетки)",
+        "languages": "Мови",
+        "madeBy": "Made by super team"
     },
     "WELCOME": {
-        "blogs": "Blogs"
+        "blogs": "Блоги"
     },
     "START": {
 
     },
     "SEARCH": {
-        "search": "Search"
+        "search": "Пошук"
     },
     "POSTS": {
-        "comments": "Comments",
-        "actions": "Actions",
-        "tag": "Tag",
-        "noPosts": "No posts"
+        "comments": "Коментарі",
+        "actions": "Дії",
+        "tag": "Тег",
+        "noPosts": "Немає постів",
+        "private": "Private"
     },
     "POST": {
-        "goBack": "Go back"
+        "controls": "Управління",
+        "goBack": "Назад"
     },
     "POPUP": {
         "remove": "Remove",
@@ -59,13 +64,13 @@
         "publish": "Publish"
     },
     "CONTROLS": {
-        "addPost": "Add post",
-        "goToDrafts": "Go to drafts",
-        "goYoBlog": "Go to blog",
-        "comments": "Comments",
-        "publish": "Publish",
-        "edit": "Edit",
-        "remove": "Remove"
+        "addPost": "Додати пост",
+        "goToDrafts": "До чернеток",
+        "goToBlog": "До блогу",
+        "comments": "Коментарі",
+        "publish": "Опублікувати",
+        "edit": "Редагувати",
+        "remove": "Видалити"
     },
     "COMMENTS": {
         "comments": "Comments",
@@ -85,25 +90,26 @@
         "approve": "Approve"
     },
     "PROFILE": {
-        "account": "Account",
-        "logout": "Logout"
+        "account": "Аккаунт",
+        "about": "About",
+        "logout": "Вийти"
     },
     "ACCOUNT": {
-        "nouser": "No user",
-        "account": "account",
-        "repositories": "repositories",
-        "hide": "Hide",
-        "update": "Update",
-        "blogs": "Blogs",
-        "noblogs": "No blogs",
-        "updateBlog": "Update blog",
-        "updateDraft": "Update draft",
-        "addPost": "Add post",
-        "goToBlog": "Go to blog",
-        "goToDrafts": "Go to drafts",
-        "remove": "Remove",
-        "activateBlog": "Activate blog",
-        "blogName": "Blog name"
+        "nouser": "Немає користувача",
+        "account": "аккаунт",
+        "repositories": "репозиторії",
+        "hide": "Сховати",
+        "update": "Оновити",
+        "blogs": "Блоги",
+        "noblogs": "Немає блогів",
+        "updateBlog": "Оновити блог",
+        "updateDraft": "Оновити чернетки",
+        "addPost": "Додати пост",
+        "goToBlog": "До блогу",
+        "goToDrafts": "До чернеток",
+        "remove": "Видалити",
+        "activateBlog": "Активувати блог",
+        "blogName": "Ім'я блогу"
     },
     "ABOUT": {
         "goBack": "Go back"

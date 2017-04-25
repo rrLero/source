@@ -1,8 +1,8 @@
-<h3 *ngIf="user && !canEdit">Private</h3>
+<h3 *ngIf="user && !canEdit" translate>POSTS.private</h3>
 
 <div class="row" *ngIf="user && canEdit">
     <div class="col-md-8">
-        <h3 *ngIf="empty">No posts</h3>
+        <h3 *ngIf="empty" translate>POSTS.noPosts</h3>
         <posts-template
             *ngIf="posts"
             [posts]="posts"
@@ -26,7 +26,7 @@
             <search></search>
         </div> -->
         <div class="widget" *ngIf="user && canEdit && posts || user && canEdit && empty">
-            <h4>{{ 'actions' | translate }}</h4>
+            <h4 translate>POSTS.actions</h4>
             <controls [drafts]="true"></controls>
         </div>
     </div>

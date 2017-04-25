@@ -1,8 +1,14 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LocalizeRouterModule } from 'localize-router';
+import { Http }                 from '@angular/http';
+import { Location }             from '@angular/common';
+import { TranslateService }     from '@ngx-translate/core';
+import {
+    LocalizeRouterModule,
+    LocalizeParser,
+    StaticParserLoader
+}                               from 'localize-router';
 import { AuthGuard }            from './services';
-
 import {
     WelcomeComponent,
     PostsComponent,
@@ -20,7 +26,7 @@ import {
     NewCommentsComponent,
 }  from './components';
 
-export const routes: Routes = [
+const routes: Routes = [
     {
         path: 'welcome',
         component: WelcomeComponent
@@ -103,9 +109,17 @@ export const routes: Routes = [
     { path: '**', component: NotFoundComponent }
 ];
 
+export function localizeLoaderFactory(translate: TranslateService, location: Location, http: Http) {
+    return new StaticParserLoader(translate, location, http, 'assets/i18n/locales.json');
+}
+
 @NgModule({
     imports: [
-        LocalizeRouterModule.forRoot(routes),
+        LocalizeRouterModule.forRoot(routes, {
+            provide: LocalizeParser,
+            useFactory: localizeLoaderFactory,
+            deps: [TranslateService, Location, Http]
+        }),
         RouterModule.forRoot(routes)
     ],
     exports: [

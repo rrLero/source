@@ -23,6 +23,7 @@
   margin: 3px 0 0;
 }
 
+
 .header h1 a {
   color: #222;
 }
@@ -46,6 +47,43 @@
 
 .create {
   margin-left: 10px;
+}
+
+.langs-control {
+  position: relative;
+  float: left;
+  margin-top: .5rem;
+  cursor: pointer;
+
+  .langs {
+    position: absolute;
+    top: 1.2em;
+    left: -4em;
+    max-width: 5.6em;
+    margin-top: .25em;
+    margin-left: .35em;
+    padding: .25em;
+    background-color: #eeeded;
+    box-shadow: 0 0 5px #000;
+    font-size: 2em;
+    user-select: none;
+    z-index: 200;
+    @media (max-width: 900px) {
+      left: 0;
+    }
+
+    a {
+      margin-right: .25em;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &.active {
+        box-shadow: 0 0 5px #0071d9;
+      }
+    }
+  }
 }
 
 .main {

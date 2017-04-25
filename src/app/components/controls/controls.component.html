@@ -1,8 +1,28 @@
 <div #controls [@controls]="controls.state" class="controls">
 
-    <a [routerLink]="[url, 'create'] | localize" [class.hidden]="post" class="btn btn-primary go-btn">Add post</a>
-    <a *ngIf="!drafts" [routerLink]="[url, 'drafts'] | localize" [class.hidden]="post" class="btn btn-primary go-btn">Go to drafts</a>
-    <a *ngIf="drafts" [routerLink]="[url] | localize" [class.hidden]="post" class="btn btn-primary go-btn">Go to blog</a>
+    <a
+        [routerLink]="[url, 'create'] | localize"
+        translate
+        [class.hidden]="post"
+        class="btn btn-primary go-btn">
+        CONTROLS.addPost
+    </a>
+    <a
+        *ngIf="!drafts"
+        [routerLink]="[url, 'drafts'] | localize"
+        translate
+        [class.hidden]="post"
+        class="btn btn-primary go-btn">
+        CONTROLS.goToDrafts
+    </a>
+    <a
+        *ngIf="drafts" 
+        [routerLink]="[url] | localize"
+        translate
+        [class.hidden]="post"
+        class="btn btn-primary go-btn">
+        CONTROLS.goToBlog
+    </a>
     <div class="post">
         <div *ngIf="!draft" [class.hidden]="!post" class="[ form-group ] text-center">
             <input
@@ -18,15 +38,34 @@
                     <span class="[ glyphicon glyphicon-ok ]"></span>
                     <span> </span>
                 </label>
-                <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
-                    Comments
+                <label for="fancy-checkbox-primary" translate class="[ btn btn-default active ]">
+                    CONTROLS.comments
                 </label>
             </div>
         </div>
-        <button *ngIf="draft" (click)="publish()" type="button" class="btn btn-success" >Publish</button>
-        <a (click)="getPostStatus()" [class.hidden]="!post" class="btn btn-primary">Edit</a>
+        <button
+            *ngIf="draft"
+            (click)="publish()"
+            translate
+            type="button"
+            class="btn btn-success">
+            CONTROLS.publish
+        </button>
+        <a
+            (click)="getPostStatus()"
+            translate
+            [class.hidden]="!post"
+            class="btn btn-primary">
+            CONTROLS.edit
+        </a>
         <!-- <a [routerLink]="['edit']" [class.hidden]="!post" class="btn btn-primary">Edit</a> -->
-        <button (click)="hidden = false" [class.hidden]="!post" class="btn btn-danger">Remove</button>
+        <button
+            (click)="hidden = false"
+            translate
+            [class.hidden]="!post"
+            class="btn btn-danger">
+            CONTROLS.remove
+        </button>
     </div>
 
 </div>

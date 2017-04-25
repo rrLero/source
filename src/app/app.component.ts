@@ -14,6 +14,10 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
 
 import '../../public/css/styles.css';
+import '../../public/i18n/en.json';
+import '../../public/i18n/ru.json';
+import '../../public/i18n/uk.json';
+import '../../public/i18n/locales.json';
 
 @Component({
     selector: 'app',
@@ -26,8 +30,11 @@ export class AppComponent implements OnInit {
     repo: string;
     drafts: boolean;
     lang: string;
+    activeLang: string;
+    langs: boolean;
     redirectUri: string;
     githubUrl: string;
+
     constructor(private routerService: RouterService,
                 private location: Location,
                 private titleService: Title,
@@ -37,24 +44,24 @@ export class AppComponent implements OnInit {
                 public toastr: ToastsManager, vcr: ViewContainerRef) {
         toastr.setRootViewContainerRef(vcr);
         translate.addLangs(['en', 'ru', 'uk']);
-        // translate.setDefaultLang('en');
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.getParams();
         this.getUrl();
         this.getAuthUrl();
         this.translate.use(this.lang);
+        this.activeLang = this.lang;
         moment.locale(this.lang);
     }
 
-    getAuthUrl() {
+    getAuthUrl(): void {
         this.lang = localStorage.getItem('LOCALIZE_LOCAL_STORAGE') || 'en';
         this.redirectUri = `${auth.redirectUri}/${this.lang}/auth`;
         this.githubUrl = `https://github.com/login/oauth/authorize?client_id=${auth.clientId}&scope=repo&redirect_uri=${this.redirectUri}`;
     }
 
-    getParams() {
+    getParams(): void {
         this.routerService
             .getRoute()
             .mergeMap(route => route.params)
@@ -69,7 +76,7 @@ export class AppComponent implements OnInit {
             });
     }
 
-    getUrl() {
+    getUrl(): void {
         this.routerService
             .getRoute()
             .mergeMap(route => route.url)
@@ -87,14 +94,19 @@ export class AppComponent implements OnInit {
             });
     }
 
-    changeLang(lang: string) {
+    changeLang(lang: string): void {
         moment.locale(lang);
         this.translate.use(lang);
         this.localize.changeLanguage(lang);
+        this.activeLang = lang;
         this.getAuthUrl();
     }
 
-    savePath() {
+    toggleLangs(): void {
+        this.langs = !this.langs;
+    }
+
+    savePath(): void {
         localStorage.setItem('path', this.location.path());
     }
 }

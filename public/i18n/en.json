@@ -1,24 +1,29 @@
 {
     "APP": {
-        "getStarted": "Начать",
-        "login": "Войти"
+        "getStarted": "Get started",
+        "login": "Login",
+        "drafts": "(drafts)",
+        "languages": "Languages",
+        "madeBy": "Made by super team"
     },
     "WELCOME": {
-        "blogs": "Блоги"
+        "blogs": "Blogs"
     },
     "START": {
 
     },
     "SEARCH": {
-        "search": "Поиск"
+        "search": "Search"
     },
     "POSTS": {
         "comments": "Comments",
         "actions": "Actions",
         "tag": "Tag",
-        "noPosts": "No posts"
+        "noPosts": "No posts",
+        "private": "Private"
     },
     "POST": {
+        "controls": "Controls",
         "goBack": "Go back"
     },
     "POPUP": {
@@ -61,7 +66,7 @@
     "CONTROLS": {
         "addPost": "Add post",
         "goToDrafts": "Go to drafts",
-        "goYoBlog": "Go to blog",
+        "goToBlog": "Go to blog",
         "comments": "Comments",
         "publish": "Publish",
         "edit": "Edit",
@@ -85,25 +90,26 @@
         "approve": "Approve"
     },
     "PROFILE": {
-        "account": "Аккаунт",
-        "logout": "Выйти"
+        "account": "Account",
+        "about": "About",
+        "logout": "Logout"
     },
     "ACCOUNT": {
-        "nouser": "Нет пользователя",
-        "account": "аккаунт",
-        "repositories": "репозитории",
-        "hide": "Спрятать",
-        "update": "Обновить",
-        "blogs": "Блоги",
-        "noblogs": "Нет блогов",
-        "updateBlog": "Обновить блог",
-        "updateDraft": "Обновить черновик",
-        "addPost": "Добавить пост",
-        "goToBlog": "Перейти к блогу",
-        "goToDrafts": "Перейти к черновикам",
-        "remove": "Удалить",
-        "activateBlog": "Активировать блог",
-        "blogName": "Имя блога"
+        "nouser": "No user",
+        "account": "account",
+        "repositories": "repositories",
+        "hide": "Hide",
+        "update": "Update",
+        "blogs": "Blogs",
+        "noblogs": "No blogs",
+        "updateBlog": "Update blog",
+        "updateDraft": "Update draft",
+        "addPost": "Add post",
+        "goToBlog": "Go to blog",
+        "goToDrafts": "Go to drafts",
+        "remove": "Remove",
+        "activateBlog": "Activate blog",
+        "blogName": "Blog name"
     },
     "ABOUT": {
         "goBack": "Go back"
