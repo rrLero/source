@@ -3,7 +3,7 @@
 
         <div class="entry">
 
-            <h3 *ngIf="noUser" class="text-center">No user</h3>
+            <h3 *ngIf="noUser" translate class="text-center">ACCOUNT.nouser</h3>
             <div *ngIf="!noUser">
 
                 <!-- Profile -->
@@ -19,12 +19,12 @@
 
                 <!-- GitHub info -->
                 <div class="info text-center">
-                    <a [href]="githubUrl + name" target="_blank" class="btn btn-default controls">GitHub account</a><br>
+                    <a [href]="githubUrl + name" target="_blank" class="btn btn-default controls">GitHub {{ 'ACCOUNT.account' | translate }}</a><br>
                     <a
                         [href]="githubUrl + name + '?tab=repositories'"
                         target="_blank"
                         class="btn btn-default controls">
-                        GitHub repositories
+                        GitHub {{ 'ACCOUNT.repositories' | translate }}
                     </a>
                     <br>
                 </div>
@@ -34,12 +34,13 @@
                 <button
                     *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && blogs.length"
                     (click)="toggleUpdateBtns()"
+                    translate
                     type="button"
                     class="btn btn-default update">
-                    {{ update ? 'Hide' : 'Update' }}
+                    {{ update ? 'ACCOUNT.hide' : 'ACCOUNT.update' }}
                 </button>
 
-                <h3>{{ blogs.length ? 'Blogs' : 'No blogs'}}</h3>
+                <h3 translate>{{ blogs.length ? 'ACCOUNT.blogs' : 'ACCOUNT.noblogs'}}</h3>
 
                 <div class="blog-list">
                     <div class="blogs">
@@ -55,40 +56,46 @@
                                     <button
                                         (click)="updateBlog(blog.repo)"
                                         [class.hidden]="!update"
+                                        translate
                                         type="button"
                                         class="btn btn-success">
-                                        Update blog
+                                        ACCOUNT.updateBlog
                                     </button>
                                     <button
                                         (click)="updateDraft(blog.repo)"
                                         [class.hidden]="!update"
+                                        translate
                                         type="button"
                                         class="btn btn-success">
-                                        Update draft
+                                        ACCOUNT.updateDraft
                                      </button>
                                     <a
                                         *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
                                         [routerLink]="['/', blog.name, blog.repo, 'create'] | localize"
+                                        translate
                                         class="btn btn-primary">
-                                        Add post
+                                        ACCOUNT.addPost
                                     </a>
                                     <a
                                         [routerLink]="['/', blog.name, blog.repo] | localize"
+                                        translate
                                         class="btn btn-primary">
-                                        Go to blog
+                                        ACCOUNT.goToBlog
                                     </a>
                                     <a
                                         *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
                                         [routerLink]="['/', blog.name, blog.repo, 'drafts'] | localize"
+                                        translate
                                         class="btn btn-primary">
-                                        Go to drafts
+                                        ACCOUNT.goToDrafts
                                     </a>
                                     <button
                                         *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
                                         (click)="prepareDelete(blog.name, blog.repo, i)"
+                                        translate
                                         type="button"
                                         class="btn btn-danger">
-                                        Remove
+                                        ACCOUNT.remove
                                     </button>
                                 </div>
 
@@ -97,11 +104,19 @@
                     </div>
 
                     <!-- Activate blog -->
-                    <form #form="ngForm" novalidate *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                    <form
+                        #form="ngForm"
+                        novalidate *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
                         (ngSubmit)="createBlog(user.login, repoEl)"
                         class="form-inline text-center">
-                        <input #repoEl type="text" [ngModel]="repoEl.value" name="repoEl" class="form-control" placeholder="Blog name" required>
-                        <button [disabled]="form.invalid" type="submit" class="btn btn-primary" >Activate blog</button>
+                        <input
+                            #repoEl
+                            [ngModel]="repoEl.value"
+                            type="text"
+                            name="repoEl"
+                            class="form-control"
+                            placeholder="{{ 'ACCOUNT.blogName' | translate }}" required>
+                        <button [disabled]="form.invalid" translate type="submit" class="btn btn-primary">ACCOUNT.activateBlog</button>
                     </form>
 
                 </div>
