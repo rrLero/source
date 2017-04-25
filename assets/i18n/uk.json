@@ -13,32 +13,76 @@
         "search": "Пошук"
     },
     "POSTS": {
-        "comments": "Коментарі",
-        "actions": "Дії"
+        "comments": "Comments",
+        "actions": "Actions",
+        "tag": "Tag",
+        "noPosts": "No posts"
     },
     "POST": {
-
+        "goBack": "Go back"
     },
     "POPUP": {
-
+        "remove": "Remove",
+        "cancel": "Cancel"
     },
     "PAGINATION": {
-
+        "prev": "Prev",
+        "next": "Next",
+        "first": "First",
+        "last": "Last"
     },
     "NOTFOUND": {
-
+        "sorry": "Sorry, page not found",
+        "goBack": "Go Back To Home Page"
     },
     "EDITPOST": {
-
+        "editPost": "Edit post",
+        "author": "Author",
+        "date": "Date",
+        "update": "Update",
+        "cancel": "Cancel",
+        "back": "Back",
+        "moveToDrafts": "Move to drafts",
+        "goBack": "Go back"
     },
     "CREATEPOST": {
-
+        "createPost": "Create post",
+        "author": "Author",
+        "date": "Date",
+        "filename": "Filename",
+        "title": "Title",
+        "tags": "Tags",
+        "preview": "Preview",
+        "text": "Text",
+        "create": "Create",
+        "back": "Back",
+        "publish": "Publish"
     },
     "CONTROLS": {
-
+        "addPost": "Add post",
+        "goToDrafts": "Go to drafts",
+        "goYoBlog": "Go to blog",
+        "comments": "Comments",
+        "publish": "Publish",
+        "edit": "Edit",
+        "remove": "Remove"
     },
     "COMMENTS": {
-
+        "comments": "Comments",
+        "noComments": "No comments. You will be first.",
+        "youMust": "You must be logged in to post a comment."
+    },
+    "COMMENTSFORM": {
+        "update": "Update",
+        "addComment": "Add comment"
+    },
+    "NEWCOMMENTS": {
+        "newComments": "New comments",
+        "noNew": "No new comments",
+        "post": "Post",
+        "text": "Text",
+        "remove": "Remove",
+        "approve": "Approve"
     },
     "PROFILE": {
         "account": "Аккаунт",
@@ -61,6 +105,6 @@
         "activateBlog": "Activate blog"
     },
     "ABOUT": {
-
+        "goBack": "Go back"
     }
 }

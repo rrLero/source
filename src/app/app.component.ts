@@ -4,6 +4,8 @@ import { Location }                            from '@angular/common';
 import { ToastsManager }                       from 'ng2-toastr/ng2-toastr';
 import { TranslateService }                    from '@ngx-translate/core';
 import { LocalizeRouterService }               from 'localize-router';
+import * as moment                             from 'moment';
+
 import { AuthService, RouterService }          from './services';
 import { auth }                                from './shared/auth';
 
@@ -43,6 +45,7 @@ export class AppComponent implements OnInit {
         this.getUrl();
         this.getAuthUrl();
         this.translate.use(this.lang);
+        moment.locale(this.lang);
     }
 
     getAuthUrl() {
@@ -85,6 +88,7 @@ export class AppComponent implements OnInit {
     }
 
     changeLang(lang: string) {
+        moment.locale(lang);
         this.translate.use(lang);
         this.localize.changeLanguage(lang);
         this.getAuthUrl();
