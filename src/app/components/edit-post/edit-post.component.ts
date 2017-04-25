@@ -2,6 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { LocalizeRouterService }               from 'localize-router';
 
 import {
     HttpService,
@@ -43,6 +44,7 @@ export class EditPostComponent implements OnInit {
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
+                private localize: LocalizeRouterService,
                 private userService: UserService,
                 private draftService: DraftService,
                 private httpService: HttpService,
@@ -201,7 +203,10 @@ export class EditPostComponent implements OnInit {
                             .subscribe(
                                 () => {
                                     this.toastService.showSuccess('Done!');
-                                    setTimeout(() => this.router.navigate([this.name, this.repo, 'drafts']), this.toastService.life());
+                                    setTimeout(() => {
+                                        let localUrl = this.localize.translateRoute(`/${this.name}`);
+                                        this.router.navigate([localUrl, this.repo, 'drafts']);
+                                    }, this.toastService.life());
                                 },
                                 error => this.toastService.showError(error)))
                     .catch(error => this.toastService.showError(error));

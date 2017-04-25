@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute }                         from '@angular/router';
 import { trigger, state, style, transition, animate }     from '@angular/animations';
+import { LocalizeRouterService }               from 'localize-router';
 
 import {
     HttpService,
@@ -47,6 +48,7 @@ export class ControlsComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private commentsService: CommentsService,
+                private localize: LocalizeRouterService,
                 private userService: UserService,
                 private draftService: DraftService,
                 private httpService: HttpService,
@@ -120,7 +122,10 @@ export class ControlsComponent implements OnInit {
 
     callback(path = ''): void {
         this.toastService.showSuccess('Done!');
-        setTimeout(() => this.router.navigate([`/${this.name}/${this.repo}/${path}`]), this.toastService.life());
+        setTimeout(() => {
+            let localUrl = this.localize.translateRoute(`/${this.name}/${this.repo}/${path}`)
+            this.router.navigate([localUrl])
+        }, this.toastService.life());
     }
 
     getPostStatus(): void {
@@ -156,11 +161,11 @@ export class ControlsComponent implements OnInit {
     }
 
     loadSession(): void {
-        let url: string;
+        let url: string | any[];
         if (this.draft) {
-            url = `${this.url}/drafts/post/${this.title}/edit`;
+            url = this.localize.translateRoute(`${this.url}/drafts/post/${this.title}/edit`);
         } else {
-            url = `${this.url}/post/${this.title}/edit`;
+            url = this.localize.translateRoute(`${this.url}/post/${this.title}/edit`);
         }
         this.toastService.showSuccess('Session loaded!');
         setTimeout(() => this.router.navigate([url]), this.toastService.life());
@@ -181,9 +186,10 @@ export class ControlsComponent implements OnInit {
                     .subscribe(
                         () => {
                             this.toastService.showSuccess('Session opened!');
-                            setTimeout(() =>
-                                this.router.navigate([this.url, 'post', this.title, 'edit']),
-                                this.toastService.life());
+                            setTimeout(() => {
+                                let localUrl = this.localize.translateRoute(this.url)
+                                this.router.navigate([localUrl, 'post', this.title, 'edit']);
+                            }, this.toastService.life());
                         },
                         error => this.toastService.showError(error));
             })
@@ -199,9 +205,10 @@ export class ControlsComponent implements OnInit {
                     .subscribe(
                         () => {
                             this.toastService.showSuccess('Session opened!');
-                            setTimeout(() =>
-                                this.router.navigate([this.url, 'drafts', 'post', this.title, 'edit']),
-                                this.toastService.life());
+                            setTimeout(() => {
+                                let localUrl = this.localize.translateRoute(this.url);
+                                this.router.navigate([localUrl, 'drafts', 'post', this.title, 'edit']);
+                            }, this.toastService.life());
                         },
                         error => this.toastService.showError(error));
             })

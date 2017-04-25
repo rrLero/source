@@ -1,5 +1,7 @@
 import { Component, Input, OnInit }                   from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TranslateService }                           from '@ngx-translate/core';
+import * as moment                                    from 'moment';
 
 import { Post } from '../../shared/post.model';
 
@@ -29,7 +31,12 @@ export class PostsTemplateComponent implements OnInit {
     @Input() url: string;
     @Input() canEdit: boolean;
 
-    constructor() { }
+    constructor(private translate: TranslateService) {
+        translate.onLangChange.subscribe(event => {
+            moment.locale(event.lang);
+        });
+        moment.locale(translate.currentLang);
+    }
 
     ngOnInit(): void { }
 }

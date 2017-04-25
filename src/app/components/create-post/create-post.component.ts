@@ -2,6 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { LocalizeRouterService }               from 'localize-router';
 
 import {
     HttpService,
@@ -39,6 +40,7 @@ export class CreatePostComponent implements OnInit {
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
+                private localize: LocalizeRouterService,
                 private authService: AuthService,
                 private userService: UserService,
                 private httpService: HttpService,
@@ -88,7 +90,10 @@ export class CreatePostComponent implements OnInit {
                     .subscribe(
                         () => {
                             this.toastService.showSuccess('Done!');
-                            setTimeout(() => this.router.navigate([this.url, 'drafts']), this.toastService.life());
+                            setTimeout(() => {
+                                let localUrl = this.localize.translateRoute(this.url);
+                                this.router.navigate([localUrl, 'drafts']);
+                            }, this.toastService.life());
                         },
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
@@ -105,7 +110,10 @@ export class CreatePostComponent implements OnInit {
                     .subscribe(
                         () => {
                             this.toastService.showSuccess('Done!');
-                            setTimeout(() => this.router.navigate([this.url]), this.toastService.life());
+                            setTimeout(() => {
+                                let localUrl = this.localize.translateRoute(this.url);
+                                this.router.navigate([localUrl]);
+                            }, this.toastService.life());
                         },
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
