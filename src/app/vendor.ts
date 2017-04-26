@@ -33,8 +33,3 @@ import 'angular2-moment';
 import '@ngx-translate/core';
 import '@ngx-translate/http-loader';
 import 'localize-router';
-
-import 'flag-icon-css/css/flag-icon.min.css';
-import 'flag-icon-css/flags/4x3/gb.svg';
-import 'flag-icon-css/flags/4x3/ru.svg';
-import 'flag-icon-css/flags/4x3/ua.svg';

@@ -21,23 +21,20 @@ module.exports = {
                 use: 'raw-loader'
             },
             {
-                test: /\.(png|jpe?g|gif|woff|woff2|ttf|eot|ico)$/,
+                test: /\.(woff|woff2|ttf|eot|ico)$/,
                 use: [{
                     loader: 'file-loader',
                     options: {
-                        name: 'assets/img/[name].[ext]'
+                        name: 'assets/[name].[ext]'
                     }
                 }]
             },
             {
-                test: /\.svg$/,
-                include: [
-                    helpers.root('node_modules')
-                ],
+                test: /\.(png|jpe?g|gif|svg|ico)$/,
                 use: [{
                     loader: 'file-loader',
                     options: {
-                        name: 'flags/4x3/[name].[ext]'
+                        name: 'assets/img/[name].[ext]'
                     }
                 }]
             },
