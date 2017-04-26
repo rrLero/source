@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute }                                 from '@angular/router';
 import { trigger, state, style, transition, animate }     from '@angular/animations';
+import { TranslateService }                               from '@ngx-translate/core';
 
-import { AuthService, ToastService, CommentsService } from '../../services';
+import { AuthService, ToastService, CommentsService }     from '../../services';
 
 @Component({
     selector: 'comment-from',
@@ -29,12 +30,13 @@ export class CommentFormComponent implements OnInit {
     @Output() updatedComment = new EventEmitter();
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
-    loading: boolean = false;
-    error: string = '';
+    loading = false;
+    error = '';
 
     constructor(private route: ActivatedRoute,
                 public authService: AuthService,
                 public toastService: ToastService,
+                private translate: TranslateService,
                 private commentsService: CommentsService) { }
 
     ngOnInit() { }
@@ -64,7 +66,10 @@ export class CommentFormComponent implements OnInit {
                     if (data === 200) {
                         input.editor.value('');
                         this.loading = false;
-                        this.toastService.showSuccess('Comment was added. Wait for approval.');
+                        this.translate
+                            .get('TOAST.COMMENTSFORM.wasAdded')
+                            .subscribe((res: string) =>
+                                this.toastService.showSuccess(res));
                     }
                 })
                 .catch(error => this.toastService.showError(error));

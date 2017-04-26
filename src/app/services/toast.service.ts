@@ -25,19 +25,19 @@ export class ToastService {
 
     showSuccess(msg: string): void {
         this.toastr
-            .success(msg, 'Success!', { dismiss: 'controlled' })
+            .success(msg, null, { dismiss: 'controlled' })
             .then(() => setTimeout(() => this.toastr.dispose(), this.toastLife));
     }
 
     showError(msg: string): void {
         this.toastr
-            .error(msg, 'Oops!', { dismiss: 'controlled' })
+            .error(msg, null, { dismiss: 'controlled' })
             .then(() => setTimeout(() => this.toastr.dispose(), 5000));
     }
 
     showWarning(msg: string): void {
         this.toastr
-            .warning(msg, 'Alert!')
+            .warning(msg, null)
             .then(() => setTimeout(() => this.toastr.dispose(), 5000));
     }
 

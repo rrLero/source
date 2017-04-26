@@ -3,7 +3,8 @@
         "getStarted": "Get started",
         "login": "Login",
         "drafts": "(drafts)",
-        "languages": "Languages",
+        "by": "by",
+        "languages": "Language",
         "madeBy": "Made by super team"
     },
     "WELCOME": {
@@ -100,6 +101,7 @@
         "repositories": "repositories",
         "hide": "Hide",
         "update": "Update",
+        "controls": "Controls",
         "blogs": "Blogs",
         "noblogs": "No blogs",
         "updateBlog": "Update blog",
@@ -113,5 +115,51 @@
     },
     "ABOUT": {
         "goBack": "Go back"
+    },
+    "TOAST": {
+        "START": {
+            "activatingBlog": "Activating blog",
+            "done": "Done"
+        },
+        "EDITPOST": {
+            "postLocked": "Post locked",
+            "inProcess": "In process...",
+            "done": "Done!",
+            "moving": "Moving..."
+        },
+        "EDITPOST": {
+            "postLocked": "Post locked",
+            "inProcess": "In process...",
+            "done": "Done!",
+            "moving": "Moving..."
+        },
+        "CREATEPOST": {
+            "creating": "Creating...",
+            "done": "Done"
+        },
+        "CONTROLS": {
+            "enabling": "Enabling...",
+            "disabling": "Disabling",
+            "done": "Done!",
+            "deleting": "Deleting...",
+            "publishing": "Publishing...",
+            "checkStatus": "Check status...",
+            "postLocked": "Post locked",
+            "sessionOpening": "Session Opening...",
+            "sessionOpened": "Session Opened!",
+            "sessionLoaded": "Session Loaded!"
+        },
+        "COMMENTSFORM": {
+            "wasAdded": "Comment was added. Wait for approval."
+        },
+        "NEWCOMMENTS": {
+            "pleaseSelect": "Please select items.",
+            "wasApproved": "Comment was approved.",
+            "wereApproved": "comments were approved",
+            "deleted": "comments deleted"
+        },
+        "GUARD": {
+            "youMust": "You must be logged in"
+        }
     }
 }

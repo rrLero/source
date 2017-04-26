@@ -2,7 +2,8 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { LocalizeRouterService }               from 'localize-router';
+import { TranslateService }                           from '@ngx-translate/core';
+import { LocalizeRouterService }                      from 'localize-router';
 
 import {
     HttpService,
@@ -40,6 +41,7 @@ export class CreatePostComponent implements OnInit {
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
+                private translate: TranslateService,
                 private localize: LocalizeRouterService,
                 private authService: AuthService,
                 private userService: UserService,
@@ -81,7 +83,10 @@ export class CreatePostComponent implements OnInit {
 
     save(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
-        this.toastService.showInfo('Creating...');
+        this.translate
+            .get('TOAST.CREATEPOST.creating')
+            .subscribe((res: string) =>
+                this.toastService.showInfo(res));
         this.draftService
             .create(this.name, this.repo, post)
             .then(() =>
@@ -89,7 +94,10 @@ export class CreatePostComponent implements OnInit {
                     .updateBlog(this.name, this.repo)
                     .subscribe(
                         () => {
-                            this.toastService.showSuccess('Done!');
+                            this.translate
+                                .get('TOAST.CREATEPOST.done')
+                                .subscribe((res: string) =>
+                                    this.toastService.showSuccess(res));
                             setTimeout(() => {
                                 let localUrl = this.localize.translateRoute(this.url);
                                 this.router.navigate([localUrl, 'drafts']);
@@ -101,7 +109,10 @@ export class CreatePostComponent implements OnInit {
 
     publish(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
-        this.toastService.showInfo('Creating...');
+        this.translate
+            .get('TOAST.CREATEPOST.creating')
+            .subscribe((res: string) =>
+                this.toastService.showInfo(res));
         this.httpService
             .create(this.name, this.repo, post)
             .then(() =>
@@ -109,7 +120,10 @@ export class CreatePostComponent implements OnInit {
                     .updateBlog(this.name, this.repo)
                     .subscribe(
                         () => {
-                            this.toastService.showSuccess('Done!');
+                            this.translate
+                                .get('TOAST.CREATEPOST.done')
+                                .subscribe((res: string) =>
+                                    this.toastService.showSuccess(res));
                             setTimeout(() => {
                                 let localUrl = this.localize.translateRoute(this.url);
                                 this.router.navigate([localUrl]);

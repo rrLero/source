@@ -25,7 +25,8 @@ export class AccountComponent implements OnInit {
     name: string;
     blogs: any[];
     hidden = true;
-    update = false;
+    hiddenUpdates = false;
+    hiddenControls = false;
     confirm = true;
     noUser = true;
     deletedBlog: any = {};
@@ -137,6 +138,11 @@ export class AccountComponent implements OnInit {
     }
 
     toggleUpdateBtns(): void {
-        this.update = !this.update;
+        this.hiddenUpdates = !this.hiddenUpdates;
+        this.hiddenControls = false;
+    }
+    toggleControlBtns(): void {
+        this.hiddenControls = !this.hiddenControls;
+        this.hiddenUpdates = false;
     }
 }

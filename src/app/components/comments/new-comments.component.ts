@@ -1,5 +1,6 @@
 import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService }       from '@ngx-translate/core';
 
 import {
     CommentsService,
@@ -16,12 +17,13 @@ export class NewCommentsComponent implements OnInit {
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
-    isFetching: boolean = false;
+    isFetching = false;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private toastService: ToastService,
                 private userService: UserService,
+                private translate: TranslateService,
                 private commentsService: CommentsService) {
     }
 
@@ -55,17 +57,31 @@ export class NewCommentsComponent implements OnInit {
         const items = this.prepareSelected();
 
         if (items.length === 0) {
-            this.toastService.showError('Please select items.');
+            this.translate
+                .get('TOAST.NEWCOMMENTS.pleaseSelect')
+                .subscribe((res: string) =>
+                    this.toastService.showError(res));
             return;
         }
 
         this.isFetching = true;
 
         this.commentsService.approve(this.name, this.repo, items).then((data) => {
-            const message = data.length === 1 ?
-                'Comment was approved.' :
-                `${data.length} comments were approved.`;
-            this.toastService.showSuccess(message);
+            if (data.length === 1) {
+                this.translate
+                    .get('TOAST.NEWCOMMENTS.wasApproved')
+                    .subscribe((res: string) =>
+                        this.toastService.showSuccess(res));
+            } else {
+                this.translate
+                    .get('TOAST.NEWCOMMENTS.wereApproved')
+                    .subscribe((res: string) =>
+                        this.toastService.showSuccess(`${data.length} ${res}`));
+            }
+            // const message = data.length === 1 ?
+            //     'Comment was approved.' :
+            //     `${data.length} comments were approved.`;
+            // this.toastService.showSuccess(message);
             this.clear();
             this.isFetching = false;
         });
@@ -75,14 +91,21 @@ export class NewCommentsComponent implements OnInit {
         const items = this.prepareSelected();
 
         if (items.length === 0) {
-            this.toastService.showError('Please select items.');
+            this.translate
+                .get('TOAST.NEWCOMMENTS.pleaseSelect')
+                .subscribe((res: string) =>
+                    this.toastService.showError(res));
             return;
         }
 
         this.isFetching = true;
 
         this.commentsService.removeFromFile(this.name, this.repo, items).then((data) => {
-            this.toastService.showSuccess(data.message);
+            let amount = data.message.split(']')[0].slice(1)
+            this.translate
+                .get('TOAST.NEWCOMMENTS.deleted')
+                .subscribe((res: string) =>
+                    this.toastService.showError(`${amount} ${res}`));
             this.clear();
             this.isFetching = false;
         });

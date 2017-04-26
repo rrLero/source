@@ -37,7 +37,17 @@
                     translate
                     type="button"
                     class="btn btn-default update">
-                    {{ update ? 'ACCOUNT.hide' : 'ACCOUNT.update' }}
+                    {{ hiddenUpdates ? 'ACCOUNT.hide' : 'ACCOUNT.update' }}
+                </button>
+
+                <!-- Update controls button -->
+                <button
+                    *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && blogs.length"
+                    (click)="toggleControlBtns()"
+                    translate
+                    type="button"
+                    class="btn btn-default update">
+                    {{ hiddenControls ? 'ACCOUNT.hide' : 'ACCOUNT.controls' }}
                 </button>
 
                 <h3 translate>{{ blogs.length ? 'ACCOUNT.blogs' : 'ACCOUNT.noblogs'}}</h3>
@@ -55,7 +65,7 @@
                                 <div>
                                     <button
                                         (click)="updateBlog(blog.repo)"
-                                        [class.hidden]="!update"
+                                        [class.hidden]="!hiddenUpdates"
                                         translate
                                         type="button"
                                         class="btn btn-success">
@@ -63,34 +73,35 @@
                                     </button>
                                     <button
                                         (click)="updateDraft(blog.repo)"
-                                        [class.hidden]="!update"
+                                        [class.hidden]="!hiddenUpdates"
                                         translate
                                         type="button"
                                         class="btn btn-success">
                                         ACCOUNT.updateDraft
                                      </button>
                                     <a
-                                        *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                                        *ngIf="hiddenControls && !hiddenUpdates"
                                         [routerLink]="['/', blog.name, blog.repo, 'create'] | localize"
                                         translate
                                         class="btn btn-primary">
                                         ACCOUNT.addPost
                                     </a>
                                     <a
+                                        *ngIf="!hiddenUpdates && !hiddenControls"
                                         [routerLink]="['/', blog.name, blog.repo] | localize"
                                         translate
                                         class="btn btn-primary">
                                         ACCOUNT.goToBlog
                                     </a>
                                     <a
-                                        *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                                        *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && !hiddenUpdates && !hiddenControls"
                                         [routerLink]="['/', blog.name, blog.repo, 'drafts'] | localize"
                                         translate
                                         class="btn btn-primary">
                                         ACCOUNT.goToDrafts
                                     </a>
                                     <button
-                                        *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                                        *ngIf="hiddenControls && !hiddenUpdates"
                                         (click)="prepareDelete(blog.name, blog.repo, i)"
                                         translate
                                         type="button"

@@ -14,7 +14,7 @@
                             class="blog-name">
                             {{ repo | titlecase }} <span translate>{{ drafts ? 'APP.drafts' : ''}}</span>
                         </a><br>
-                        by <a [routerLink]="['/', name] | localize" class="blog-author">{{ name }}</a>
+                        {{ 'APP.by' | translate }} <a [routerLink]="['/', name] | localize" class="blog-author">{{ name }}</a>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -52,7 +52,7 @@
                             </a>
                             <a
                                 (click)="changeLang('uk'); toggleLangs()"
-                                [class.active]="activeLang === 'uk'" 
+                                [class.active]="activeLang === 'uk'"
                                 class="flag-icon flag-icon-ua">
                             </a>
                         </div>

@@ -3,7 +3,8 @@
         "getStarted": "Почати",
         "login": "Увійти",
         "drafts": "(чернетки)",
-        "languages": "Мови",
+        "by": "від",
+        "languages": "Мова",
         "madeBy": "Made by super team"
     },
     "WELCOME": {
@@ -73,25 +74,25 @@
         "remove": "Видалити"
     },
     "COMMENTS": {
-        "comments": "Comments",
-        "noComments": "No comments. You will be first.",
-        "youMust": "You must be logged in to post a comment."
+        "comments": "Коментарі",
+        "noComments": "Коментарів нема. Ви будете першим",
+        "youMust": "Ви потрібно увійти, щоб залишити коментар."
     },
     "COMMENTSFORM": {
-        "update": "Update",
-        "addComment": "Add comment"
+        "update": "Оновити",
+        "addComment": "Коментувати"
     },
     "NEWCOMMENTS": {
-        "newComments": "New comments",
-        "noNew": "No new comments",
-        "post": "Post",
-        "text": "Text",
-        "remove": "Remove",
-        "approve": "Approve"
+        "newComments": "Нові коментарі",
+        "noNew": "Немає нових коментарів",
+        "post": "Пост",
+        "text": "Текст",
+        "remove": "Видалити",
+        "approve": "Затвердити"
     },
     "PROFILE": {
         "account": "Аккаунт",
-        "about": "About",
+        "about": "Про платформу",
         "logout": "Вийти"
     },
     "ACCOUNT": {
@@ -100,6 +101,7 @@
         "repositories": "репозиторії",
         "hide": "Сховати",
         "update": "Оновити",
+        "controls": "Управління",
         "blogs": "Блоги",
         "noblogs": "Немає блогів",
         "updateBlog": "Оновити блог",
@@ -112,6 +114,52 @@
         "blogName": "Ім'я блогу"
     },
     "ABOUT": {
-        "goBack": "Go back"
+        "goBack": "Назад"
+    },
+    "TOAST": {
+        "START": {
+            "activatingBlog": "Активація блогу",
+            "done": "Готово"
+        },
+        "EDITPOST": {
+            "postLocked": "Пост заблокован",
+            "inProcess": "У процесі...",
+            "done": "Готово!",
+            "moving": "Переміщення..."
+        },
+        "EDITPOST": {
+            "postLocked": "Пост заблокован",
+            "inProcess": "У процесі...",
+            "done": "Готово!",
+            "moving": "Переміщення..."
+        },
+        "CREATEPOST": {
+            "creating": "Створення...",
+            "done": "Готово"
+        },
+        "CONTROLS": {
+            "enabling": "Включення...",
+            "disabling": "Відключення",
+            "done": "Готово!",
+            "deleting": "Видалення...",
+            "publishing": "Публікація...",
+            "checkStatus": "Перевірка статусу...",
+            "postLocked": "Пост заблокований",
+            "sessionOpening": "Відкриття сесії...",
+            "sessionOpened": "Сесія відкрита!",
+            "sessionLoaded": "Сесія завантажена!"
+        },
+        "COMMENTSFORM": {
+            "wasAdded": "Коментар додан. Чекайте на підтвердження"
+        },
+        "NEWCOMMENTS": {
+            "pleaseSelect": "Будь-ласка, вибирете коментар.",
+            "wasApproved": "Коментар підтверджен.",
+            "wereApproved": "коментарів підтверджено.",
+            "deleted": "коментарів видалено"
+        },
+        "GUARD": {
+            "youMust": "Ви потрібно увійти"
+        }
     }
 }

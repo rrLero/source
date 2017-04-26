@@ -1,5 +1,5 @@
 <div class="comments-wrap">
-    <h3>Comments ({{ comments.length }})</h3>
+    <h3>{{ 'COMMENTS.comments' | translate }} ({{ comments.length }})</h3>
 
     <ul class="comments-list" *ngIf="comments && comments.length">
         <li class="comment" *ngFor="let comment of comments">
@@ -38,8 +38,8 @@
         </li>
     </ul>
 
-    <p *ngIf="!comments.length">No comments. You will be first.</p>
-    <p *ngIf="!user">You must be logged in to post a comment.</p>
+    <p *ngIf="!comments.length" translate>COMMENTS.noComments</p>
+    <p *ngIf="!user" translate>COMMENTS.youMust</p>
 
     <comment-from (addComment)="addCommentHandler($event)" [postId]="postId"></comment-from>
 </div>

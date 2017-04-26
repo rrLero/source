@@ -3,7 +3,8 @@
         "getStarted": "Начать",
         "login": "Войти",
         "drafts": "(черновики)",
-        "languages": "Языки",
+        "by": "от",
+        "languages": "Язык",
         "madeBy": "Made by super team"
     },
     "WELCOME": {
@@ -73,25 +74,25 @@
         "remove": "Удалить"
     },
     "COMMENTS": {
-        "comments": "Comments",
-        "noComments": "No comments. You will be first.",
-        "youMust": "You must be logged in to post a comment."
+        "comments": "Комментарии",
+        "noComments": "Комментариев нет. Вы будете первым.",
+        "youMust": "Вам нужно войти, чтобы оставить комментарий."
     },
     "COMMENTSFORM": {
-        "update": "Update",
-        "addComment": "Add comment"
+        "update": "Обновить",
+        "addComment": "Комментировать"
     },
     "NEWCOMMENTS": {
-        "newComments": "New comments",
-        "noNew": "No new comments",
-        "post": "Post",
-        "text": "Text",
-        "remove": "Remove",
-        "approve": "Approve"
+        "newComments": "Новые комментарии",
+        "noNew": "Нет новых комментариев",
+        "post": "Пост",
+        "text": "Текст",
+        "remove": "Удалить",
+        "approve": "Одобрить"
     },
     "PROFILE": {
         "account": "Аккаунт",
-        "about": "About",
+        "about": "Про платформу",
         "logout": "Выйти"
     },
     "ACCOUNT": {
@@ -100,6 +101,7 @@
         "repositories": "репозитории",
         "hide": "Спрятать",
         "update": "Обновить",
+        "controls": "Управление",
         "blogs": "Блоги",
         "noblogs": "Нет блогов",
         "updateBlog": "Обновить блог",
@@ -113,5 +115,45 @@
     },
     "ABOUT": {
         "goBack": "Go back"
+    },
+    "TOAST": {
+        "START": {
+            "activatingBlog": "Активация блога",
+            "done": "Готово"
+        },
+        "EDITPOST": {
+            "postLocked": "Пост заблокирован",
+            "inProcess": "В процессе...",
+            "done": "Готово!",
+            "moving": "Перемещение..."
+        },
+        "CREATEPOST": {
+            "creating": "Создание...",
+            "done": "Готово"
+        },
+        "CONTROLS": {
+            "enabling": "Включение...",
+            "disabling": "Отключение",
+            "done": "Готово!",
+            "deleting": "Удаление...",
+            "publishing": "Публикация...",
+            "checkStatus": "Проверка статуса...",
+            "postLocked": "Пост заблоктрован",
+            "sessionOpening": "Открытие сессии...",
+            "sessionOpened": "Сессия открыта!",
+            "sessionLoaded": "Сессия загружена!"
+        },
+        "COMMENTSFORM": {
+            "wasAdded": "Комментарий добавлен. Ждите одобрения"
+        },
+        "NEWCOMMENTS": {
+            "pleaseSelect": "Пожалуйста, выберите комментарий.",
+            "wasApproved": "Комментарий одобрен.",
+            "wereApproved": "комментарии одобрено.",
+            "deleted": "комментариев удалено"
+        },
+        "GUARD": {
+            "youMust": "Вы должны зайти"
+        }
     }
 }

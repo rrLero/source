@@ -4,14 +4,16 @@ import {
     CanActivate,
     RouterStateSnapshot,
     ActivatedRouteSnapshot
-}                       from '@angular/router';
-import { AuthService }  from './auth.service';
-import { ToastService } from './toast.service';
+}                           from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthService }      from './auth.service';
+import { ToastService }     from './toast.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
     constructor(private router: Router,
                 private authService: AuthService,
+                private translate: TranslateService,
                 public toastService: ToastService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -23,7 +25,10 @@ export class AuthGuard implements CanActivate {
         if (this.authService.isLogged) {
             return true;
         }
-        this.toastService.showWarning('You must be logged in');
+        this.translate
+            .get('TOAST.GUARD.youMust')
+            .subscribe((res: string) =>
+                this.toastService.showWarning(res));
         this.router.navigate(['/']);
         return false;
     }
