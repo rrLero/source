@@ -1,58 +1,73 @@
-<section class="row" [@start]="faq.state">
+<section *ngIf="githubUrl" class="row" [@start]="faq.state">
     <div class="col-md-10 col-md-offset-1">
         <div class="entry">
-            <h4 class="title">
-                Для того, что-бы начать пользоваться платформой, достатачно
+            <h4 class="title" translate>
+                START.title
             </h4>
             <ul>
-                <li>быть пользователем <a href="https://github.com" target="_blank">GitHub</a></li>
-                <li><a href="https://github.com/login/oauth/authorize?client_id=48f5b894f42ae1f869d2&scope=repo&redirect_uri=http://acid.zzz.com.ua/auth" (click)="savePath()">авторизироваться</a> на платформе</li>
-                <li>активировать блог (будет создан репозиторий или использован существующий)</li>
+                <li [innerHTML]="'START.instruction.li1' | translate | safeHtml"></li>
+                <li>
+                    <a [href]="githubUrl" (click)="savePath()">{{ 'START.instruction.li2.i1' | translate }}</a>
+                    {{ 'START.instruction.li2.i2' | translate }}
+                </li>
+                <li [innerHTML]="'START.instruction.li3' | translate | safeHtml"></li>
             </ul>
 
             <form #form="ngForm" novalidate (ngSubmit)="createBlog(repoEl)" class="form-inline">
-                <input [disabled]="!user" #repoEl [ngModel]="repoEl.value" name="repoEl" type="text" class="form-control" placeholder="Blog name" required>
-                <button [disabled]="!user || form.invalid" class="btn btn-primary" type="submit">Activate Blog</button>
-                <span *ngIf="!user">Необходима авторизация</span>
+                <input
+                    [disabled]="!user"
+                    #repoEl
+                    [ngModel]="repoEl.value"
+                    name="repoEl" type="text"
+                    class="form-control"
+                    placeholder="{{ 'START.form.blogName' | translate }}" required>
+                <button
+                    [disabled]="!user || form.invalid"
+                     translate
+                     class="btn btn-primary"
+                     type="submit">
+                     START.form.activateBlog
+                </button>
+                <span *ngIf="!user" translate class="need-auth">START.form.needAuth</span>
             </form>
 
-            <p class="alert alert-info">
-                Для корректной работы блога, все изменения необходимо производить через интерфейс платформы
+            <p translate class="alert alert-info">
+                START.info
             </p>
 
             <div class="panel-group" id="accordion1">
 
                 <div class="panel panel-default">
                     <div class="panel-heading" (click)="faq.friends=!faq.friends">
-                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                            Возможности платформы
+                        <h4 class="panel-title"><a translate data-toggle="collapse" data-parent="#accordion1">
+                            START.capabilities.title
                         </a></h4>
                     </div>
                     <div class="panel-collapse collapse" [class.in]="faq.friends">
-                        <div class="panel-body">
-                            Краткий перечень возможностей платформы:
+                        <div translate class="panel-body">
+                            START.capabilities.panel
                             <hr>
                             <ul>
-                                <li>создание / удаление блогов</li>
-                                <li>создание / редактирование/ удаление постов</li>
-                                <li>включение / отключение комментариев</li>
-                                <li>добавление / редактирование / удаление комментариев</li>
+                                <li translate>START.capabilities.li1</li>
+                                <li translate>START.capabilities.li2</li>
+                                <li translate>START.capabilities.li3</li>
+                                <li translate>START.capabilities.li4</li>
                                 <li>
                                     <div class="panel panel-default">
                                         <div class="panel-heading" (click)="faq.capabilities=!faq.capabilities">
-                                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                                            Коллективное ведение блога
+                                            <h4 class="panel-title"><a translate data-toggle="collapse" data-parent="#accordion1" >
+                                            START.capabilities.li5.title
                                         </a></h4>
                                         </div>
                                         <div class="panel-collapse collapse" [class.in]="faq.capabilities">
-                                            <div class="panel-body">
-                                                Чтобы один блог могли вести несколько человек, необходимо:
+                                            <div translate class="panel-body">
+                                                START.capabilities.li5.panel
                                                 <hr>
                                                 <ul>
-                                                    <li>в своем репозитории зайти в настройки (<code>Settings</code>)</li>
-                                                    <li>выбрать пункт <code>Collaborators</code></li>
-                                                    <li>в поле ввести имя пользователя, которому предоставляется доступ</li>
-                                                    <li>нажать кнопку <code>Add collaborator</code></li>
+                                                    <li translate>START.capabilities.li5.li51</li>
+                                                    <li [innerHTML]="'START.capabilities.li5.li52' | translate | safeHtml"></li>
+                                                    <li translate>START.capabilities.li5.li53</li>
+                                                    <li [innerHTML]="'START.capabilities.li5.li54' | translate | safeHtml"></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -65,8 +80,8 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading" (click)="faq.problems=!faq.problems">
-                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                            Возможные проблемы
+                        <h4 class="panel-title"><a translate data-toggle="collapse" data-parent="#accordion1" >
+                            START.problems.title
                         </a></h4>
                     </div>
 
@@ -74,42 +89,40 @@
                         <div class="panel-body">
                             <div class="panel panel-default">
                                 <div class="panel-heading" (click)="faq.github=!faq.github">
-                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                                        Проблемы с обновлением блога
+                                    <h4 class="panel-title"><a translate data-toggle="collapse" data-parent="#accordion1" >
+                                        START.problems.updateBlog.title
                                     </a></h4>
                                 </div>
 
                                 <div class="panel-collapse collapse" [class.in]="faq.github">
                                     <div class="panel-body">
-                                        Скорее всего Вы работаете с блогом минуя платформу. <br> Для корректной работы блога, все изменения необходимо производить через интерфейс платформы. <br> Если у Вас есть причины не использовать интерфейс платформы, тогда необходимо:
+                                        <span [innerHTML]="'START.problems.updateBlog.panel'| translate | safeHtml"></span>
                                         <hr>
                                         <ul>
-                                            <li>или настроить <code>webhook</code>:
+                                            <li>{{ 'START.problems.updateBlog.li1.title' | translate }}
                                                 <ul>
-                                                    <li>в своем репозитории зайти в настройки</li>
-                                                    <li>выбрать пункт <code>add Webhooks</code> </li>
-                                                    <li>в поле <code> Payload url</code> вставить http://gitblog.pythonanywhere.com/<code>git_username</code>/<code>git_repo_name</code>/api/web_hook, где <code>git_username</code> это имя вашего аккаунта GitHub, а <code>git_repo_name</code>                                            - репозитория</li>
-                                                    <li>в <code>content type</code> выбрать <code>application/json</code></li>
-                                                    <li><code>Just the push event</code> и <code>Active</code> должны быть отмечены</li>
-                                                    <li>финальный аккорд - <code>Add Webhook</code></li>
+                                                    <li [innerHTML]="'START.problems.updateBlog.li1.li11' | translate | safeHtml"></li>
+                                                    <li [innerHTML]="'START.problems.updateBlog.li1.li12' | translate | safeHtml"></li>
+                                                    <li [innerHTML]="'START.problems.updateBlog.li1.li13' | translate | safeHtml"></li>
+                                                    <li [innerHTML]="'START.problems.updateBlog.li1.li14' | translate | safeHtml"></li>
+                                                    <li [innerHTML]="'START.problems.updateBlog.li1.li15' | translate | safeHtml"></li>
+                                                    <li [innerHTML]="'START.problems.updateBlog.li1.li16' | translate | safeHtml"></li>
                                                 </ul>
 
                                             </li>
-                                            <li>или обновлять блог с помощью кнопки <code>Update</code></li>
+                                            <li [innerHTML]="'START.problems.updateBlog.li2' | translate | safeHtml"></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading" (click)="faq.comments=!faq.comments">
-                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" >
-                                        Невозможно оставить комментарий
+                                    <h4 class="panel-title"><a translate data-toggle="collapse" data-parent="#accordion1" >
+                                        START.problems.comments.title
                                     </a></h4>
                                 </div>
                                 <div class="panel-collapse collapse" [class.in]="faq.comments">
-                                    <div class="panel-body">
-                                        В форкнутом репозиторие нет возможности оставлять комментарии. <br> Необходимо использовать свой репозиторий
-                                    </div>
+                                    <div [innerHTML]="'START.problems.comments.panel' | translate | safeHtml" class="panel-body"></div>
                                 </div>
                             </div>
                         </div>

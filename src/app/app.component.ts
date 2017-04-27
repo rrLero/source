@@ -14,10 +14,10 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
 
 import '../../public/css/styles.css';
+import '../../public/i18n/config.json';
 import '../../public/i18n/en.json';
 import '../../public/i18n/ru.json';
 import '../../public/i18n/uk.json';
-import '../../public/i18n/locales.json';
 
 @Component({
     selector: 'app',
@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
     repo: string;
     drafts: boolean;
     lang: string;
-    activeLang: string;
     langs: boolean;
+    activeLang: string;
     redirectUri: string;
     githubUrl: string;
 

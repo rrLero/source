@@ -110,7 +110,7 @@ const routes: Routes = [
 ];
 
 export function localizeLoaderFactory(translate: TranslateService, location: Location, http: Http) {
-    return new StaticParserLoader(translate, location, http, 'assets/i18n/locales.json');
+    return new StaticParserLoader(translate, location, http, 'assets/i18n/config.json');
 }
 
 @NgModule({
