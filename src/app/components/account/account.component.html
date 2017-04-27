@@ -80,11 +80,18 @@
                                         ACCOUNT.updateDraft
                                      </button>
                                     <a
-                                        *ngIf="hiddenControls && !hiddenUpdates"
+                                        *ngIf="hiddenControls"
                                         [routerLink]="['/', blog.name, blog.repo, 'create'] | localize"
                                         translate
                                         class="btn btn-primary">
                                         ACCOUNT.addPost
+                                    </a>
+                                    <a
+                                        *ngIf="hiddenControls"
+                                        [routerLink]="['/', blog.name, blog.repo, 'newcomments'] | localize"
+                                        translate
+                                        class="btn btn-primary">
+                                        ACCOUNT.newComments
                                     </a>
                                     <a
                                         *ngIf="!hiddenUpdates && !hiddenControls"
@@ -101,7 +108,7 @@
                                         ACCOUNT.goToDrafts
                                     </a>
                                     <button
-                                        *ngIf="hiddenControls && !hiddenUpdates"
+                                        *ngIf="hiddenControls"
                                         (click)="prepareDelete(blog.name, blog.repo, i)"
                                         translate
                                         type="button"
@@ -117,7 +124,7 @@
                     <!-- Activate blog -->
                     <form
                         #form="ngForm"
-                        novalidate *ngIf="user && user.login.toLowerCase() === name.toLowerCase()"
+                        novalidate *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && hiddenControls"
                         (ngSubmit)="createBlog(user.login, repoEl)"
                         class="form-inline text-center">
                         <input

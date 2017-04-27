@@ -104,6 +104,7 @@
         "updateBlog": "Update blog",
         "updateDraft": "Update draft",
         "addPost": "Add post",
+        "newComments": "New comments",
         "goToBlog": "Go to blog",
         "goToDrafts": "Go to drafts",
         "remove": "Remove",
