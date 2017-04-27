@@ -88,12 +88,12 @@ a:focus {
   min-height: initial;
 }
 
-.flag-icon-background {
+.flag-icon-background, .svg-icon {
   background-size: contain;
   background-position: 50%;
   background-repeat: no-repeat;
 }
-.flag-icon {
+.flag-icon, .svg-icon {
   background-size: contain;
   background-position: 50%;
   background-repeat: no-repeat;
@@ -102,7 +102,10 @@ a:focus {
   width: 1.33333333em;
   line-height: 1em;
 }
-.flag-icon:before {
+i.svg-icon {
+    font-size: 2em;
+}
+.flag-icon:before, .svg-icon::before {
   content: "\00a0";
 }
 
@@ -116,6 +119,34 @@ a:focus {
 
 .flag-icon-ua {
   background-image: url(../../node_modules/flag-icon-css/flags/4x3/ua.svg);
+}
+
+.svg-icon-account {
+  background-image: url(../../public/icons/account.svg);
+}
+
+.svg-icon-clock {
+  background-image: url(../../public/icons/clock.svg);
+}
+
+.svg-icon-comment {
+  background-image: url(../../public/icons/comment.svg);
+}
+
+.svg-icon-delete {
+  background-image: url(../../public/icons/delete.svg);
+}
+
+.svg-icon-pencil {
+  background-image: url(../../public/icons/pencil.svg);
+}
+
+.svg-icon-settings {
+  background-image: url(../../public/icons/settings.svg);
+}
+
+.svg-icon-tag {
+  background-image: url(../../public/icons/tag.svg);
 }
 
 img {

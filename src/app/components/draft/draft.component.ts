@@ -1,5 +1,6 @@
 import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
+import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DraftService, UserService, ToastService }    from '../../services';
@@ -36,6 +37,7 @@ export class DraftComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
+                private location: Location,
                 // private commentsService: CommentsService,
                 public toastService: ToastService,
                 // private httpService: HttpService,
@@ -78,9 +80,8 @@ export class DraftComponent implements OnInit {
     //         this.commentsAmount = data;
     //     }
     // }
+
     goBack(): void {
-        let loadPage = localStorage.getItem('page') ? localStorage.getItem('page') : 1;
-        this.router.navigate([`/${this.url}/page/${loadPage}`]);
-        localStorage.removeItem('page');
+        this.location.back();
     }
 }

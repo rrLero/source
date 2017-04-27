@@ -10,15 +10,18 @@
                     <h1 class="entry-title">{{ post.title }}</h1>
                     <ul class="entry-meta">
                         <li class="entry-author icons">
-                            <i class="material-icons">person</i>
+                            <i class="svg-icon svg-icon-account"></i>
+                            <!-- <i class="material-icons">person</i> -->
                             <span>{{ post.author || 'user' }}</span>
                         </li>
                         <li class="entry-date icons">
-                            <i class="material-icons">access_time</i>
+                            <i class="svg-icon svg-icon-clock"></i>
+                            <!-- <i class="material-icons">access_time</i> -->
                             <span>{{ post.date | amTimeAgo }}</span>
                         </li>
                         <li class="entry-controls icons" (click)="toggleControls()" *ngIf="user && canEdit" [@post]="controls.state">
-                            <i class="material-icons">build</i>
+                            <i class="svg-icon svg-icon-settings"></i>
+                            <!-- <i class="material-icons">build</i> -->
                             <span>Controls</span>
                         </li>
                     </ul>
@@ -27,7 +30,8 @@
                 <div class="entry-content" [innerHTML]="post.text_full_strings | markdown | safeHtml"></div>
                 <footer class="entry-footer">
                     <div class="entry-tags icons">
-                        <i class="material-icons">local_offer</i>
+                        <i class="svg-icon svg-icon-tag"></i>
+                        <!-- <i class="material-icons">local_offer</i> -->
                         <span>{{ post.tags }}</span>
                     </div>
                 </footer>

@@ -2,8 +2,8 @@
   "name": "blog-platform",
   "version": "0.0.1",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/blog-platform/source"
+    "type": "git",
+    "url": "https://github.com/blog-platform/source"
   },
   "description": "",
   "author": "ihortkachuk && acid-base",
