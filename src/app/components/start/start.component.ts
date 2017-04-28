@@ -41,9 +41,9 @@ export class StartComponent implements OnInit {
 
     constructor(private router: Router,
                 private location: Location,
+                private translate: TranslateService,
                 private httpService: HttpService,
                 private userService: UserService,
-                private translate: TranslateService,
                 public toastService: ToastService) {
         translate.onLangChange
             .subscribe(event => this.getAuthUrl());
@@ -56,17 +56,11 @@ export class StartComponent implements OnInit {
 
     createBlog(repo): void {
         let blog = repo.value.replace(/\s+/g, '-');
-        this.translate
-            .get('TOAST.START.activatingBlog')
-            .subscribe((res: string) =>
-                this.toastService.showWarning(res));
+        this.toastService.showInfo('TOAST.START.activatingBlog');
         this.httpService
             .createBlog(this.user.login, blog)
             .then(() => {
-                this.translate
-                    .get('TOAST.START.done')
-                    .subscribe((res: string) =>
-                        this.toastService.showWarning(res));
+                this.toastService.showSuccess('TOAST.START.done');
                 setTimeout(() => this.router.navigate([`${this.user.login}`]), this.toastService.life());
             })
             .catch(error => this.toastService.showError(error));

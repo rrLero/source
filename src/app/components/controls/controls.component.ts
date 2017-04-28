@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute }                         from '@angular/router';
 import { trigger, state, style, transition, animate }     from '@angular/animations';
-import { TranslateService }                               from '@ngx-translate/core';
 import { LocalizeRouterService }                          from 'localize-router';
 
 import {
@@ -49,7 +48,6 @@ export class ControlsComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private commentsService: CommentsService,
-                private translate: TranslateService,
                 private localize: LocalizeRouterService,
                 private userService: UserService,
                 private draftService: DraftService,
@@ -61,10 +59,7 @@ export class ControlsComponent implements OnInit {
     }
 
     unLockComments(): void {
-        this.translate
-            .get('TOAST.CONTROLS.enabling')
-            .subscribe((res: string) =>
-                this.toastService.showInfo(res));
+        this.toastService.showInfo('TOAST.CONTROLS.enabling');
         this.commentsService
             .unLockComments(this.name, this.repo, this.post.id)
             .then(() => this.updateComments(true))
@@ -73,10 +68,7 @@ export class ControlsComponent implements OnInit {
     }
 
     lockComments(): void {
-        this.translate
-            .get('TOAST.CONTROLS.disabling')
-            .subscribe((res: string) =>
-                this.toastService.showInfo(res));
+        this.toastService.showInfo('TOAST.CONTROLS.disabling');
         this.commentsService
             .lockComments(this.name, this.repo, this.post.id)
             .then(() => this.updateComments(false))
@@ -88,20 +80,14 @@ export class ControlsComponent implements OnInit {
             .updateBlog(this.name, this.repo)
             .subscribe(
                 () => {
-                    this.translate
-                        .get('TOAST.CONTROLS.done')
-                        .subscribe((res: string) =>
-                            this.toastService.showSuccess(res));
+                    this.toastService.showSuccess('TOAST.CONTROLS.done');
                     setTimeout(() => this.comments.emit(status), this.toastService.life());
                 },
                 error => this.toastService.showError(error));
     }
 
     delete(): void {
-        this.translate
-            .get('TOAST.CONTROLS.deleting')
-            .subscribe((res: string) =>
-                this.toastService.showInfo(res));
+        this.toastService.showInfo('TOAST.CONTROLS.deleting');
         this.httpService
             .delete(this.name, this.repo, this.post.id, this.post.sha)
             .then(() =>
@@ -114,10 +100,7 @@ export class ControlsComponent implements OnInit {
     }
 
     deleteDraft(): void {
-        this.translate
-            .get('TOAST.CONTROLS.deleting')
-            .subscribe((res: string) =>
-                this.toastService.showInfo(res));
+        this.toastService.showInfo('TOAST.CONTROLS.deleting');
         this.draftService
             .delete(this.name, this.repo, this.post.id)
             .then(() =>
@@ -130,10 +113,7 @@ export class ControlsComponent implements OnInit {
     }
 
     publish(): void {
-        this.translate
-            .get('TOAST.CONTROLS.publishing')
-            .subscribe((res: string) =>
-                this.toastService.showInfo(res));
+        this.toastService.showInfo('TOAST.CONTROLS.publishing');
         this.draftService
             .publish(this.name, this.repo, this.title)
             .then(() => this.callback())
@@ -141,10 +121,7 @@ export class ControlsComponent implements OnInit {
     }
 
     callback(path = ''): void {
-        this.translate
-            .get('TOAST.CONTROLS.done')
-            .subscribe((res: string) =>
-                this.toastService.showSuccess(res));
+        this.toastService.showSuccess('TOAST.CONTROLS.done');
         setTimeout(() => {
             let localUrl = this.localize.translateRoute(`/${this.name}/${this.repo}/${path}`)
             this.router.navigate([localUrl])
@@ -152,10 +129,7 @@ export class ControlsComponent implements OnInit {
     }
 
     getPostStatus(): void {
-        this.translate
-            .get('TOAST.CONTROLS.checkStatus')
-            .subscribe((res: string) =>
-                this.toastService.showInfo(res));
+        this.toastService.showInfo('TOAST.CONTROLS.checkStatus');
         if (this.draft) {
             this.draftService
                 .getDraft(this.name, this.repo, this.title)
@@ -177,17 +151,11 @@ export class ControlsComponent implements OnInit {
         let canEdit = this.user.login === author;
 
         if (onEdit && !canEdit) {
-            this.translate
-                .get('TOAST.CONTROLS.postLocked')
-                .subscribe((res: string) =>
-                    this.toastService.showWarning(res));
+            this.toastService.showWarning('TOAST.CONTROLS.postLocked');
         } else if (onEdit && canEdit) {
             this.loadSession();
         } else {
-            this.translate
-                .get('TOAST.CONTROLS.sessionOpening')
-                .subscribe((res: string) =>
-                    this.toastService.showInfo(res));
+            this.toastService.showInfo('TOAST.CONTROLS.sessionOpening');
             this.lock(post);
         }
     }
@@ -199,10 +167,7 @@ export class ControlsComponent implements OnInit {
         } else {
             url = this.localize.translateRoute(`${this.url}/post/${this.title}/edit`);
         }
-        this.translate
-            .get('TOAST.CONTROLS.sessionLoaded')
-            .subscribe((res: string) =>
-                this.toastService.showSuccess(res));
+        this.toastService.showSuccess('TOAST.CONTROLS.sessionLoaded');
         setTimeout(() => this.router.navigate([url]), this.toastService.life());
     }
 
@@ -220,10 +185,7 @@ export class ControlsComponent implements OnInit {
                     .updateBlog(this.name, this.repo)
                     .subscribe(
                         () => {
-                            this.translate
-                                .get('TOAST.CONTROLS.sessionOpened')
-                                .subscribe((res: string) =>
-                                    this.toastService.showSuccess(res));
+                            this.toastService.showSuccess('TOAST.CONTROLS.sessionOpened');
                             setTimeout(() => {
                                 let localUrl = this.localize.translateRoute(this.url)
                                 this.router.navigate([localUrl, 'post', this.title, 'edit']);
@@ -242,10 +204,7 @@ export class ControlsComponent implements OnInit {
                     .updateBlog(this.name, this.repo)
                     .subscribe(
                         () => {
-                            this.translate
-                                .get('TOAST.CONTROLS.sessionOpened')
-                                .subscribe((res: string) =>
-                                    this.toastService.showSuccess(res));
+                            this.toastService.showSuccess('TOAST.CONTROLS.sessionOpened');
                             setTimeout(() => {
                                 let localUrl = this.localize.translateRoute(this.url);
                                 this.router.navigate([localUrl, 'drafts', 'post', this.title, 'edit']);

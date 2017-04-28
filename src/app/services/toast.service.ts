@@ -1,5 +1,6 @@
 import { Injectable }                  from '@angular/core';
 import { ToastsManager, ToastOptions } from 'ng2-toastr';
+import { TranslateService }            from '@ngx-translate/core';
 
 ToastsManager.prototype.dispose = function () {
     if (this.container) {
@@ -21,38 +22,51 @@ export class ToastConfig extends ToastOptions {
 export class ToastService {
     toastLife = 2000;
 
-    constructor(public toastr: ToastsManager) { }
+    constructor(private translate: TranslateService,
+                public toastr: ToastsManager) { }
 
-    showSuccess(msg: string): void {
-        this.toastr
-            .success(msg, null, { dismiss: 'controlled' })
-            .then(() => setTimeout(() => this.toastr.dispose(), this.toastLife));
+    showSuccess(msg: string, data =  ''): void {
+        this.translate
+            .get(msg)
+            .subscribe((res: string) =>
+                this.toastr
+                    .success(`${data} ${res}`, null, { dismiss: 'controlled' })
+                    .then(() => setTimeout(() => this.toastr.dispose(), this.toastLife)));
     }
 
-    showError(msg: string): void {
-        this.toastr
-            .error(msg, null, { dismiss: 'controlled' })
-            .then(() => setTimeout(() => this.toastr.dispose(), 5000));
+    showError(msg: string, data = ''): void {
+        this.translate
+            .get(msg)
+            .subscribe((res: string) =>
+                this.toastr
+                    .error(`${data} ${res}`, null, { dismiss: 'controlled' })
+                    .then(() => setTimeout(() => this.toastr.dispose(), 5000)));
     }
 
-    showWarning(msg: string): void {
-        this.toastr
-            .warning(msg, null)
-            .then(() => setTimeout(() => this.toastr.dispose(), 5000));
+    showWarning(msg: string, data = ''): void {
+        this.translate
+            .get(msg)
+            .subscribe((res: string) =>
+                this.toastr
+                    .warning(`${data} ${res}`, null, { dismiss: 'controlled' })
+                    .then(() => setTimeout(() => this.toastr.dispose(), 5000)));
     }
 
     showInfo(msg: string): void {
-        this.toastr
-            .info(msg, null, { dismiss: 'controlled' })
-            .then(toast => {
-                if (toast.timeoutId) {
-                    clearTimeout(toast.timeoutId);
-                }
-            });
+        this.translate
+            .get(msg)
+            .subscribe((res: string) =>
+                this.toastr
+                    .info(res, null, { dismiss: 'controlled' })
+                    .then(toast => toast.timeoutId && clearTimeout(toast.timeoutId)));
     }
 
     showCustom(msg: string): void {
-        this.toastr.custom(`<span class="custom-toast-color">${msg}</span>`, null, { enableHTML: true });
+        this.translate
+            .get(msg)
+            .subscribe((res: string) =>
+                this.toastr
+                    .custom(`<span class="custom-toast-color">${res}</span>`, null, { enableHTML: true }));
     }
 
     life(): number {

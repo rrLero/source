@@ -146,6 +146,8 @@
         },
         "NEWCOMMENTS": {
             "pleaseSelect": "Пожалуйста, выберите комментарий.",
+            "approving": "Approving...",
+            "deleting": "Deleting...",
             "wasApproved": "Комментарий одобрен.",
             "wereApproved": "комментарии одобрено.",
             "deleted": "комментариев удалено"

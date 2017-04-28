@@ -152,6 +152,8 @@
         },
         "NEWCOMMENTS": {
             "pleaseSelect": "Please select items.",
+            "approving": "Approving...",
+            "deleting": "Deleting...",
             "wasApproved": "Comment was approved.",
             "wereApproved": "comments were approved",
             "deleted": "comments deleted"

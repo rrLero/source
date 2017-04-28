@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute }                                 from '@angular/router';
 import { trigger, state, style, transition, animate }     from '@angular/animations';
-import { TranslateService }                               from '@ngx-translate/core';
 
 import { AuthService, ToastService, CommentsService }     from '../../services';
 
@@ -36,7 +35,6 @@ export class CommentFormComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 public authService: AuthService,
                 public toastService: ToastService,
-                private translate: TranslateService,
                 private commentsService: CommentsService) { }
 
     ngOnInit() { }
@@ -66,10 +64,7 @@ export class CommentFormComponent implements OnInit {
                     if (data === 200) {
                         input.editor.value('');
                         this.loading = false;
-                        this.translate
-                            .get('TOAST.COMMENTSFORM.wasAdded')
-                            .subscribe((res: string) =>
-                                this.toastService.showSuccess(res));
+                        this.toastService.showSuccess('TOAST.COMMENTSFORM.wasAdded');
                     }
                 })
                 .catch(error => this.toastService.showError(error));

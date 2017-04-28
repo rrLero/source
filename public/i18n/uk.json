@@ -152,6 +152,8 @@
         },
         "NEWCOMMENTS": {
             "pleaseSelect": "Будь-ласка, вибирете коментар.",
+            "approving": "Approving...",
+            "deleting": "Deleting...",
             "wasApproved": "Коментар підтверджен.",
             "wereApproved": "коментарів підтверджено.",
             "deleted": "коментарів видалено"

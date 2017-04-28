@@ -2,7 +2,6 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { TranslateService }                           from '@ngx-translate/core';
 import { LocalizeRouterService }                      from 'localize-router';
 
 import {
@@ -45,7 +44,6 @@ export class EditPostComponent implements OnInit {
     constructor(private router: Router,
                 private location: Location,
                 private route: ActivatedRoute,
-                private translate: TranslateService,
                 private localize: LocalizeRouterService,
                 private userService: UserService,
                 private draftService: DraftService,
@@ -76,10 +74,7 @@ export class EditPostComponent implements OnInit {
         }
         if (!this.canEdit) {
             this.onEdit = true;
-            this.translate
-                .get('TOAST.EDITPOST.postLocked')
-                .subscribe((res: string) =>
-                    this.toastService.showWarning(res));
+            this.toastService.showWarning('TOAST.EDITPOST.postLocked');
         } else {
             this.post.tags.pop();
         }
@@ -116,10 +111,7 @@ export class EditPostComponent implements OnInit {
         this.post.tags = tagsEl.value.split(',');
         this.post.preview = previewEl.value;
         this.post.text_full_strings = textEl.value;
-        this.translate
-            .get('TOAST.EDITPOST.inProcess')
-            .subscribe((res: string) =>
-                this.toastService.showInfo(res));
+        this.toastService.showInfo('TOAST.EDITPOST.inProcess');
         this.buildFullMd();
         this.draft ? this.updateDraft() : this.update();
     }
@@ -145,10 +137,7 @@ export class EditPostComponent implements OnInit {
                     .updateBlog(this.name, this.repo)
                     .subscribe(
                         () => {
-                            this.translate
-                                .get('TOAST.EDITPOST.done')
-                                .subscribe((res: string) =>
-                                    this.toastService.showSuccess(res));
+                            this.toastService.showSuccess('TOAST.EDITPOST.done');
                             setTimeout(() => this.goBack(), this.toastService.life());
                         },
                         error => this.toastService.showError(error)))
@@ -163,10 +152,7 @@ export class EditPostComponent implements OnInit {
                     .updateBlog(this.name, this.repo)
                     .subscribe(
                         () => {
-                            this.translate
-                                .get('TOAST.EDITPOST.done')
-                                .subscribe((res: string) =>
-                                    this.toastService.showSuccess(res));
+                            this.toastService.showSuccess('TOAST.EDITPOST.done');
                             setTimeout(() => this.goBack(), this.toastService.life());
                         },
                         error => this.toastService.showError(error)))
@@ -205,10 +191,7 @@ export class EditPostComponent implements OnInit {
 
     moveToDrafts(titleEl, tagsEl, prevEl, textEl): void {
         this.create(titleEl, tagsEl, prevEl, textEl);
-        this.translate
-            .get('TOAST.EDITPOST.moving')
-            .subscribe((res: string) =>
-                this.toastService.showInfo(res));
+        this.toastService.showInfo('TOAST.EDITPOST.moving');
         this.draftService
             .create(this.name, this.repo, post)
             .then(() => {
@@ -219,10 +202,7 @@ export class EditPostComponent implements OnInit {
                             .updateBlog(this.name, this.repo)
                             .subscribe(
                                 () => {
-                                    this.translate
-                                        .get('TOAST.EDITPOST.done')
-                                        .subscribe((res: string) =>
-                                            this.toastService.showSuccess(res));
+                                    this.toastService.showSuccess('TOAST.EDITPOST.done');
                                     setTimeout(() => {
                                         let localUrl = this.localize.translateRoute(`/${this.name}`);
                                         this.router.navigate([localUrl, this.repo, 'drafts']);
