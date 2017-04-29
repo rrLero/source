@@ -4,7 +4,7 @@
         <div class="entry-wrap">
             <article class="entry">
                 <ul class="nav nav-tabs">
-                    <li *ngFor="let post of posts" [class.active]="active === post.title">
+                    <li *ngFor="let post of postsLocal" [class.active]="active === post.title">
                         <a (click)="getData(post.title)">{{ post.title }}</a>
                     </li>
                 </ul>

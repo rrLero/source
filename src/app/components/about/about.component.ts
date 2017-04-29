@@ -2,6 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router }                                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TranslateService }                           from '@ngx-translate/core';
 
 import { DraftService, ToastService }                 from '../../services';
 import { Post }                                       from '../../shared/post.model';
@@ -25,14 +26,22 @@ import { Post }                                       from '../../shared/post.mo
 })
 export class AboutComponent implements OnInit {
     posts: Post[];
+    postsLocal: Post[];
     post: any = {};
     title: string;
     active: string;
+    lang = localStorage.getItem('LOCALIZE_LOCAL_STORAGE') || 'en';
 
     constructor(private router: Router,
+                private translate: TranslateService,
                 private location: Location,
                 private draftService: DraftService,
-                public toastService: ToastService) { }
+                public toastService: ToastService) {
+        translate.onLangChange.subscribe(event => {
+            this.lang = event.lang;
+            this.getDrafts();
+        });
+    }
 
     ngOnInit(): void {
         this.getDrafts();
@@ -44,19 +53,24 @@ export class AboutComponent implements OnInit {
             .then(res => {
                 if (res.items.length) {
                     this.posts = res.items;
-                    this.getData('FAQ');
+                    this.chooseLang();
+                    this.getData(this.active || 'FAQ');
                 }
             })
             .catch(error => this.toastService.showError(error));
     }
 
     getData(title: string): void {
-        this.posts.forEach(item => {
+        this.postsLocal.forEach(item => {
             if (item.title === title) {
                 this.post.text_full_strings = item.text_full_strings;
                 this.active = title;
             }
         });
+    }
+
+    chooseLang(): void {
+        this.postsLocal = this.posts.filter(item => item.tags[0] === this.lang)
     }
 
     goBack(): void {
