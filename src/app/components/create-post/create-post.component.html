@@ -1,33 +1,67 @@
 <div class="row" [@create]="preview.state">
     <div class="col-md-8 col-md-offset-2">
         <div class="entry">
-            <h2 class="text-center">Create post</h2>
-            <div><b>Author:</b> {{ author }}</div>
-            <div><b>Date:</b> {{ datetime }}</div>
-            <form #form="ngForm" novalidate (ngSubmit)="check.checked ? publish(filename, title, tags, preview, text) : save(filename, title, tags, preview, text)">
+            <h2 class="text-center" translate>CREATEPOST.createPost</h2>
+            <div><b translate>CREATEPOST.author </b> {{ author }}</div>
+            <div><b translate>CREATEPOST.date </b> {{ datetime }}</div>
+            <form
+                #form="ngForm"
+                novalidate
+                (ngSubmit)="check.checked ? publish(filename, title, tags, preview, text) : save(filename, title, tags, preview, text)">
                 <div class="form-group">
-                    <label for="filename">Filename:</label>
-                    <input #filename [ngModel]="filename.value" name="filename" class="form-control" type="text" id="filename" placeholder="Filename" (change)="repalceSpace(filename)" required>
+                    <!-- <label for="filename" translate>CREATEPOST.filename</label> -->
+                    <input
+                        #filename
+                        [ngModel]="filename.value"
+                        name="filename"
+                        class="form-control"
+                        type="text"
+                        id="filename"
+                        placeholder="{{ 'CREATEPOST.filename' | translate | slice:0:-1 }}"
+                        (change)="repalceSpace(filename)"
+                        required>
                 </div>
                 <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input #title [ngModel]="title.value" name="title" class="form-control" type="text" id="title" placeholder="Title" required>
+                    <!-- <label for="title" translate>CREATEPOST.title</label> -->
+                    <input
+                        #title 
+                        [ngModel]="title.value"
+                        name="title"
+                        class="form-control"
+                        type="text"
+                        id="title"
+                        placeholder="{{ 'CREATEPOST.title' | translate | slice:0:-1 }}"
+                        required>
                 </div>
                 <div class="form-group">
-                    <label for="tags">Tags:</label>
-                    <input #tags [ngModel]="tags.value" name="tags" class="form-control" type="text" id="tags" placeholder="Tags" required>
+                    <!-- <label for="tags" translate>CREATEPOST.tags</label> -->
+                    <input
+                        #tags
+                        [ngModel]="tags.value"
+                        name="tags"
+                        class="form-control"
+                        type="text"
+                        id="tags"
+                        placeholder="{{ 'CREATEPOST.tags' | translate | slice:0:-1 }}"
+                        required>
                 </div>
                 <div class="form-group">
-                    <label>Preview:</label>
-                    <md-editor #preview></md-editor>
+                    <!-- <label translate>CREATEPOST.preview</label> -->
+                    <md-editor #preview [placeholder]="'CREATEPOST.preview'"></md-editor>
                 </div>
                 <div class="form-group">
-                    <label>Text:</label>
-                    <md-editor #text></md-editor>
+                    <!-- <label translate>CREATEPOST.text</label> -->
+                    <md-editor #text [placeholder]="'CREATEPOST.text'"></md-editor>
                 </div>
+
                 <div class="form-group">
-                    <button [disabled]="!text.value || !preview.value || form.invalid" type="submit" class="btn btn-primary">Create</button>
-                    <button type="button" class="btn" (click)="goBack()">Back</button>
+                    <button
+                        [disabled]="!text.value || !preview.value || form.invalid"
+                        translate type="submit"
+                        class="btn btn-primary">
+                        CREATEPOST.create
+                    </button>
+                    <button type="button" class="btn" (click)="goBack()" translate>CREATEPOST.back</button>
 
                     <div class="[ form-group ] text-center publish">
                         <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" checked>
@@ -36,12 +70,11 @@
                                 <span class="[ glyphicon glyphicon-ok ]"></span>
                                 <span> </span>
                             </label>
-                            <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
-                                Publish
+                            <label for="fancy-checkbox-primary" class="[ btn btn-default active ]" translate>
+                                CREATEPOST.publish
                             </label>
                         </div>
                     </div>
-
                 </div>
             </form>
         </div>

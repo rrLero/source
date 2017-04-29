@@ -1,30 +1,59 @@
 <div class="row" *ngIf="post && !onEdit" [@edit]="post.state">
     <div class="col-md-8 col-md-offset-2">
         <div class="entry">
-            <h2 class="text-center">Edit post</h2>
-            <div><b>Author:</b>{{ post.author }}</div>
-            <div><b>Date:</b> {{ post.date }}</div>
-            <form #form="ngForm" novalidate (ngSubmit)="check.checked ? moveToDrafts(title, tags, preview, text) : save(title, tags, preview, text)">
+            <h2 class="text-center" translate>EDITPOST.editPost</h2>
+            <div><b translate>EDITPOST.author </b>{{ post.author }}</div>
+            <div><b translate>EDITPOST.date </b> {{ post.date }}</div>
+            <form
+                #form="ngForm"
+                novalidate
+                (ngSubmit)="check.checked ? moveToDrafts(title, tags, preview, text) : save(title, tags, preview, text)">
                 <div class="form-group">
-                    <label>Title:</label>
-                    <input #title [ngModel]="post.title" class="form-control" type="text" name="title" placeholder="Title" required>
+                    <!-- <label translate>EDITPOST.title</label> -->
+                    <input
+                        #title
+                        [ngModel]="post.title"
+                        class="form-control"
+                        type="text"
+                        name="title"
+                        placeholder="{{ 'EDITPOST.title' | translate | slice:0:-1 }}"
+                        required>
                 </div>
                 <div class="form-group">
-                    <label>Tags:</label>
-                    <input #tags [ngModel]="post.tags" class="form-control" type="text" name="tags" placeholder="Tags" required>
+                    <!-- <label translate>EDITPOST.tags</label> -->
+                    <input
+                        #tags
+                        [ngModel]="post.tags"
+                        class="form-control"
+                        type="text"
+                        name="tags"
+                        placeholder="{{ 'EDITPOST.tags' | translate | slice:0:-1 }}"
+                        required>
                 </div>
                 <div class="form-group">
-                    <label>Preview:</label>
-                    <md-editor #preview [value]="post.preview"></md-editor>
+                    <!-- <label translate>EDITPOST.preview</label> -->
+                    <md-editor #preview [placeholder]="'EDITPOST.preview'" [value]="post.preview"></md-editor>
                 </div>
                 <div class="form-group">
-                    <label>Text:</label>
-                    <md-editor #text [value]="post.text_full_strings.trim()"></md-editor>
+                    <!-- <label translate>EDITPOST.text</label> -->
+                    <md-editor #text [placeholder]="'EDITPOST.text'" [value]="post.text_full_strings.trim()"></md-editor>
                 </div>
                 <div class="form-group">
-                    <button [disabled]="!text.value || !preview.value || form.invalid" type="submit" class="btn btn-primary">Update</button>
-                    <button type="button" (click)="cancel(title, tags, text, preview)" class="btn">Cancel</button>
-                    <button type="button" (click)="goBack()" class="btn">Back</button>
+                    <button
+                        [disabled]="!text.value || !preview.value || form.invalid"
+                        translate
+                        type="submit"
+                        class="btn btn-primary">
+                        EDITPOST.update
+                    </button>
+                    <button
+                        type="button"
+                        (click)="cancel(title, tags, text, preview)"
+                        translate
+                        class="btn">
+                        EDITPOST.cancel
+                    </button>
+                    <button type="button" (click)="goBack()" translate class="btn">EDITPOST.back</button>
 
                     <div class="[ form-group ] text-center publish">
                         <input #check type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off">
@@ -33,8 +62,8 @@
                                 <span class="[ glyphicon glyphicon-ok ]"></span>
                                 <span> </span>
                             </label>
-                            <label for="fancy-checkbox-primary" class="[ btn btn-default active ]">
-                                Move to drafts
+                            <label translate for="fancy-checkbox-primary" class="[ btn btn-default active ]">
+                                EDITPOST.moveToDrafts
                             </label>
                         </div>
                     </div>
@@ -44,6 +73,5 @@
         </div>
     </div>
 </div>
-<!-- <button *ngIf="onEdit" (click)="getPost()" class="btn btn-primary" type="button" name="button">Try again</button> -->
-<button *ngIf="onEdit" type="button" (click)="goBack()" class="btn btn-primary">Go back</button>
+
 <spinner *ngIf="!post"></spinner>

@@ -25,41 +25,44 @@
         "goBack": "Назад"
     },
     "POPUP": {
-        "remove": "Remove",
-        "cancel": "Cancel"
+        "remove": "Удалить",
+        "cancel": "Отмена"
     },
     "PAGINATION": {
-        "prev": "Prev",
-        "next": "Next",
-        "first": "First",
-        "last": "Last"
+        "prev": "Пред",
+        "next": "След",
+        "first": "Первая",
+        "last": "Последняя"
     },
     "NOTFOUND": {
-        "sorry": "Sorry, page not found",
-        "goBack": "Go Back To Home Page"
+        "sorry": "Извините, страница не найдена",
+        "goBack": "Вернуться на главную"
     },
     "EDITPOST": {
-        "editPost": "Edit post",
-        "author": "Author",
-        "date": "Date",
-        "update": "Update",
-        "cancel": "Cancel",
-        "back": "Back",
-        "moveToDrafts": "Move to drafts",
-        "goBack": "Go back"
+        "editPost": "Редактирование поста",
+        "author": "Автор:",
+        "date": "Дата:",
+        "title": "Заглавие:",
+        "tags": "Теги:",
+        "preview": "Предварительный просмотр:",
+        "text": "Текст:",
+        "update": "Обновить",
+        "cancel": "Отмена",
+        "back": "Назад",
+        "moveToDrafts": "Переместить в черновики"
     },
     "CREATEPOST": {
-        "createPost": "Create post",
-        "author": "Author",
-        "date": "Date",
-        "filename": "Filename",
-        "title": "Title",
-        "tags": "Tags",
-        "preview": "Preview",
-        "text": "Text",
-        "create": "Create",
-        "back": "Back",
-        "publish": "Publish"
+        "createPost": "Создание поста",
+        "author": "Автор:",
+        "date": "Дата:",
+        "filename": "Имя файла:",
+        "title": "Заглавие:",
+        "tags": "Теги:",
+        "preview": "Предпросмотр:",
+        "text": "Текст:",
+        "create": "Создать",
+        "back": "Назад",
+        "publish": "Публикация"
     },
     "CONTROLS": {
         "addPost": "Добавить пост",
@@ -112,7 +115,7 @@
         "blogName": "Имя блога"
     },
     "ABOUT": {
-        "goBack": "Go back"
+        "goBack": "Назад"
     },
     "TOAST": {
         "START": {
@@ -146,8 +149,8 @@
         },
         "NEWCOMMENTS": {
             "pleaseSelect": "Пожалуйста, выберите комментарий.",
-            "approving": "Approving...",
-            "deleting": "Deleting...",
+            "approving": "Одобрение...",
+            "deleting": "Удаление...",
             "wasApproved": "Комментарий одобрен.",
             "wereApproved": "комментарии одобрено.",
             "deleted": "комментариев удалено"

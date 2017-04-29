@@ -1,8 +1,14 @@
-<h3 *ngIf="user && !canEdit" translate>POSTS.private</h3>
+<div *ngIf="user && !canEdit" class="col-md-8 col-md-offset-2">
+    <div class="private">
+        <h3 translate>POSTS.private</h3>
+    </div>
+</div>
 
 <div class="row" *ngIf="user && canEdit">
     <div class="col-md-8">
-        <h3 *ngIf="empty" translate>POSTS.noPosts</h3>
+        <div *ngIf="empty" class="no-posts">
+            <h3 translate>POSTS.noPosts</h3>
+        </div>
         <posts-template
             *ngIf="posts"
             [posts]="posts"

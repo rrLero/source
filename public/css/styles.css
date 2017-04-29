@@ -149,6 +149,15 @@ i.svg-icon {
   background-image: url(../../public/icons/tag.svg);
 }
 
+.svg-icon-arrow-right {
+  background-image: url(../../public/icons/arrow.svg);
+}
+
+.svg-icon-arrow-left {
+  background-image: url(../../public/icons/arrow.svg);
+  transform: rotate(180deg);
+}
+
 img {
   display: block;
   width: 100%;

@@ -31,35 +31,38 @@
     "PAGINATION": {
         "prev": "Prev",
         "next": "Next",
-        "first": "First",
-        "last": "Last"
+        "first": "Перша",
+        "last": "Остання"
     },
     "NOTFOUND": {
-        "sorry": "Sorry, page not found",
-        "goBack": "Go Back To Home Page"
+        "sorry": "Вибачте, сторінка не знайдена",
+        "goBack": "Повернутися до головної"
     },
     "EDITPOST": {
-        "editPost": "Edit post",
-        "author": "Author",
-        "date": "Date",
-        "update": "Update",
-        "cancel": "Cancel",
-        "back": "Back",
-        "moveToDrafts": "Move to drafts",
-        "goBack": "Go back"
+        "editPost": "Редагування посту",
+        "author": "Автор:",
+        "date": "Дата:",
+        "title": "Назва:",
+        "tags": "Теги:",
+        "preview": "Попередній перегляд:",
+        "text": "Текст:",
+        "update": "Оновити",
+        "cancel": "Відміна",
+        "back": "Назад",
+        "moveToDrafts": "Перемістити до чернеток"
     },
     "CREATEPOST": {
-        "createPost": "Create post",
-        "author": "Author",
-        "date": "Date",
-        "filename": "Filename",
-        "title": "Title",
-        "tags": "Tags",
-        "preview": "Preview",
-        "text": "Text",
-        "create": "Create",
-        "back": "Back",
-        "publish": "Publish"
+        "createPost": "Створення посту",
+        "author": "Автор:",
+        "date": "Дата:",
+        "filename": "Ім'я файлу:",
+        "title": "Назва:",
+        "tags": "Теги:",
+        "preview": "Попередній перегляд:",
+        "text": "Текст:",
+        "create": "Створити",
+        "back": "Назад",
+        "publish": "Публікація"
     },
     "CONTROLS": {
         "addPost": "Додати пост",
@@ -152,8 +155,8 @@
         },
         "NEWCOMMENTS": {
             "pleaseSelect": "Будь-ласка, вибирете коментар.",
-            "approving": "Approving...",
-            "deleting": "Deleting...",
+            "approving": "Підтвердження...",
+            "deleting": "Видалення...",
             "wasApproved": "Коментар підтверджен.",
             "wereApproved": "коментарів підтверджено.",
             "deleted": "коментарів видалено"

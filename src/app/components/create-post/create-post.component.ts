@@ -119,6 +119,10 @@ export class CreatePostComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
+    onFocus() {
+        console.log('focus');
+    }
+
     goBack() {
         this.location.back();
     }

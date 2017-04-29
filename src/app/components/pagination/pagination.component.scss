@@ -16,3 +16,11 @@ li.disabled > a {
   pointer-events: none;
   cursor: not-allowed;
 }
+
+.svg-icon {
+  font-size: 2em;
+}
+
+a.arrow {
+  padding: .3rem .5rem;
+}

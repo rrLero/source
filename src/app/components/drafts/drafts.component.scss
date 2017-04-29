@@ -95,3 +95,21 @@
   font-weight: bold;
   font-size: 20px;
 }
+
+.no-posts {
+  margin-bottom: 1em;
+  padding-top: 2em;
+  padding-bottom: 2.4em;
+  background-color: #fff;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    margin: 0 1.2em 1em;
+  }
+}
+
+.private {
+  padding: 3em;
+  background-color: #fff;
+  text-align: center;
+}

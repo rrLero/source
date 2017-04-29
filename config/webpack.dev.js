@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.common');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const commonConfig = require('./webpack.common.js');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const helpers = require('./helpers');
 

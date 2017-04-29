@@ -28,7 +28,7 @@ export class DraftsComponent implements OnInit {
     total = 0;
     perPage = 5;
     empty = false;
-    canEdit = false;
+    canEdit = true;
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     id = +this.route.snapshot.params['id'] || 1;
@@ -59,7 +59,7 @@ export class DraftsComponent implements OnInit {
         this.draftService
             .getDrafts(this.name, this.repo, id, this.perPage)
             .then(res => {
-                if (res.items.length) {
+                if (res.items && res.items[0].date !== false) {
                     this.posts = res.items;
                     this.total = res.total;
                     window.scrollTo(0, 0);

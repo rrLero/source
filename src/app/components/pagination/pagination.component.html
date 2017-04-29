@@ -3,10 +3,12 @@
         <li>
             <ul class="pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}" *ngIf="pager.pages.length > 2">
-                    <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1] | localize">Prev</a>
+                    <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1] | localize" class="arrow"><span class="svg-icon svg-icon-arrow-left"></span></a>
+                    <!-- <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1] | localize" translate>PAGINATION.prev</a> -->
                 </li>
                 <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.pages.length > 2">
-                    <a (click)="onPageChange(pager.currentPage + 1)" [routerLink]="[url, 'page', pager.currentPage + 1] | localize">Next</a>
+                    <a (click)="onPageChange(pager.currentPage + 1)" [routerLink]="[url, 'page', pager.currentPage + 1] | localize" class="arrow"><span class="svg-icon svg-icon-arrow-right"></span></a>
+                    <!-- <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1] | localize" translate>PAGINATION.next</a> -->
                 </li>
             </ul>
         </li><br>
@@ -14,13 +16,13 @@
         <li>
             <ul class="pagination">
                 <li  [ngClass]="{disabled:pager.currentPage === 1}" *ngIf="pager.pages.length > 2">
-                    <a (click)="onPageChange(1)" [routerLink]="[url, 'page', 1]">First</a>
+                    <a (click)="onPageChange(1)" [routerLink]="[url, 'page', 1] | localize" translate>PAGINATION.first</a>
                 </li>
                 <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
                     <a (click)="onPageChange(page)" [routerLink]="[url, 'page', page] | localize">{{ page }}</a>
                 </li>
                 <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.totalPages > 2">
-                    <a (click)="onPageChange(pager.totalPages)" [routerLink]="[url, 'page', pager.totalPages] | localize">Last</a>
+                    <a (click)="onPageChange(pager.totalPages)" [routerLink]="[url, 'page', pager.totalPages] | localize" translate>PAGINATION.last</a>
                 </li>
             </ul>
         </li>
