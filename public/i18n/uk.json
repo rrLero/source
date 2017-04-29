@@ -160,6 +160,12 @@
         },
         "GUARD": {
             "youMust": "Ви потрібно увійти"
+        },
+        "ACCOUNT": {
+            "activatingBlog": "Активація блогу...",
+            "updating": "Оновлення...",
+            "deleting": "Видалення...",
+            "done": "Готово!"
         }
     },
     "START": {

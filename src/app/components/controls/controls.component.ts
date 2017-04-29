@@ -11,6 +11,7 @@ import {
     ToastService
 }                               from '../../services';
 import { Post, FullMd, fullMd } from '../../shared/post.model';
+import { User }                 from '../../shared/user.model';
 
 @Component({
     selector: 'controls',
@@ -35,8 +36,7 @@ export class ControlsComponent implements OnInit {
     @Input() drafts: boolean;
     @Input() status: boolean;
     @Output() comments = new EventEmitter();
-    user: any;
-    savedSession: string;
+    user: User;
     hidden = true;
     confirm = true;
     popupText = 'Remove post?';
@@ -75,57 +75,12 @@ export class ControlsComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    updateComments(status: boolean): void {
-        this.httpService
-            .updateBlog(this.name, this.repo)
-            .subscribe(
-                () => {
-                    this.toastService.showSuccess('TOAST.CONTROLS.done');
-                    setTimeout(() => this.comments.emit(status), this.toastService.life());
-                },
-                error => this.toastService.showError(error));
-    }
-
-    delete(): void {
-        this.toastService.showInfo('TOAST.CONTROLS.deleting');
-        this.httpService
-            .delete(this.name, this.repo, this.post.id, this.post.sha)
-            .then(() =>
-                this.httpService
-                    .updateBlog(this.name, this.repo)
-                    .subscribe(() =>
-                        this.callback(),
-                        error => this.toastService.showError(error)))
-            .catch(error => this.toastService.showError(error));
-    }
-
-    deleteDraft(): void {
-        this.toastService.showInfo('TOAST.CONTROLS.deleting');
-        this.draftService
-            .delete(this.name, this.repo, this.post.id)
-            .then(() =>
-                this.draftService
-                    .updateBlog(this.name, this.repo)
-                    .subscribe(() =>
-                        this.callback('drafts'),
-                        error => this.toastService.showError(error)))
-            .catch(error => this.toastService.showError(error));
-    }
-
     publish(): void {
         this.toastService.showInfo('TOAST.CONTROLS.publishing');
         this.draftService
             .publish(this.name, this.repo, this.title)
             .then(() => this.callback())
             .catch(error => this.toastService.showError(error));
-    }
-
-    callback(path = ''): void {
-        this.toastService.showSuccess('TOAST.CONTROLS.done');
-        setTimeout(() => {
-            let localUrl = this.localize.translateRoute(`/${this.name}/${this.repo}/${path}`)
-            this.router.navigate([localUrl])
-        }, this.toastService.life());
     }
 
     getPostStatus(): void {
@@ -143,7 +98,42 @@ export class ControlsComponent implements OnInit {
         }
     }
 
-    checkStatus(post: Post): void {
+    popupHandler(confirm: boolean): void {
+        if (confirm) {
+            this.hidden = true;
+            this.draft ? this.deleteDraft() : this.deletePost();
+        } else {
+            this.hidden = true;
+        }
+    }
+
+    private deletePost(): void {
+        this.toastService.showInfo('TOAST.CONTROLS.deleting');
+        this.httpService
+            .delete(this.name, this.repo, this.post.id, this.post.sha)
+            .then(() =>
+                this.httpService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(() =>
+                        this.callback(),
+                        error => this.toastService.showError(error)))
+            .catch(error => this.toastService.showError(error));
+    }
+
+    private deleteDraft(): void {
+        this.toastService.showInfo('TOAST.CONTROLS.deleting');
+        this.draftService
+            .delete(this.name, this.repo, this.post.id)
+            .then(() =>
+                this.draftService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(() =>
+                        this.callback('drafts'),
+                        error => this.toastService.showError(error)))
+            .catch(error => this.toastService.showError(error));
+    }
+
+    private checkStatus(post: Post): void {
         let lastInx = post.tags.length - 1;
         let lockInfo = post.tags[lastInx].split(':');
         let onEdit = lockInfo[0] === '-----post-locked-by';
@@ -160,24 +150,24 @@ export class ControlsComponent implements OnInit {
         }
     }
 
-    loadSession(): void {
-        let url: string | any[];
-        if (this.draft) {
-            url = this.localize.translateRoute(`${this.url}/drafts/post/${this.title}/edit`);
-        } else {
-            url = this.localize.translateRoute(`${this.url}/post/${this.title}/edit`);
-        }
-        this.toastService.showSuccess('TOAST.CONTROLS.sessionLoaded');
-        setTimeout(() => this.router.navigate([url]), this.toastService.life());
+    private updateComments(status: boolean): void {
+        this.httpService
+            .updateBlog(this.name, this.repo)
+            .subscribe(
+                () => {
+                    this.toastService.showSuccess('TOAST.CONTROLS.done');
+                    setTimeout(() => this.comments.emit(status), this.toastService.life());
+                },
+                error => this.toastService.showError(error));
     }
 
-    lock(post: Post): void {
+    private lock(post: Post): void {
         post.tags.push(`-----post-locked-by:${this.user.login}`);
         this.buildFullMd(post);
         this.draft ? this.lockDraft(post) : this.lockPost(post);
     }
 
-    lockPost(post: Post): void {
+    private lockPost(post: Post): void {
         this.httpService
             .update(this.name, this.repo, post.id, post.sha, post)
             .then(() => {
@@ -196,7 +186,7 @@ export class ControlsComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    lockDraft(post: Post): void {
+    private lockDraft(post: Post): void {
         this.draftService
             .update(this.name, this.repo, post.id, post)
             .then(() => {
@@ -215,7 +205,7 @@ export class ControlsComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    buildFullMd(post: Post): void {
+    private buildFullMd(post: Post): void {
         new FullMd(
             post.title,
             post.tags.join(', '),
@@ -227,12 +217,23 @@ export class ControlsComponent implements OnInit {
         post.text_full_md = fullMd.trim();
     }
 
-    popupHandler(confirm: boolean): void {
-        if (confirm) {
-            this.hidden = true;
-            this.draft ? this.deleteDraft() : this.delete();
+    private loadSession(): void {
+        let url: string | any[];
+        if (this.draft) {
+            url = this.localize.translateRoute(`${this.url}/drafts/post/${this.title}/edit`);
         } else {
-            this.hidden = true;
+            url = this.localize.translateRoute(`${this.url}/post/${this.title}/edit`);
         }
+        this.toastService.showSuccess('TOAST.CONTROLS.sessionLoaded');
+        setTimeout(() => this.router.navigate([url]), this.toastService.life());
     }
+
+    private callback(path = ''): void {
+        this.toastService.showSuccess('TOAST.CONTROLS.done');
+        setTimeout(() => {
+            let localUrl = this.localize.translateRoute(`/${this.name}/${this.repo}/${path}`)
+            this.router.navigate([localUrl])
+        }, this.toastService.life());
+    }
+
 }

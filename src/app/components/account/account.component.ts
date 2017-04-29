@@ -76,32 +76,32 @@ export class AccountComponent implements OnInit {
 
     createBlog(name: string, repoEl: HTMLInputElement): void {
         let blog = repoEl.value.replace(/\s+/g, '-');
-        this.toastService.showInfo('Activating blog...');
+        this.toastService.showInfo('TOAST.ACCOUNT.activatingBlog');
         this.httpService
             .createBlog(name, blog)
             .then(() => {
-                this.toastService.showSuccess('Done!');
-                this.blogs.push({ name: name, repo: blog });
+                this.toastService.showSuccess('TOAST.ACCOUNT.done');
+                this.blogs.push({ name: name.toLowerCase(), repo: blog });
                 repoEl.value = null;
             })
             .catch(error => this.toastService.showError(error));
     }
 
     updateBlog(repo: string): void {
-        this.toastService.showInfo('Updating...');
+        this.toastService.showInfo('TOAST.ACCOUNT.updating');
         this.httpService
             .updateBlog(this.name, repo)
             .subscribe(
-                () => this.toastService.showSuccess('Done!'),
+                () => this.toastService.showSuccess('TOAST.ACCOUNT.done'),
                 error => this.toastService.showError(error));
     }
 
     updateDraft(repo: string): void {
-        this.toastService.showInfo('Updating...');
+        this.toastService.showInfo('TOAST.ACCOUNT.updating');
         this.draftService
             .updateBlog(this.name, repo)
             .subscribe(
-                () => this.toastService.showSuccess('Done!'),
+                () => this.toastService.showSuccess('TOAST.ACCOUNT.done'),
                 error => this.toastService.showError(error));
     }
 
@@ -113,7 +113,7 @@ export class AccountComponent implements OnInit {
     }
 
     deleteBlog(name: string, repo: string, index: number): void {
-        this.toastService.showInfo('Deleting...');
+        this.toastService.showInfo('TOAST.ACCOUNT.deleting');
         this.httpService
             .deleteBlog(name, repo)
             .then(() =>
@@ -122,7 +122,7 @@ export class AccountComponent implements OnInit {
                     .subscribe(
                         () => {
                             this.blogs.splice(index, 1);
-                            this.toastService.showSuccess('Done!');
+                            this.toastService.showSuccess('TOAST.ACCOUNT.done');
                         },
                         error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
@@ -141,8 +141,10 @@ export class AccountComponent implements OnInit {
         this.hiddenUpdates = !this.hiddenUpdates;
         this.hiddenControls = false;
     }
+
     toggleControlBtns(): void {
         this.hiddenControls = !this.hiddenControls;
         this.hiddenUpdates = false;
     }
+
 }

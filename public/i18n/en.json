@@ -160,6 +160,12 @@
         },
         "GUARD": {
             "youMust": "You must be logged in"
+        },
+        "ACCOUNT": {
+            "activatingBlog": "Activating blog...",
+            "updating": "Updating...",
+            "deleting": "Deleting...",
+            "done": "Done!"
         }
     },
     "START": {

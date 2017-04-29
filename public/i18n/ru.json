@@ -154,6 +154,12 @@
         },
         "GUARD": {
             "youMust": "Вы должны зайти"
+        },
+        "ACCOUNT": {
+            "activatingBlog": "Активация блога...",
+            "updating": "Обновление...",
+            "deleting": "Удаление...",
+            "done": "Готово!"
         }
     },
     "START": {
