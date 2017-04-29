@@ -1,4 +1,4 @@
-import { Injectable }                  from '@angular/core';
+import { Injectable, EventEmitter }    from '@angular/core';
 import { ToastsManager, ToastOptions } from 'ng2-toastr';
 import { TranslateService }            from '@ngx-translate/core';
 
@@ -20,6 +20,7 @@ export class ToastConfig extends ToastOptions {
 
 @Injectable()
 export class ToastService {
+    state: EventEmitter<boolean> = new EventEmitter();
     toastLife = 2000;
 
     constructor(private translate: TranslateService,
@@ -31,7 +32,10 @@ export class ToastService {
             .subscribe((res: string) =>
                 this.toastr
                     .success(`${data} ${res}`, null, { dismiss: 'controlled' })
-                    .then(() => setTimeout(() => this.toastr.dispose(), this.toastLife)));
+                    .then(() => setTimeout(() => {
+                        this.toastr.dispose();
+                        this.state.emit(false);
+                    }, this.toastLife)));
     }
 
     showError(msg: string, data = ''): void {
@@ -40,7 +44,10 @@ export class ToastService {
             .subscribe((res: string) =>
                 this.toastr
                     .error(`${data} ${res}`, null, { dismiss: 'controlled' })
-                    .then(() => setTimeout(() => this.toastr.dispose(), 5000)));
+                    .then(() => setTimeout(() => {
+                        this.state.emit(false);
+                        this.toastr.dispose();
+                    }, 5000)));
     }
 
     showWarning(msg: string, data = ''): void {
@@ -49,10 +56,14 @@ export class ToastService {
             .subscribe((res: string) =>
                 this.toastr
                     .warning(`${data} ${res}`, null, { dismiss: 'controlled' })
-                    .then(() => setTimeout(() => this.toastr.dispose(), 5000)));
+                    .then(() => setTimeout(() => {
+                        this.state.emit(false);
+                        this.toastr.dispose();
+                    }, 5000)));
     }
 
     showInfo(msg: string): void {
+        this.state.emit(true);
         this.translate
             .get(msg)
             .subscribe((res: string) =>
@@ -71,5 +82,9 @@ export class ToastService {
 
     life(): number {
         return this.toastLife;
+    }
+
+    getState(): EventEmitter<boolean> {
+        return this.state;
     }
 }

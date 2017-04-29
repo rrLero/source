@@ -79,7 +79,14 @@ export class ControlsComponent implements OnInit {
         this.toastService.showInfo('TOAST.CONTROLS.publishing');
         this.draftService
             .publish(this.name, this.repo, this.title)
-            .then(() => this.callback())
+            .then(() => {
+                this.draftService
+                    .updateBlog(this.name, this.repo)
+                    .subscribe(() =>
+                        this.httpService
+                            .updateBlog(this.name, this.repo)
+                            .subscribe(() => this.callback()))
+            })
             .catch(error => this.toastService.showError(error));
     }
 

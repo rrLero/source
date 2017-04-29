@@ -11,6 +11,7 @@ import { AppRoutingModule }                 from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { components }   from './components';
+import { directives }   from './directives';
 import { services }     from './services';
 import { pipes }        from './pipes';
 
@@ -37,6 +38,7 @@ export function HttpLoaderFactory(http: Http) {
     ],
     declarations: [
         AppComponent,
+        ...directives,
         ...components,
         ...pipes
     ],

@@ -112,6 +112,18 @@
   font-size: 2rem;
 }
 
+.lock-page {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #aaa;
+  opacity: .2;
+  z-index: 1000;
+}
+
 @media (max-width: 768px) {
   .main {
     padding-top: 15px;
