@@ -7,7 +7,7 @@ import {
     HttpService,
     ToastService,
     UserService
-} from '../../services';
+} from '../../../../services';
 
 @Component({
     templateUrl: 'new-comments.component.html',

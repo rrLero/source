@@ -7,13 +7,16 @@ import { ToastModule }                      from 'ng2-toastr';
 import { MomentModule }                     from 'angular2-moment';
 import { TranslateHttpLoader }              from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
+import { SharedModule }                     from './shared';
+import { CommentsModule }                   from './modules';
 import { AppRoutingModule }                 from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { components }   from './components';
 import { directives }   from './directives';
 import { services }     from './services';
-import { pipes }        from './pipes';
+// import { pipes }        from './pipes';
 
 export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http);
@@ -24,9 +27,11 @@ export function HttpLoaderFactory(http: Http) {
         BrowserModule,
         HttpModule,
         FormsModule,
-        AppRoutingModule,
         BrowserAnimationsModule,
         MomentModule,
+        SharedModule,
+        AppRoutingModule,
+        CommentsModule,
         ToastModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
@@ -40,7 +45,7 @@ export function HttpLoaderFactory(http: Http) {
         AppComponent,
         ...directives,
         ...components,
-        ...pipes
+        // ...pipes
     ],
     providers: [...services],
     bootstrap: [AppComponent]

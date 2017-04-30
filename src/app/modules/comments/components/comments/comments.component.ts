@@ -7,8 +7,8 @@ import {
     UserService,
     CommentsService,
     ToastService
-}  from '../../services';
-import { Comment } from '../../shared/comment.model';
+}                        from '../../../../services';
+import { User, Comment } from '../../../../shared';
 
 @Component({
     selector: 'comments',
@@ -37,7 +37,6 @@ export class CommentsComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     url = 'https://github.com/';
     user: any;
-    // access;
 
     constructor(private route: ActivatedRoute,
                 private authService: AuthService,

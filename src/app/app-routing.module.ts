@@ -23,8 +23,9 @@ import {
     DraftComponent,
     PostsByTagComponent,
     AboutComponent,
-    NewCommentsComponent,
+    // NewCommentsComponent,
 }  from './components';
+import { NewCommentsComponent } from './modules/comments/components';
 
 const routes: Routes = [
     {

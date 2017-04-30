@@ -4,7 +4,7 @@ import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DraftService, UserService, ToastService }    from '../../services';
-import { Post }                                       from '../../shared/post.model';
+import { Post, User }                                 from '../../shared';
 
 @Component({
     selector: 'draft',
@@ -25,9 +25,7 @@ import { Post }                                       from '../../shared/post.mo
 })
 export class DraftComponent implements OnInit {
     post: Post;
-    user: any;
-    // commentsStatus: boolean;
-    // commentsAmount: number;
+    user: User;
     canEdit = false;
     controls = false;
     name = this.route.snapshot.params['name'];
@@ -38,9 +36,7 @@ export class DraftComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private location: Location,
-                // private commentsService: CommentsService,
                 public toastService: ToastService,
-                // private httpService: HttpService,
                 private draftService: DraftService,
                 private userService: UserService) { }
 
@@ -61,11 +57,7 @@ export class DraftComponent implements OnInit {
                 this.draftService
                     .getDraft(name, repo, title))
                     .subscribe(
-                        post => {
-                            this.post = post;
-                            // this.commentsStatus = this.post.comments_status;
-                            // this.commentsAmount = this.post.comments;
-                        },
+                        post => this.post = post,
                         error => this.toastService.showError(error));
     }
 
@@ -73,15 +65,8 @@ export class DraftComponent implements OnInit {
         this.controls = !this.controls;
     }
 
-    // commentsHandler(data): void {
-    //     if (typeof data === 'boolean') {
-    //         this.commentsStatus = data;
-    //     } else if (typeof data === 'number') {
-    //         this.commentsAmount = data;
-    //     }
-    // }
-
     goBack(): void {
         this.location.back();
     }
+
 }

@@ -7,10 +7,10 @@ import { EditPostComponent }      from './edit-post/edit-post.component';
 import { PaginationComponent }    from './pagination/pagination.component';
 import { SearchComponent }        from './search/search.component';
 import { NotFoundComponent }      from './not-found/not-found.component';
-import { MdEditorComponent }      from './md-editor/md-editor.component';
+// import { MdEditorComponent }      from './md-editor/md-editor.component';
 import { AuthComponent }          from './auth/auth.component';
-import { CommentsComponent }      from './comments/comments.component';
-import { CommentFormComponent }   from './comments/comment-form.component';
+// import { CommentsComponent }      from './comments/comments.component';
+// import { CommentFormComponent }   from './comments/comment-form.component';
 import { PopupComponent }         from './popup/popup.component';
 import { ControlsComponent }      from './controls/controls.component';
 import { StartComponent }         from './start/start.component';
@@ -21,7 +21,7 @@ import { DraftComponent }         from './draft/draft.component';
 import { PostsByTagComponent }    from './posts-by-tag/posts-by-tag.component';
 import { PostsTemplateComponent } from './posts-template/posts-template.component';
 import { AboutComponent }         from './about/about.component';
-import { NewCommentsComponent }   from './comments/new-comments.component';
+// import { NewCommentsComponent }   from './comments/new-comments.component';
 
 export { WelcomeComponent };
 export { PostsComponent };
@@ -37,7 +37,7 @@ export { DraftsComponent };
 export { DraftComponent };
 export { PostsByTagComponent };
 export { AboutComponent };
-export { NewCommentsComponent };
+// export { NewCommentsComponent };
 
 export const components = [
     WelcomeComponent,
@@ -49,10 +49,10 @@ export const components = [
     PaginationComponent,
     SearchComponent,
     NotFoundComponent,
-    MdEditorComponent,
+    // MdEditorComponent,
     AuthComponent,
-    CommentsComponent,
-    CommentFormComponent,
+    // CommentsComponent,
+    // CommentFormComponent,
     PopupComponent,
     ControlsComponent,
     StartComponent,
@@ -63,5 +63,5 @@ export const components = [
     PostsByTagComponent,
     PostsTemplateComponent,
     AboutComponent,
-    NewCommentsComponent
+    // NewCommentsComponent
 ];

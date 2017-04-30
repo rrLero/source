@@ -12,7 +12,16 @@ module.exports = {
 
     resolve: {
         extensions: ['.ts', '.js', '.json', '.html', '.css', '.scss', '.xlf'],
-        modules: [helpers.root('src'), 'node_modules']
+        modules: [helpers.root('src'), 'node_modules'],
+        // alias: {
+        //     modules: helpers.root('src/app/modules'),
+        //     services: helpers.root('src/app/services'),
+        //     directives: helpers.root('src/app/directives'),
+        //     pipes: helpers.root('src/app/pipes'),
+        //     components: helpers.root('src/app/components'),
+        //     shared: helpers.root('src/app/shared'),
+        //     public: helpers.root('public')
+        // }
     },
 
     module: {
@@ -92,7 +101,7 @@ module.exports = {
         }),
         new webpack.ContextReplacementPlugin(
             /angular(\\|\/)core(\\|\/)@angular/,
-            helpers.root(), {}
+            helpers.root('./src'), {}
         ),
         new HtmlWebpackPlugin({
             template: './src/index.html',

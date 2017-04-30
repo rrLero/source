@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute }                                 from '@angular/router';
 import { trigger, state, style, transition, animate }     from '@angular/animations';
 
-import { AuthService, ToastService, CommentsService }     from '../../services';
+import { AuthService, ToastService, CommentsService }     from '../../../../services';
 
 @Component({
     selector: 'comment-from',
