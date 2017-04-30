@@ -18,9 +18,19 @@ export class MdEditorComponent implements OnInit {
     @ViewChild('editor') el: ElementRef;
     editor: SimpleMDE;
 
-    constructor(private translate: TranslateService) { }
+    constructor(private translate: TranslateService) {
+        translate.onLangChange.subscribe(() => {
+            this.editor && this.editor.toTextArea();
+            this.editor = null;
+            this.buildEditor();
+        });
+    }
 
     ngOnInit(): void {
+        this.buildEditor();
+    }
+
+    buildEditor(): void {
         this.editor = new SimpleMDE({
             element: this.el.nativeElement,
             status: false,
@@ -33,6 +43,7 @@ export class MdEditorComponent implements OnInit {
         this.editor.codemirror.on('change', () => {
             this.value = this.editor.value();
         });
+
     }
 
     setValue(value: string): void {
@@ -43,7 +54,7 @@ export class MdEditorComponent implements OnInit {
         let placeholder: string;
         this.translate
             .get(value)
-            .subscribe(res => placeholder = res.slice(0, -1));
+            .subscribe(res => placeholder = res);
 
         return placeholder;
     }

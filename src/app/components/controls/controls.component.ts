@@ -79,15 +79,16 @@ export class ControlsComponent implements OnInit {
         this.toastService.showInfo('TOAST.CONTROLS.publishing');
         this.draftService
             .publish(this.name, this.repo, this.title)
-            .then(() => {
+            .then(() =>
                 this.draftService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(() =>
+                    .then(() =>
                         this.httpService
                             .updateBlog(this.name, this.repo)
-                            .subscribe(() => this.callback()))
-            })
-            .catch(error => this.toastService.showError(error));
+                            .then(() => this.callback())
+                            .catch(error => this.toastService.showError(error))
+                    .catch(error => this.toastService.showError(error)))
+            .catch(error => this.toastService.showError(error)));
     }
 
     getPostStatus(): void {
@@ -121,9 +122,8 @@ export class ControlsComponent implements OnInit {
             .then(() =>
                 this.httpService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(() =>
-                        this.callback(),
-                        error => this.toastService.showError(error)))
+                    .then(() => this.callback())
+                    .catch(error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
 
@@ -134,9 +134,8 @@ export class ControlsComponent implements OnInit {
             .then(() =>
                 this.draftService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(() =>
-                        this.callback('drafts'),
-                        error => this.toastService.showError(error)))
+                    .then(() => this.callback('drafts'))
+                    .catch(error => this.toastService.showError(error)))
             .catch(error => this.toastService.showError(error));
     }
 
@@ -160,12 +159,11 @@ export class ControlsComponent implements OnInit {
     private updateComments(status: boolean): void {
         this.httpService
             .updateBlog(this.name, this.repo)
-            .subscribe(
-                () => {
-                    this.toastService.showSuccess('TOAST.CONTROLS.done');
-                    setTimeout(() => this.comments.emit(status), this.toastService.life());
-                },
-                error => this.toastService.showError(error));
+            .then(() => {
+                this.toastService.showSuccess('TOAST.CONTROLS.done');
+                setTimeout(() => this.comments.emit(status), this.toastService.life());
+            })
+            .catch(error => this.toastService.showError(error));
     }
 
     private lock(post: Post): void {
@@ -180,15 +178,14 @@ export class ControlsComponent implements OnInit {
             .then(() => {
                 this.httpService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('TOAST.CONTROLS.sessionOpened');
-                            setTimeout(() => {
-                                let localUrl = this.localize.translateRoute(this.url)
-                                this.router.navigate([localUrl, 'post', this.title, 'edit']);
-                            }, this.toastService.life());
-                        },
-                        error => this.toastService.showError(error));
+                    .then(() => {
+                        this.toastService.showSuccess('TOAST.CONTROLS.sessionOpened');
+                        setTimeout(() => {
+                            let localUrl = this.localize.translateRoute(this.url)
+                            this.router.navigate([localUrl, 'post', this.title, 'edit']);
+                        }, this.toastService.life());
+                    })
+                    .catch(error => this.toastService.showError(error));
             })
             .catch(error => this.toastService.showError(error));
     }
@@ -199,15 +196,14 @@ export class ControlsComponent implements OnInit {
             .then(() => {
                 this.draftService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('TOAST.CONTROLS.sessionOpened');
-                            setTimeout(() => {
-                                let localUrl = this.localize.translateRoute(this.url);
-                                this.router.navigate([localUrl, 'drafts', 'post', this.title, 'edit']);
-                            }, this.toastService.life());
-                        },
-                        error => this.toastService.showError(error));
+                    .then(() => {
+                        this.toastService.showSuccess('TOAST.CONTROLS.sessionOpened');
+                        setTimeout(() => {
+                            let localUrl = this.localize.translateRoute(this.url);
+                            this.router.navigate([localUrl, 'drafts', 'post', this.title, 'edit']);
+                        }, this.toastService.life());
+                    })
+                    .catch(error => this.toastService.showError(error));
             })
             .catch(error => this.toastService.showError(error));
     }

@@ -33,9 +33,12 @@
   border-bottom: none;
 }
 
-.search-result ul li:before {
-  content: 'keyboard_arrow_right';
-  margin-right: 8px;
-  font-family: 'Material Icons';
-  vertical-align: bottom;
+i.svg-icon {
+  font-size: 1em;
 }
+// .search-result ul li:before {
+//   content: 'keyboard_arrow_right';
+//   margin-right: 8px;
+//   font-family: 'Material Icons';
+//   vertical-align: bottom;
+// }

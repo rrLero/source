@@ -91,18 +91,16 @@ export class AccountComponent implements OnInit {
         this.toastService.showInfo('TOAST.ACCOUNT.updating');
         this.httpService
             .updateBlog(this.name, repo)
-            .subscribe(
-                () => this.toastService.showSuccess('TOAST.ACCOUNT.done'),
-                error => this.toastService.showError(error));
+            .then(() => this.toastService.showSuccess('TOAST.ACCOUNT.done'))
+            .catch(error => this.toastService.showError(error));
     }
 
     updateDraft(repo: string): void {
         this.toastService.showInfo('TOAST.ACCOUNT.updating');
         this.draftService
             .updateBlog(this.name, repo)
-            .subscribe(
-                () => this.toastService.showSuccess('TOAST.ACCOUNT.done'),
-                error => this.toastService.showError(error));
+            .then(() => this.toastService.showSuccess('TOAST.ACCOUNT.done'))
+            .catch(error => this.toastService.showError(error));
     }
 
     prepareDelete(name: string, repo: string, index: number): void {
@@ -119,13 +117,12 @@ export class AccountComponent implements OnInit {
             .then(() =>
                 this.httpService
                     .updateBlog(name, repo)
-                    .subscribe(
-                        () => {
-                            this.blogs.splice(index, 1);
-                            this.toastService.showSuccess('TOAST.ACCOUNT.done');
-                        },
-                        error => this.toastService.showError(error)))
-            .catch(error => this.toastService.showError(error));
+                    .then(() => {
+                        this.blogs.splice(index, 1);
+                        this.toastService.showSuccess('TOAST.ACCOUNT.done');
+                    })
+                    .catch(error => this.toastService.showError(error))
+            .catch(error => this.toastService.showError(error)));
     }
 
     popupHandler(confirm: boolean): void {

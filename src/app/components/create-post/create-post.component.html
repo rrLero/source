@@ -17,20 +17,20 @@
                         class="form-control"
                         type="text"
                         id="filename"
-                        placeholder="{{ 'CREATEPOST.filename' | translate | slice:0:-1 }}"
+                        placeholder="{{ 'CREATEPOST.filename' | translate}}"
                         (change)="repalceSpace(filename)"
                         required>
                 </div>
                 <div class="form-group">
                     <!-- <label for="title" translate>CREATEPOST.title</label> -->
                     <input
-                        #title 
+                        #title
                         [ngModel]="title.value"
                         name="title"
                         class="form-control"
                         type="text"
                         id="title"
-                        placeholder="{{ 'CREATEPOST.title' | translate | slice:0:-1 }}"
+                        placeholder="{{ 'CREATEPOST.title' | translate }}"
                         required>
                 </div>
                 <div class="form-group">
@@ -42,7 +42,7 @@
                         class="form-control"
                         type="text"
                         id="tags"
-                        placeholder="{{ 'CREATEPOST.tags' | translate | slice:0:-1 }}"
+                        placeholder="{{ 'CREATEPOST.tags' | translate }}"
                         required>
                 </div>
                 <div class="form-group">

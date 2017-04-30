@@ -158,6 +158,10 @@ i.svg-icon {
   transform: rotate(180deg);
 }
 
+.svg-icon-chevron-right {
+  background-image: url(../../public/icons/chevron.svg);
+}
+
 img {
   display: block;
   width: 100%;

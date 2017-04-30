@@ -62,12 +62,14 @@ export class PostComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.post && this.post.comments !== this.commentsAmount) {
-            setTimeout(() =>
-                this.httpService
-                    .updateBlog(this.name, this.repo)
-                    .subscribe(), 0);
-        }
+        setTimeout(() =>
+            this.httpService.updateBlog(this.name, this.repo), 0);
+        // if (this.post && this.post.comments !== this.commentsAmount) {
+        //     setTimeout(() =>
+        //         this.httpService
+        //             .updateBlog(this.name, this.repo)
+        //             .then(() => console.log(true)), 0);
+        // }
     }
 
     getPost(): void {
@@ -86,7 +88,7 @@ export class PostComponent implements OnInit, OnDestroy {
                                 let localUrl = this.localize.translateRoute('/page-not-found');
                                 this.router.navigate([localUrl]);
                             }
-                        });
+                    });
     }
 
     toggleControls(): void {
@@ -104,4 +106,5 @@ export class PostComponent implements OnInit, OnDestroy {
     goBack(): void {
         this.location.back();
     }
+
 }

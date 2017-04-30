@@ -29,6 +29,7 @@ export class AppComponent implements OnInit {
     name: string;
     repo: string;
     drafts: boolean;
+    draftsTitle: string;
     lang: string;
     langs: boolean;
     activeLang: string;
@@ -86,6 +87,9 @@ export class AppComponent implements OnInit {
                 event.forEach(item => {
                     if (item.path === 'drafts') {
                         this.drafts = true;
+                        this.translate
+                            .get('APP.drafts')
+                            .subscribe((res: string) => this.draftsTitle = res);
                     }
                 });
                 if (event[0].path === 'about') {
@@ -109,4 +113,5 @@ export class AppComponent implements OnInit {
     savePath(): void {
         localStorage.setItem('path', this.location.path());
     }
+
 }

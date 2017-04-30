@@ -85,11 +85,15 @@ export class DraftService {
             .catch(this.handleError);
     }
 
-    updateBlog(name: string, repo: string) {
+    updateBlog(name: string, repo: string): Promise<void> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
         const url = `${this.url}/update?ref=True&access_token=${token}`;
-        return this.http.get(url).catch(this.handleError);
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

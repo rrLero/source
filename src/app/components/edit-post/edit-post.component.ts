@@ -135,13 +135,12 @@ export class EditPostComponent implements OnInit {
             .then(() =>
                 this.httpService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('TOAST.EDITPOST.done');
-                            setTimeout(() => this.goBack(), this.toastService.life());
-                        },
-                        error => this.toastService.showError(error)))
-            .catch(error => this.toastService.showError(error));
+                    .then(() => {
+                        this.toastService.showSuccess('TOAST.EDITPOST.done');
+                        setTimeout(() => this.goBack(), this.toastService.life());
+                    })
+                    .catch(error => this.toastService.showError(error))
+            .catch(error => this.toastService.showError(error)));
     }
 
     updateDraft(): void {
@@ -150,13 +149,12 @@ export class EditPostComponent implements OnInit {
             .then(() =>
                 this.draftService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('TOAST.EDITPOST.done');
-                            setTimeout(() => this.goBack(), this.toastService.life());
-                        },
-                        error => this.toastService.showError(error)))
-            .catch(error => this.toastService.showError(error));
+                    .then(() => {
+                        this.toastService.showSuccess('TOAST.EDITPOST.done');
+                        setTimeout(() => this.goBack(), this.toastService.life());
+                    })
+                    .catch(error => this.toastService.showError(error))
+            .catch(error => this.toastService.showError(error)));
     }
 
     addAuthors(): void {
@@ -200,15 +198,19 @@ export class EditPostComponent implements OnInit {
                     .then(() =>
                         this.httpService
                             .updateBlog(this.name, this.repo)
-                            .subscribe(
-                                () => {
-                                    this.toastService.showSuccess('TOAST.EDITPOST.done');
-                                    setTimeout(() => {
-                                        let localUrl = this.localize.translateRoute(`/${this.name}`);
-                                        this.router.navigate([localUrl, this.repo, 'drafts']);
-                                    }, this.toastService.life());
-                                },
-                                error => this.toastService.showError(error)))
+                            .then(() => {
+                                this.draftService
+                                    .updateBlog(this.name, this.repo)
+                                    .then(() => {
+                                        this.toastService.showSuccess('TOAST.EDITPOST.done');
+                                        setTimeout(() => {
+                                            let localUrl = this.localize.translateRoute(`/${this.name}`);
+                                            this.router.navigate([localUrl, this.repo, 'drafts']);
+                                        }, this.toastService.life());
+                                    })
+                                    .catch(error => this.toastService.showError(error))
+                            })
+                            .catch(error => this.toastService.showError(error)))
                     .catch(error => this.toastService.showError(error));
             })
             .catch(error => this.toastService.showError(error));

@@ -27,7 +27,7 @@ export class HttpService {
             .catch(this.handleError);
     }
 
-    getPage(name: string, repo: string, page: number, size: number) {
+    getPage(name: string, repo: string, page: number, size: number): Promise<any> {
         this.getUrl(name, repo);
         const url = `${this.url}/get?page=${page}&per_page=${size}`;
         return this.http
@@ -37,7 +37,7 @@ export class HttpService {
             .catch(this.handleError);
     }
 
-    getPostsByTag(name: string, repo: string, page: number, size: number, tag: string) {
+    getPostsByTag(name: string, repo: string, page: number, size: number, tag: string): Promise<any> {
         this.getUrl(name, repo);
         const url = `${this.url}/get/tags/${tag}?page=${page}&per_page=${size}`;
         return this.http
@@ -101,11 +101,15 @@ export class HttpService {
             .catch(this.handleError);
     }
 
-    updateBlog(name: string, repo: string) {
+    updateBlog(name: string, repo: string): Promise<void> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
         const url = `${this.url}/update?access_token=${token}`;
-        return this.http.get(url).catch(this.handleError);
+        return this.http
+            .get(url)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
     }
 
     createBlog(name: string, repo: string): Promise<any> {

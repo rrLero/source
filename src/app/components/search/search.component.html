@@ -3,6 +3,7 @@
     <div class="search-result">
         <ul>
             <li *ngFor="let post of posts | async" (click)="gotoDetail(post)">
+                <i class="svg-icon svg-icon-chevron-right"></i>
                 {{ post.title }}
             </li>
         </ul>

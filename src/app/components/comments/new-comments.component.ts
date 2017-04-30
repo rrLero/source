@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import {
     CommentsService,
+    HttpService,
     ToastService,
     UserService
 } from '../../services';
@@ -20,6 +21,7 @@ export class NewCommentsComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
+                private httpService: HttpService,
                 private toastService: ToastService,
                 private userService: UserService,
                 private commentsService: CommentsService) {
@@ -64,6 +66,7 @@ export class NewCommentsComponent implements OnInit {
                     : this.toastService.showSuccess('TOAST.NEWCOMMENTS.wereApproved', data.length);
                 this.clear();
                 this.isFetching = false;
+                this.httpService.updateBlog(this.name, this.repo);
             });
     }
 
@@ -85,6 +88,7 @@ export class NewCommentsComponent implements OnInit {
                 this.toastService.showError('TOAST.NEWCOMMENTS.deleted', amount);
                 this.clear();
                 this.isFetching = false;
+                this.httpService.updateBlog(this.name, this.repo);
             });
     }
 

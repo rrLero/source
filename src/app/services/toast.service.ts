@@ -87,4 +87,5 @@ export class ToastService {
     getState(): EventEmitter<boolean> {
         return this.state;
     }
+
 }

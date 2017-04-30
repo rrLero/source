@@ -1,6 +1,7 @@
 import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { LocalizeRouterService }                      from 'localize-router';
 import { Observable }                                 from 'rxjs/Observable';
 import { Subject }                                    from 'rxjs/Subject';
 
@@ -34,6 +35,7 @@ export class SearchComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
+                private localize: LocalizeRouterService,
                 public toastService: ToastService,
                 private searchService: SearchService) { }
 
@@ -55,7 +57,8 @@ export class SearchComponent implements OnInit {
     }
 
     gotoDetail(post: Post): void {
-        let link = [this.url, post.id];
-        this.router.navigate(link);
+        let localUrl = this.localize.translateRoute(this.url)
+        this.router.navigate([localUrl, post.id]);
     }
+
 }

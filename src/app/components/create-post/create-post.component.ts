@@ -87,16 +87,15 @@ export class CreatePostComponent implements OnInit {
             .then(() =>
                 this.draftService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('TOAST.CREATEPOST.done');
-                            setTimeout(() => {
-                                let localUrl = this.localize.translateRoute(this.url);
-                                this.router.navigate([localUrl, 'drafts']);
-                            }, this.toastService.life());
-                        },
-                        error => this.toastService.showError(error)))
-            .catch(error => this.toastService.showError(error));
+                    .then(() => {
+                        this.toastService.showSuccess('TOAST.CREATEPOST.done');
+                        setTimeout(() => {
+                            let localUrl = this.localize.translateRoute(this.url);
+                            this.router.navigate([localUrl, 'drafts']);
+                        }, this.toastService.life());
+                    })
+                    .catch(error => this.toastService.showError(error))
+            .catch(error => this.toastService.showError(error)));
     }
 
     publish(filenameEl, titleEl, tagsEl, prevEl, textEl) {
@@ -107,20 +106,15 @@ export class CreatePostComponent implements OnInit {
             .then(() =>
                 this.httpService
                     .updateBlog(this.name, this.repo)
-                    .subscribe(
-                        () => {
-                            this.toastService.showSuccess('TOAST.CREATEPOST.done');
-                            setTimeout(() => {
-                                let localUrl = this.localize.translateRoute(this.url);
-                                this.router.navigate([localUrl]);
-                            }, this.toastService.life());
-                        },
-                        error => this.toastService.showError(error)))
-            .catch(error => this.toastService.showError(error));
-    }
-
-    onFocus() {
-        console.log('focus');
+                    .then(() => {
+                        this.toastService.showSuccess('TOAST.CREATEPOST.done');
+                        setTimeout(() => {
+                            let localUrl = this.localize.translateRoute(this.url);
+                            this.router.navigate([localUrl]);
+                        }, this.toastService.life());
+                    })
+                    .catch(error => this.toastService.showError(error))
+            .catch(error => this.toastService.showError(error)));
     }
 
     goBack() {
