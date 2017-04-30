@@ -1,5 +1,6 @@
-import { Component, OnInit }      from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, OnInit }                          from '@angular/core';
+import { Router, ActivatedRoute }                     from '@angular/router';
 
 import {
     CommentsService,
@@ -10,7 +11,19 @@ import {
 
 @Component({
     templateUrl: 'new-comments.component.html',
-    styleUrls: ['new-comments.component.scss']
+    styleUrls: ['new-comments.component.scss'],
+    animations: [
+        trigger('comments', [
+            state('in', style({ opacity: '1' })),
+            transition('void => *', [
+                style({ opacity: '0' }),
+                animate(300)
+            ]),
+            transition('* => void', [
+                animate(300, style({ opacity: '0' }))
+            ])
+        ])
+    ]
 })
 export class NewCommentsComponent implements OnInit {
     comments = [];
@@ -18,6 +31,7 @@ export class NewCommentsComponent implements OnInit {
     repo = this.route.snapshot.params['repo'];
     url = `/${this.name}/${this.repo}`;
     isFetching = false;
+    empty = false;
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -35,8 +49,13 @@ export class NewCommentsComponent implements OnInit {
             return;
         }
 
-        this.commentsService.getFromFile(this.name, this.repo)
-            .then(data => this.comments = data);
+        this.commentsService
+            .getFromFile(this.name, this.repo)
+            .then(data => {
+                this.comments = data;
+                this.empty = this.comments.length ? false : true;
+            })
+            .catch(error => this.toastService.showError(error));
     }
 
     selectAll(e): void {
@@ -51,7 +70,7 @@ export class NewCommentsComponent implements OnInit {
         const items = this.prepareSelected();
 
         if (items.length === 0) {
-            this.toastService.showError('TOAST.NEWCOMMENTS.pleaseSelect');
+            this.toastService.showWarning('TOAST.NEWCOMMENTS.pleaseSelect');
             return;
         }
 
@@ -66,6 +85,7 @@ export class NewCommentsComponent implements OnInit {
                     : this.toastService.showSuccess('TOAST.NEWCOMMENTS.wereApproved', data.length);
                 this.clear();
                 this.isFetching = false;
+                this.empty = true;
                 this.httpService.updateBlog(this.name, this.repo);
             });
     }
@@ -74,7 +94,7 @@ export class NewCommentsComponent implements OnInit {
         const items = this.prepareSelected();
 
         if (items.length === 0) {
-            this.toastService.showError('TOAST.NEWCOMMENTS.pleaseSelect');
+            this.toastService.showWarning('TOAST.NEWCOMMENTS.pleaseSelect');
             return;
         }
 
@@ -85,9 +105,10 @@ export class NewCommentsComponent implements OnInit {
             .removeFromFile(this.name, this.repo, items)
             .then((data) => {
                 let amount = data.message.split(']')[0].slice(1) // FIX
-                this.toastService.showError('TOAST.NEWCOMMENTS.deleted', amount);
+                this.toastService.showWarning('TOAST.NEWCOMMENTS.deleted', amount);
                 this.clear();
                 this.isFetching = false;
+                this.empty = true;
                 this.httpService.updateBlog(this.name, this.repo);
             });
     }

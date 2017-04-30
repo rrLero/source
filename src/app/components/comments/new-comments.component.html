@@ -1,11 +1,11 @@
-<div class="row">
+<div [@comments]="comments.state" class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="paper">
             <div class="text-center">
-                <h2 translate>NEWCOMMENTS.newComments</h2>
-                <h4 *ngIf="comments.length === 0" translate>NEWCOMMENTS.noNew</h4>
+                <h2 *ngIf="comments?.length" translate>NEWCOMMENTS.newComments</h2>
+                <h4 *ngIf="empty" translate>NEWCOMMENTS.noNew</h4>
             </div>
-            <div *ngIf="comments.length > 0">
+            <div *ngIf="comments?.length" [@comments]="comments.state">
                 <table class="table">
                     <tr>
                         <th>№</th>
