@@ -30,7 +30,7 @@ export class AccountComponent implements OnInit {
     confirm = true;
     noUser = true;
     deletedBlog: any = {};
-    popupText = 'Remove blog?';
+    popupText = 'POPUP.removeBlog';
     githubUrl = `https://github.com/`;
 
     constructor(private router: Router,

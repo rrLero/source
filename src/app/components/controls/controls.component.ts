@@ -39,7 +39,7 @@ export class ControlsComponent implements OnInit {
     user: User;
     hidden = true;
     confirm = true;
-    popupText = 'Remove post?';
+    popupText = 'POPUP.removePost';
     name = this.route.snapshot.params['name'];
     repo = this.route.snapshot.params['repo'];
     title = this.route.snapshot.params['title'];

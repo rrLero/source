@@ -23,6 +23,10 @@ export class PopupComponent {
     @Input() hidden: boolean;
     @Output() answer = new EventEmitter();
 
+    // constructor() {
+    //     console.log(this.text);
+    // }
+
     remove() {
         this.answer.emit(true);
     }

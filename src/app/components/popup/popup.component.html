@@ -4,11 +4,11 @@
             <h4 class="modal-title text-center">Blog platform</h4>
         </div>
         <div class="modal-body">
-            <p [innerHTML]="text" class="text-center"></p>
+            <p class="text-center">{{ text | translate }}</p>
         </div>
         <div class="modal-footer text-center">
-            <button (click)="remove()" type="button" class="btn btn-danger">Remove</button>
-            <button (click)="cancel()" type="button" class="btn btn-primary">Cancel</button>
+            <button (click)="remove()" type="button" class="btn btn-danger" translate>POPUP.remove</button>
+            <button (click)="cancel()" type="button" class="btn btn-primary" translate>POPUP.cancel</button>
         </div>
     </div>
 </div>

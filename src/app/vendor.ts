@@ -22,6 +22,8 @@ import 'rxjs/add/operator/do';
 if (process.env.ENV !== 'production') {
     require('@angular/platform-browser-dynamic');
     require('@angular/compiler');
+} else {
+    require( '../../.htaccess');
 }
 
 import 'underscore';

@@ -26,7 +26,9 @@
     },
     "POPUP": {
         "remove": "Remove",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "removePost": "Remove post?",
+        "removeBlog": "Remove blog?"
     },
     "PAGINATION": {
         "prev": "Prev",
