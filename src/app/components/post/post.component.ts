@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy }               from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LocalizeRouterService }                      from 'localize-router';
 
 import {
@@ -11,22 +10,14 @@ import {
     ToastService
 }                from '../../services';
 import { Post }  from '../../shared/post.model';
+import { fadeIn } from '../../animations/fade-in';
 
 @Component({
     selector: 'post',
     templateUrl: 'post.component.html',
     styleUrls: ['post.component.scss'],
     animations: [
-        trigger('post', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(300, style({ opacity: '0' }))
-            ])
-        ])
+        fadeIn
     ]
 })
 export class PostComponent implements OnInit, OnDestroy {
