@@ -1,10 +1,10 @@
-import { Post }         from './post.model';
-import { User }         from './user.model';
-import { Comment }      from './comment.model';
-import { auth }         from './auth';
+import { Post, post, FullMd, fullMd } from './post.model';
+import { User }                       from './user.model';
+import { Comment }                    from './comment.model';
+import { auth }                       from './auth';
 
 export {
-    Post,
+    Post, post, FullMd, fullMd,
     User,
     Comment,
     auth

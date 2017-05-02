@@ -3,7 +3,7 @@ import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DraftService, UserService, ToastService }    from '../../../../services';
-import { Post }                                       from '../../../../shared/post.model';
+import { Post }                                       from '../../../../shared';
 
 @Component({
     selector: 'drafts',
@@ -59,7 +59,7 @@ export class DraftsComponent implements OnInit {
         this.draftService
             .getDrafts(this.name, this.repo, id, this.perPage)
             .then(res => {
-                if (res.items && res.items[0].date !== false) {
+                if (res.total) {
                     this.posts = res.items;
                     this.total = res.total;
                     window.scrollTo(0, 0);
