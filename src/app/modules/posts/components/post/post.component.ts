@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy }               from '@angular/core';
-import { Router, ActivatedRoute }                     from '@angular/router';
-import { Location }                                   from '@angular/common';
-import { LocalizeRouterService }                      from 'localize-router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute }       from '@angular/router';
+import { Location }                     from '@angular/common';
+import { LocalizeRouterService }        from 'localize-router';
 
 import {
     HttpService,
@@ -16,9 +16,7 @@ import { fadeIn } from '../../../../animations/fade-in';
     selector: 'post',
     templateUrl: 'post.component.html',
     styleUrls: ['post.component.scss'],
-    animations: [
-        fadeIn
-    ]
+    animations: [fadeIn]
 })
 export class PostComponent implements OnInit, OnDestroy {
     post: Post;
