@@ -4,10 +4,9 @@ import { FormsModule }          from '@angular/forms';
 import { RouterModule }         from '@angular/router';
 import { TranslateModule }      from '@ngx-translate/core';
 import { LocalizeRouterModule } from 'localize-router';
-import { MomentModule }         from 'angular2-moment';
-import { SharedModule }         from '../shared/shared.module';
 
-import { components }           from './components';
+import { components } from './components';
+import { pipes }      from '../../pipes';
 
 @NgModule({
     imports: [
@@ -15,15 +14,15 @@ import { components }           from './components';
         FormsModule,
         RouterModule,
         TranslateModule,
-        MomentModule,
-        LocalizeRouterModule,
-        SharedModule
+        LocalizeRouterModule
     ],
     declarations: [
-        ...components
+        ...components,
+        ...pipes
     ],
     exports: [
-        ...components
+        ...components,
+        ...pipes
     ]
 })
-export class CommentsModule { }
+export class SharedModule { }

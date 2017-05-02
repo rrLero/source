@@ -2,8 +2,8 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { HttpService, UserService, ToastService } from '../../services';
-import { Post }                                   from '../../shared/post.model';
+import { HttpService, UserService, ToastService } from '../../../../services';
+import { Post }                                   from '../../../../shared/post.model';
 
 @Component({
     templateUrl: 'posts-by-tag.component.html',

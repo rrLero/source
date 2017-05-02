@@ -9,9 +9,9 @@ import {
     CommentsService,
     UserService,
     ToastService
-}                               from '../../services';
-import { Post, FullMd, fullMd } from '../../shared/post.model';
-import { User }                 from '../../shared/user.model';
+}                               from '../../../../services';
+import { Post, FullMd, fullMd } from '../../../../shared/post.model';
+import { User }                 from '../../../../shared/user.model';
 
 @Component({
     selector: 'controls',

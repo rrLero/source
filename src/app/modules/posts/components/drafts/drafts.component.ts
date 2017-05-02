@@ -2,8 +2,8 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { DraftService, UserService, ToastService }    from '../../services';
-import { Post }                                       from '../../shared/post.model';
+import { DraftService, UserService, ToastService }    from '../../../../services';
+import { Post }                                       from '../../../../shared/post.model';
 
 @Component({
     selector: 'drafts',

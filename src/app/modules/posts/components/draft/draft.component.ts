@@ -3,8 +3,8 @@ import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { DraftService, UserService, ToastService }    from '../../services';
-import { Post, User }                                 from '../../shared';
+import { DraftService, UserService, ToastService }    from '../../../../services';
+import { Post, User }                                 from '../../../../shared';
 
 @Component({
     selector: 'draft',

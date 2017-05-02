@@ -6,6 +6,7 @@ import { TranslateModule }      from '@ngx-translate/core';
 import { LocalizeRouterModule } from 'localize-router';
 import { MomentModule }         from 'angular2-moment';
 import { SharedModule }         from '../shared/shared.module';
+import { CommentsModule }       from '../comments/comments.module';
 
 import { components }           from './components';
 
@@ -17,7 +18,8 @@ import { components }           from './components';
         TranslateModule,
         MomentModule,
         LocalizeRouterModule,
-        SharedModule
+        SharedModule,
+        CommentsModule
     ],
     declarations: [
         ...components
@@ -26,4 +28,4 @@ import { components }           from './components';
         ...components
     ]
 })
-export class CommentsModule { }
+export class PostsModule { }

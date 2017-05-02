@@ -10,8 +10,8 @@ import {
     AuthService,
     ToastService,
     UserService
-}                                     from '../../services';
-import { Post, post, FullMd, fullMd } from '../../shared/post.model';
+}                                     from '../../../../services';
+import { Post, post, FullMd, fullMd } from '../../../../shared/post.model';
 
 @Component({
     templateUrl: 'create-post.component.html',

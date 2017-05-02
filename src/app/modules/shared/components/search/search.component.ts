@@ -5,8 +5,8 @@ import { LocalizeRouterService }                      from 'localize-router';
 import { Observable }                                 from 'rxjs/Observable';
 import { Subject }                                    from 'rxjs/Subject';
 
-import { SearchService, ToastService } from '../../services';
-import { Post }                        from '../../shared/post.model';
+import { SearchService, ToastService } from '../../../../services';
+import { Post }                        from '../../../../shared';
 
 @Component({
     selector: 'search',

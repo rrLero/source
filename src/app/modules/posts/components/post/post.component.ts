@@ -9,8 +9,8 @@ import {
     CommentsService,
     UserService,
     ToastService
-}                from '../../services';
-import { Post }  from '../../shared/post.model';
+}                from '../../../../services';
+import { Post }  from '../../../../shared/post.model';
 
 @Component({
     selector: 'post',

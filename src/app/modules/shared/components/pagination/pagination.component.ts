@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Location }       from '@angular/common';
 
-import { PagerService }   from '../../services';
+import { PagerService }   from '../../../../services';
 
 @Component({
     selector: 'pagination',
