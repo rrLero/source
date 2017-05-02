@@ -11,20 +11,22 @@ import {
 import { AuthGuard }            from './services';
 import {
     WelcomeComponent,
-    PostsComponent,
-    PostComponent,
-    CreatePostComponent,
-    EditPostComponent,
     NotFoundComponent,
     AuthComponent,
     StartComponent,
     AccountComponent,
+    AboutComponent
+}                              from './components';
+import {
+    PostsComponent,
+    PostComponent,
+    CreatePostComponent,
+    EditPostComponent,
     DraftsComponent,
     DraftComponent,
     PostsByTagComponent,
-    AboutComponent,
-    NewCommentsComponent,
-}  from './components';
+}                               from './modules/posts/components';
+import { NewCommentsComponent } from './modules/comments/components';
 
 const routes: Routes = [
     {

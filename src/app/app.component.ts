@@ -7,7 +7,7 @@ import { LocalizeRouterService }               from 'localize-router';
 import * as moment                             from 'moment';
 
 import { AuthService, RouterService }          from './services';
-import { auth }                                from './shared/auth';
+import { auth }                                from './shared';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';

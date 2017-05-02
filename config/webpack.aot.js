@@ -29,8 +29,9 @@ module.exports = webpackMerge(commonConfig, {
             tsConfig: './tsconfig.json'
         }),
         new webpack.LoaderOptionsPlugin({
-            minimize: false,
-            debug: false
+            htmlLoader: {
+                minimize: false
+            }
         }),
         new WebpackChunkHash({
             algorithm: 'md5'
@@ -43,7 +44,10 @@ module.exports = webpackMerge(commonConfig, {
             output: {
                 comments: false
             },
-            sourceMap: false
+            mangle: {
+                keep_fnames: true
+            },
+            sourceMap: false,
         }),
         new CompressionPlugin({
             asset: '[path].gz[query]',
