@@ -5,6 +5,8 @@ import { RouterModule }         from '@angular/router';
 import { TranslateModule }      from '@ngx-translate/core';
 import { LocalizeRouterModule } from 'localize-router';
 import { MomentModule }         from 'angular2-moment';
+
+import { PostsRoutingModule }   from './posts-routing.module';
 import { SharedModule }         from '../shared/shared.module';
 import { CommentsModule }       from '../comments/comments.module';
 
@@ -18,6 +20,7 @@ import { components }           from './components';
         TranslateModule,
         MomentModule,
         LocalizeRouterModule,
+        PostsRoutingModule,
         SharedModule,
         CommentsModule
     ],

@@ -8,7 +8,6 @@ import {
     LocalizeParser,
     StaticParserLoader
 }                               from 'localize-router';
-import { AuthGuard }            from './services';
 import {
     WelcomeComponent,
     NotFoundComponent,
@@ -16,16 +15,7 @@ import {
     StartComponent,
     AccountComponent,
     AboutComponent
-}                              from './components';
-import {
-    PostsComponent,
-    PostComponent,
-    CreatePostComponent,
-    EditPostComponent,
-    DraftsComponent,
-    DraftComponent,
-    PostsByTagComponent,
-}                               from './modules/posts/components';
+}                               from './components';
 import { NewCommentsComponent } from './modules/comments/components';
 
 const routes: Routes = [
@@ -52,56 +42,6 @@ const routes: Routes = [
     {
         path: ':name',
         component: AccountComponent
-    },
-    {
-        path: ':name/:repo',
-        component: PostsComponent
-    },
-    {
-        path: ':name/:repo/page/:id',
-        component: PostsComponent
-    },
-    {
-        path: ':name/:repo/tag/:tag',
-        component: PostsByTagComponent
-    },
-    {
-        path: ':name/:repo/tag/:tag/page/:id',
-        component: PostsByTagComponent
-    },
-    {
-        path: ':name/:repo/post/:title',
-        component: PostComponent
-    },
-    {
-        path: ':name/:repo/post/:title/edit',
-        component: EditPostComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: ':name/:repo/create',
-        component: CreatePostComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: ':name/:repo/drafts',
-        component: DraftsComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: ':name/:repo/drafts/page/:id',
-        component: DraftsComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: ':name/:repo/drafts/post/:title',
-        component: DraftComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: ':name/:repo/drafts/post/:title/edit',
-        component: EditPostComponent,
-        canActivate: [AuthGuard]
     },
     {
         path: ':name/:repo/newcomments',
