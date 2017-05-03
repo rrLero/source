@@ -1,6 +1,5 @@
 import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DraftService, UserService, ToastService }    from '../../../../services';
 import { Post }                                       from '../../../../shared';
@@ -8,19 +7,7 @@ import { Post }                                       from '../../../../shared';
 @Component({
     selector: 'drafts',
     templateUrl: 'drafts.component.html',
-    styleUrls: ['drafts.component.scss'],
-    animations: [
-        trigger('posts', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(0, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    styleUrls: ['drafts.component.scss']
 })
 export class DraftsComponent implements OnInit {
     posts: Post[];
@@ -59,18 +46,26 @@ export class DraftsComponent implements OnInit {
         this.draftService
             .getDrafts(this.name, this.repo, id, this.perPage)
             .then(res => {
-                if (res.total) {
+                if (res.items[0].date !== false) {
                     this.posts = res.items;
                     this.total = res.total;
                     window.scrollTo(0, 0);
                 } else {
                     this.empty = true;
                 }
+                // if (res.total) {
+                //     this.posts = res.items;
+                //     this.total = res.total;
+                //     window.scrollTo(0, 0);
+                // } else {
+                //     this.empty = true;
+                // }
             })
             .catch(error => this.toastService.showError(error));
     }
 
     handlePageChange(page: number): void {
         this.getPage(page);
+        // console.log(true);
     }
 }

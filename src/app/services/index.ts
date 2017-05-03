@@ -7,6 +7,7 @@ import { CommentsService } from './comments.service';
 import { UserService }     from './user.service';
 import { RouterService }   from './router.service';
 import { DraftService }    from './draft.service';
+import { BlogService }     from './blog.service';
 import { ToastService }    from './toast.service';
 import { ToastConfig }     from './toast.service';
 import { ToastOptions }    from 'ng2-toastr';
@@ -21,7 +22,8 @@ export {
     UserService,
     ToastService,
     RouterService,
-    DraftService
+    DraftService,
+    BlogService
 };
 
 export const services = [
@@ -33,5 +35,6 @@ export const services = [
     UserService,
     RouterService,
     DraftService,
+    BlogService,
     ToastService, { provide: ToastOptions, useClass: ToastConfig }
 ];

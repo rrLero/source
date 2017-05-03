@@ -11,6 +11,7 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'dev';
 commonConfig.module.rules.push({
     test: /\.ts$/,
     use: [
+        // '@angularclass/hmr-loader',
         'awesome-typescript-loader',
         'angular2-router-loader',
         'angular2-template-loader'

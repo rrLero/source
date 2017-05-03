@@ -12,22 +12,12 @@ import {
     UserService
 }                                     from '../../../../services';
 import { Post, post, FullMd, fullMd } from '../../../../shared/post.model';
+import { fadeIn }                     from '../../../../animations/fade-in';
 
 @Component({
     templateUrl: 'create-post.component.html',
     styleUrls: ['create-post.component.scss'],
-    animations: [
-        trigger('create', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(300, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class CreatePostComponent implements OnInit {
     date = new Date();
@@ -51,11 +41,11 @@ export class CreatePostComponent implements OnInit {
         let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
         let time = `${this.date.toString()}`.slice(15).slice(0, 6);
         this.datetime = date + time;
-        if (this.authService.isLogged) {
-            const profile = this.userService.getUser();
-            this.author = profile.login;
+        // if (this.authService.isLogged) {
+        const profile = this.userService.getUser();
+        this.author = profile.login;
             // this.author = profile.name || profile.login;
-        }
+        // }
     }
 
     repalceSpace(filenameEl) {

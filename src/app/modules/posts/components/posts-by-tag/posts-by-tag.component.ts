@@ -1,25 +1,12 @@
 import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { HttpService, UserService, ToastService } from '../../../../services';
-import { Post }                                   from '../../../../shared/post.model';
+import { Post }                                   from '../../../../shared';
 
 @Component({
     templateUrl: 'posts-by-tag.component.html',
-    styleUrls: ['posts-by-tag.component.scss'],
-    animations: [
-        trigger('posts', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(0, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    styleUrls: ['posts-by-tag.component.scss']
 })
 export class PostsByTagComponent implements OnInit {
     posts: Post[];

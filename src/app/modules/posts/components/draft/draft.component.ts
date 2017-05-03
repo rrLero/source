@@ -1,27 +1,16 @@
 import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 import { Location }                                   from '@angular/common';
-import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { DraftService, UserService, ToastService }    from '../../../../services';
 import { Post, User }                                 from '../../../../shared';
+import { fadeIn }                                     from '../../../../animations/fade-in';
 
 @Component({
     selector: 'draft',
     templateUrl: 'draft.component.html',
     styleUrls: ['draft.component.scss'],
-    animations: [
-        trigger('post', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(300, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class DraftComponent implements OnInit {
     post: Post;

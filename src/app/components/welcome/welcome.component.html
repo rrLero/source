@@ -6,6 +6,7 @@
                 <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs" [routerLink]="['/', blog.name, blog.repo] | localize">
                     <p class="blog-name">{{  blog.repo | titlecase }}</p>
                     <a [routerLink]="['/', blog.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ blog.name }}</a>
+                    <!-- <button (click)="getBlogId(blog.name, blog.repo)" type="button">sub</button> -->
                 </li>
             </ul>
         </div>

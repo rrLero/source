@@ -2,7 +2,7 @@ import { Component, OnInit }                      from '@angular/core';
 import { Router, ActivatedRoute }                 from '@angular/router';
 import { LocalizeRouterService }                  from 'localize-router';
 import { HttpService, UserService, ToastService } from '../../../../services';
-import { Post }                                   from '../../../../shared/post.model';
+import { Post }                                   from '../../../../shared';
 
 @Component({
     selector: 'posts',

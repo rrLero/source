@@ -11,22 +11,12 @@ import {
     ToastService
 }                                     from '../../../../services';
 import { Post, post, FullMd, fullMd } from '../../../../shared/post.model';
+import { fadeIn }                     from '../../../../animations/fade-in';
 
 @Component({
     templateUrl: 'edit-post.component.html',
     styleUrls: ['edit-post.component.scss'],
-    animations: [
-        trigger('edit', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(300, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class EditPostComponent implements OnInit {
     post: Post;

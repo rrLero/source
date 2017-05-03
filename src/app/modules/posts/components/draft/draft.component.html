@@ -1,4 +1,4 @@
-<div class="row" *ngIf="post" [@post]="post.state">
+<div class="row" *ngIf="post" [@fadeIn]="post.state">
 
     <div class="col-md-10 col-md-offset-1">
         <div class="entry-wrap">
@@ -19,7 +19,7 @@
                             <!-- <i class="material-icons">access_time</i> -->
                             <span>{{ post.date | amTimeAgo }}</span>
                         </li>
-                        <li class="entry-controls icons" (click)="toggleControls()" *ngIf="user && canEdit" [@post]="controls.state">
+                        <li class="entry-controls icons" (click)="toggleControls()" *ngIf="user && canEdit" [@fadeIn]="controls.state">
                             <i class="svg-icon svg-icon-settings"></i>
                             <!-- <i class="material-icons">build</i> -->
                             <span translate>POST.controls</span>
