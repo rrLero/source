@@ -8,7 +8,11 @@
         "madeBy": "Made by super team"
     },
     "WELCOME": {
-        "blogs": "Блоги"
+        "blogs": "Блоги",
+        "allBlogs": "Все блоги",
+        "favorites": "Избранные",
+        "subscribe": "Добавить в избранные",
+        "unsubscribe": "Удалить из избранных"
     },
     "SEARCH": {
         "search": "Поиск"

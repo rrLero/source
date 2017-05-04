@@ -3,23 +3,23 @@
         <div class="blog-list paper">
             <h3 translate class="text-center">WELCOME.blogs</h3>
             <tabs>
-                <tab [tabTitle]="'All blogs'">
+                <tab [tabTitle]="'WELCOME.allBlogs' | translate">
                     <ul class="blogs">
                         <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs">
                             <div [routerLink]="['/', blog.name, blog.repo] | localize">
                                 <p class="blog-name">{{  blog.repo | titlecase }}</p>
                                 <a [routerLink]="['/', blog.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ blog.name }}</a>
                             </div>
-                            <button *ngIf="isLogged && !blog.subscribed" (click)="subscribe(blog)" type="button" data-tooltip="Make as favorite">
+                            <button *ngIf="isLogged && !blog.subscribed" (click)="subscribe(blog)" type="button" [attr.data-tooltip]="'WELCOME.subscribe' | translate">
                                 <i class="svg-icon svg-icon-star-border"></i>
                             </button>
-                            <button *ngIf="isLogged && blog.subscribed" (click)="unsubscribe(blog)" type="button" data-tooltip="Unsubscribe">
+                            <button *ngIf="isLogged && blog.subscribed" (click)="unsubscribe(blog)" type="button" [attr.data-tooltip]="'WELCOME.unsubscribe' | translate">
                                 <i class="svg-icon svg-icon-star"></i>
                             </button>
                         </li>
                     </ul>
                 </tab>
-                <tab *ngIf="isLogged" [tabTitle]="'Favorites'">
+                <tab *ngIf="isLogged" [tabTitle]="'WELCOME.favorites' | translate">
                     <h4 *ngIf="favorites.length === 0" class="text-center">No data</h4>
                     <ul *ngIf="favorites.length > 0" class="blogs">
                         <li class="blog" *ngFor="let favorite of favorites">
@@ -27,7 +27,7 @@
                                 <p class="blog-name">{{  favorite.repo | titlecase }}</p>
                                 <a [routerLink]="['/', favorite.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ favorite.name }}</a>
                             </div>
-                            <button (click)="unsubscribe(favorite)" type="button">
+                            <button (click)="unsubscribe(favorite)" type="button" [attr.data-tooltip]="'WELCOME.unsubscribe' | translate">
                                 <i class="svg-icon svg-icon-delete"></i>
                             </button>
                         </li>

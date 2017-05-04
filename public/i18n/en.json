@@ -8,7 +8,11 @@
         "madeBy": "Made by super team"
     },
     "WELCOME": {
-        "blogs": "Blogs"
+        "blogs": "Blogs",
+        "allBlogs": "All Blogs",
+        "favorites": "Favorites",
+        "subscribe": "Make as favorite",
+        "unsubscribe": "Remove from favorites"
     },
     "SEARCH": {
         "search": "Search"
