@@ -11,8 +11,9 @@
         "blogs": "Blogs",
         "allBlogs": "All Blogs",
         "favorites": "Favorites",
-        "subscribe": "Make as favorite",
-        "unsubscribe": "Remove from favorites"
+        "addToFavorite": "Make as favorite",
+        "removeFromFavorite": "Remove from favorites",
+        "emptyFavorites": "No favorite blogs"
     },
     "SEARCH": {
         "search": "Search"
@@ -175,6 +176,10 @@
             "updating": "Updating...",
             "deleting": "Deleting...",
             "done": "Done!"
+        },
+        "WELCOME": {
+            "subscribe": "You have been successfully subscribed to the blog",
+            "unsubscribe": "You have been successfully unsubscribed from the blog"
         }
     },
     "START": {

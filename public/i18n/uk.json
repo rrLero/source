@@ -11,8 +11,9 @@
         "blogs": "Блоги",
         "allBlogs": "Всі блоги",
         "favorites": "Улюблені",
-        "subscribe": "Додати до улюблених",
-        "unsubscribe": "Видалити з улюблених"
+        "addToFavorite": "Додати до улюблених",
+        "removeFromFavorite": "Видалити з улюблених",
+        "emptyFavorites": "Немає улюблених блогів"
     },
     "SEARCH": {
         "search": "Пошук"
@@ -175,6 +176,10 @@
             "updating": "Оновлення...",
             "deleting": "Видалення...",
             "done": "Готово!"
+        },
+        "WELCOME": {
+            "subscribe": "Ви успішно підписалися на блог",
+            "unsubscribe": "Ви успішно відписалися від блогу"
         }
     },
     "START": {

@@ -72,7 +72,7 @@ export class WelcomeComponent implements OnInit {
             .then(() => {
                 blog.subscribed = true;
                 this.favorites.push(blog);
-                this.toastService.showSuccess('Subscribed');
+                this.toastService.showSuccess('TOAST.WELCOME.subscribe');
             })
             .catch(error => this.toastService.showError(error));
     }
@@ -82,7 +82,7 @@ export class WelcomeComponent implements OnInit {
             .then(() => {
                 blog.subscribed = false;
                 this.favorites = this.favorites.filter(item => item.id !== blog.id);
-                this.toastService.showSuccess('Unsubscribed');
+                this.toastService.showSuccess('TOAST.WELCOME.unsubscribe');
             })
             .catch(error => this.toastService.showError(error));
     }
