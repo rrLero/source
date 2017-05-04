@@ -1,12 +1,16 @@
 .blog-list {
   padding: 30px 60px;
-}
 
-.blog-list h3 {
-  font-size: 42px;
-  font-weight: 700;
-  margin-top: 0;
-  margin-bottom: 20px;
+  h3 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  h4 {
+    margin: 1em 0;
+  }
 }
 
 .blogs {
@@ -18,11 +22,37 @@
 
 .blog {
   position: relative;
-  display: block;
-  border-top: 1px solid #eee;
+  display: table;
   border-bottom: 1px solid #eee;
   padding: 10px 20px;
-  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+
+  div {
+    cursor: pointer;
+    display: table-cell;
+    width: 100%;
+  }
+
+  button {
+    display: table-cell;
+    vertical-align: middle;
+    border: none;
+    background: none;
+    padding: 0;
+
+    i {
+      font-size: 2.5em;
+    }
+
+    i.svg-icon-star {
+      animation: star 0.25s ease-in;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 .blog:not(:first-child) {
@@ -38,4 +68,16 @@
   font-weight: 700;
   color: #222;
   margin: 0;
+}
+
+@keyframes star {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

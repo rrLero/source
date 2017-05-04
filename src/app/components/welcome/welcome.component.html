@@ -2,15 +2,40 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="blog-list paper">
             <h3 translate class="text-center">WELCOME.blogs</h3>
-            <ul class="blogs">
-                <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs" [routerLink]="['/', blog.name, blog.repo] | localize">
-                    <p class="blog-name">{{  blog.repo | titlecase }}</p>
-                    <a [routerLink]="['/', blog.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ blog.name }}</a>
-                    <!-- <button (click)="getBlogId(blog.name, blog.repo)" type="button">sub</button> -->
-                </li>
-            </ul>
+            <tabs>
+                <tab [tabTitle]="'All blogs'">
+                    <ul class="blogs">
+                        <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs">
+                            <div [routerLink]="['/', blog.name, blog.repo] | localize">
+                                <p class="blog-name">{{  blog.repo | titlecase }}</p>
+                                <a [routerLink]="['/', blog.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ blog.name }}</a>
+                            </div>
+                            <button *ngIf="isLogged && !blog.subscribed" (click)="subscribe(blog)" type="button">
+                                <i class="svg-icon svg-icon-star-border"></i>
+                            </button>
+                            <button *ngIf="isLogged && blog.subscribed" (click)="unsubscribe(blog)" type="button">
+                                <i class="svg-icon svg-icon-star"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </tab>
+                <tab *ngIf="isLogged" [tabTitle]="'Favorites'">
+                    <h4 *ngIf="favorites.length === 0" class="text-center">No data</h4>
+                    <ul *ngIf="favorites.length > 0" class="blogs">
+                        <li class="blog" *ngFor="let favorite of favorites">
+                            <div [routerLink]="['/', favorite.name, favorite.repo] | localize">
+                                <p class="blog-name">{{  favorite.repo | titlecase }}</p>
+                                <a [routerLink]="['/', favorite.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ favorite.name }}</a>
+                            </div>
+                            <button (click)="unsubscribe(favorite)" type="button">
+                                <i class="svg-icon svg-icon-delete"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </tab>
+            </tabs>
         </div>
     </div>
 </div>
 
-<spinner *ngIf="!blogs"></spinner>
+<spinner *ngIf="!blogs.length"></spinner>

@@ -162,6 +162,14 @@ i.svg-icon {
   background-image: url(../../public/icons/chevron.svg);
 }
 
+.svg-icon-star {
+  background-image: url(../../public/icons/star.svg);
+}
+
+.svg-icon-star-border {
+  background-image: url(../../public/icons/star_border.svg);
+}
+
 img {
   display: block;
   width: 100%;

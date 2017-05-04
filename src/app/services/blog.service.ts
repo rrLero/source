@@ -25,32 +25,41 @@ export class BlogService {
             .catch(this.handleError);
     }
 
-    getBlogId(name: string, repo: string): Promise<any> {
-        this.getUrl(name, repo);
-        const token = this.userService.getUser().access_token;
-        const url = `${this.url}/add_subscribe`;
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
-    }
+    // getBlogId(name: string, repo: string): Promise<any> {
+    //     this.getUrl(name, repo);
+    //     const token = this.userService.getUser().access_token;
+    //     const url = `${this.url}/add_subscribe`;
+    //     return this.http
+    //         .get(url)
+    //         .toPromise()
+    //         .then(response => response.json())
+    //         .catch(this.handleError);
+    // }
 
-    subscribeBlog(name: string, repo: string, id: number): Promise<any> {
-        this.getUrl(name, repo);
+    subscribeBlog(name: string, id: number): Promise<any> {
         const token = this.userService.getUser().access_token;
-        const url = `${this.url}/add_subscribe?access_token=${token}`;
+        const url = `${this.host}/${name}/api/add_subscribe?access_token=${token}`;
         return this.http
-            .post(url, JSON.stringify([id]), { headers: this.headers })
+            .post(url, [id], { headers: this.headers })
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
     }
 
-    getSubscribe(name: string, repo: string): Promise<any> {
-        this.getUrl(name, repo);
+    unsubscribeBlog(name: string, id: number): Promise<any> {
         const token = this.userService.getUser().access_token;
-        const url = `${this.url}/get_subscribe?access_token=${token}`;
+        const options = new RequestOptions({ headers: this.headers, body: [id] });
+        const url = `${this.host}/${name}/api/add_subscribe?access_token=${token}`;
+        return this.http
+            .delete(url, options)
+            .toPromise()
+            .then(() => null)
+            .catch(this.handleError);
+    }
+
+    getSubscribe(name: string): Promise<any> {
+        const token = this.userService.getUser().access_token;
+        const url = `${this.host}/${name}/api/get_subscribe?access_token=${token}`;
         return this.http
             .get(url)
             .toPromise()
