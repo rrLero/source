@@ -10,10 +10,10 @@
                                 <p class="blog-name">{{  blog.repo | titlecase }}</p>
                                 <a [routerLink]="['/', blog.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ blog.name }}</a>
                             </div>
-                            <button *ngIf="isLogged && !blog.subscribed" (click)="subscribe(blog)" type="button">
+                            <button *ngIf="isLogged && !blog.subscribed" (click)="subscribe(blog)" type="button" data-tooltip="Make as favorite">
                                 <i class="svg-icon svg-icon-star-border"></i>
                             </button>
-                            <button *ngIf="isLogged && blog.subscribed" (click)="unsubscribe(blog)" type="button">
+                            <button *ngIf="isLogged && blog.subscribed" (click)="unsubscribe(blog)" type="button" data-tooltip="Unsubscribe">
                                 <i class="svg-icon svg-icon-star"></i>
                             </button>
                         </li>
