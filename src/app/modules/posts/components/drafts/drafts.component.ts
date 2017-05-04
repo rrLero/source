@@ -46,20 +46,13 @@ export class DraftsComponent implements OnInit {
         this.draftService
             .getDrafts(this.name, this.repo, id, this.perPage)
             .then(res => {
-                if (res.items[0].date !== false) {
+                if (res.total) {
                     this.posts = res.items;
                     this.total = res.total;
                     window.scrollTo(0, 0);
                 } else {
                     this.empty = true;
                 }
-                // if (res.total) {
-                //     this.posts = res.items;
-                //     this.total = res.total;
-                //     window.scrollTo(0, 0);
-                // } else {
-                //     this.empty = true;
-                // }
             })
             .catch(error => this.toastService.showError(error));
     }

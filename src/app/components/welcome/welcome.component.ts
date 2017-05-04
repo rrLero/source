@@ -87,17 +87,6 @@ export class WelcomeComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    // getBlogId(name: string, repo: string): void {
-    //     this.blogService
-    //         .getBlogId(name, repo)
-    //         .then(res =>
-    //             this.blogService
-    //                 .subscribeBlog(name, repo, res.id))
-    //                 .then(res => this.toastService.showSuccess('done'))
-    //                 .catch(error => this.toastService.showError(error))
-    //         .catch(error => this.toastService.showError(error));
-    // }
-
     get isLogged() {
         return this.authService.isLogged;
     }
