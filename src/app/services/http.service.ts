@@ -126,8 +126,8 @@ export class HttpService {
     deleteBlog(name: string, repo: string): Promise<void> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
-        const headers = new Headers({ 'Authorization': 'token ' + token });
-        const options = new RequestOptions({ headers: headers });
+        // const headers = new Headers({ 'Authorization': 'token ' + token });
+        // const options = new RequestOptions({ headers: headers });
         const url = `${this.url}/del_repo?access_token=${token}`;
         return this.http
             .delete(url, options)

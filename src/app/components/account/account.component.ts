@@ -114,15 +114,11 @@ export class AccountComponent implements OnInit {
         this.toastService.showInfo('TOAST.ACCOUNT.deleting');
         this.httpService
             .deleteBlog(name, repo)
-            .then(() =>
-                this.httpService
-                    .updateBlog(name, repo)
-                    .then(() => {
-                        this.blogs.splice(index, 1);
-                        this.toastService.showSuccess('TOAST.ACCOUNT.done');
-                    })
-                    .catch(error => this.toastService.showError(error))
-            .catch(error => this.toastService.showError(error)));
+            .then(() => {
+                this.blogs.splice(index, 1);
+                this.toastService.showSuccess('TOAST.ACCOUNT.done');
+            })
+            .catch(error => this.toastService.showError(error));
     }
 
     popupHandler(confirm: boolean): void {
