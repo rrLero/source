@@ -45,10 +45,6 @@
       font-size: 2.5em;
     }
 
-    i.svg-icon-star {
-      animation: star 0.25s ease-in;
-    }
-
     &:focus {
       outline: none;
     }
@@ -92,16 +88,4 @@
   font-weight: 700;
   color: #222;
   margin: 0;
-}
-
-@keyframes star {
-  0% {
-    transform: scale(0.8);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
