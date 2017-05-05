@@ -1,8 +1,6 @@
 .widget {
   position: relative;
   background: #fff;
-  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
-  -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
   box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
   margin-bottom: 30px;
   @media (max-width: 768px) {
@@ -16,7 +14,6 @@
 
 .widget h4 {
   margin: 0 0 15px;
-  font-size: 20px;
 }
 
 .no-posts {

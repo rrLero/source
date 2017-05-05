@@ -33,6 +33,18 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
 pre {
   background-color: #252525;
   color: #eee;
@@ -366,10 +378,6 @@ img {
   vertical-align: middle;
 }
 
-.entry .icons i {
-  margin-right: 5px;
-}
-
 /* ---------------------------------------------------------  */
 /* ---------------------- Entry meta -----------------------  */
 /* ---------------------------------------------------------  */
@@ -380,10 +388,17 @@ img {
 .entry-meta > li {
   display: inline-block;
   border-left: 1px solid #eee;
-  padding: 0 15px;
+  padding: 0 10px;
 }
 
 .entry-meta > li:first-child {
   border: none;
   padding-left: 0;
+}
+
+@media (max-width: 767px) {
+  .entry-meta > li {
+    border-left: none;
+    padding: 0 5px 0 0;
+  }
 }
