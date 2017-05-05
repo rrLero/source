@@ -18,27 +18,31 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-md-offset-1">
-                    <a
-                        *ngIf="!authService.isLogged"
-                        [routerLink]="['/start'] | localize"
-                        translate
-                        class="btn btn-primary pull-right create">
-                        APP.getStarted
-                    </a>
                     <div class="account pull-right" *ngIf="authService.isLogged">
                         <auth-profile #profile></auth-profile>
                     </div>
-                    <a
-                        *ngIf="!authService.isLogged"
-                        [href]="githubUrl"
-                        translate
-                        (click)="savePath()"
-                        class="btn btn-default pull-right">
-                        APP.login
-                    </a>
+                    <div class="header-buttons pull-right">
+                        <a
+                            *ngIf="!authService.isLogged"
+                            [href]="githubUrl"
+                            translate
+                            (click)="savePath()"
+                            class="btn btn-default">
+                            APP.login
+                        </a>
+                        <a
+                            *ngIf="!authService.isLogged"
+                            [routerLink]="['/start'] | localize"
+                            translate
+                            class="btn btn-primary create">
+                            APP.getStarted
+                        </a>
+                    </div>
                     <div class="langs-control pull-left">
-                        <span (click)="toggleLangs()" translate class="langs-controls">APP.languages</span>
-                        <span class="caret"></span>
+                        <div (click)="toggleLangs()">
+                            <span translate class="langs-controls">APP.languages</span>
+                            <span class="caret"></span>
+                        </div>
                         <div [class.hidden]="!langs" class="langs">
                             <a
                                 (click)="changeLang('en'); toggleLangs()"

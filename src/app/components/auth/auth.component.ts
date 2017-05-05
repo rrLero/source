@@ -14,6 +14,12 @@ import { AuthService, ToastService } from '../../services';
         text-transform: uppercase;
         font-weight: 600;
       }
+        
+      @media (max-width: 676px) {
+        p {
+          font-size: 32px;
+        }
+      }
     `]
 })
 export class AuthComponent implements OnInit {

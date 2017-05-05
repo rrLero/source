@@ -38,6 +38,10 @@
     cursor: pointer;
     display: table-cell;
     width: 100%;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   button {
