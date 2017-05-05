@@ -12,7 +12,7 @@ import { AuthService, ToastService } from '../../services';
         color: #ccc;
         text-align: center;
         text-transform: uppercase;
-        font-weight: bold;
+        font-weight: 600;
       }
     `]
 })

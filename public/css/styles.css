@@ -5,7 +5,7 @@ html, body {
 body {
   font: 1.25em/1.5 'Open Sans', Arial, sans-serif;
   /*font: 1.25em/1.5 'Lato', Arial, sans-serif;*/
-  font-weight: 300;
+  font-weight: 400;
   line-height: normal;
   background: #eceff4;
   overflow-x: hidden;
@@ -30,7 +30,7 @@ p {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 pre {
@@ -176,11 +176,11 @@ img {
   max-width: 400px;
 }
 
-@media (max-width: 768px) {
-  .col-md-8, .col-md-10 {
-    padding: 0;
-  }
-}
+/*@media (max-width: 768px) {*/
+  /*.col-md-8, .col-md-10 {*/
+    /*padding: 0;*/
+  /*}*/
+/*}*/
 
 /* ---------------------------------------------------------  */
 /* ------------------------ Buttons ------------------------  */

@@ -2,13 +2,13 @@
     <header class="header">
         <div class="container">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <h1>
-                        <a [routerLink]="['/', 'welcome'] | localize">{{ title }}</a><br>
+                        <a [routerLink]="['/', 'welcome'] | localize">{{ title }}</a>
                     </h1>
                 </div>
-                <div class="col-md-4">
-                    <div *ngIf="repo" class="blog-info">
+                <div class="col-md-4 text-center">
+                    <div *ngIf="repo" class="blog-info text-left">
                         <a
                             [routerLink]="['/', name, repo] | localize"
                             class="blog-name">
@@ -17,7 +17,7 @@
                         {{ 'APP.by' | translate }} <a [routerLink]="['/', name] | localize" class="blog-author">{{ name }}</a>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-md-offset-1">
                     <a
                         *ngIf="!authService.isLogged"
                         [routerLink]="['/start'] | localize"
@@ -36,7 +36,7 @@
                         class="btn btn-default pull-right">
                         APP.login
                     </a>
-                    <div class="langs-control">
+                    <div class="langs-control pull-left">
                         <span (click)="toggleLangs()" translate class="langs-controls">APP.languages</span>
                         <span class="caret"></span>
                         <div [class.hidden]="!langs" class="langs">

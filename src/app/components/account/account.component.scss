@@ -20,13 +20,6 @@
   display: inline-block;
 }
 
-.info {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 1em;
-}
-
 .blog-list {
   margin-bottom: 2em;
   background: #fff;
@@ -35,7 +28,7 @@
 
 h3 {
   margin: 1em 10% 0;
-  color: #000f62;
+  // color: #000f62;
 }
 
 .blogs {
