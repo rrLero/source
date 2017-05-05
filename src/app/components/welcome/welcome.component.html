@@ -5,7 +5,7 @@
             <tabs>
                 <tab [tabTitle]="'WELCOME.allBlogs' | translate">
                     <ul class="blogs">
-                        <li class="blog" [@welcome]="blog.state" *ngFor="let blog of blogs">
+                        <li class="blog" [@fadeIn]="'in'" *ngFor="let blog of blogs">
                             <div [routerLink]="['/', blog.name, blog.repo] | localize">
                                 <p class="blog-name">{{  blog.repo | titlecase }}</p>
                                 <a [routerLink]="['/', blog.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ blog.name }}</a>
@@ -22,7 +22,7 @@
                 <tab *ngIf="isLogged" [tabTitle]="'WELCOME.favorites' | translate">
                     <h4 *ngIf="favorites.length === 0" class="text-center" translate>WELCOME.emptyFavorites</h4>
                     <ul *ngIf="favorites.length > 0" class="blogs">
-                        <li class="blog" *ngFor="let favorite of favorites">
+                        <li class="blog" [@fadeIn]="'in'" *ngFor="let favorite of favorites">
                             <div [routerLink]="['/', favorite.name, favorite.repo] | localize">
                                 <p class="blog-name">{{  favorite.repo | titlecase }}</p>
                                 <a [routerLink]="['/', favorite.name] | localize" class="blog-author">{{ 'APP.by' | translate }} {{ favorite.name }}</a>

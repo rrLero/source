@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute }                                 from '@angular/router';
-import { trigger, state, style, transition, animate }     from '@angular/animations';
 
 import {
     AuthService,
@@ -9,23 +8,13 @@ import {
     ToastService
 }                        from '../../../../services';
 import { User, Comment } from '../../../../shared';
+import { fadeIn }        from '../../../../animations/fade-in';
 
 @Component({
     selector: 'comments',
     templateUrl: 'comments.component.html',
     styleUrls: ['comments.component.scss'],
-    animations: [
-        trigger('comment', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(300)
-            ]),
-            transition('* => void', [
-                animate(300, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class CommentsComponent implements OnInit {
     @Input() postId: string;

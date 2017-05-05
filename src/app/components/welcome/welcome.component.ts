@@ -4,23 +4,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 import { HttpService, BlogService, UserService, ToastService, AuthService } from '../../services';
 import { Blog } from '../../shared/blog.model';
+import { fadeIn } from '../../animations/fade-in';
 
 @Component({
     selector: 'welcome',
     templateUrl: 'welcome.component.html',
     styleUrls: ['welcome.component.scss'],
-    animations: [
-        trigger('welcome', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(100, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class WelcomeComponent implements OnInit {
     blogs: Blog[] = [];
