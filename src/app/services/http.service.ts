@@ -130,7 +130,7 @@ export class HttpService {
         // const options = new RequestOptions({ headers: headers });
         const url = `${this.url}/del_repo?access_token=${token}`;
         return this.http
-            .delete(url, options)
+            .delete(url)
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
