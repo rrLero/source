@@ -58,6 +58,7 @@ export class WelcomeComponent implements OnInit {
     }
 
     subscribe(blog: Blog) {
+        this.toastService.showInfo('TOAST.WELCOME.process');
         this.blogService.subscribeBlog(this.login, blog.id)
             .then(() => {
                 blog.subscribed = true;
@@ -68,6 +69,7 @@ export class WelcomeComponent implements OnInit {
     }
 
     unsubscribe(blog: Blog) {
+        this.toastService.showInfo('TOAST.WELCOME.process');
         this.blogService.unsubscribeBlog(this.login, blog.id)
             .then(() => {
                 blog.subscribed = false;
