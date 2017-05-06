@@ -1,34 +1,23 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute }                         from '@angular/router';
-import { trigger, state, style, transition, animate }     from '@angular/animations';
 import { LocalizeRouterService }                          from 'localize-router';
 
 import {
-    HttpService,
+    PostService,
+    BlogService,
     DraftService,
     CommentsService,
     UserService,
     ToastService
-}                               from '../../../../services';
-import { Post, FullMd, fullMd } from '../../../../shared/post.model';
-import { User }                 from '../../../../shared/user.model';
+}                                     from '../../../../services';
+import { Post, FullMd, fullMd, User } from '../../../../models';
+import { fadeIn }                     from '../../../../animations';
 
 @Component({
     selector: 'controls',
     templateUrl: 'controls.component.html',
     styleUrls: ['controls.component.scss'],
-    animations: [
-        trigger('controls', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(300, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class ControlsComponent implements OnInit {
     @Input() post: Post;
@@ -51,8 +40,9 @@ export class ControlsComponent implements OnInit {
                 private localize: LocalizeRouterService,
                 private userService: UserService,
                 private draftService: DraftService,
-                private httpService: HttpService,
-                public toastService: ToastService) { }
+                private postService: PostService,
+                private blogService: BlogService,
+                private toastService: ToastService) { }
 
     ngOnInit(): void {
         this.user = this.userService.getUser();
@@ -83,7 +73,7 @@ export class ControlsComponent implements OnInit {
                 this.draftService
                     .updateBlog(this.name, this.repo)
                     .then(() =>
-                        this.httpService
+                        this.blogService
                             .updateBlog(this.name, this.repo)
                             .then(() => this.callback())
                             .catch(error => this.toastService.showError(error))
@@ -99,7 +89,7 @@ export class ControlsComponent implements OnInit {
                 .then(post => this.checkStatus(post))
                 .catch(error => this.toastService.showError(error));
         } else {
-            this.httpService
+            this.postService
                 .getPost(this.name, this.repo, this.title)
                 .then(post => this.checkStatus(post))
                 .catch(error => this.toastService.showError(error));
@@ -117,10 +107,10 @@ export class ControlsComponent implements OnInit {
 
     private deletePost(): void {
         this.toastService.showInfo('TOAST.CONTROLS.deleting');
-        this.httpService
+        this.postService
             .delete(this.name, this.repo, this.post.id, this.post.sha)
             .then(() =>
-                this.httpService
+                this.blogService
                     .updateBlog(this.name, this.repo)
                     .then(() => this.callback())
                     .catch(error => this.toastService.showError(error)))
@@ -157,7 +147,7 @@ export class ControlsComponent implements OnInit {
     }
 
     private updateComments(status: boolean): void {
-        this.httpService
+        this.blogService
             .updateBlog(this.name, this.repo)
             .then(() => {
                 this.toastService.showSuccess('TOAST.CONTROLS.done');
@@ -173,10 +163,10 @@ export class ControlsComponent implements OnInit {
     }
 
     private lockPost(post: Post): void {
-        this.httpService
+        this.postService
             .update(this.name, this.repo, post.id, post.sha, post)
             .then(() => {
-                this.httpService
+                this.blogService
                     .updateBlog(this.name, this.repo)
                     .then(() => {
                         this.toastService.showSuccess('TOAST.CONTROLS.sessionOpened');

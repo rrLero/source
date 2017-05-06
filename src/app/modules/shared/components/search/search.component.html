@@ -1,4 +1,4 @@
-<div  [@search]="searchBox.state" class="search">
+<div  [@fadeIn]="'in'" class="search">
     <input #searchBox (keyup)="search(searchBox.value)" class="form-control" [placeholder]="'SEARCH.search' | translate">
     <div class="search-result">
         <ul>

@@ -1,30 +1,19 @@
-import { Component, OnInit }                          from '@angular/core';
-import { Router, ActivatedRoute }                     from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { LocalizeRouterService }                      from 'localize-router';
-import { Observable }                                 from 'rxjs/Observable';
-import { Subject }                                    from 'rxjs/Subject';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LocalizeRouterService }  from 'localize-router';
+import { Observable }             from 'rxjs/Observable';
+import { Subject }                from 'rxjs/Subject';
 
 import { SearchService, ToastService } from '../../../../services';
-import { Post }                        from '../../../../shared';
+import { fadeIn }                      from '../../../../animations';
+import { Post }                        from '../../../../models';
 
 @Component({
     selector: 'search',
     templateUrl: 'search.component.html',
     styleUrls: ['search.component.scss'],
     providers: [SearchService],
-    animations: [
-        trigger('search', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(100, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class SearchComponent implements OnInit {
     posts: Observable<Post[]>;

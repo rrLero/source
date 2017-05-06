@@ -2,7 +2,7 @@ import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 
 import { DraftService, UserService, ToastService }    from '../../../../services';
-import { Post }                                       from '../../../../shared';
+import { Post }                                       from '../../../../models';
 
 @Component({
     selector: 'drafts',

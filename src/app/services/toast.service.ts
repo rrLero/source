@@ -24,7 +24,7 @@ export class ToastService {
     toastLife = 2000;
 
     constructor(private translate: TranslateService,
-                public toastr: ToastsManager) { }
+                private toastr: ToastsManager) { }
 
     showSuccess(msg: string, data =  ''): void {
         this.translate

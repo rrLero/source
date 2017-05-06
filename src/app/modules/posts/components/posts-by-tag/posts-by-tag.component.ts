@@ -1,8 +1,8 @@
 import { Component, OnInit }                          from '@angular/core';
 import { Router, ActivatedRoute }                     from '@angular/router';
 
-import { HttpService, UserService, ToastService } from '../../../../services';
-import { Post }                                   from '../../../../shared';
+import { PostService, UserService, ToastService } from '../../../../services';
+import { Post }                                   from '../../../../models';
 
 @Component({
     templateUrl: 'posts-by-tag.component.html',
@@ -24,7 +24,7 @@ export class PostsByTagComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private httpService: HttpService,
+                private postService: PostService,
                 private userService: UserService,
                 public toastService: ToastService) { };
 
@@ -48,7 +48,7 @@ export class PostsByTagComponent implements OnInit {
             this.tag = param.tag;
             this.paginationUrl = `${this.url}/tag/${this.tag}`;
         });
-        this.httpService
+        this.postService
             .getPostsByTag(this.name, this.repo, id, this.perPage, this.tag)
             .then(res => {
                 if (res.items) {

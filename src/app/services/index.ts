@@ -1,4 +1,4 @@
-import { HttpService }     from './http.service';
+import { PostService }     from './post.service';
 import { PagerService }    from './pager.service';
 import { SearchService }   from './search.service';
 import { AuthService }     from './auth.service';
@@ -13,7 +13,7 @@ import { ToastConfig }     from './toast.service';
 import { ToastOptions }    from 'ng2-toastr';
 
 export {
-    HttpService,
+    PostService,
     PagerService,
     SearchService,
     AuthService,
@@ -27,7 +27,7 @@ export {
 };
 
 export const services = [
-    HttpService,
+    PostService,
     PagerService,
     AuthService,
     AuthGuard,

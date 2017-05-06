@@ -1,13 +1,14 @@
 import { Injectable }                    from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 
-import { Post }        from '../shared/post.model';
 import { UserService } from './user.service';
+import { Post }        from '../models';
+import { api }         from '../shared';
 
 @Injectable()
-export class HttpService {
+export class PostService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private host = 'http://gitblog.pythonanywhere.com';
+    private host = api;
     private url: string;
 
     constructor(private http: Http,
@@ -87,50 +88,6 @@ export class HttpService {
         const url = `${this.url}/put/${id}/${sha}?access_token=${token}`;
         return this.http
             .delete(url, options)
-            .toPromise()
-            .then(() => null)
-            .catch(this.handleError);
-    }
-
-    getBlogs(): Promise<any> {
-        const url = `${this.host}/api/blog_list`;
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
-    }
-
-    updateBlog(name: string, repo: string): Promise<void> {
-        this.getUrl(name, repo);
-        const token = this.userService.getUser().access_token;
-        const url = `${this.url}/update?access_token=${token}`;
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(() => null)
-            .catch(this.handleError);
-    }
-
-    createBlog(name: string, repo: string): Promise<any> {
-        this.getUrl(name, repo);
-        const token = this.userService.getUser().access_token;
-        const url = `${this.url}/get?access_token=${token}`;
-        return this.http
-            .get(url)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
-    }
-
-    deleteBlog(name: string, repo: string): Promise<void> {
-        this.getUrl(name, repo);
-        const token = this.userService.getUser().access_token;
-        // const headers = new Headers({ 'Authorization': 'token ' + token });
-        // const options = new RequestOptions({ headers: headers });
-        const url = `${this.url}/del_repo?access_token=${token}`;
-        return this.http
-            .delete(url)
             .toPromise()
             .then(() => null)
             .catch(this.handleError);

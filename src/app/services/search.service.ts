@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { Http }       from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Post }       from '../shared/post.model';
+import { Post }       from '../models';
+import { api }        from '../shared';
 
 @Injectable()
 export class SearchService {
-    private host = 'http://gitblog.pythonanywhere.com';
+    private host = api;
     private url: string;
 
     constructor(private http: Http) { }
 
-    getUrl(name: string, repo: string) {
+    getUrl(name: string, repo: string): void {
         this.url = `${this.host}/${name}/${repo}/api/get?title=`;
     }
 

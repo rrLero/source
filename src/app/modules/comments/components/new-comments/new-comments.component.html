@@ -1,11 +1,11 @@
-<div [@comments]="comments.state" class="row">
+<div [@fadeIn]="'in'" class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="paper">
             <div class="text-center">
                 <h2 *ngIf="comments?.length" translate>NEWCOMMENTS.newComments</h2>
                 <h4 *ngIf="empty" translate>NEWCOMMENTS.noNew</h4>
             </div>
-            <div *ngIf="comments?.length" [@comments]="comments.state">
+            <div *ngIf="comments?.length" [@fadeIn]="'in'">
                 <table class="table">
                     <tr>
                         <th>№</th>

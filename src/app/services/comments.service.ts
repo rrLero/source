@@ -1,21 +1,24 @@
 import { Injectable }                     from '@angular/core';
 import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable }                     from 'rxjs/Observable';
+
 import { UserService }                    from './user.service';
+import { Comment }                        from '../models';
+import { api }                            from '../shared';
 
 @Injectable()
 export class CommentsService {
-    private host = 'http://gitblog.pythonanywhere.com';
+    private host = api;
     private url: string;
 
     constructor(private http: Http,
                 private userService: UserService) { }
 
-    getUrl(name: string, repo: string) {
+    getUrl(name: string, repo: string): void {
         this.url = `${this.host}/${name}/${repo}/api`;
     }
 
-    get(name: string, repo: string, postId: string) {
+    get(name: string, repo: string, postId: string): Promise<Comment[]> {
         this.getUrl(name, repo);
         return this.http
             .get(`${this.url}/get_comments/${postId}`)
@@ -24,7 +27,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    add(name: string, repo: string, postId: string, body: string) {
+    add(name: string, repo: string, postId: string, body: string): Promise<any> {
         this.getUrl(name, repo);
         let token = this.userService.getUser().access_token;
         return this.http
@@ -34,7 +37,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    remove(name: string, repo: string, id: number) {
+    remove(name: string, repo: string, id: number): Promise<any> {
         this.getUrl(name, repo);
         let token = this.userService.getUser().access_token;
         return this.http
@@ -44,7 +47,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    edit(name: string, repo: string, id: number, body: string) {
+    edit(name: string, repo: string, id: number, body: string): Promise<any> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
         const url = `${this.url}/get_comments/${id}?access_token=${token}`;
@@ -55,7 +58,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    getCommentsStatus(name: string, repo: string, id: string) {
+    getCommentsStatus(name: string, repo: string, id: string): Promise<any> {
         this.getUrl(name, repo);
         const url = `${this.url}/lock_status/${id}`;
         return this.http
@@ -65,7 +68,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    unLockComments(name: string, repo: string, id: string) {
+    unLockComments(name: string, repo: string, id: string): Promise<any> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
         const url = `${this.url}/lock_comments/${id}?access_token=${token}`;
@@ -76,7 +79,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    lockComments(name: string, repo: string, id: string) {
+    lockComments(name: string, repo: string, id: string): Promise<any> {
         this.getUrl(name, repo);
         const token = this.userService.getUser().access_token;
         const url = `${this.url}/lock_comments/${id}?access_token=${token}`;
@@ -87,7 +90,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    getFromFile(name: string, repo: string) {
+    getFromFile(name: string, repo: string): Promise<any> {
         this.getUrl(name, repo);
         return this.http
             .get(`${this.url}/get_comments_file`)
@@ -96,7 +99,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    approve(name: string, repo: string, data) {
+    approve(name: string, repo: string, data): Promise<any> {
         this.getUrl(name, repo);
         let token = this.userService.getUser().access_token;
         return this.http
@@ -106,7 +109,7 @@ export class CommentsService {
             .catch(this.handleError);
     }
 
-    removeFromFile(name: string, repo: string, data) {
+    removeFromFile(name: string, repo: string, data): Promise<any> {
         this.getUrl(name, repo);
         let token = this.userService.getUser().access_token;
         let options = new RequestOptions({ body: data });

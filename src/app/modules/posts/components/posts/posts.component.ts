@@ -1,8 +1,8 @@
 import { Component, OnInit }                      from '@angular/core';
 import { Router, ActivatedRoute }                 from '@angular/router';
 import { LocalizeRouterService }                  from 'localize-router';
-import { HttpService, UserService, ToastService } from '../../../../services';
-import { Post }                                   from '../../../../shared';
+import { PostService, UserService, ToastService } from '../../../../services';
+import { Post }                                   from '../../../../models';
 
 @Component({
     selector: 'posts',
@@ -24,7 +24,7 @@ export class PostsComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private localize: LocalizeRouterService,
-                private httpService: HttpService,
+                private postService: PostService,
                 private userService: UserService,
                 public toastService: ToastService) { };
 
@@ -44,7 +44,7 @@ export class PostsComponent implements OnInit {
     }
 
     getPage(id: number = this.id): void {
-        this.httpService
+        this.postService
             .getPage(this.name, this.repo, id, this.perPage)
             .then(res => {
                 if (res.items) {

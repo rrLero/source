@@ -1,4 +1,4 @@
-<div *ngIf="blogs" [@account]="blogs.state" class="row">
+<div *ngIf="blogs" [@fadeIn]="'in'" class="row">
     <div class="col-md-8 col-md-offset-2">
 
         <div class="entry">
@@ -123,7 +123,8 @@
                     <!-- Activate blog -->
                     <form
                         #form="ngForm"
-                        novalidate *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && hiddenControls"
+                        novalidate *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && hiddenControls
+                                       || user && user.login.toLowerCase() === name.toLowerCase() && !blogs.length"
                         (ngSubmit)="createBlog(user.login, repoEl)"
                         class="form-inline text-center">
                         <input

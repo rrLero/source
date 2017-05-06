@@ -1,7 +1,11 @@
 import { Component, OnInit }      from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LocalizeRouterService }  from 'localize-router';
-import { AuthService, UserService, ToastService } from '../../services';
+import {
+    AuthService,
+    UserService,
+    ToastService
+} from '../../services';
 
 @Component({
     selector: 'auth-profile',
@@ -21,8 +25,8 @@ export class AuthProfileComponent implements OnInit {
                 private route: ActivatedRoute,
                 private userService: UserService,
                 private localize: LocalizeRouterService,
-                public authService: AuthService,
-                public toastService: ToastService) { };
+                private authService: AuthService,
+                private toastService: ToastService) { };
 
     ngOnInit(): void {
         this.login();
@@ -43,5 +47,9 @@ export class AuthProfileComponent implements OnInit {
         this.logged = false;
         this.authService.logout();
         this.router.navigate([this.localize.translateRoute('/')]);
+    }
+
+    get isLogged(): boolean {
+        return this.authService.isLogged;
     }
 }

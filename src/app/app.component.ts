@@ -80,19 +80,17 @@ export class AppComponent implements OnInit {
     getUrl(): void {
         this.routerService
             .getRoute()
-            .mergeMap(route => route.url)
+            .mergeMap(route => route.data)
             .subscribe(event => {
                 this.drafts = false;
                 this.title = 'Blog platform';
-                event.forEach(item => {
-                    if (item.path === 'drafts') {
-                        this.drafts = true;
+                if (event.drafts) {
+                    this.drafts = true;
                         this.translate
                             .get('APP.drafts')
                             .subscribe((res: string) => this.draftsTitle = res);
-                    }
-                });
-                if (event[0].path === 'about') {
+                }
+                if (event.about) {
                     this.title = 'Blog platform / about';
                 }
             });

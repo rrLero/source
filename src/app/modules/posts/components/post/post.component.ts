@@ -4,13 +4,14 @@ import { Location }                     from '@angular/common';
 import { LocalizeRouterService }        from 'localize-router';
 
 import {
-    HttpService,
+    PostService,
+    BlogService,
     CommentsService,
     UserService,
     ToastService
 }                 from '../../../../services';
-import { Post }   from '../../../../shared';
-import { fadeIn } from '../../../../animations/fade-in';
+import { Post }   from '../../../../models';
+import { fadeIn } from '../../../../animations';
 
 @Component({
     selector: 'post',
@@ -35,9 +36,10 @@ export class PostComponent implements OnInit, OnDestroy {
                 private route: ActivatedRoute,
                 private localize: LocalizeRouterService,
                 private commentsService: CommentsService,
-                private httpService: HttpService,
+                private postService: PostService,
+                private blogService: BlogService,
                 private userService: UserService,
-                public toastService: ToastService) { }
+                private toastService: ToastService) { }
 
     ngOnInit(): void {
         this.getPost();
@@ -52,7 +54,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         setTimeout(() =>
-            this.httpService.updateBlog(this.name, this.repo), 0);
+            this.user && this.blogService.updateBlog(this.name, this.repo), 0);
         // if (this.post && this.post.comments !== this.commentsAmount) {
         //     setTimeout(() =>
         //         this.httpService
@@ -64,7 +66,7 @@ export class PostComponent implements OnInit, OnDestroy {
     getPost(): void {
         this.route.params
             .switchMap(({ name, repo, title }) =>
-                this.httpService
+                this.postService
                     .getPost(name, repo, title))
                     .subscribe(
                         post => {

@@ -20,8 +20,8 @@
                     </ul>
                 </tab>
                 <tab *ngIf="isLogged" [tabTitle]="'WELCOME.favorites' | translate">
-                    <h4 *ngIf="favorites.length === 0" class="text-center" translate>WELCOME.emptyFavorites</h4>
-                    <ul *ngIf="favorites.length > 0" class="blogs">
+                    <h4 *ngIf="!favorites.length" class="text-center" translate>WELCOME.emptyFavorites</h4>
+                    <ul *ngIf="favorites.length" class="blogs">
                         <li class="blog" [@fadeIn]="'in'" *ngFor="let favorite of favorites">
                             <div [routerLink]="['/', favorite.name, favorite.repo] | localize">
                                 <p class="blog-name">{{  favorite.repo | titlecase }}</p>

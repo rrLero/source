@@ -49,6 +49,7 @@ const routes: Routes = [
             },
             {
                 path: 'drafts',
+                data: { drafts: true },
                 canActivate: [AuthGuard],
                 children: [
                     {

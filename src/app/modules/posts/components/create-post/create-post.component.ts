@@ -1,18 +1,18 @@
-import { Component, OnInit }                          from '@angular/core';
-import { Router, ActivatedRoute }                     from '@angular/router';
-import { Location }                                   from '@angular/common';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { LocalizeRouterService }                      from 'localize-router';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location }               from '@angular/common';
+import { LocalizeRouterService }  from 'localize-router';
 
 import {
-    HttpService,
+    PostService,
+    BlogService,
     DraftService,
     AuthService,
     ToastService,
     UserService
 }                                     from '../../../../services';
-import { Post, post, FullMd, fullMd } from '../../../../shared/post.model';
-import { fadeIn }                     from '../../../../animations/fade-in';
+import { Post, post, FullMd, fullMd } from '../../../../models';
+import { fadeIn }                     from '../../../../animations';
 
 @Component({
     templateUrl: 'create-post.component.html',
@@ -33,7 +33,8 @@ export class CreatePostComponent implements OnInit {
                 private localize: LocalizeRouterService,
                 private authService: AuthService,
                 private userService: UserService,
-                private httpService: HttpService,
+                private postService: PostService,
+                private blogService: BlogService,
                 private draftService: DraftService,
                 public toastService: ToastService) { }
 
@@ -91,10 +92,10 @@ export class CreatePostComponent implements OnInit {
     publish(filenameEl, titleEl, tagsEl, prevEl, textEl) {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
         this.toastService.showInfo('TOAST.CREATEPOST.creating');
-        this.httpService
+        this.postService
             .create(this.name, this.repo, post)
             .then(() =>
-                this.httpService
+                this.blogService
                     .updateBlog(this.name, this.repo)
                     .then(() => {
                         this.toastService.showSuccess('TOAST.CREATEPOST.done');

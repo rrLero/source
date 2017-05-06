@@ -1,10 +1,14 @@
-import { Component, OnInit }                          from '@angular/core';
-import { Router }                                     from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { Router }            from '@angular/router';
 
-import { HttpService, BlogService, UserService, ToastService, AuthService } from '../../services';
-import { Blog } from '../../shared/blog.model';
-import { fadeIn } from '../../animations/fade-in';
+import {
+    BlogService,
+    UserService,
+    ToastService,
+    AuthService
+}                 from '../../services';
+import { fadeIn } from '../../animations';
+import { Blog }   from '../../models';
 
 @Component({
     selector: 'welcome',
@@ -18,19 +22,17 @@ export class WelcomeComponent implements OnInit {
     login: string;
 
     constructor(private router: Router,
-                public toastService: ToastService,
+                private toastService: ToastService,
                 private blogService: BlogService,
-                private httpService: HttpService,
                 private userService: UserService,
-                private authService: AuthService) {
-    }
+                private authService: AuthService) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.getBlogs();
     }
 
-    getBlogs() {
-        this.httpService
+    getBlogs(): void {
+        this.blogService
             .getBlogs()
             .then(blogs => {
                 this.blogs = blogs;
@@ -39,7 +41,7 @@ export class WelcomeComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    getSubscribe() {
+    getSubscribe(): void {
         if (!this.isLogged) return;
 
         this.login = this.userService.getUser().login;
@@ -57,7 +59,7 @@ export class WelcomeComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    subscribe(blog: Blog) {
+    subscribe(blog: Blog): void {
         this.toastService.showInfo('TOAST.WELCOME.process');
         this.blogService.subscribeBlog(this.login, blog.id)
             .then(() => {
@@ -68,7 +70,7 @@ export class WelcomeComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    unsubscribe(blog: Blog) {
+    unsubscribe(blog: Blog): void {
         this.toastService.showInfo('TOAST.WELCOME.process');
         this.blogService.unsubscribeBlog(this.login, blog.id)
             .then(() => {
@@ -79,7 +81,7 @@ export class WelcomeComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    get isLogged() {
+    get isLogged(): boolean {
         return this.authService.isLogged;
     }
 }

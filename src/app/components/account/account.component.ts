@@ -1,24 +1,18 @@
-import { Component, OnInit }                          from '@angular/core';
-import { Router, ActivatedRoute }                     from '@angular/router';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import { HttpService, DraftService, UserService, ToastService } from '../../services';
+import {
+    BlogService,
+    DraftService,
+    UserService,
+    ToastService
+}                 from '../../services';
+import { fadeIn } from '../../animations';
 
 @Component({
     templateUrl: 'account.component.html',
     styleUrls: ['account.component.scss'],
-    animations: [
-        trigger('account', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(300)
-            ]),
-            transition('* => void', [
-                animate(200, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class AccountComponent implements OnInit {
     user: any;
@@ -35,10 +29,10 @@ export class AccountComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private httpService: HttpService,
+                private blogService: BlogService,
                 private draftService: DraftService,
                 private userService: UserService,
-                public toastService: ToastService) { }
+                private toastService: ToastService) { }
 
     ngOnInit(): void {
         this.user = this.userService.getUser();
@@ -53,7 +47,7 @@ export class AccountComponent implements OnInit {
     }
 
     getBlogs(): void {
-        this.httpService
+        this.blogService
             .getBlogs()
             .then(blogs => {
                 this.blogs = blogs.filter(item => item.name === this.name.toLowerCase());
@@ -77,7 +71,7 @@ export class AccountComponent implements OnInit {
     createBlog(name: string, repoEl: HTMLInputElement): void {
         let blog = repoEl.value.replace(/\s+/g, '-');
         this.toastService.showInfo('TOAST.ACCOUNT.activatingBlog');
-        this.httpService
+        this.blogService
             .createBlog(name, blog)
             .then(() => {
                 this.toastService.showSuccess('TOAST.ACCOUNT.done');
@@ -89,7 +83,7 @@ export class AccountComponent implements OnInit {
 
     updateBlog(repo: string): void {
         this.toastService.showInfo('TOAST.ACCOUNT.updating');
-        this.httpService
+        this.blogService
             .updateBlog(this.name, repo)
             .then(() => this.toastService.showSuccess('TOAST.ACCOUNT.done'))
             .catch(error => this.toastService.showError(error));
@@ -112,7 +106,7 @@ export class AccountComponent implements OnInit {
 
     deleteBlog(name: string, repo: string, index: number): void {
         this.toastService.showInfo('TOAST.ACCOUNT.deleting');
-        this.httpService
+        this.blogService
             .deleteBlog(name, repo)
             .then(() => {
                 this.blogs.splice(index, 1);

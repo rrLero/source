@@ -1,5 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute }                                 from '@angular/router';
+import {
+    Component,
+    OnInit,
+    Input,
+    Output,
+    EventEmitter
+}                         from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import {
     AuthService,
@@ -7,8 +13,8 @@ import {
     CommentsService,
     ToastService
 }                        from '../../../../services';
-import { User, Comment } from '../../../../shared';
-import { fadeIn }        from '../../../../animations/fade-in';
+import { User, Comment } from '../../../../models';
+import { fadeIn }        from '../../../../animations';
 
 @Component({
     selector: 'comments',
@@ -30,11 +36,11 @@ export class CommentsComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private authService: AuthService,
                 private userService: UserService,
-                public toastService: ToastService,
+                private toastService: ToastService,
                 private commentsService: CommentsService) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.commentsService.get(this.name, this.repo, this.postId)
             .then(data => {
                 if (data.length > 0) {
@@ -53,7 +59,7 @@ export class CommentsComponent implements OnInit {
         // }
     }
 
-    remove(comment) {
+    remove(comment): void {
         const id = comment.id;
         this.commentsService.remove(this.name, this.repo, id)
             .then(() => {
@@ -64,17 +70,17 @@ export class CommentsComponent implements OnInit {
             .catch(error => this.toastService.showError(error));
     }
 
-    edit(comment) {
+    edit(comment): void {
         this.commentId = comment.id;
         this.onEdit = !this.onEdit;
     }
 
-    addCommentHandler(data) {
+    addCommentHandler(data): void {
         this.comments.push(data);
         this.commentsAmount.emit(this.comments.length);
     }
 
-    editCommentHandler(data, comment) {
+    editCommentHandler(data, comment): void {
         this.onEdit = !this.onEdit;
         comment.body = data;
     }

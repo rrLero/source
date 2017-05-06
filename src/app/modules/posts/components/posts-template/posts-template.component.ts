@@ -1,7 +1,8 @@
 import { Component, Input, OnInit }                   from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
-import { Post } from '../../../../shared';
+import { Post }   from '../../../../models';
+// import { fadeIn } from '../../../../animations';
 
 @Component({
     selector: 'posts-template',

@@ -1,4 +1,4 @@
-<div class="row" *ngIf="post && !onEdit" [@fadeIn]="post.state">
+<div class="row" *ngIf="post && !onEdit" [@fadeIn]="'in'">
     <div class="col-md-8 col-md-offset-2">
         <div class="entry paper">
             <h2 class="text-center" translate>EDITPOST.editPost</h2>
@@ -9,7 +9,7 @@
                 novalidate
                 (ngSubmit)="check.checked ? moveToDrafts(title, tags, preview, text) : save(title, tags, preview, text)">
                 <div class="form-group">
-                    <!-- <label translate>EDITPOST.title</label> -->
+                    <label translate>EDITPOST.title</label>
                     <input
                         #title
                         [ngModel]="post.title"
@@ -20,7 +20,7 @@
                         required>
                 </div>
                 <div class="form-group">
-                    <!-- <label translate>EDITPOST.tags</label> -->
+                    <label translate>EDITPOST.tags</label>
                     <input
                         #tags
                         [ngModel]="post.tags"
@@ -31,11 +31,11 @@
                         required>
                 </div>
                 <div class="form-group">
-                    <!-- <label translate>EDITPOST.preview</label> -->
+                    <label translate>EDITPOST.preview</label>
                     <md-editor #preview [placeholder]="'EDITPOST.preview'" [value]="post.preview"></md-editor>
                 </div>
                 <div class="form-group">
-                    <!-- <label translate>EDITPOST.text</label> -->
+                    <label translate>EDITPOST.text</label>
                     <md-editor #text [placeholder]="'EDITPOST.text'" [value]="post.text_full_strings.trim()"></md-editor>
                 </div>
                 <div class="form-group">

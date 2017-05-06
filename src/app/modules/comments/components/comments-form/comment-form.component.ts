@@ -1,25 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute }                                 from '@angular/router';
-import { trigger, state, style, transition, animate }     from '@angular/animations';
 
 import { AuthService, ToastService, CommentsService }     from '../../../../services';
+import { fadeIn }                                         from '../../../../animations';
 
 @Component({
     selector: 'comment-from',
     templateUrl: 'comment-form.component.html',
     styleUrls: ['comment-form.component.scss'],
-    animations: [
-        trigger('form', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(300, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class CommentFormComponent implements OnInit {
     @Input() postId: string;
@@ -33,13 +22,13 @@ export class CommentFormComponent implements OnInit {
     error = '';
 
     constructor(private route: ActivatedRoute,
-                public authService: AuthService,
-                public toastService: ToastService,
+                private authService: AuthService,
+                private toastService: ToastService,
                 private commentsService: CommentsService) { }
 
-    ngOnInit() { }
+    ngOnInit(): void { }
 
-    submit(input) {
+    submit(input): void {
         this.loading = true;
         this.error = '';
         if (this.onEdit) {
@@ -69,5 +58,9 @@ export class CommentFormComponent implements OnInit {
                 })
                 .catch(error => this.toastService.showError(error));
         }
+    }
+
+    get isLogged(): boolean {
+        return this.authService.isLogged;
     }
 }

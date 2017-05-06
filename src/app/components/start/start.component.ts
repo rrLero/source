@@ -1,11 +1,15 @@
-import { Component, OnInit }                          from '@angular/core';
-import { Router }                                     from '@angular/router';
-import { Location }                                   from '@angular/common';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { TranslateService }                           from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
+import { Router }            from '@angular/router';
+import { Location }          from '@angular/common';
+import { TranslateService }  from '@ngx-translate/core';
 
-import { UserService, HttpService, ToastService }     from '../../services';
-import { auth }                                       from '../../shared/auth';
+import {
+    UserService,
+    BlogService,
+    ToastService
+}                 from '../../services';
+import { fadeIn } from '../../animations';
+import { auth }   from '../../shared';
 
 const faq = {
     capabilities: false,
@@ -19,18 +23,7 @@ const faq = {
     selector: 'start',
     templateUrl: 'start.component.html',
     styleUrls: ['start.component.scss'],
-    animations: [
-        trigger('start', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(200)
-            ]),
-            transition('* => void', [
-                animate(100, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class StartComponent implements OnInit {
     user: any;
@@ -42,9 +35,9 @@ export class StartComponent implements OnInit {
     constructor(private router: Router,
                 private location: Location,
                 private translate: TranslateService,
-                private httpService: HttpService,
+                private blogService: BlogService,
                 private userService: UserService,
-                public toastService: ToastService) {
+                private toastService: ToastService) {
         translate.onLangChange
             .subscribe(event => this.getAuthUrl());
     }
@@ -57,7 +50,7 @@ export class StartComponent implements OnInit {
     createBlog(repo): void {
         let blog = repo.value.replace(/\s+/g, '-');
         this.toastService.showInfo('TOAST.START.activatingBlog');
-        this.httpService
+        this.blogService
             .createBlog(this.user.login, blog)
             .then(() => {
                 this.toastService.showSuccess('TOAST.START.done');

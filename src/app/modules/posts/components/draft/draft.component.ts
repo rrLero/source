@@ -1,10 +1,10 @@
-import { Component, OnInit }                          from '@angular/core';
-import { Router, ActivatedRoute }                     from '@angular/router';
-import { Location }                                   from '@angular/common';
+import { Component, OnInit }                       from '@angular/core';
+import { Router, ActivatedRoute }                  from '@angular/router';
+import { Location }                                from '@angular/common';
 
-import { DraftService, UserService, ToastService }    from '../../../../services';
-import { Post, User }                                 from '../../../../shared';
-import { fadeIn }                                     from '../../../../animations/fade-in';
+import { DraftService, UserService, ToastService } from '../../../../services';
+import { Post, User }                              from '../../../../models';
+import { fadeIn }                                  from '../../../../animations';
 
 @Component({
     selector: 'draft',

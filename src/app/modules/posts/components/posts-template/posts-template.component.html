@@ -1,5 +1,5 @@
 <h3 *ngIf="tag" class="found-tag paper">{{ 'POSTS.tag'  | translate}}: {{ tag }}</h3>
-<article class="entry paper" *ngFor="let post of posts" [@posts]="post.state">
+<article class="entry paper" *ngFor="let post of posts" [@posts]="'in'">
     <header>
         <div class="entry-date icons">
             <i class="svg-icon svg-icon-clock"></i>

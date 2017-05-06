@@ -1,5 +1,5 @@
-import { Component, OnInit }      from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit }         from '@angular/core';
+import { ActivatedRoute, Router }    from '@angular/router';
 
 import { AuthService, ToastService } from '../../services';
 
@@ -14,7 +14,7 @@ import { AuthService, ToastService } from '../../services';
         text-transform: uppercase;
         font-weight: 600;
       }
-        
+
       @media (max-width: 676px) {
         p {
           font-size: 32px;
@@ -25,11 +25,11 @@ import { AuthService, ToastService } from '../../services';
 export class AuthComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private router: Router,
-                public toastService: ToastService,
+                private toastService: ToastService,
                 private authService: AuthService) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.route.queryParams.subscribe(
             (param: any) => {
                 let code = param['code'];

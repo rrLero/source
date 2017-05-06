@@ -1,13 +1,14 @@
 import { Injectable }                    from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
 
-import { Post }        from '../shared/post.model';
+import { Post }        from '../models';
 import { UserService } from './user.service';
+import { api }         from '../shared';
 
 @Injectable()
 export class DraftService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private host = 'http://gitblog.pythonanywhere.com';
+    private host = api;
     private url: string;
 
     constructor(private http: Http,

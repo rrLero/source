@@ -1,17 +1,17 @@
-import { Component, OnInit }                          from '@angular/core';
-import { Router, ActivatedRoute }                     from '@angular/router';
-import { Location }                                   from '@angular/common';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { LocalizeRouterService }                      from 'localize-router';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location }               from '@angular/common';
+import { LocalizeRouterService }  from 'localize-router';
 
 import {
-    HttpService,
+    PostService,
+    BlogService,
     DraftService,
     UserService,
     ToastService
 }                                     from '../../../../services';
-import { Post, post, FullMd, fullMd } from '../../../../shared/post.model';
-import { fadeIn }                     from '../../../../animations/fade-in';
+import { Post, post, FullMd, fullMd } from '../../../../models';
+import { fadeIn }                     from '../../../../animations';
 
 @Component({
     templateUrl: 'edit-post.component.html',
@@ -37,8 +37,9 @@ export class EditPostComponent implements OnInit {
                 private localize: LocalizeRouterService,
                 private userService: UserService,
                 private draftService: DraftService,
-                private httpService: HttpService,
-                public toastService: ToastService) { }
+                private postService: PostService,
+                private blogService: BlogService,
+                private toastService: ToastService) { }
 
     ngOnInit(): void {
         this.checkPath();
@@ -73,7 +74,7 @@ export class EditPostComponent implements OnInit {
     getPost(): void {
         this.route.params
             .switchMap(({ name, repo, title }) =>
-                this.httpService
+                this.postService
                     .getPost(name, repo, title))
                     .subscribe(
                         post => {
@@ -120,10 +121,10 @@ export class EditPostComponent implements OnInit {
     }
 
     update(): void {
-        this.httpService
+        this.postService
             .update(this.name, this.repo, this.post.id, this.post.sha, this.post)
             .then(() =>
-                this.httpService
+                this.blogService
                     .updateBlog(this.name, this.repo)
                     .then(() => {
                         this.toastService.showSuccess('TOAST.EDITPOST.done');
@@ -183,10 +184,10 @@ export class EditPostComponent implements OnInit {
         this.draftService
             .create(this.name, this.repo, post)
             .then(() => {
-                this.httpService
+                this.postService
                     .delete(this.name, this.repo, this.post.id, this.post.sha)
                     .then(() =>
-                        this.httpService
+                        this.blogService
                             .updateBlog(this.name, this.repo)
                             .then(() => {
                                 this.draftService

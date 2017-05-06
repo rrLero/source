@@ -1,29 +1,18 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, OnInit }                          from '@angular/core';
-import { Router, ActivatedRoute }                     from '@angular/router';
+import { Component, OnInit }      from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import {
     CommentsService,
-    HttpService,
+    BlogService,
     ToastService,
     UserService
-} from '../../../../services';
+}                 from '../../../../services';
+import { fadeIn } from '../../../../animations';
 
 @Component({
     templateUrl: 'new-comments.component.html',
     styleUrls: ['new-comments.component.scss'],
-    animations: [
-        trigger('comments', [
-            state('in', style({ opacity: '1' })),
-            transition('void => *', [
-                style({ opacity: '0' }),
-                animate(300)
-            ]),
-            transition('* => void', [
-                animate(300, style({ opacity: '0' }))
-            ])
-        ])
-    ]
+    animations: [fadeIn]
 })
 export class NewCommentsComponent implements OnInit {
     comments = [];
@@ -35,7 +24,7 @@ export class NewCommentsComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private httpService: HttpService,
+                private blogService: BlogService,
                 private toastService: ToastService,
                 private userService: UserService,
                 private commentsService: CommentsService) {
@@ -86,7 +75,7 @@ export class NewCommentsComponent implements OnInit {
                 this.clear();
                 this.isFetching = false;
                 this.empty = true;
-                this.httpService.updateBlog(this.name, this.repo);
+                this.blogService.updateBlog(this.name, this.repo);
             });
     }
 
@@ -109,7 +98,7 @@ export class NewCommentsComponent implements OnInit {
                 this.clear();
                 this.isFetching = false;
                 this.empty = true;
-                this.httpService.updateBlog(this.name, this.repo);
+                this.blogService.updateBlog(this.name, this.repo);
             });
     }
 
