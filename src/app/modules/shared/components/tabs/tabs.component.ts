@@ -24,7 +24,7 @@ export class TabsComponent implements AfterContentInit {
         let activeTabs = this.tabs.filter((tab) => tab.active);
 
         if (activeTabs.length === 0) {
-            this.selectTab(this.tabs.last);
+            this.selectTab(this.tabs.first);
         }
     }
 

@@ -23,8 +23,8 @@
         class="btn btn-primary go-btn">
         CONTROLS.goToBlog
     </a>
-    <div class="post">
-        <div *ngIf="!draft" [class.hidden]="!post" class="[ form-group ] text-center">
+    <div *ngIf="post" class="post">
+        <div *ngIf="!draft" [class.hidden]="!post" class="[ form-group ]">
             <input
                 #check
                 (click)="check.checked ?  unLockComments() :lockComments()"

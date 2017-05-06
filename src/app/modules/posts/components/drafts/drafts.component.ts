@@ -25,14 +25,14 @@ export class DraftsComponent implements OnInit {
                 private route: ActivatedRoute,
                 private userService: UserService,
                 private draftService: DraftService,
-                public toastService: ToastService) { };
+                private toastService: ToastService) { };
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.getUser();
         this.getPage();
     }
 
-    getUser() {
+    getUser(): void {
         this.user = this.userService.getUser();
         if (this.user) {
             this.userService
@@ -59,6 +59,5 @@ export class DraftsComponent implements OnInit {
 
     handlePageChange(page: number): void {
         this.getPage(page);
-        // console.log(true);
     }
 }

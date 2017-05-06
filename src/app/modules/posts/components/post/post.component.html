@@ -1,17 +1,26 @@
+<div *ngIf="controls" class="controls">
+    <controls [status]="commentsStatus" (comments)="commentsHandler($event)" [post]="post"></controls>
+</div>
+
 <div class="row" *ngIf="post" [@fadeIn]="'in'">
 
     <div class="col-md-10 col-md-offset-1">
         <div class="entry-wrap paper">
             <article class="entry">
-                <div *ngIf="controls" class="controls">
+                <!-- <div *ngIf="controls" class="controls">
                     <controls [status]="commentsStatus" (comments)="commentsHandler($event)" [post]="post"></controls>
+                </div> -->
+                <div
+                    *ngIf="user && canEdit"
+                    [@fadeIn]="'in'"
+                    (click)="toggleControls()"
+                    class="svg-icon svg-icon-settings post-controls">
                 </div>
                 <header>
                     <h1 class="entry-title">{{ post.title }}</h1>
                     <ul class="entry-meta">
                         <li class="entry-author icons">
                             <i class="svg-icon svg-icon-account"></i>
-                            <!-- <i class="material-icons">person</i> -->
                             <ul class="authors">
                                 <li *ngFor="let author of post.author.split(',')">
                                     <a [routerLink]="['/', author.trim() | lowercase] | localize">{{ author }}</a>
@@ -20,12 +29,10 @@
                         </li>
                         <li class="entry-date icons">
                             <i class="svg-icon svg-icon-clock"></i>
-                            <!-- <i class="material-icons">access_time</i> -->
                             <span>{{ post.date | amTimeAgo }}</span>
                         </li>
                         <li class="entry-controls icons" (click)="toggleControls()" *ngIf="user && canEdit" [@fadeIn]="'in'">
                             <i class="svg-icon svg-icon-settings"></i>
-                            <!-- <i class="material-icons">build</i> -->
                             <span translate>POST.controls</span>
                         </li>
                     </ul>
@@ -35,7 +42,6 @@
                 <footer class="entry-footer">
                     <div class="entry-tags icons">
                         <i class="svg-icon svg-icon-tag"></i>
-                        <!-- <i class="material-icons">local_offer</i> -->
                         <ul class="tags">
                             <li *ngFor="let tag of post.tags">
                                 <a [routerLink]="['/', name, repo, 'tag', tag] | localize">{{ tag }}</a>

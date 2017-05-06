@@ -12,7 +12,29 @@ a.go-btn {
 }
 
 .post {
-  float: right;
+  position: absolute;
+  top: 7em;
+  right: 6%;
+  width: 13em;
+  padding: 1em 1em 0;
+  box-shadow: 0 0 5px #000;
+  background-color: #eee;
+  border-radius: 3px;
+
+  a, button {
+    display: block;
+    width: 100%;
+    max-width: 10em;
+    margin-bottom: 1em;
+  }
+
+  label:first-child {
+    width: 30%;
+  }
+
+  label:last-child {
+    width: 70%;
+  }
 }
 
 .form-group input[type="checkbox"] {

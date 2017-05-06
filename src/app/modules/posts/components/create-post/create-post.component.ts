@@ -36,26 +36,23 @@ export class CreatePostComponent implements OnInit {
                 private postService: PostService,
                 private blogService: BlogService,
                 private draftService: DraftService,
-                public toastService: ToastService) { }
+                private toastService: ToastService) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         let date = `${this.date.toISOString()}`.slice(2).slice(0, 8);
         let time = `${this.date.toString()}`.slice(15).slice(0, 6);
         this.datetime = date + time;
-        // if (this.authService.isLogged) {
         const profile = this.userService.getUser();
         this.author = profile.login;
-            // this.author = profile.name || profile.login;
-        // }
     }
 
-    repalceSpace(filenameEl) {
+    repalceSpace(filenameEl): void {
         if (filenameEl.value) {
             filenameEl.value = filenameEl.value.replace(/\s+/g, '-');
         }
     }
 
-    create(filenameEl, titleEl, tagsEl, prevEl, textEl) {
+    create(filenameEl, titleEl, tagsEl, prevEl, textEl): void {
         new FullMd(
             titleEl.value,
             tagsEl.value,
@@ -70,7 +67,7 @@ export class CreatePostComponent implements OnInit {
         );
     }
 
-    save(filenameEl, titleEl, tagsEl, prevEl, textEl) {
+    save(filenameEl, titleEl, tagsEl, prevEl, textEl): void {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
         this.toastService.showInfo('TOAST.CREATEPOST.creating');
         this.draftService
@@ -89,7 +86,7 @@ export class CreatePostComponent implements OnInit {
             .catch(error => this.toastService.showError(error)));
     }
 
-    publish(filenameEl, titleEl, tagsEl, prevEl, textEl) {
+    publish(filenameEl, titleEl, tagsEl, prevEl, textEl): void {
         this.create(filenameEl, titleEl, tagsEl, prevEl, textEl);
         this.toastService.showInfo('TOAST.CREATEPOST.creating');
         this.postService
@@ -108,7 +105,7 @@ export class CreatePostComponent implements OnInit {
             .catch(error => this.toastService.showError(error)));
     }
 
-    goBack() {
+    goBack(): void {
         this.location.back();
     }
 }

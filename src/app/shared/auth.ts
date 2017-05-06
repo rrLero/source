@@ -1,4 +1,5 @@
 import { api } from './api';
+
 export const auth = {
     authUri: `${api}/rrlero/git-blog/api/oauth?code=`,
     redirectUri: 'http://acid.zzz.com.ua',

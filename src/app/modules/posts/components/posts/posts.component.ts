@@ -26,7 +26,7 @@ export class PostsComponent implements OnInit {
                 private localize: LocalizeRouterService,
                 private postService: PostService,
                 private userService: UserService,
-                public toastService: ToastService) { };
+                private toastService: ToastService) { };
 
     ngOnInit(): void {
         this.getUser();

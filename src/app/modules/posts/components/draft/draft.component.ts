@@ -25,7 +25,7 @@ export class DraftComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private location: Location,
-                public toastService: ToastService,
+                private toastService: ToastService,
                 private draftService: DraftService,
                 private userService: UserService) { }
 

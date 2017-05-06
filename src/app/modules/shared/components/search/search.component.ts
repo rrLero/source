@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private localize: LocalizeRouterService,
-                public toastService: ToastService,
+                private toastService: ToastService,
                 private searchService: SearchService) { }
 
     search(term: string): void {

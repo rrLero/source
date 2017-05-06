@@ -9,9 +9,9 @@ import {
     CommentsService,
     UserService,
     ToastService
-}                 from '../../../../services';
-import { Post }   from '../../../../models';
-import { fadeIn } from '../../../../animations';
+}                     from '../../../../services';
+import { Post, User } from '../../../../models';
+import { fadeIn }     from '../../../../animations';
 
 @Component({
     selector: 'post',
@@ -21,7 +21,7 @@ import { fadeIn } from '../../../../animations';
 })
 export class PostComponent implements OnInit, OnDestroy {
     post: Post;
-    user: any;
+    user: User;
     commentsStatus: boolean;
     commentsAmount: number;
     canEdit = false;
