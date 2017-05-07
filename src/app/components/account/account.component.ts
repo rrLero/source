@@ -5,6 +5,7 @@ import {
     BlogService,
     DraftService,
     UserService,
+    CommentsService,
     ToastService
 }                 from '../../services';
 import { fadeIn } from '../../animations';
@@ -18,6 +19,7 @@ export class AccountComponent implements OnInit {
     user: any;
     name: string;
     blogs: any[];
+    comments: any[] = [];
     hidden = true;
     hiddenUpdates = false;
     hiddenControls = false;
@@ -31,6 +33,7 @@ export class AccountComponent implements OnInit {
                 private route: ActivatedRoute,
                 private blogService: BlogService,
                 private draftService: DraftService,
+                private commentsService: CommentsService,
                 private userService: UserService,
                 private toastService: ToastService) { }
 
@@ -52,6 +55,7 @@ export class AccountComponent implements OnInit {
             .then(blogs => {
                 this.blogs = blogs.filter(item => item.name === this.name.toLowerCase());
                 this.checkUser(blogs);
+                this.getNewComments();
             })
             .catch(error => this.toastService.showError(error));
     }
@@ -66,6 +70,17 @@ export class AccountComponent implements OnInit {
                 }
             });
         }
+    }
+
+    getNewComments(): void {
+        this.blogs.forEach(item =>
+            this.commentsService
+                .getFromFile(this.name, item.repo)
+                .then(data => {
+                    data.repo = item.repo;
+                    this.comments.push(data)
+                })
+                .catch(error => this.toastService.showError(error)));
     }
 
     createBlog(name: string, repoEl: HTMLInputElement): void {

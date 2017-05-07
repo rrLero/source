@@ -27,8 +27,7 @@ export class NewCommentsComponent implements OnInit {
                 private blogService: BlogService,
                 private toastService: ToastService,
                 private userService: UserService,
-                private commentsService: CommentsService) {
-    }
+                private commentsService: CommentsService) { }
 
     ngOnInit(): void {
         const user = this.userService.getUser();
@@ -38,6 +37,10 @@ export class NewCommentsComponent implements OnInit {
             return;
         }
 
+        this.getNewComments();
+    }
+
+    getNewComments(): void {
         this.commentsService
             .getFromFile(this.name, this.repo)
             .then(data => {

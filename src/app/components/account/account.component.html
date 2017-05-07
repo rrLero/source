@@ -114,6 +114,16 @@
                                         class="btn btn-danger">
                                         ACCOUNT.remove
                                     </button>
+                                    <i
+                                        *ngIf="user && user.login.toLowerCase() === name.toLowerCase() && !hiddenUpdates && !hiddenControls"
+                                        class="svg-icon svg-icon-comment new-comments">
+                                        <a
+                                            *ngIf="comments[i]?.repo === blog.repo"
+                                            [routerLink]="['/', blog.name, blog.repo, 'newcomments'] | localize"
+                                            class="amount">
+                                            {{ comments[i]?.length }}
+                                        </a>
+                                    </i>
                                 </div>
 
                             </div>

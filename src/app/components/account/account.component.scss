@@ -83,3 +83,19 @@ form {
 .controls {
   min-width: 11em;
 }
+
+.new-comments {
+  // float: right;
+  position: relative;
+  top: .2em;
+  left: 1em;
+  font-size: 2em;
+
+  .amount {
+    position: relative;
+    top: -.3em;
+    left: -.1em;
+    font-size: .6em;
+    // font-style: normal;
+  }
+}
