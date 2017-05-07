@@ -1,11 +1,5 @@
-import { Post, post, FullMd, fullMd } from './post.model';
-import { User }                       from './user.model';
-import { Comment }                    from './comment.model';
-import { Blog }                       from './blog.model';
-
-export {
-    Post, post, FullMd, fullMd,
-    User,
-    Comment,
-    Blog
-};
+export { Post, post, FullMd, fullMd } from './post.model';
+export { User }                       from './user.model';
+export { Comment }                    from './comment.model';
+export { Blog }                       from './blog.model';
+export { Pager }                      from './pager.model';

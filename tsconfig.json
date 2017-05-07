@@ -19,6 +19,8 @@
             "pipes": ["src/app/pipes/index"],
             "components": ["src/app/components/index"],
             "shared": ["src/app/shared/index"],
+            "animations": ["src/app/animations/index"],
+            "models": ["src/app/models/index"],
             "public/*": ["public/*"]
         }
     },

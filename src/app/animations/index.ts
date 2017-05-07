@@ -1,5 +1,1 @@
-import { fadeIn } from './fade-in';
-
-export {
-    fadeIn
-};
+export { fadeIn } from './fade-in';

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as _         from 'underscore';
+import { Pager }      from 'models';
 
 @Injectable()
 export class PagerService {
-    getPager(totalItems: number, currentPage, pageSize): any {
+    getPager(totalItems: number, currentPage: number, pageSize: number): Pager {
         let totalPages = Math.ceil(totalItems / pageSize);
         let startPage: number, endPage: number;
 

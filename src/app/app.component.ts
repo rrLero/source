@@ -13,11 +13,11 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
 
-import '../../public/css/styles.css';
-import '../../public/i18n/config.json';
-import '../../public/i18n/en.json';
-import '../../public/i18n/ru.json';
-import '../../public/i18n/uk.json';
+import 'public/css/styles.css';
+import 'public/i18n/config.json';
+import 'public/i18n/en.json';
+import 'public/i18n/ru.json';
+import 'public/i18n/uk.json';
 
 @Component({
     selector: 'app',
@@ -41,8 +41,8 @@ export class AppComponent implements OnInit {
                 private titleService: Title,
                 private translate: TranslateService,
                 private localize: LocalizeRouterService,
-                public authService: AuthService,
-                public toastr: ToastsManager, vcr: ViewContainerRef) {
+                private authService: AuthService,
+                private toastr: ToastsManager, vcr: ViewContainerRef) {
         toastr.setRootViewContainerRef(vcr);
         translate.addLangs(['en', 'ru', 'uk']);
     }
@@ -110,6 +110,10 @@ export class AppComponent implements OnInit {
 
     savePath(): void {
         localStorage.setItem('path', this.location.path());
+    }
+
+    get isLogged(): boolean {
+        return this.authService.isLogged;
     }
 
 }

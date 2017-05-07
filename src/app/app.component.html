@@ -18,12 +18,12 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-md-offset-1">
-                    <div class="account pull-right" *ngIf="authService.isLogged">
+                    <div class="account pull-right" *ngIf="isLogged">
                         <auth-profile #profile></auth-profile>
                     </div>
                     <div class="header-buttons pull-right">
                         <a
-                            *ngIf="!authService.isLogged"
+                            *ngIf="!isLogged"
                             [href]="githubUrl"
                             translate
                             (click)="savePath()"
@@ -31,7 +31,7 @@
                             APP.login
                         </a>
                         <a
-                            *ngIf="!authService.isLogged"
+                            *ngIf="!isLogged"
                             [routerLink]="['/start'] | localize"
                             translate
                             class="btn btn-primary create">

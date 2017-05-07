@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location }       from '@angular/common';
 
 import { PagerService }   from '../../../../services';
+import { Pager }          from '../../../../models';
 
 @Component({
     selector: 'pagination',
@@ -21,7 +22,7 @@ export class PaginationComponent implements OnInit {
     @Input() perPage: number;
     @Input() currentPage: number;
     @Output() pageChange = new EventEmitter();
-    pager: any;
+    pager: Pager;
 
     constructor(private route: ActivatedRoute,
                 private location: Location,
