@@ -1,0 +1,16 @@
+.widget {
+  position: relative;
+  min-height: 6em;
+  margin-bottom: 30px;
+  padding: 20px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, .05);
+  background: #fff;
+
+  h4 {
+    margin: 0 0 15px;
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 15px;
+  }
+}

@@ -36,9 +36,34 @@
 i.svg-icon {
   font-size: 1em;
 }
-// .search-result ul li:before {
-//   content: 'keyboard_arrow_right';
-//   margin-right: 8px;
-//   font-family: 'Material Icons';
-//   vertical-align: bottom;
-// }
+
+.toggle-advanced {
+  float: right;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+.advanced {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    margin-right: 0;
+  }
+}
+
+.calendar {
+  max-width: 100%;
+  margin: .5em 1.5em .5em 0;
+  font-size: 1.3em;
+}
+
+button {
+  min-width: 6.5em;
+  margin: .25em;
+}
+
+label {
+  font-size: .8em;
+}

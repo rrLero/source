@@ -61,7 +61,7 @@ code {
   padding: 2px 3px;
 }
 
-pre > code {
+pre>code {
   display: block;
   border: none;
   white-space: pre;
@@ -81,13 +81,35 @@ table, td, th {
   color: #333;
 }
 
+.ui-calendar input {
+  width: 90%;
+  max-width: 10em;
+}
+
+.ui-dropdown {
+  min-width: 10em;
+  max-width: 100%;
+}
+
+.ui-state-disabled, .ui-widget:disabled {
+  opacity: .5;
+}
+
+.ui-state-disabled .ui-dropdown-trigger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .ui-datepicker.ui-widget.ui-widget-content {
+    left: -4em !important;
+  }
+}
+
 .cbalink {
   display: none !important;
 }
 
-a:hover,
-a:active,
-a:focus {
+a:hover, a:active, a:focus {
   text-decoration: none;
 }
 
@@ -105,6 +127,7 @@ a:focus {
   background-position: 50%;
   background-repeat: no-repeat;
 }
+
 .flag-icon, .svg-icon {
   background-size: contain;
   background-position: 50%;
@@ -114,9 +137,11 @@ a:focus {
   width: 1.33333333em;
   line-height: 1em;
 }
+
 i.svg-icon {
-    font-size: 2em;
+  font-size: 2em;
 }
+
 .flag-icon:before, .svg-icon::before {
   content: "\00a0";
 }
@@ -188,14 +213,20 @@ img {
   max-width: 400px;
 }
 
+
 /*@media (max-width: 768px) {
-  .col-md-8, .col-md-10 {
-    padding: 0;
-  }
+ .col-md-8, .col-md-10 {
+  padding: 0;
+ }
 }*/
 
+
 /* ---------------------------------------------------------  */
+
+
 /* ------------------------ Buttons ------------------------  */
+
+
 /* ---------------------------------------------------------  */
 
 .btn-default {
@@ -207,8 +238,13 @@ img {
   background: #F5F5F5;
 }
 
+
 /* ---------------------------------------------------------  */
+
+
 /* ------------------------- Input -------------------------  */
+
+
 /* ---------------------------------------------------------  */
 
 .form-control {
@@ -223,8 +259,13 @@ img {
   box-shadow: none;
 }
 
+
 /* ---------------------------------------------------------  */
+
+
 /* ------------------------ Spinner ------------------------  */
+
+
 /* ---------------------------------------------------------  */
 
 .spinner {
@@ -320,8 +361,13 @@ img {
   }
 }
 
+
 /* ---------------------------------------------------------  */
+
+
 /* ------------------------ Paper --------------------------  */
+
+
 /* ---------------------------------------------------------  */
 
 .paper {
@@ -338,8 +384,13 @@ img {
   }
 }
 
+
 /* ---------------------------------------------------------  */
+
+
 /* ------------------ Tags & Authors list ------------------  */
+
+
 /* ---------------------------------------------------------  */
 
 .tags, .authors {
@@ -355,16 +406,21 @@ img {
   padding: 0;
 }
 
-.tags li:not(:last-child):after,
-.authors li:not(:last-child):after {
+.tags li:not(:last-child):after, .authors li:not(:last-child):after {
   content: ', ';
   position: relative;
   left: -2px;
 }
 
+
 /* ---------------------------------------------------------  */
+
+
 /* ---------------------- Entry icons ----------------------  */
+
+
 /* ---------------------------------------------------------  */
+
 .entry .icons {
   color: #aaa;
 }
@@ -378,26 +434,32 @@ img {
   vertical-align: middle;
 }
 
+
 /* ---------------------------------------------------------  */
+
+
 /* ---------------------- Entry meta -----------------------  */
+
+
 /* ---------------------------------------------------------  */
+
 .entry-meta {
   padding: 0;
 }
 
-.entry-meta > li {
+.entry-meta>li {
   display: inline-block;
   border-left: 1px solid #eee;
   padding: 0 10px;
 }
 
-.entry-meta > li:first-child {
+.entry-meta>li:first-child {
   border: none;
   padding-left: 0;
 }
 
 @media (max-width: 767px) {
-  .entry-meta > li {
+  .entry-meta>li {
     border-left: none;
     padding: 0 5px 0 0;
   }

@@ -3,9 +3,10 @@
         "getStarted": "Начать",
         "login": "Войти",
         "drafts": "(черновики)",
+        "search": "(поиск)",
         "by": "от",
         "languages": "Язык",
-        "madeBy": "Made by super team"
+        "madeBy": "Разработано супер командой"
     },
     "WELCOME": {
         "blogs": "Блоги",
@@ -16,14 +17,36 @@
         "emptyFavorites": "Нет избранных блогов"
     },
     "SEARCH": {
-        "search": "Поиск"
+        "search": "Поиск",
+        "advanced": "Расширенный",
+        "selectAuthor": "Выберите автора",
+        "fromDate": "от:",
+        "beforeDate": "до:",
+        "clear": "Очистить",
+        "CALENDAR": {
+            "dayNamesMin": ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+            "monthNames":  [
+                "Январь",
+                "Февраль",
+                "Март",
+                "Апрель",
+                "Май",
+                "Июнь",
+                "Июль",
+                "Август",
+                "Сентябрь",
+                "Октябрь",
+                "Ноябрь",
+                "Декабрь"
+            ]
+        }
     },
     "POSTS": {
         "comments": "Комментарии",
         "actions": "Действия",
         "tag": "Тег",
         "noPosts": "Нет постов",
-        "private": "Private"
+        "private": "Частный блог"
     },
     "POST": {
         "controls": "Управление",
@@ -175,6 +198,9 @@
             "subscribe": "Вы успешно подписались на блог",
             "unsubscribe": "Вы успешно отписались от блога",
             "process": "В процессе..."
+        },
+        "SEARCH": {
+            "invalidTimeInterval": "Неверный временной интервал"
         }
     },
     "START": {

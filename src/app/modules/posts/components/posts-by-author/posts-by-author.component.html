@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="widget">
+            <search [advanced]="true" (postsByAuthor)="handleSearch($event)"></search>
+        </div>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <posts-template
+            *ngIf="posts"
+            [posts]="posts"
+            [name]="name"
+            [repo]="repo"
+            [tag]="tag"
+            [url]="url"
+            [canEdit]="canEdit">
+        </posts-template>
+        <!-- <pagination
+            *ngIf="total"
+            [url]="paginationUrl"
+            [currentPage]="id"
+            [total]="total"
+            [perPage]="perPage"
+            (pageChange)="handlePageChange($event)">
+        </pagination> -->
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <div *ngIf="posts && !posts.length" class="widget text-center">
+            <h3 translate>POSTS.noPosts</h3>
+        </div>
+    </div>
+</div>
+
+<!-- <spinner *ngIf="!posts && !empty"></spinner> -->

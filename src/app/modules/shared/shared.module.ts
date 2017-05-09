@@ -4,6 +4,8 @@ import { FormsModule }          from '@angular/forms';
 import { RouterModule }         from '@angular/router';
 import { TranslateModule }      from '@ngx-translate/core';
 import { LocalizeRouterModule } from 'localize-router';
+import { CalendarModule }       from 'primeng/primeng';
+import { DropdownModule }       from 'primeng/primeng';
 
 import { components } from './components';
 import { pipes }      from '../../pipes';
@@ -14,7 +16,9 @@ import { pipes }      from '../../pipes';
         FormsModule,
         RouterModule,
         TranslateModule,
-        LocalizeRouterModule
+        LocalizeRouterModule,
+        CalendarModule,
+        DropdownModule
     ],
     declarations: [
         ...components,

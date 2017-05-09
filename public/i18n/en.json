@@ -3,9 +3,10 @@
         "getStarted": "Get started",
         "login": "Login",
         "drafts": "(drafts)",
+        "search": "(search)",
         "by": "by",
         "languages": "Language",
-        "madeBy": "Made by super team"
+        "madeBy": "Developed by super team"
     },
     "WELCOME": {
         "blogs": "Blogs",
@@ -16,14 +17,36 @@
         "emptyFavorites": "No favorite blogs"
     },
     "SEARCH": {
-        "search": "Search"
+        "search": "Search",
+        "advanced": "Advanced",
+        "selectAuthor": "Select author",
+        "fromDate": "from:",
+        "beforeDate": "before:",
+        "clear": "Clear",
+        "CALENDAR": {
+            "dayNamesMin": ["Sn", "Mn", "Tu", "Wd", "Th", "Fr", "St"],
+            "monthNames":  [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ]
+        }
     },
     "POSTS": {
         "comments": "Comments",
         "actions": "Actions",
         "tag": "Tag",
         "noPosts": "No posts",
-        "private": "Private"
+        "private": "Private blog"
     },
     "POST": {
         "controls": "Controls",
@@ -181,6 +204,9 @@
             "subscribe": "You have been successfully subscribed to the blog",
             "unsubscribe": "You have been successfully unsubscribed from the blog",
             "process": "In process..."
+        },
+        "SEARCH": {
+            "invalidTimeInterval": "Invalid time interval"
         }
     },
     "START": {

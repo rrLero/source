@@ -5,6 +5,7 @@ import { EditPostComponent }      from './edit-post/edit-post.component';
 import { DraftsComponent }        from './drafts/drafts.component';
 import { DraftComponent }         from './draft/draft.component';
 import { PostsByTagComponent }    from './posts-by-tag/posts-by-tag.component';
+import { PostsByAuthorComponent } from './posts-by-author/posts-by-author.component';
 import { PostsTemplateComponent } from './posts-template/posts-template.component';
 
 export {
@@ -14,7 +15,8 @@ export {
     EditPostComponent,
     DraftsComponent,
     DraftComponent,
-    PostsByTagComponent
+    PostsByTagComponent,
+    PostsByAuthorComponent
 };
 
 export const components = [
@@ -25,5 +27,6 @@ export const components = [
     DraftsComponent,
     DraftComponent,
     PostsByTagComponent,
+    PostsByAuthorComponent,
     PostsTemplateComponent
 ];

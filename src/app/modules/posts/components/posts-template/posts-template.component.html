@@ -3,7 +3,6 @@
     <header>
         <div class="entry-date icons">
             <i class="svg-icon svg-icon-clock"></i>
-            <!-- <i class="material-icons">access_time</i> -->
             <span>{{ post.date | amTimeAgo }}</span>
         </div>
         <h2 class="entry-title">
@@ -19,7 +18,6 @@
         <ul class="entry-meta pull-left">
             <li class="entry-author icons">
                 <i class="svg-icon svg-icon-account"></i>
-                <!-- <i class="material-icons">person</i> -->
                 <ul class="authors">
                     <li *ngFor="let author of post.author.split(',')">
                         <a [routerLink]="['/', author.trim() | lowercase] | localize">{{ author }}</a>
@@ -28,7 +26,6 @@
             </li>
             <li class="entry-tags icons">
                 <i class="svg-icon svg-icon-tag"></i>
-                <!-- <i class="material-icons">local_offer</i> -->
                 <ul class="tags">
                     <li *ngFor="let tag of post.tags">
                         <a [routerLink]="[url, 'tag', tag] | localize">{{ tag }}</a>
@@ -38,7 +35,6 @@
         </ul>
         <div *ngIf="post.comments_status && !drafts" class="entry-comment icons pull-right">
             <i class="svg-icon svg-icon-comment"></i>
-            <!-- <i class="material-icons">chat_bubble_outline</i> -->
             <span>{{ 'POSTS.comments' | translate }} ({{ post.comments }})</span>
         </div>
     </footer>

@@ -11,6 +11,7 @@ import {
     DraftsComponent,
     DraftComponent,
     PostsByTagComponent,
+    PostsByAuthorComponent
 } from './components';
 
 const routes: Routes = [
@@ -46,6 +47,11 @@ const routes: Routes = [
                 path: 'create',
                 component: CreatePostComponent,
                 canActivate: [AuthGuard]
+            },
+            {
+                path: 'search',
+                component: PostsByAuthorComponent,
+                data: { search: true }
             },
             {
                 path: 'drafts',

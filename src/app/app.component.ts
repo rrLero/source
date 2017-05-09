@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.getParams();
-        this.getUrl();
+        this.getData();
         this.getAuthUrl();
         this.translate.use(this.lang);
         this.activeLang = this.lang;
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
             });
     }
 
-    getUrl(): void {
+    getData(): void {
         this.routerService
             .getRoute()
             .mergeMap(route => route.data)
@@ -86,11 +86,15 @@ export class AppComponent implements OnInit {
                 this.title = 'Blog platform';
                 if (event.drafts) {
                     this.drafts = true;
-                        this.translate
-                            .get('APP.drafts')
-                            .subscribe((res: string) => this.draftsTitle = res);
-                }
-                if (event.about) {
+                    this.translate
+                        .get('APP.drafts')
+                        .subscribe((res: string) => this.draftsTitle = res);
+                } else if (event.search) {
+                    this.drafts = true;
+                    this.translate
+                        .get('APP.search')
+                        .subscribe((res: string) => this.draftsTitle = res);
+                } else if (event.about) {
                     this.title = 'Blog platform / about';
                 }
             });

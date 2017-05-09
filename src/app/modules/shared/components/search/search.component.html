@@ -1,5 +1,79 @@
 <div  [@fadeIn]="'in'" class="search">
-    <input #searchBox (keyup)="search(searchBox.value)" class="form-control" [placeholder]="'SEARCH.search' | translate">
+    <a
+        *ngIf="!advanced"
+        [routerLink]="['/', name, repo, 'search'] | localize"
+        class="toggle-advanced"
+        translate>
+        SEARCH.advanced
+    </a>
+    <input
+        *ngIf="!advanced"
+        #searchBox
+        (keyup)="search(searchBox.value)"
+        class="form-control"
+        [placeholder]="'SEARCH.search' | translate">
+
+    <div *ngIf="advanced && minDate" [@fadeIn]="'in'" class="advanced">
+        <div class="calendar">
+            <label *ngIf="!oneDayBlog" translate>SEARCH.fromDate</label>
+            <p-calendar
+                [(ngModel)]="fromDate"
+                dateFormat="dd/MM/y"
+                [showIcon]="true"
+                [locale]="calendar"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                [yearNavigator]="true"
+                yearRange="2016:2017"
+                [readonlyInput]="true"
+                [disabled]="oneDayBlog"
+                (onSelect)="checkDates(fromDate, beforeDate)"
+                placeholder="{{ 'SEARCH.dateFrom' | translate }}">
+            </p-calendar>
+        </div>
+        <div *ngIf="!oneDayBlog" class="calendar">
+            <label translate>SEARCH.beforeDate</label>
+            <p-calendar
+                [(ngModel)]="beforeDate"
+                dateFormat="dd/MM/y"
+                [showIcon]="true"
+                [locale]="calendar"
+                [minDate]="minDate"
+                [maxDate]="maxDate"
+                [yearNavigator]="true"
+                yearRange="2016:2017"
+                [readonlyInput]="true"
+                (onSelect)="checkDates(fromDate, beforeDate)"
+                placeholder="{{ 'SEARCH.beforeDate' | translate }}">
+            </p-calendar>
+        </div>
+        <div class="calendar">
+            <p-dropdown
+                [options]="authors"
+                [(ngModel)]="selectedAuthor"
+                [disabled]="uniqueAuthors.length === 1"
+                placeholder="{{ uniqueAuthors.length === 1 ? '' : 'SEARCH.selectAuthor' | translate }}">
+            </p-dropdown>
+        </div>
+        <div class="buttons">
+            <button
+                [disabled]="!selectedAuthor || invalidTimeInterval"
+                (click)="advancedSearch(fromDate, beforeDate, selectedAuthor.name || selectedAuthor)"
+                type="button"
+                class="btn btn-primary"
+                translate>
+                SEARCH.search
+            </button>
+            <button
+                (click)="clear()"
+                type="button"
+                class="btn btn-primary"
+                translate>
+                SEARCH.clear
+            </button>
+        </div>
+    </div>
+
     <div class="search-result">
         <ul>
             <li *ngFor="let post of posts | async" (click)="gotoDetail(post)">

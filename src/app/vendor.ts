@@ -23,7 +23,7 @@ if (process.env.ENV !== 'production') {
     require('@angular/platform-browser-dynamic');
     require('@angular/compiler');
 } else {
-    require( '../../.htaccess');
+    require('../../.htaccess');
 }
 
 import 'underscore';
@@ -35,3 +35,7 @@ import 'angular2-moment';
 import '@ngx-translate/core';
 import '@ngx-translate/http-loader';
 import 'localize-router';
+import 'primeng/primeng';
+
+import 'primeng/resources/primeng.min.css';
+import 'primeng/resources/themes/omega/theme.css';

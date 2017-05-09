@@ -22,6 +22,7 @@ export class ToastConfig extends ToastOptions {
 export class ToastService {
     state: EventEmitter<boolean> = new EventEmitter();
     toastLife = 2000;
+    lockPage = true;
 
     constructor(private translate: TranslateService,
                 private toastr: ToastsManager) { }
@@ -63,7 +64,7 @@ export class ToastService {
     }
 
     showInfo(msg: string): void {
-        this.state.emit(true);
+        this.lockPage && this.state.emit(true);
         this.translate
             .get(msg)
             .subscribe((res: string) =>
@@ -86,6 +87,14 @@ export class ToastService {
 
     getState(): EventEmitter<boolean> {
         return this.state;
+    }
+
+    setToastLife(value: number): void {
+        this.toastLife = value;
+    }
+
+    noLockPage(): void {
+        this.lockPage = false;
     }
 
 }

@@ -18,13 +18,13 @@ export class PostService {
         this.url = `${this.host}/${name}/${repo}/api`;
     }
 
-    getPosts(name: string, repo: string): Promise<Post[]> {
+    getPosts(name: string, repo: string): Promise<any> {
         this.getUrl(name, repo);
         const url = `${this.url}/get`;
         return this.http
             .get(url)
             .toPromise()
-            .then(response => response.json() as Post[])
+            .then(response => response.json())
             .catch(this.handleError);
     }
 
