@@ -28,8 +28,8 @@ export class AppComponent implements OnInit {
     title = 'Blog platform';
     name: string;
     repo: string;
-    drafts: boolean;
-    draftsTitle: string;
+    subTitle: boolean;
+    subTitleText: string;
     lang: string;
     langs: boolean;
     activeLang: string;
@@ -82,18 +82,18 @@ export class AppComponent implements OnInit {
             .getRoute()
             .mergeMap(route => route.data)
             .subscribe(event => {
-                this.drafts = false;
+                this.subTitle = false;
                 this.title = 'Blog platform';
                 if (event.drafts) {
-                    this.drafts = true;
+                    this.subTitle = true;
                     this.translate
                         .get('APP.drafts')
-                        .subscribe((res: string) => this.draftsTitle = res);
+                        .subscribe((res: string) => this.subTitleText = res);
                 } else if (event.search) {
-                    this.drafts = true;
+                    this.subTitle = true;
                     this.translate
                         .get('APP.search')
-                        .subscribe((res: string) => this.draftsTitle = res);
+                        .subscribe((res: string) => this.subTitleText = res);
                 } else if (event.about) {
                     this.title = 'Blog platform / about';
                 }

@@ -18,7 +18,7 @@
             <label *ngIf="!oneDayBlog" translate>SEARCH.fromDate</label>
             <p-calendar
                 [(ngModel)]="fromDate"
-                dateFormat="dd/MM/y"
+                dateFormat="dd/MM/yy"
                 [showIcon]="true"
                 [locale]="calendar"
                 [minDate]="minDate"
@@ -35,7 +35,7 @@
             <label translate>SEARCH.beforeDate</label>
             <p-calendar
                 [(ngModel)]="beforeDate"
-                dateFormat="dd/MM/y"
+                dateFormat="dd/MM/yy"
                 [showIcon]="true"
                 [locale]="calendar"
                 [minDate]="minDate"

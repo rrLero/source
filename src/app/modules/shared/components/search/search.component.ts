@@ -67,10 +67,10 @@ export class SearchComponent implements OnInit {
             .switchMap(term => term
                 ? this.searchService.search(this.name, this.repo, term)
                 : Observable.of<Post[]>([]))
-                .catch(error => {
-                    this.toastService.showError(error);
-                    return Observable.of<Post[]>([]);
-                });
+            .catch(error => {
+                this.toastService.showError(error);
+                return Observable.of<Post[]>([]);
+            });
 
         this.advanced && this.loadAdvanced();
     }

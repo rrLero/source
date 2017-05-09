@@ -12,7 +12,7 @@
                         <a
                             [routerLink]="['/', name, repo] | localize"
                             class="blog-name">
-                            {{ repo | titlecase }} {{ drafts ? draftsTitle : ''}}
+                            {{ repo | titlecase }} {{ subTitle ? subTitleText : ''}}
                         </a><br>
                         {{ 'APP.by' | translate }} <a [routerLink]="['/', name] | localize" class="blog-author">{{ name }}</a>
                     </div>
