@@ -57,15 +57,17 @@
         </div>
         <div class="buttons">
             <button
+                #search
                 [disabled]="!selectedAuthor || invalidTimeInterval"
-                (click)="advancedSearch(fromDate, beforeDate, selectedAuthor.name || selectedAuthor)"
+                (click)="advancedSearch(fromDate, beforeDate, selectedAuthor.name || selectedAuthor); search.blur()" 
                 type="button"
                 class="btn btn-primary"
                 translate>
                 SEARCH.search
             </button>
             <button
-                (click)="clear()"
+                #clear
+                (click)="clear(); clear.blur()"
                 type="button"
                 class="btn btn-primary"
                 translate>

@@ -3,11 +3,11 @@
         <li>
             <ul class="pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}" *ngIf="pager.pages.length > 2">
-                    <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1] | localize" class="arrow"><span class="svg-icon svg-icon-arrow-left"></span></a>
+                    <a #prev (click)="onPageChange(pager.currentPage - 1); prev.blur()" [routerLink]="[url, 'page', pager.currentPage - 1] | localize" class="arrow"><span class="svg-icon svg-icon-arrow-left"></span></a>
                     <!-- <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1] | localize" translate>PAGINATION.prev</a> -->
                 </li>
                 <li  [ngClass]="{disabled:pager.currentPage === pager.totalPages}" *ngIf="pager.pages.length > 2">
-                    <a (click)="onPageChange(pager.currentPage + 1)" [routerLink]="[url, 'page', pager.currentPage + 1] | localize" class="arrow"><span class="svg-icon svg-icon-arrow-right"></span></a>
+                    <a #next (click)="onPageChange(pager.currentPage + 1); next.blur()" [routerLink]="[url, 'page', pager.currentPage + 1] | localize" class="arrow"><span class="svg-icon svg-icon-arrow-right"></span></a>
                     <!-- <a (click)="onPageChange(pager.currentPage - 1)" [routerLink]="[url, 'page', pager.currentPage - 1] | localize" translate>PAGINATION.next</a> -->
                 </li>
             </ul>

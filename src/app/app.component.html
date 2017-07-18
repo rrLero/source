@@ -31,8 +31,10 @@
                             APP.login
                         </a>
                         <a
+                            #start
                             *ngIf="!isLogged"
                             [routerLink]="['/start'] | localize"
+                            (click)="start.blur()"
                             translate
                             class="btn btn-primary create">
                             APP.getStarted
