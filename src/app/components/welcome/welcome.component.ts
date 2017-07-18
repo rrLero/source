@@ -37,6 +37,9 @@ export class WelcomeComponent implements OnInit {
             .then(blogs => {
                 this.blogs = blogs;
                 this.getSubscribe();
+
+                this.blogs = this.blogs.filter(blog =>
+                    blog.repo !== 'git-blog' && blog.repo !== 'dev');
             })
             .catch(error => this.toastService.showError(error));
     }
