@@ -30,7 +30,7 @@ module.exports = webpackMerge(commonConfig, {
     plugins: [
         // new TsConfigPathsPlugin(),
         // new CheckerPlugin(),
-        new ExtractTextPlugin('[name].css'),
+        new ExtractTextPlugin({ disable: true }),
         new webpack.NamedModulesPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
@@ -50,6 +50,9 @@ module.exports = webpackMerge(commonConfig, {
 
     devServer: {
         historyApiFallback: true,
-        stats: 'minimal'
+        stats: { colors: true },
+    },
+    watchOptions: {
+        aggregateTimeout: 100
     }
 });

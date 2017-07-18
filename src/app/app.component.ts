@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
 
-import 'public/css/styles.css';
+import 'public/css/styles.scss';
 import 'public/i18n/config.json';
 import 'public/i18n/en.json';
 import 'public/i18n/ru.json';

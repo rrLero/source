@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const helpers = require('./helpers');
 
+const ENV = process.env.NODE_ENV;
+
 module.exports = {
     entry: {
         polyfills: './src/app/polyfills',
@@ -71,20 +73,33 @@ module.exports = {
                 }]
             },
             {
-                test: /\.css$/,
+                test: /\.(scss|sass|css)$/i,
                 include: [
                     helpers.root('public/css'),
                     helpers.root('node_modules')
                 ],
-                loader: ExtractTextPlugin.extract({
+                use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [{
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: false,
-                            minimize: true
+                            loader: 'css-loader',
+                            options: {
+                                minimize: ENV === 'production',
+                                // sourceMap: ENV !== 'production'
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
                         }
-                    }]
+                    ]
                 })
             },
             {
@@ -93,6 +108,9 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
+                include: [
+                    helpers.root('src/app'),
+                ],
                 use: ['raw-loader', 'postcss-loader', 'sass-loader']
             }
         ]

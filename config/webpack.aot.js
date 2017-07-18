@@ -28,6 +28,7 @@ module.exports = webpackMerge(commonConfig, {
             entryModule: './src/app/app.module#AppModule',
             tsConfig: './tsconfig.json'
         }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.LoaderOptionsPlugin({
             htmlLoader: {
                 minimize: false
