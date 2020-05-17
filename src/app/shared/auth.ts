@@ -8,7 +8,7 @@ const auth = {
 
 if (process.env.ENV === 'production') {
     auth.authUri = `${api}/rrlero/git-blog/api/oauth?code=`;
-    auth.redirectUri = 'http://acid.zzz.com.ua';
+    auth.redirectUri = 'https://git-blog-lero.herokuapp.com';
     auth.clientId = '48f5b894f42ae1f869d2';
 };
 

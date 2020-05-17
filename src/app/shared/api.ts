@@ -1,1 +1,2 @@
-export const api = 'http://gitblog.pythonanywhere.com';
+export const api = 'https://gitblog.pythonanywhere.com';
+
